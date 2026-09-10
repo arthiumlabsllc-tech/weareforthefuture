@@ -97,7 +97,7 @@ export default function HomePage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
+        <div className="relative z-30 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
           <div className="max-w-3xl">
             <AnimatePresence mode="wait">
               <motion.div
