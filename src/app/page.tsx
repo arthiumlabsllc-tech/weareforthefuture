@@ -77,8 +77,8 @@ export default function HomePage() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.2 }}
               className="absolute inset-0"
@@ -89,7 +89,7 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 priority
-                unoptimized
+                sizes="100vw"
               />
             </motion.div>
           </AnimatePresence>
