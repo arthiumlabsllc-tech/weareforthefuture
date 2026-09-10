@@ -663,7 +663,7 @@ export default function HomePage() {
         <div className="relative overflow-hidden">
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-warm-white to-transparent z-10" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-warm-white to-transparent z-10" />
-          <div className="flex animate-marquee">
+          <div className="flex partners-track">
             {[...partners, ...partners].map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
