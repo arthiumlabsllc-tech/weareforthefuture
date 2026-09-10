@@ -1,0 +1,81 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
+
+interface SectionWrapperProps {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+  background?: "white" | "warm" | "navy" | "gradient";
+}
+
+const bgStyles = {
+  white: "bg-white",
+  warm: "bg-warm-white",
+  navy: "bg-navy-900 text-white",
+  gradient: "bg-gradient-to-b from-warm-white to-white",
+};
+
+export default function SectionWrapper({
+  children,
+  className = "",
+  id,
+  background = "warm",
+}: SectionWrapperProps) {
+  return (
+    <section id={id} className={`py-20 md:py-24 lg:py-28 ${bgStyles[background]} ${className}`}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">{children}</div>
+    </section>
+  );
+}
+
+export function SectionHeader({
+  overline,
+  title,
+  description,
+  align = "center",
+  light = false,
+}: {
+  overline?: string;
+  title: string;
+  description?: string;
+  align?: "center" | "left";
+  light?: boolean;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6 }}
+      className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : "text-left"} mb-12 md:mb-16`}
+    >
+      {overline && (
+        <span
+          className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-3 ${
+            light ? "text-gold-400" : "text-gold-600"
+          }`}
+        >
+          {overline}
+        </span>
+      )}
+      <h2
+        className={`font-[family-name:var(--font-display)] text-3xl font-bold leading-tight md:text-4xl lg:text-5xl ${
+          light ? "text-white" : "text-navy-900"
+        }`}
+      >
+        {title}
+      </h2>
+      {description && (
+        <p
+          className={`mt-4 text-lg leading-relaxed ${
+            light ? "text-white/70" : "text-navy-600"
+          }`}
+        >
+          {description}
+        </p>
+      )}
+    </motion.div>
+  );
+}

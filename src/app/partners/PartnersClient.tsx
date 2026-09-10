@@ -1,0 +1,274 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Handshake,
+  Building2,
+  Globe,
+  Users,
+  Heart,
+  Check,
+  Star,
+  Award,
+} from "lucide-react";
+import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+
+import { partnerLogos } from "@/data/site";
+
+const partnerCategories = [
+  {
+    title: "Corporate Partners",
+    description: "Leading businesses supporting our mission through CSR programs and sponsorships.",
+    icon: Building2,
+    partners: ["Unilever", "Promasidor", "Bel Aqua / Bel Beverages", "PETROSOL", "Samboad"],
+  },
+  {
+    title: "Institutional Partners",
+    description: "Organizations and institutions aligned with our vision for children's empowerment.",
+    icon: Globe,
+    partners: ["UNFPA Ghana", "The Wit Schools", "Asustem Robotics", "Jambo Spaces"],
+  },
+  {
+    title: "Community Partners",
+    description: "Grassroots organizations and community groups working alongside us on the ground.",
+    icon: Users,
+    partners: ["Chess in Slums", "I Was Here", "Flood-gates Foundation", "School in a Bag"],
+  },
+];
+
+const partnershipTypes = [
+  {
+    title: "Corporate Sponsor",
+    description: "Fund specific programs or become a flagship partner for maximum visibility and impact.",
+    benefits: [
+      "Brand visibility across all FTF channels",
+      "Impact reports and metrics",
+      "Employee volunteer opportunities",
+      "CSR alignment and reporting",
+    ],
+    icon: Award,
+    color: "gold",
+  },
+  {
+    title: "Program Partner",
+    description: "Co-create and deliver programs together, combining expertise for greater reach.",
+    benefits: [
+      "Joint program development",
+      "Shared resources and expertise",
+      "Co-branded communications",
+      "Measurable impact data",
+    ],
+    icon: Handshake,
+    color: "emerald",
+  },
+  {
+    title: "In-Kind Partner",
+    description: "Contribute goods, services, or technology that supports our programs and operations.",
+    benefits: [
+      "Product or service donation",
+      "Tax deduction benefits",
+      "Recognition in annual reports",
+      "Media and PR exposure",
+    ],
+    icon: Heart,
+    color: "coral",
+  },
+];
+
+export default function PartnersClient() {
+  return (
+    <>
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/page-heroes/partners-hero.png"
+            alt="Our Partners"
+            fill
+            className="object-cover"
+            priority
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-navy-900/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+              Our Partners
+            </span>
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+              Together, We Go Further
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+              Our partners are essential to our mission. Together, we create
+              opportunities and transform the lives of underprivileged children
+              across three countries.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== PARTNER CATEGORIES ===== */}
+      <SectionWrapper background="white">
+        <SectionHeader
+          overline="Who We Work With"
+          title="Our Partner Ecosystem"
+          description="We collaborate with diverse organizations to maximize our impact."
+        />
+        <div className="grid gap-8 md:grid-cols-3">
+          {partnerCategories.map((category, i) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.5 }}
+              className="rounded-2xl border border-navy-100 bg-white p-8"
+            >
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+                <category.icon className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-bold text-navy-900 mb-2">
+                {category.title}
+              </h3>
+              <p className="text-sm text-navy-600 leading-relaxed mb-6">
+                {category.description}
+              </p>
+              <div className="space-y-3">
+                {category.partners.map((partner) => {
+                  const logoData = partnerLogos.find(p =>
+                    partner.toLowerCase().includes(p.name.toLowerCase().split(" ")[0]) ||
+                    p.name.toLowerCase().includes(partner.toLowerCase().split(" ")[0])
+                  );
+                  return (
+                    <div
+                      key={partner}
+                      className="flex items-center gap-3 rounded-lg bg-navy-50/50 px-4 py-3"
+                    >
+                      {logoData ? (
+                        <Image
+                          src={logoData.image}
+                          alt={partner}
+                          width={32}
+                          height={32}
+                          className="h-8 w-8 object-contain"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="h-2 w-2 rounded-full bg-gold-400" />
+                      )}
+                      <span className="text-sm font-medium text-navy-700">
+                        {partner}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ===== BECOME A PARTNER ===== */}
+      <SectionWrapper background="warm">
+        <SectionHeader
+          overline="Partner With Us"
+          title="Partnership Opportunities"
+          description="Choose the partnership model that aligns with your organization's goals and values."
+        />
+        <div className="grid gap-8 md:grid-cols-3">
+          {partnershipTypes.map((type, i) => (
+            <motion.div
+              key={type.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.5 }}
+              className={`group rounded-2xl border-2 p-8 transition-all hover:shadow-xl hover:-translate-y-1 ${
+                type.color === "gold"
+                  ? "border-gold-200 hover:border-gold-400 bg-white"
+                  : type.color === "emerald"
+                  ? "border-emerald-200 hover:border-emerald-400 bg-white"
+                  : "border-coral-200 hover:border-coral-400 bg-white"
+              }`}
+            >
+              <div
+                className={`mb-5 flex h-14 w-14 items-center justify-center rounded-xl ${
+                  type.color === "gold"
+                    ? "bg-gold-50 text-gold-600"
+                    : type.color === "emerald"
+                    ? "bg-emerald-50 text-emerald-600"
+                    : "bg-coral-50 text-coral-500"
+                }`}
+              >
+                <type.icon className="h-7 w-7" />
+              </div>
+              <h3 className="text-xl font-bold text-navy-900 mb-3">
+                {type.title}
+              </h3>
+              <p className="text-sm text-navy-600 leading-relaxed mb-6">
+                {type.description}
+              </p>
+              <ul className="space-y-3">
+                {type.benefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-2">
+                    <Check className="h-4 w-4 mt-0.5 text-emerald-500 shrink-0" />
+                    <span className="text-sm text-navy-600">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ===== CTA ===== */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,168,67,0.1),transparent_50%)]" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Handshake className="h-12 w-12 text-gold-400 mx-auto mb-4" />
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
+              Let&apos;s Create Impact Together
+            </h2>
+            <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
+              Whether you&apos;re a corporation, foundation, or community
+              organization - we&apos;d love to explore how we can work together.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:scale-[1.02]"
+              >
+                Become a Partner
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+              <Link
+                href="/donate"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/10"
+              >
+                <Heart className="h-5 w-5" />
+                Make a Donation
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+}
