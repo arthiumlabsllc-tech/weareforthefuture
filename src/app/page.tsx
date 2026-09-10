@@ -74,28 +74,26 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2 }}
-              className="absolute inset-0"
+          {heroSlides.map((slide, i) => (
+            <div
+              key={i}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                i === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
             >
               <Image
-                src={heroSlides[currentSlide].image}
+                src={slide.image}
                 alt=""
                 fill
                 className="object-cover"
-                priority
+                priority={i === 0}
                 sizes="100vw"
               />
-            </motion.div>
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-900/85 via-navy-900/60 to-navy-900/30" />
-          <div className="absolute top-1/4 -right-32 h-96 w-96 rounded-full bg-gold-400/10 blur-3xl" />
-          <div className="absolute bottom-1/4 -left-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
+            </div>
+          ))}
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-navy-900/85 via-navy-900/60 to-navy-900/30" />
+          <div className="absolute top-1/4 -right-32 h-96 w-96 rounded-full bg-gold-400/10 blur-3xl z-20" />
+          <div className="absolute bottom-1/4 -left-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl z-20" />
         </div>
 
         {/* Content */}
