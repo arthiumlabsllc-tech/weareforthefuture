@@ -17,13 +17,13 @@ interface ButtonProps {
 
 const variants = {
   primary:
-    "bg-gradient-to-r from-gold-400 to-gold-500 text-navy-900 shadow-lg shadow-gold-400/25 hover:shadow-xl hover:shadow-gold-400/30",
+    "bg-gradient-to-r from-accent to-accent-hover text-navy-900 shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30",
   secondary:
-    "bg-navy-900 text-white shadow-lg shadow-navy-900/25 hover:shadow-xl hover:bg-navy-800",
+    "bg-primary text-text-on-primary shadow-lg shadow-primary/25 hover:shadow-xl hover:bg-primary-hover",
   outline:
-    "border-2 border-navy-200 text-navy-700 hover:border-navy-900 hover:bg-navy-50",
+    "border-2 border-border text-text-secondary hover:border-primary hover:bg-bg-tertiary",
   ghost:
-    "text-navy-700 hover:bg-navy-50",
+    "text-text-secondary hover:bg-bg-tertiary",
 };
 
 const sizes = {
@@ -68,7 +68,7 @@ export function LearnMoreLink({ href, text = "Learn more" }: { href: string; tex
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 transition-colors hover:text-gold-700"
+      className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent-hover transition-colors hover:text-accent"
     >
       {text}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

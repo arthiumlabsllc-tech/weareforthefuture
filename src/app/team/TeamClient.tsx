@@ -37,8 +37,8 @@ export default function TeamClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -48,13 +48,13 @@ export default function TeamClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               Our People
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               The Passionate People Behind the Mission
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               Meet the dedicated team of young changemakers driving FTF&apos;s
               mission across Ghana, Nigeria, and the United States.
             </p>
@@ -79,7 +79,7 @@ export default function TeamClient() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="group text-center"
             >
-              <div className="relative mx-auto mb-6 h-48 w-48 overflow-hidden rounded-2xl bg-gradient-to-br from-navy-100 to-navy-200 transition-transform group-hover:scale-[1.02]">
+              <div className="relative mx-auto mb-6 h-48 w-48 overflow-hidden rounded-2xl bg-gradient-to-br from-bg-tertiary to-border transition-transform group-hover:scale-[1.02]">
                 {member.image ? (
                   <Image
                     src={member.image}
@@ -90,25 +90,25 @@ export default function TeamClient() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/80">
-                      <User className="h-10 w-10 text-navy-400" />
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-surface/80">
+                      <User className="h-10 w-10 text-text-muted" />
                     </div>
                   </div>
                 )}
                 {i === 0 && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gold-400/90 to-transparent p-3">
-                    <span className="text-xs font-semibold text-navy-900">Founder</span>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-accent/90 to-transparent p-3">
+                    <span className="text-xs font-semibold text-text-primary">Founder</span>
                   </div>
                 )}
               </div>
-              <h3 className="text-xl font-bold text-navy-900">{member.name}</h3>
-              <p className="text-sm font-medium text-gold-600 mb-2">{member.role}</p>
-              <p className="text-sm text-navy-500 flex items-center justify-center gap-1">
+              <h3 className="text-xl font-bold text-text-primary">{member.name}</h3>
+              <p className="text-sm font-medium text-accent mb-2">{member.role}</p>
+              <p className="text-sm text-text-tertiary flex items-center justify-center gap-1">
                 <MapPin className="h-3 w-3" />
                 {member.country}
               </p>
               {member.bio && (
-                <p className="mt-3 text-sm text-navy-600 leading-relaxed">
+                <p className="mt-3 text-sm text-text-secondary leading-relaxed">
                   {member.bio}
                 </p>
               )}
@@ -133,8 +133,8 @@ export default function TeamClient() {
               onClick={() => setActiveTab(tab.key)}
               className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all ${
                 activeTab === tab.key
-                  ? "bg-navy-900 text-white shadow-lg shadow-navy-900/20"
-                  : "bg-white text-navy-600 border border-navy-200 hover:border-navy-400"
+                  ? "bg-primary text-text-on-primary shadow-lg shadow-primary/5"
+                  : "bg-surface text-text-secondary border border-border-strong hover:border-border"
               }`}
             >
               <tab.icon className="h-4 w-4" />
@@ -155,17 +155,17 @@ export default function TeamClient() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.03, duration: 0.3 }}
-              className="group rounded-xl border border-navy-100 bg-white p-5 transition-all hover:shadow-lg hover:border-gold-200 hover:-translate-y-0.5"
+              className="group rounded-xl border border-border bg-surface p-5 transition-all hover:shadow-lg hover:border-accent hover:-translate-y-0.5"
             >
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-50 text-navy-400 transition-colors group-hover:bg-gold-50 group-hover:text-gold-600">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-bg-tertiary text-text-muted transition-colors group-hover:bg-accent-subtle group-hover:text-accent">
                   <User className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm font-bold text-navy-900 truncate">
+                  <h3 className="text-sm font-bold text-text-primary truncate">
                     {member.name}
                   </h3>
-                  <p className="text-xs text-navy-500 truncate">{member.role}</p>
+                  <p className="text-xs text-text-tertiary truncate">{member.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -174,7 +174,7 @@ export default function TeamClient() {
       </SectionWrapper>
 
       {/* ===== JOIN THE TEAM ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 py-20">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary to-primary py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(212,168,67,0.1),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <motion.div
@@ -183,11 +183,11 @@ export default function TeamClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Heart className="h-12 w-12 text-gold-400 mx-auto mb-4" />
-            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
+            <Heart className="h-12 w-12 text-accent mx-auto mb-4" />
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Join Our Team
             </h2>
-            <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-on-primary/60 max-w-2xl mx-auto">
               We&apos;re always looking for passionate individuals who want to
               make a difference. Whether you&apos;re in Ghana, Nigeria, or the
               US - there&apos;s a place for you at FTF.
@@ -195,14 +195,14 @@ export default function TeamClient() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row justify-center">
               <Link
                 href="/volunteer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-2xl shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 Apply to Volunteer
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-text-on-primary transition-all hover:bg-surface/10"
               >
                 Get in Touch
               </Link>

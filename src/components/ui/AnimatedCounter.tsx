@@ -52,14 +52,14 @@ export default function AnimatedCounter({
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 tabular-nums">
+      <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary tabular-nums">
         <span ref={ref}>
           {prefix}
           {formatNumber(count)}
           {suffix}
         </span>
       </div>
-      <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-navy-500">
+      <p className="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-text-muted">
         {label}
       </p>
     </motion.div>

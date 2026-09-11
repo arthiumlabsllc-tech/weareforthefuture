@@ -124,7 +124,7 @@ export default function SuccessContent() {
     : transaction?.customer?.email || "Generous Donor";
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-navy-900 via-navy-800 to-navy-900 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-primary via-primary to-primary overflow-hidden">
       {/* Confetti */}
       {verified && (
         <div className="fixed inset-0 pointer-events-none z-10">
@@ -140,7 +140,7 @@ export default function SuccessContent() {
       )}
 
       {/* Content */}
-      <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-16">
+      <div className="relative z-20 flex items-start justify-center min-h-screen px-4 pt-36 pb-16">
         <div className="w-full max-w-lg">
           {/* Loading State */}
           {loading && (
@@ -149,9 +149,9 @@ export default function SuccessContent() {
               animate={{ opacity: 1 }}
               className="text-center"
             >
-              <Loader2 className="h-12 w-12 text-gold-400 animate-spin mx-auto mb-4" />
-              <p className="text-lg text-white/70">Verifying your payment...</p>
-              <p className="text-sm text-white/40 mt-2">Please wait while we confirm your transaction</p>
+              <Loader2 className="h-12 w-12 text-accent animate-spin mx-auto mb-4" />
+              <p className="text-lg text-text-on-primary/70">Verifying your payment...</p>
+              <p className="text-sm text-text-on-primary/40 mt-2">Please wait while we confirm your transaction</p>
             </motion.div>
           )}
 
@@ -165,27 +165,27 @@ export default function SuccessContent() {
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-500/10 border border-amber-400/20 mx-auto mb-6">
                 <AlertCircle className="h-10 w-10 text-amber-400" />
               </div>
-              <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white mb-3">
+              <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-on-primary mb-3">
                 Verification Pending
               </h1>
-              <p className="text-white/60 leading-relaxed mb-6">{error}</p>
+              <p className="text-text-on-primary/60 leading-relaxed mb-6">{error}</p>
               {reference && (
-                <div className="rounded-xl bg-white/5 border border-white/10 p-4 mb-6">
-                  <p className="text-xs text-white/40 mb-1">Reference</p>
-                  <p className="text-sm text-white font-mono">{reference}</p>
+                <div className="rounded-xl bg-text-on-primary/5 border border-text-on-primary/10 p-4 mb-6">
+                  <p className="text-xs text-text-on-primary/40 mb-1">Reference</p>
+                  <p className="text-sm text-text-on-primary font-mono">{reference}</p>
                 </div>
               )}
               <div className="flex flex-col gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3 text-sm font-semibold text-navy-900"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast"
                 >
                   <Mail className="h-4 w-4" />
                   Contact Support
                 </Link>
                 <Link
                   href="/"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-text-on-primary/20 px-8 py-3 text-sm font-semibold text-text-on-primary hover:bg-text-on-primary/10"
                 >
                   <Home className="h-4 w-4" />
                   Back to Home
@@ -209,13 +209,13 @@ export default function SuccessContent() {
                 transition={{ type: "spring", damping: 12, delay: 0.2 }}
                 className="relative mx-auto mb-6"
               >
-                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-emerald-500/10 border-2 border-emerald-400/30">
+                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-success/10 border-2 border-success/30">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.4, type: "spring" }}
                   >
-                    <Check className="h-12 w-12 text-emerald-400" strokeWidth={3} />
+                    <Check className="h-12 w-12 text-success-text" strokeWidth={3} />
                   </motion.div>
                 </div>
                 <motion.div
@@ -224,7 +224,7 @@ export default function SuccessContent() {
                   transition={{ delay: 0.6, type: "spring" }}
                   className="absolute -top-2 -right-2"
                 >
-                  <PartyPopper className="h-8 w-8 text-gold-400" />
+                  <PartyPopper className="h-8 w-8 text-accent" />
                 </motion.div>
               </motion.div>
 
@@ -234,14 +234,14 @@ export default function SuccessContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="inline-flex items-center gap-2 rounded-full bg-gold-400/10 border border-gold-400/20 px-4 py-1.5 text-xs font-semibold text-gold-400 uppercase tracking-wider mb-4">
+                <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-4 py-1.5 text-xs font-semibold text-accent uppercase tracking-wider mb-4">
                   <Sparkles className="h-3 w-3" />
                   Payment Confirmed
                 </span>
-                <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white sm:text-4xl mb-3">
+                <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl mb-3">
                   {isStore ? "Thank You for Your Purchase!" : "Thank You, " + displayName.split(" ")[0] + "!"}
                 </h1>
-                <p className="text-lg text-white/60 leading-relaxed mb-6">
+                <p className="text-lg text-text-on-primary/60 leading-relaxed mb-6">
                   {isStore
                     ? "Your order has been placed successfully. Every purchase directly changes a child's life."
                     : "Your generous donation has been received. You're directly changing the lives of underprivileged children across Ghana, Nigeria, and beyond."}
@@ -253,23 +253,23 @@ export default function SuccessContent() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="rounded-2xl bg-white/5 border border-white/10 p-6 mb-6 text-left space-y-4"
+                className="rounded-2xl bg-text-on-primary/5 border border-text-on-primary/10 p-6 mb-6 text-left space-y-4"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/50">Amount</span>
-                  <span className="text-2xl font-bold text-white">
+                  <span className="text-sm text-text-on-primary/50">Amount</span>
+                  <span className="text-2xl font-bold text-text-on-primary">
                     GH₵{transaction.amount.toLocaleString()}
                   </span>
                 </div>
-                <div className="border-t border-white/10" />
+                <div className="border-t border-text-on-primary/10" />
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-xs text-white/40 mb-0.5">Reference</p>
-                    <p className="text-sm text-white font-mono truncate">{reference}</p>
+                    <p className="text-xs text-text-on-primary/40 mb-0.5">Reference</p>
+                    <p className="text-sm text-text-on-primary font-mono truncate">{reference}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-white/40 mb-0.5">Payment Method</p>
-                    <p className="text-sm text-white capitalize">
+                    <p className="text-xs text-text-on-primary/40 mb-0.5">Payment Method</p>
+                    <p className="text-sm text-text-on-primary capitalize">
                       {transaction.channel === "mobile_money"
                         ? "Mobile Money"
                         : transaction.channel === "bank_transfer"
@@ -278,14 +278,14 @@ export default function SuccessContent() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-white/40 mb-0.5">Status</p>
-                    <p className="text-sm text-emerald-400 font-semibold flex items-center gap-1">
+                    <p className="text-xs text-text-on-primary/40 mb-0.5">Status</p>
+                    <p className="text-sm text-success-text font-semibold flex items-center gap-1">
                       <Check className="h-3 w-3" /> Successful
                     </p>
                   </div>
                   <div>
-                    <p className="text-xs text-white/40 mb-0.5">Date</p>
-                    <p className="text-sm text-white">
+                    <p className="text-xs text-text-on-primary/40 mb-0.5">Date</p>
+                    <p className="text-sm text-text-on-primary">
                       {new Date(transaction.paidAt).toLocaleDateString("en-GB", {
                         day: "numeric",
                         month: "short",
@@ -303,11 +303,11 @@ export default function SuccessContent() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
-                className="flex items-center justify-center gap-2 text-sm text-white/50 mb-8"
+                className="flex items-center justify-center gap-2 text-sm text-text-on-primary/50 mb-8"
               >
                 <Mail className="h-4 w-4" />
                 A receipt has been sent to{" "}
-                <span className="text-white/70 font-medium">
+                <span className="text-text-on-primary/70 font-medium">
                   {transaction.customer?.email || "your email"}
                 </span>
               </motion.div>
@@ -318,10 +318,10 @@ export default function SuccessContent() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
-                  className="rounded-xl bg-emerald-500/10 border border-emerald-400/20 p-4 mb-8"
+                  className="rounded-xl bg-success/10 border border-success/20 p-4 mb-8"
                 >
-                  <Heart className="h-5 w-5 text-emerald-400 mx-auto mb-2" />
-                  <p className="text-sm text-emerald-300 font-medium">
+                  <Heart className="h-5 w-5 text-success-text mx-auto mb-2" />
+                  <p className="text-sm text-success-text font-medium">
                     Your donation is tax-deductible. For The Future Organization is a registered 501(c)(3) nonprofit.
                   </p>
                 </motion.div>
@@ -337,7 +337,7 @@ export default function SuccessContent() {
                 {isStore ? (
                   <Link
                     href="/impact-store"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3 text-sm font-semibold text-navy-900 shadow-lg transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast shadow-lg transition-all hover:scale-[1.02]"
                   >
                     <Home className="h-4 w-4" />
                     Continue Shopping
@@ -345,7 +345,7 @@ export default function SuccessContent() {
                 ) : (
                   <Link
                     href="/donate"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3 text-sm font-semibold text-navy-900 shadow-lg transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast shadow-lg transition-all hover:scale-[1.02]"
                   >
                     <Heart className="h-4 w-4" />
                     Donate Again
@@ -353,7 +353,7 @@ export default function SuccessContent() {
                 )}
                 <Link
                   href="/"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-text-on-primary/20 px-8 py-3 text-sm font-semibold text-text-on-primary transition-all hover:bg-text-on-primary/10"
                 >
                   Back to Home
                   <ArrowRight className="h-4 w-4" />
@@ -369,18 +369,18 @@ export default function SuccessContent() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center"
             >
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/5 border border-white/10 mx-auto mb-6">
-                <Heart className="h-10 w-10 text-gold-400" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-text-on-primary/5 border border-text-on-primary/10 mx-auto mb-6">
+                <Heart className="h-10 w-10 text-accent" />
               </div>
-              <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-white mb-3">
+              <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-on-primary mb-3">
                 Thank You for Your Support!
               </h1>
-              <p className="text-white/60 leading-relaxed mb-6">
+              <p className="text-text-on-primary/60 leading-relaxed mb-6">
                 Your generosity changes lives. If you just completed a payment, you'll receive a confirmation email shortly.
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3 text-sm font-semibold text-navy-900"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast"
               >
                 <Home className="h-4 w-4" />
                 Back to Home

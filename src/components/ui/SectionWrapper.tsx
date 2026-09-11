@@ -11,10 +11,10 @@ interface SectionWrapperProps {
 }
 
 const bgStyles = {
-  white: "bg-white",
-  warm: "bg-warm-white",
-  navy: "bg-navy-900 text-white",
-  gradient: "bg-gradient-to-b from-warm-white to-white",
+  white: "bg-surface",
+  warm: "bg-bg-primary",
+  navy: "bg-primary text-text-on-primary",
+  gradient: "bg-gradient-to-b from-bg-primary to-surface",
 };
 
 export default function SectionWrapper({
@@ -54,7 +54,7 @@ export function SectionHeader({
       {overline && (
         <span
           className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-3 ${
-            light ? "text-gold-400" : "text-gold-600"
+            light ? "text-accent" : "text-accent-hover"
           }`}
         >
           {overline}
@@ -62,7 +62,7 @@ export function SectionHeader({
       )}
       <h2
         className={`font-[family-name:var(--font-display)] text-3xl font-bold leading-tight md:text-4xl lg:text-5xl ${
-          light ? "text-white" : "text-navy-900"
+          light ? "text-text-on-primary" : "text-text-primary"
         }`}
       >
         {title}
@@ -70,7 +70,7 @@ export function SectionHeader({
       {description && (
         <p
           className={`mt-4 text-lg leading-relaxed ${
-            light ? "text-white/70" : "text-navy-600"
+            light ? "text-text-on-primary/70" : "text-text-secondary"
           }`}
         >
           {description}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -12,15 +12,8 @@ import {
   Check,
   Loader2,
   Shield,
+  Phone,
 } from "lucide-react";
-
-declare global {
-  interface Window {
-    PaystackPop?: {
-      setup: (config: Record<string, unknown>) => { openIframe: () => void };
-    };
-  }
-}
 
 interface PaystackCheckoutProps {
   amount: number; // in GHS
@@ -33,6 +26,8 @@ interface PaystackCheckoutProps {
   redirectOnSuccess?: boolean;
   /** Source identifier: "donation" or "store" */
   source?: "donation" | "store";
+  /** When true, shows MoMo-specific UI with phone field */
+  momoMode?: boolean;
 }
 
 export default function PaystackCheckout({
@@ -44,35 +39,35 @@ export default function PaystackCheckout({
   metadata,
   redirectOnSuccess = false,
   source = "donation",
+  momoMode = false,
 }: PaystackCheckoutProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState(initialEmail || "");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [paystackReady, setPaystackReady] = useState(false);
+  const paystackRef = useRef<typeof import("@paystack/inline-js").default | null>(null);
 
-  // Load Paystack inline script
+  // Load Paystack inline-js only in the browser (it uses window at module level)
   useEffect(() => {
-    if (document.getElementById("paystack-inline")) {
+    import("@paystack/inline-js").then((mod) => {
+      paystackRef.current = mod.default;
       setPaystackReady(true);
-      return;
-    }
-    const script = document.createElement("script");
-    script.id = "paystack-inline";
-    script.src = "https://js.paystack.co/v2/paystack.js";
-    script.async = true;
-    script.onload = () => setPaystackReady(true);
-    script.onerror = () => setError("Failed to load payment system");
-    document.head.appendChild(script);
-    return () => {
-      // Keep script for reuse
-    };
+    }).catch((err) => {
+      console.error("[Paystack] Failed to load inline-js:", err);
+      setError("Payment system failed to load. Please refresh the page.");
+    });
   }, []);
 
   const handleCheckout = useCallback(async () => {
     if (!email || !email.includes("@")) {
       setError("Please enter a valid email address");
+      return;
+    }
+    if (momoMode && (!phone || phone.replace(/\D/g, "").length < 10)) {
+      setError("Please enter a valid Mobile Money number");
       return;
     }
     if (!amount || amount <= 0) {
@@ -95,6 +90,8 @@ export default function PaystackCheckout({
             ...metadata,
             cart_items: metadata?.cart_items,
           },
+          channels: momoMode ? ["mobile_money"] : undefined,
+          phone: momoMode && phone ? phone.replace(/\D/g, "") : undefined,
         }),
       });
 
@@ -104,20 +101,20 @@ export default function PaystackCheckout({
         throw new Error(initData.error || "Failed to start payment");
       }
 
-      // Open Paystack popup
-      if (!window.PaystackPop) {
+      // Open Paystack popup using npm package (no CDN script needed)
+      if (!paystackRef.current) {
         throw new Error("Payment system not loaded. Please try again.");
       }
 
-      const handler = window.PaystackPop.setup({
-        publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "",
+      const handler = paystackRef.current.setup({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "",
         email: email,
         amount: Math.round(amount * 100), // Convert to pesewas
         currency: "GHS",
         reference: initData.reference,
         accessCode: initData.accessCode,
         label: "For The Future Organization",
-        channels: ["mobile_money", "card", "bank_transfer"],
+        channels: momoMode ? ["mobile_money"] : ["card", "bank_transfer"],
         metadata: {
           custom_fields: [
             {
@@ -149,7 +146,7 @@ export default function PaystackCheckout({
       setError(err instanceof Error ? err.message : "Payment failed");
       setLoading(false);
     }
-  }, [email, amount, metadata, onSuccess, onClose]);
+  }, [email, phone, amount, metadata, onSuccess, onClose, momoMode, router, source, redirectOnSuccess]);
 
   const openCheckout = () => {
     setError("");
@@ -161,7 +158,7 @@ export default function PaystackCheckout({
       {/* Trigger Button */}
       <button
         onClick={openCheckout}
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-6 py-3.5 text-sm font-bold text-navy-900 shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
+        className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-3.5 text-sm font-bold text-navy-900 shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
       >
         <CreditCard className="h-4 w-4" />
         {label}
@@ -188,20 +185,20 @@ export default function PaystackCheckout({
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="fixed inset-0 z-[210] flex items-center justify-center p-4"
             >
-              <div className="w-full max-w-md rounded-2xl bg-white shadow-2xl overflow-hidden">
+              <div className="w-full max-w-md rounded-2xl bg-surface shadow-2xl overflow-hidden">
                 {/* Header */}
-                <div className="bg-navy-900 px-6 py-5 flex items-center justify-between">
+                <div className="bg-primary px-6 py-5 flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-white">
-                      Secure Checkout
+                    <h3 className="text-lg font-bold text-text-on-primary">
+                      {momoMode ? "Mobile Money Payment" : "Secure Checkout"}
                     </h3>
-                    <p className="text-sm text-white/50 mt-0.5">
-                      Pay with Mobile Money or Card
+                    <p className="text-sm text-text-on-primary/50 mt-0.5">
+                      {momoMode ? "Pay directly from your MoMo wallet" : "Pay with Mobile Money or Card"}
                     </p>
                   </div>
                   <button
                     onClick={() => !loading && setIsOpen(false)}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition-colors"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-text-on-primary/70 hover:bg-white/20 hover:text-text-on-primary transition-colors"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -210,40 +207,49 @@ export default function PaystackCheckout({
                 {/* Body */}
                 <div className="p-6 space-y-5">
                   {/* Amount */}
-                  <div className="text-center py-3 rounded-xl bg-navy-50 border border-navy-100">
-                    <p className="text-xs text-navy-500 uppercase tracking-wider mb-1">
+                  <div className="text-center py-3 rounded-xl bg-bg-tertiary border border-border">
+                    <p className="text-xs text-text-muted uppercase tracking-wider mb-1">
                       Amount to pay
                     </p>
-                    <p className="text-3xl font-bold text-navy-900">
+                    <p className="text-3xl font-bold text-text-primary">
                       GH₵{amount.toLocaleString()}
                     </p>
                   </div>
 
                   {/* Payment Methods */}
-                  <div className="flex items-center justify-center gap-4">
-                    <div className="flex items-center gap-1.5 text-xs text-navy-500">
-                      <Smartphone className="h-4 w-4 text-navy-400" />
-                      <span>Mobile Money</span>
+                  {!momoMode && (
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="flex items-center gap-1.5 text-xs text-text-muted">
+                        <Smartphone className="h-4 w-4 text-text-muted" />
+                        <span>Mobile Money</span>
+                      </div>
+                      <div className="h-3 w-px bg-border" />
+                      <div className="flex items-center gap-1.5 text-xs text-text-muted">
+                        <CreditCard className="h-4 w-4 text-text-muted" />
+                        <span>Card</span>
+                      </div>
+                      <div className="h-3 w-px bg-border" />
+                      <div className="flex items-center gap-1.5 text-xs text-text-muted">
+                        <Shield className="h-4 w-4 text-text-muted" />
+                        <span>Bank</span>
+                      </div>
                     </div>
-                    <div className="h-3 w-px bg-navy-200" />
-                    <div className="flex items-center gap-1.5 text-xs text-navy-500">
-                      <CreditCard className="h-4 w-4 text-navy-400" />
-                      <span>Card</span>
+                  )}
+
+                  {momoMode && (
+                    <div className="flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-success-bg border border-success/20">
+                      <Smartphone className="h-5 w-5 text-success-text" />
+                      <span className="text-sm font-medium text-success-text">MTN / Vodafone / AirtelTigo</span>
                     </div>
-                    <div className="h-3 w-px bg-navy-200" />
-                    <div className="flex items-center gap-1.5 text-xs text-navy-500">
-                      <Shield className="h-4 w-4 text-navy-400" />
-                      <span>Bank</span>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Email */}
                   <div>
-                    <label className="text-xs font-semibold text-navy-500 uppercase tracking-wider mb-1.5 block">
+                    <label className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1.5 block">
                       Email Address
                     </label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-navy-300" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
                       <input
                         type="email"
                         placeholder="your@email.com"
@@ -252,11 +258,36 @@ export default function PaystackCheckout({
                           setEmail(e.target.value);
                           setError("");
                         }}
-                        className="w-full rounded-xl border border-navy-200 bg-white py-3 pl-10 pr-4 text-sm text-navy-900 placeholder:text-navy-300 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/20"
+                        className="w-full rounded-xl border border-border bg-surface py-3 pl-10 pr-4 text-sm text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                         autoFocus
                       />
                     </div>
                   </div>
+
+                  {/* Phone (MoMo mode) */}
+                  {momoMode && (
+                    <div>
+                      <label className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1.5 block">
+                        Mobile Money Number
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
+                        <input
+                          type="tel"
+                          placeholder="e.g. 0551234987"
+                          value={phone}
+                          onChange={(e) => {
+                            setPhone(e.target.value.replace(/[^0-9+ ]/g, ""));
+                            setError("");
+                          }}
+                          className="w-full rounded-xl border border-border bg-surface py-3 pl-10 pr-4 text-sm text-text-primary placeholder:text-text-muted focus:border-success focus:outline-none focus:ring-2 focus:ring-success/20"
+                        />
+                      </div>
+                      <p className="mt-1.5 text-xs text-text-muted">
+                        A prompt will be sent to this number to authorize payment
+                      </p>
+                    </div>
+                  )}
 
                   {/* Error */}
                   <AnimatePresence>
@@ -276,23 +307,30 @@ export default function PaystackCheckout({
                   <button
                     onClick={handleCheckout}
                     disabled={loading || !paystackReady}
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-4 text-sm font-bold text-white shadow-lg transition-all hover:shadow-xl hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className={`flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-bold text-white shadow-lg transition-all hover:shadow-xl hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed ${
+                      momoMode
+                        ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                        : "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                    }`}
                   >
                     {loading ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Connecting to Paystack...
+                        {momoMode ? "Sending MoMo prompt..." : "Connecting to Paystack..."}
                       </>
                     ) : (
                       <>
                         <Lock className="h-4 w-4" />
-                        Pay GH₵{amount.toLocaleString()} Securely
+                        {momoMode
+                          ? `Authorize GH₵${amount.toLocaleString()} Payment`
+                          : `Pay GH₵${amount.toLocaleString()} Securely`
+                        }
                       </>
                     )}
                   </button>
 
                   {/* Security */}
-                  <div className="flex items-center justify-center gap-2 text-xs text-navy-400">
+                  <div className="flex items-center justify-center gap-2 text-xs text-text-muted">
                     <Lock className="h-3 w-3" />
                     <span>
                       Secured by Paystack. Your payment info is encrypted.

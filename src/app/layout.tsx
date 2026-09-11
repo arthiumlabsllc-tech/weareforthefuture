@@ -63,14 +63,27 @@ export const metadata: Metadata = {
     icon: "/images/misc/ftf-logo-ico.png",
     apple: "/images/misc/ftf-logo-ico.png",
   },
+  other: {
+    "theme-color": "#FDF8F0",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
     >
+      <head>
+        {/* FOUC prevention: set theme before any CSS renders */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('ftf-theme');var th=t||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',th);document.documentElement.style.colorScheme=th;}catch(e){}})();`,
+          }}
+        />
+        <meta name="theme-color" content="#FDF8F0" />
+      </head>
       <body className="min-h-full flex flex-col">
         <a href="#main-content" className="skip-to-content">
           Skip to main content

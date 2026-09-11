@@ -1,0 +1,218 @@
+{
+  "zones": [
+    {
+      "region": "Greater Accra",
+      "areas": {
+        "inner": {
+          "cities": ["Accra", "Tema", "Madina", "Teshie", "Nungua", "Spintex", "Osu", "East Legon", "West Legon", "Achimoto", "Lapaz", "Kaneshie", "Dansoman", "Labadi"],
+          "fee": 20
+        },
+        "outer": {
+          "cities": ["Dodowa", "Aburi", "Kasoa", "Amasaman", "Adenta", "Ashaiman", "Tema New Town", "Kwabenya", "Weija", "Bortianor"],
+          "fee": 35
+        }
+      }
+    },
+    {
+      "region": "Ashanti",
+      "areas": {
+        "inner": {
+          "cities": ["Kumasi", "Suame", "Bantama", "Kwadaso", "Obuasi"],
+          "fee": 45
+        },
+        "outer": {
+          "cities": ["Ejisu", "Konongo", "Mampong", "Bekwai", "Kintampo", "Koforidua"],
+          "fee": 60
+        }
+      }
+    },
+    {
+      "region": "Central",
+      "areas": {
+        "inner": {
+          "cities": ["Cape Coast", "Winneba"],
+          "fee": 50
+        },
+        "outer": {
+          "cities": ["Elmina", "Swedru", "Mankessim", "Saltpond", "Oguaa"],
+          "fee": 60
+        }
+      }
+    },
+    {
+      "region": "Eastern",
+      "areas": {
+        "inner": {
+          "cities": ["Koforidua", "Nsawam"],
+          "fee": 45
+        },
+        "outer": {
+          "cities": ["Akim Oda", "Kibi", "Aburi", "Suhum", "Asamankese"],
+          "fee": 55
+        }
+      }
+    },
+    {
+      "region": "Western",
+      "areas": {
+        "inner": {
+          "cities": ["Takoradi", "Tarkwa"],
+          "fee": 55
+        },
+        "outer": {
+          "cities": ["Sekondi", "Essiama", "Agona Nkwanta", "Shama"],
+          "fee": 65
+        }
+      }
+    },
+    {
+      "region": "Volta",
+      "areas": {
+        "inner": {
+          "cities": ["Ho", "Keta"],
+          "fee": 55
+        },
+        "outer": {
+          "cities": ["Hohoe", "Kpandu", "Jasikan", "Kadjebi"],
+          "fee": 65
+        }
+      }
+    },
+    {
+      "region": "Northern",
+      "areas": {
+        "inner": {
+          "cities": ["Tamale"],
+          "fee": 70
+        },
+        "outer": {
+          "cities": ["Yendi", "Toloni", "Gushiegu", "Kpandae"],
+          "fee": 80
+        }
+      }
+    },
+    {
+      "region": "Upper East",
+      "areas": {
+        "inner": {
+          "cities": ["Bolgatanga"],
+          "fee": 80
+        },
+        "outer": {
+          "cities": ["Navrongo", "Bawku", "Zuarungu", "Paga"],
+          "fee": 90
+        }
+      }
+    },
+    {
+      "region": "Upper West",
+      "areas": {
+        "inner": {
+          "cities": ["Wa"],
+          "fee": 85
+        },
+        "outer": {
+          "cities": ["Lawra", "Nandom", "Tumu", "Daffiama"],
+          "fee": 95
+        }
+      }
+    },
+    {
+      "region": "Bono",
+      "areas": {
+        "inner": {
+          "cities": ["Sunyani"],
+          "fee": 70
+        },
+        "outer": {
+          "cities": ["Berekum", "Dormaa Ahenkro", "Sampa"],
+          "fee": 80
+        }
+      }
+    },
+    {
+      "region": "Bono East",
+      "areas": {
+        "inner": {
+          "cities": ["Techiman"],
+          "fee": 70
+        },
+        "outer": {
+          "cities": ["Wenchi", "Nkoranza", "Kintampo"],
+          "fee": 80
+        }
+      }
+    },
+    {
+      "region": "Ahafo",
+      "areas": {
+        "inner": {
+          "cities": ["Goaso"],
+          "fee": 70
+        },
+        "outer": {
+          "cities": ["Mim", "Bechem", "Kenyasi"],
+          "fee": 80
+        }
+      }
+    },
+    {
+      "region": "Savannah",
+      "areas": {
+        "inner": {
+          "cities": ["Damongo"],
+          "fee": 75
+        },
+        "outer": {
+          "cities": ["Salaga", "Bole", "Larabanga"],
+          "fee": 85
+        }
+      }
+    },
+    {
+      "region": "North East",
+      "areas": {
+        "inner": {
+          "cities": ["Nalerigu"],
+          "fee": 75
+        },
+        "outer": {
+          "cities": ["Gambaga", "Walewale", "Chereponi"],
+          "fee": 85
+        }
+      }
+    },
+    {
+      "region": "Oti",
+      "areas": {
+        "inner": {
+          "cities": ["Dambai"],
+          "fee": 75
+        },
+        "outer": {
+          "cities": ["Kadjebi", "Jasikan", "Nkwanta"],
+          "fee": 85
+        }
+      }
+    },
+    {
+      "region": "Western North",
+      "areas": {
+        "inner": {
+          "cities": ["Sefwi Wiawso"],
+          "fee": 75
+        },
+        "outer": {
+          "cities": ["Bibiani", "Enchi", "Juaboso"],
+          "fee": 85
+        }
+      }
+    }
+  ],
+  "rules": {
+    "freeDeliveryAccra": 500,
+    "freeDeliveryNationwide": 1000,
+    "heavyItemSurcharge": 10,
+    "heavyItemIds": ["gift-hamper"]
+  }
+}

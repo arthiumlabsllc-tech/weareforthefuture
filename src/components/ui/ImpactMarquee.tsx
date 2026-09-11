@@ -50,7 +50,7 @@ export default function ImpactMarquee() {
         isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}
     >
-      <div className="bg-navy-900/95 backdrop-blur-md border-b border-gold-400/10 overflow-hidden">
+      <div className="bg-primary/95 backdrop-blur-md border-b border-accent/10 overflow-hidden">
         <div className="marquee-track flex whitespace-nowrap py-2">
           {doubled.map((msg, i) => (
             <span
@@ -58,8 +58,8 @@ export default function ImpactMarquee() {
               className="inline-flex items-center mx-6 text-xs font-medium tracking-wide"
             >
               {/* Gold diamond separator */}
-              <span className="inline-block w-1.5 h-1.5 bg-gold-400 rotate-45 mr-3 shrink-0 opacity-60" />
-              <span className={i % 3 === 0 ? "text-gold-400" : "text-white/70"}>
+              <span className="inline-block w-1.5 h-1.5 bg-accent rotate-45 mr-3 shrink-0 opacity-60" />
+              <span className={i % 3 === 0 ? "text-accent" : "text-text-on-primary/70"}>
                 {msg}
               </span>
             </span>

@@ -36,8 +36,8 @@ export default function AboutPageClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -47,13 +47,13 @@ export default function AboutPageClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               Our Story
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               From a Small Act of Kindness to a Global Movement
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               What began in a small Ghanaian community in 2016 has become a
               powerful, youth-led movement transforming the lives of
               underprivileged children across Ghana, Nigeria, and the United States.
@@ -81,7 +81,7 @@ export default function AboutPageClient() {
         />
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-navy-200 md:left-1/2 md:-translate-x-px" />
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-border-strong md:left-1/2 md:-translate-x-px" />
 
           <div className="space-y-12">
             {timeline.map((event, i) => (
@@ -97,28 +97,28 @@ export default function AboutPageClient() {
               >
                 {/* Dot */}
                 <div className="absolute left-4 md:left-1/2 -translate-x-1/2 z-10">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400 shadow-lg shadow-gold-400/30">
-                    <div className="h-3 w-3 rounded-full bg-white" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent shadow-lg shadow-accent/30">
+                    <div className="h-3 w-3 rounded-full bg-surface" />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className={`ml-16 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-gold-50 px-4 py-1.5 text-sm font-bold text-gold-700 mb-3">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-sm font-bold text-accent mb-3">
                     <Calendar className="h-3.5 w-3.5" />
                     {event.year}
                   </span>
-                  <h3 className="text-xl font-bold text-navy-900 mb-2">
+                  <h3 className="text-xl font-bold text-text-primary mb-2">
                     {event.title}
                   </h3>
-                  <p className="text-navy-600 leading-relaxed mb-4">
+                  <p className="text-text-secondary leading-relaxed mb-4">
                     {event.description}
                   </p>
                   <div className={`flex flex-wrap gap-2 ${i % 2 === 0 ? "md:justify-end" : ""}`}>
                     {event.highlights.map((h) => (
                       <span
                         key={h}
-                        className="inline-flex items-center rounded-full bg-navy-50 px-3 py-1 text-xs font-medium text-navy-600"
+                        className="inline-flex items-center rounded-full bg-bg-tertiary px-3 py-1 text-xs font-medium text-text-secondary"
                       >
                         {h}
                       </span>
@@ -166,21 +166,21 @@ export default function AboutPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="rounded-2xl border border-navy-100 p-8 transition-all hover:shadow-xl hover:shadow-navy-900/5"
+              className="rounded-2xl border border-border p-8 transition-all hover:shadow-xl hover:shadow-primary/5"
             >
               <div
                 className={`mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl ${
                   item.color === "gold"
-                    ? "bg-gold-50 text-gold-600"
+                    ? "bg-accent-subtle text-accent"
                     : item.color === "emerald"
-                    ? "bg-emerald-50 text-emerald-600"
+                    ? "bg-success-bg text-success-text"
                     : "bg-coral-50 text-coral-500"
                 }`}
               >
                 <item.icon className="h-7 w-7" />
               </div>
-              <h3 className="text-xl font-bold text-navy-900 mb-3">{item.title}</h3>
-              <p className="text-navy-600 leading-relaxed">{item.description}</p>
+              <h3 className="text-xl font-bold text-text-primary mb-3">{item.title}</h3>
+              <p className="text-text-secondary leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>
@@ -201,13 +201,13 @@ export default function AboutPageClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="group rounded-2xl bg-white border border-navy-100 p-6 text-center transition-all hover:shadow-lg hover:-translate-y-1"
+              className="group rounded-2xl bg-surface border border-border p-6 text-center transition-all hover:shadow-lg hover:-translate-y-1"
             >
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-navy-900 to-navy-700 text-white font-bold text-xl transition-transform group-hover:scale-110">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary-hover text-text-on-primary font-bold text-xl transition-transform group-hover:scale-110">
                 SDG {goal.number}
               </div>
-              <h3 className="font-bold text-navy-900 mb-2">{goal.title}</h3>
-              <p className="text-xs text-navy-500 leading-relaxed">
+              <h3 className="font-bold text-text-primary mb-2">{goal.title}</h3>
+              <p className="text-xs text-text-tertiary leading-relaxed">
                 {goal.description}
               </p>
             </motion.div>
@@ -224,13 +224,13 @@ export default function AboutPageClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Volunteer Program
             </span>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-navy-900 md:text-4xl leading-tight">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl leading-tight">
               FTF Fellowship Programme
             </h2>
-            <p className="mt-6 text-lg text-navy-600 leading-relaxed">
+            <p className="mt-6 text-lg text-text-secondary leading-relaxed">
               A transformative 6–10 week volunteer opportunity for passionate
               university students in Ghana. Blending training, mentorship, and
               hands-on community service, this initiative equips participants
@@ -245,17 +245,17 @@ export default function AboutPageClient() {
                 "Network of youth changemakers",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                    <div className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success-bg">
+                    <div className="h-2 w-2 rounded-full bg-success" />
                   </div>
-                  <span className="text-navy-600">{item}</span>
+                  <span className="text-text-secondary">{item}</span>
                 </li>
               ))}
             </ul>
             <div className="mt-8 flex gap-4">
               <Link
                 href="/volunteer"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-6 py-3 text-sm font-semibold text-navy-900 shadow-lg shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-3 text-sm font-semibold text-text-primary shadow-lg shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 Join Now
                 <ArrowRight className="h-4 w-4" />
@@ -272,10 +272,10 @@ export default function AboutPageClient() {
           >
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: BookOpen, label: "Training", color: "bg-gold-50 text-gold-600" },
-                { icon: Users, label: "Mentorship", color: "bg-emerald-50 text-emerald-600" },
+                { icon: BookOpen, label: "Training", color: "bg-accent-subtle text-accent" },
+                { icon: Users, label: "Mentorship", color: "bg-success-bg text-success-text" },
                 { icon: HandHeart, label: "Service", color: "bg-coral-50 text-coral-500" },
-                { icon: Award, label: "Leadership", color: "bg-navy-50 text-navy-600" },
+                { icon: Award, label: "Leadership", color: "bg-bg-tertiary text-text-secondary" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -283,10 +283,10 @@ export default function AboutPageClient() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.1, duration: 0.4 }}
-                  className={`rounded-2xl border border-navy-100 p-8 text-center ${item.color.split(" ")[0]}`}
+                  className={`rounded-2xl border border-border p-8 text-center ${item.color.split(" ")[0]}`}
                 >
                   <item.icon className={`h-10 w-10 mx-auto mb-3 ${item.color.split(" ")[1]}`} />
-                  <p className="font-bold text-navy-900">{item.label}</p>
+                  <p className="font-bold text-text-primary">{item.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -295,7 +295,7 @@ export default function AboutPageClient() {
       </SectionWrapper>
 
       {/* ===== START A CHAPTER ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 py-20">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary to-primary py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(212,168,67,0.1),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
@@ -305,10 +305,10 @@ export default function AboutPageClient() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Start a Chapter in Your Country
             </h2>
-            <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-on-primary/60 max-w-2xl mx-auto">
               Our mission is spreading fast - from streets to classrooms, from
               neighborhoods to nations. Join our global community of young
               changemakers.
@@ -317,9 +317,9 @@ export default function AboutPageClient() {
               {["Ghana", "Nigeria", "United States"].map((country) => (
                 <div
                   key={country}
-                  className="flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-medium text-white border border-white/10"
+                  className="flex items-center gap-2 rounded-full bg-surface/10 px-5 py-2.5 text-sm font-medium text-text-on-primary border border-white/10"
                 >
-                  <MapPin className="h-4 w-4 text-gold-400" />
+                  <MapPin className="h-4 w-4 text-accent" />
                   {country}
                 </div>
               ))}
@@ -327,7 +327,7 @@ export default function AboutPageClient() {
             <div className="mt-8">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-2xl shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 Start a Chapter
                 <ArrowRight className="h-5 w-5" />

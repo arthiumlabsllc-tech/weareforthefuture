@@ -14,24 +14,24 @@ interface ValueCardProps {
 
 const colorMap: Record<string, { bg: string; icon: string; border: string }> = {
   gold: {
-    bg: "bg-gold-50",
-    icon: "text-gold-600",
-    border: "border-gold-200",
+    bg: "bg-accent-subtle",
+    icon: "text-accent",
+    border: "border-accent/20",
   },
   coral: {
-    bg: "bg-coral-50",
-    icon: "text-coral-500",
-    border: "border-coral-200",
+    bg: "bg-error-bg",
+    icon: "text-error",
+    border: "border-error/20",
   },
   emerald: {
-    bg: "bg-emerald-50",
-    icon: "text-emerald-600",
-    border: "border-emerald-200",
+    bg: "bg-success-bg",
+    icon: "text-success-text",
+    border: "border-success/20",
   },
   navy: {
-    bg: "bg-navy-50",
-    icon: "text-navy-600",
-    border: "border-navy-200",
+    bg: "bg-primary-subtle",
+    icon: "text-primary",
+    border: "border-primary/20",
   },
 };
 
@@ -53,15 +53,15 @@ export default function ValueCard({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -4 }}
-      className={`group relative rounded-2xl border ${colors.border} ${colors.bg} p-8 transition-shadow hover:shadow-xl hover:shadow-navy-900/5`}
+      className={`group relative rounded-2xl border ${colors.border} ${colors.bg} p-8 transition-shadow hover:shadow-xl hover:shadow-primary/5`}
     >
       <div
         className={`mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl ${colors.bg} ${colors.icon} transition-transform group-hover:scale-110`}
       >
         <Icon className="h-7 w-7" />
       </div>
-      <h3 className="text-xl font-bold text-navy-900 mb-2">{title}</h3>
-      <p className="text-navy-600 leading-relaxed">{description}</p>
+      <h3 className="text-xl font-bold text-text-primary mb-2">{title}</h3>
+      <p className="text-text-secondary leading-relaxed">{description}</p>
     </motion.div>
   );
 }

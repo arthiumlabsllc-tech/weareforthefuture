@@ -128,8 +128,8 @@ export default function NewsClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -139,13 +139,13 @@ export default function NewsClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               News & Stories
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               Stories of Impact, News of Change
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               Stay updated with the latest news, impact stories, and events
               from For The Future Organization.
             </p>
@@ -168,7 +168,7 @@ export default function NewsClient() {
             transition={{ duration: 0.6 }}
             className="grid gap-8 lg:grid-cols-2 items-center"
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-navy-100">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-bg-tertiary">
               <Image
                 src={featured.image}
                 alt={featured.title}
@@ -179,20 +179,20 @@ export default function NewsClient() {
             </div>
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <span className="inline-flex items-center rounded-full bg-gold-100 px-3 py-1 text-xs font-semibold text-gold-700">
+                <span className="inline-flex items-center rounded-full bg-accent-subtle px-3 py-1 text-xs font-semibold text-accent">
                   Featured
                 </span>
-                <span className="inline-flex items-center rounded-full bg-navy-50 px-3 py-1 text-xs font-medium text-navy-600">
+                <span className="inline-flex items-center rounded-full bg-bg-tertiary px-3 py-1 text-xs font-medium text-text-secondary">
                   {featured.category}
                 </span>
               </div>
-              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-navy-900 md:text-3xl leading-tight mb-4">
+              <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-primary md:text-3xl leading-tight mb-4">
                 {featured.title}
               </h2>
-              <p className="text-navy-600 leading-relaxed mb-6">
+              <p className="text-text-secondary leading-relaxed mb-6">
                 {featured.excerpt}
               </p>
-              <div className="flex items-center gap-4 text-sm text-navy-500 mb-6">
+              <div className="flex items-center gap-4 text-sm text-text-tertiary mb-6">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" />
                   {featured.date}
@@ -202,7 +202,7 @@ export default function NewsClient() {
                   {featured.readTime}
                 </span>
               </div>
-              <button className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-6 py-3 text-sm font-semibold text-navy-900 shadow-lg shadow-gold-400/20 transition-all hover:scale-[1.02]">
+              <button className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-3 text-sm font-semibold text-text-primary shadow-lg shadow-accent/20 transition-all hover:scale-[1.02]">
                 Read Full Story
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -226,8 +226,8 @@ export default function NewsClient() {
               onClick={() => setActiveCategory(cat)}
               className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
                 activeCategory === cat
-                  ? "bg-navy-900 text-white shadow-lg"
-                  : "bg-white text-navy-600 border border-navy-200 hover:border-navy-400"
+                  ? "bg-primary text-text-on-primary shadow-lg"
+                  : "bg-surface text-text-secondary border border-border-strong hover:border-border"
               }`}
             >
               {cat}
@@ -243,9 +243,9 @@ export default function NewsClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="group overflow-hidden rounded-2xl border border-navy-100 bg-white transition-all hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1"
+              className="group overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-navy-100">
+              <div className="relative aspect-[16/9] overflow-hidden bg-bg-tertiary">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -256,19 +256,19 @@ export default function NewsClient() {
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-navy-50 px-2.5 py-0.5 text-xs font-medium text-navy-600">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-bg-tertiary px-2.5 py-0.5 text-xs font-medium text-text-secondary">
                     <Tag className="h-3 w-3" />
                     {article.category}
                   </span>
-                  <span className="text-xs text-navy-400">{article.date}</span>
+                  <span className="text-xs text-text-muted">{article.date}</span>
                 </div>
-                <h3 className="text-lg font-bold text-navy-900 group-hover:text-gold-600 transition-colors mb-2 line-clamp-2">
+                <h3 className="text-lg font-bold text-text-primary group-hover:text-accent transition-colors mb-2 line-clamp-2">
                   {article.title}
                 </h3>
-                <p className="text-sm text-navy-600 leading-relaxed line-clamp-3 mb-4">
+                <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 mb-4">
                   {article.excerpt}
                 </p>
-                <div className="flex items-center justify-between text-xs text-navy-400">
+                <div className="flex items-center justify-between text-xs text-text-muted">
                   <span className="flex items-center gap-1">
                     <User className="h-3 w-3" />
                     {article.author}

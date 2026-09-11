@@ -92,8 +92,8 @@ export default function PartnersClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -103,13 +103,13 @@ export default function PartnersClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               Our Partners
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               Together, We Go Further
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               Our partners are essential to our mission. Together, we create
               opportunities and transform the lives of underprivileged children
               across three countries.
@@ -133,15 +133,15 @@ export default function PartnersClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="rounded-2xl border border-navy-100 bg-white p-8"
+              className="rounded-2xl border border-border bg-surface p-8"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent">
                 <category.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-navy-900 mb-2">
+              <h3 className="text-xl font-bold text-text-primary mb-2">
                 {category.title}
               </h3>
-              <p className="text-sm text-navy-600 leading-relaxed mb-6">
+              <p className="text-sm text-text-secondary leading-relaxed mb-6">
                 {category.description}
               </p>
               <div className="space-y-3">
@@ -153,7 +153,7 @@ export default function PartnersClient() {
                   return (
                     <div
                       key={partner}
-                      className="flex items-center gap-3 rounded-lg bg-navy-50/50 px-4 py-3"
+                      className="flex items-center gap-3 rounded-lg bg-bg-tertiary/50 px-4 py-3"
                     >
                       {logoData ? (
                         <Image
@@ -165,9 +165,9 @@ export default function PartnersClient() {
                           unoptimized
                         />
                       ) : (
-                        <div className="h-2 w-2 rounded-full bg-gold-400" />
+                        <div className="h-2 w-2 rounded-full bg-accent" />
                       )}
-                      <span className="text-sm font-medium text-navy-700">
+                      <span className="text-sm font-medium text-text-secondary">
                         {partner}
                       </span>
                     </div>
@@ -196,34 +196,34 @@ export default function PartnersClient() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className={`group rounded-2xl border-2 p-8 transition-all hover:shadow-xl hover:-translate-y-1 ${
                 type.color === "gold"
-                  ? "border-gold-200 hover:border-gold-400 bg-white"
+                  ? "border-accent hover:border-accent bg-surface"
                   : type.color === "emerald"
-                  ? "border-emerald-200 hover:border-emerald-400 bg-white"
-                  : "border-coral-200 hover:border-coral-400 bg-white"
+                  ? "border-success/20 hover:border-success bg-surface"
+                  : "border-coral-200 hover:border-coral-400 bg-surface"
               }`}
             >
               <div
                 className={`mb-5 flex h-14 w-14 items-center justify-center rounded-xl ${
                   type.color === "gold"
-                    ? "bg-gold-50 text-gold-600"
+                    ? "bg-accent-subtle text-accent"
                     : type.color === "emerald"
-                    ? "bg-emerald-50 text-emerald-600"
+                    ? "bg-success-bg text-success-text"
                     : "bg-coral-50 text-coral-500"
                 }`}
               >
                 <type.icon className="h-7 w-7" />
               </div>
-              <h3 className="text-xl font-bold text-navy-900 mb-3">
+              <h3 className="text-xl font-bold text-text-primary mb-3">
                 {type.title}
               </h3>
-              <p className="text-sm text-navy-600 leading-relaxed mb-6">
+              <p className="text-sm text-text-secondary leading-relaxed mb-6">
                 {type.description}
               </p>
               <ul className="space-y-3">
                 {type.benefits.map((benefit) => (
                   <li key={benefit} className="flex items-start gap-2">
-                    <Check className="h-4 w-4 mt-0.5 text-emerald-500 shrink-0" />
-                    <span className="text-sm text-navy-600">{benefit}</span>
+                    <Check className="h-4 w-4 mt-0.5 text-success shrink-0" />
+                    <span className="text-sm text-text-secondary">{benefit}</span>
                   </li>
                 ))}
               </ul>
@@ -233,7 +233,7 @@ export default function PartnersClient() {
       </SectionWrapper>
 
       {/* ===== CTA ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 py-20">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary to-primary py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,168,67,0.1),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <motion.div
@@ -242,25 +242,25 @@ export default function PartnersClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Handshake className="h-12 w-12 text-gold-400 mx-auto mb-4" />
-            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
+            <Handshake className="h-12 w-12 text-accent mx-auto mb-4" />
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Let&apos;s Create Impact Together
             </h2>
-            <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-on-primary/60 max-w-2xl mx-auto">
               Whether you&apos;re a corporation, foundation, or community
               organization - we&apos;d love to explore how we can work together.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-2xl shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 Become a Partner
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
                 href="/donate"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-text-on-primary transition-all hover:bg-surface/10"
               >
                 <Heart className="h-5 w-5" />
                 Make a Donation

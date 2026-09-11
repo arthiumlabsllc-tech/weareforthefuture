@@ -34,8 +34,8 @@ export default function AdvisoryBoardClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
         </div>
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8 text-center">
           <motion.div
@@ -43,14 +43,14 @@ export default function AdvisoryBoardClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-gold-400/10 px-4 py-1.5 text-xs font-semibold text-gold-400 uppercase tracking-wider mb-6">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent uppercase tracking-wider mb-6">
               <Compass className="h-3.5 w-3.5" />
               Guidance & Leadership
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-text-on-primary sm:text-5xl lg:text-6xl">
               Advisory Board
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70">
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
               Expert guidance, leadership, and unwavering support to help drive
               our mission forward and create lasting impact for underprivileged
               children.
@@ -60,7 +60,7 @@ export default function AdvisoryBoardClient() {
       </section>
 
       {/* ===== STATS BAR ===== */}
-      <div className="bg-navy-800 border-y border-white/5">
+      <div className="bg-bg-secondary border-y border-white/5">
         <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {[
@@ -70,10 +70,10 @@ export default function AdvisoryBoardClient() {
               { label: "U.S. Board", value: usAdvisory.length },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-2xl font-bold text-gold-400">
+                <div className="text-2xl font-bold text-accent">
                   {stat.value}
                 </div>
-                <div className="text-xs text-white/50 mt-1">{stat.label}</div>
+                <div className="text-xs text-text-on-primary/50 mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -96,8 +96,8 @@ export default function AdvisoryBoardClient() {
               onClick={() => setActiveCountry(country)}
               className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
                 activeCountry === country
-                  ? "bg-navy-900 text-white shadow-lg"
-                  : "bg-white text-navy-600 hover:bg-navy-50 shadow"
+                  ? "bg-primary text-text-on-primary shadow-lg"
+                  : "bg-surface text-text-secondary hover:bg-bg-tertiary shadow"
               }`}
             >
               {country === "United States" ? "United States" : country}
@@ -123,7 +123,7 @@ export default function AdvisoryBoardClient() {
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 className="group"
               >
-                <div className="relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-navy-100 to-navy-50 mb-4">
+                <div className="relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-bg-tertiary to-bg-tertiary mb-4">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -131,18 +131,18 @@ export default function AdvisoryBoardClient() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-1 text-[10px] font-medium text-white">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-surface/20 backdrop-blur-sm px-2.5 py-1 text-[10px] font-medium text-text-on-primary">
                       <MapPin className="h-2.5 w-2.5" />
                       {member.country}
                     </span>
                   </div>
                 </div>
-                <h3 className="text-sm font-bold text-navy-900 leading-tight">
+                <h3 className="text-sm font-bold text-text-primary leading-tight">
                   {member.name}
                 </h3>
-                <p className="text-xs text-navy-500 mt-0.5">{member.role}</p>
+                <p className="text-xs text-text-tertiary mt-0.5">{member.role}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -152,25 +152,25 @@ export default function AdvisoryBoardClient() {
       {/* ===== CTA ===== */}
       <SectionWrapper background="navy">
         <div className="mx-auto max-w-3xl text-center">
-          <Users className="mx-auto h-10 w-10 text-gold-400 mb-4" />
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white sm:text-4xl">
+          <Users className="mx-auto h-10 w-10 text-accent mb-4" />
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl">
             Interested in advising?
           </h2>
-          <p className="mt-4 text-lg text-white/60">
+          <p className="mt-4 text-lg text-text-on-primary/60">
             We welcome experienced professionals who share our passion for
             empowering underprivileged children.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3.5 text-sm font-semibold text-navy-900 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-text-primary shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
             >
               Get in Touch
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/volunteer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-text-on-primary transition-all hover:bg-surface/10"
             >
               Volunteer With Us
             </Link>

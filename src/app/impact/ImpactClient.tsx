@@ -69,11 +69,11 @@ const impactByYear = [
 ];
 
 const fundAllocation = [
-  { category: "Education Programs", percentage: 40, color: "bg-gold-400" },
-  { category: "Healthcare & Hygiene", percentage: 20, color: "bg-emerald-500" },
+  { category: "Education Programs", percentage: 40, color: "bg-accent" },
+  { category: "Healthcare & Hygiene", percentage: 20, color: "bg-success" },
   { category: "Community Development", percentage: 15, color: "bg-coral-500" },
-  { category: "FTF Village Project", percentage: 15, color: "bg-navy-600" },
-  { category: "Operations & Admin", percentage: 10, color: "bg-navy-300" },
+  { category: "FTF Village Project", percentage: 15, color: "bg-text-secondary" },
+  { category: "Operations & Admin", percentage: 10, color: "bg-border" },
 ];
 
 const successStories = [
@@ -116,8 +116,8 @@ export default function ImpactClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -127,13 +127,13 @@ export default function ImpactClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               Transparency & Impact
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               Measurable Change, Real Lives Transformed
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               We believe in full transparency. Here&apos;s how your support
               creates real, measurable impact for underprivileged children.
             </p>
@@ -151,28 +151,28 @@ export default function ImpactClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl border border-navy-100 bg-white p-8 transition-all hover:shadow-xl hover:shadow-navy-900/5"
+              className="rounded-2xl border border-border bg-surface p-8 transition-all hover:shadow-xl hover:shadow-primary/5"
             >
               <div
                 className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${
                   metric.color === "gold"
-                    ? "bg-gold-50 text-gold-600"
+                    ? "bg-accent-subtle text-accent"
                     : metric.color === "emerald"
-                    ? "bg-emerald-50 text-emerald-600"
+                    ? "bg-success-bg text-success-text"
                     : metric.color === "coral"
                     ? "bg-coral-50 text-coral-500"
-                    : "bg-navy-50 text-navy-600"
+                    : "bg-bg-tertiary text-text-secondary"
                 }`}
               >
                 <metric.icon className="h-6 w-6" />
               </div>
-              <div className="text-3xl font-bold text-navy-900 mb-1">
+              <div className="text-3xl font-bold text-text-primary mb-1">
                 {metric.value}
               </div>
-              <div className="text-sm font-semibold text-navy-700 mb-2">
+              <div className="text-sm font-semibold text-text-secondary mb-2">
                 {metric.label}
               </div>
-              <p className="text-sm text-navy-500 leading-relaxed">
+              <p className="text-sm text-text-tertiary leading-relaxed">
                 {metric.description}
               </p>
             </motion.div>
@@ -192,7 +192,7 @@ export default function ImpactClient() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-navy-100 bg-white p-8 md:p-12"
+          className="rounded-2xl border border-border bg-surface p-8 md:p-12"
         >
           <div className="flex items-end gap-2 h-64 md:h-80">
             {impactByYear.map((data, i) => (
@@ -204,21 +204,21 @@ export default function ImpactClient() {
                   }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: i * 0.05 }}
-                  className="w-full rounded-t-lg bg-gradient-to-t from-gold-500 to-gold-300 min-h-[4px] relative group cursor-pointer"
+                  className="w-full rounded-t-lg bg-gradient-to-t from-accent to-accent-hover min-h-[4px] relative group cursor-pointer"
                 >
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-navy-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-primary text-text-on-primary text-xs px-2 py-1 rounded whitespace-nowrap">
                     {data.children.toLocaleString()}
                   </div>
                 </motion.div>
-                <span className="text-[10px] md:text-xs text-navy-500 font-medium">
+                <span className="text-[10px] md:text-xs text-text-tertiary font-medium">
                   {data.year.slice(2)}
                 </span>
               </div>
             ))}
           </div>
-          <div className="mt-6 flex items-center gap-6 text-sm text-navy-500">
+          <div className="mt-6 flex items-center gap-6 text-sm text-text-tertiary">
             <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-sm bg-gradient-to-t from-gold-500 to-gold-300" />
+              <div className="h-3 w-3 rounded-sm bg-gradient-to-t from-accent to-accent-hover" />
               Children Reached
             </div>
           </div>
@@ -234,13 +234,13 @@ export default function ImpactClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Financial Transparency
             </span>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-navy-900 md:text-4xl leading-tight">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl leading-tight">
               Where Your Donations Go
             </h2>
-            <p className="mt-4 text-navy-600 leading-relaxed">
+            <p className="mt-4 text-text-secondary leading-relaxed">
               We are committed to ensuring that every dollar makes maximum
               impact. Here&apos;s how funds are allocated across our programs.
             </p>
@@ -255,14 +255,14 @@ export default function ImpactClient() {
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-sm font-medium text-navy-700">
+                    <span className="text-sm font-medium text-text-secondary">
                       {item.category}
                     </span>
-                    <span className="text-sm font-bold text-navy-900">
+                    <span className="text-sm font-bold text-text-primary">
                       {item.percentage}%
                     </span>
                   </div>
-                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-navy-100">
+                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-bg-tertiary">
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${item.percentage}%` }}
@@ -320,8 +320,8 @@ export default function ImpactClient() {
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-navy-900">90%</div>
-                  <div className="text-sm text-navy-500">Goes to Programs</div>
+                  <div className="text-3xl font-bold text-text-primary">90%</div>
+                  <div className="text-sm text-text-tertiary">Goes to Programs</div>
                 </div>
               </div>
             </div>
@@ -344,18 +344,18 @@ export default function ImpactClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="rounded-2xl bg-white border border-navy-100 p-8 transition-all hover:shadow-xl hover:shadow-navy-900/5"
+              className="rounded-2xl bg-surface border border-border p-8 transition-all hover:shadow-xl hover:shadow-primary/5"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gold-50 text-gold-600">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent-subtle text-accent">
                 <Heart className="h-6 w-6" />
               </div>
-              <p className="text-navy-600 leading-relaxed mb-6 italic">
+              <p className="text-text-secondary leading-relaxed mb-6 italic">
                 &ldquo;{story.story}&rdquo;
               </p>
-              <div className="border-t border-navy-100 pt-4">
-                <div className="font-semibold text-navy-900">{story.name}</div>
-                <div className="text-sm text-navy-500">{story.location}</div>
-                <div className="mt-2 inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+              <div className="border-t border-border pt-4">
+                <div className="font-semibold text-text-primary">{story.name}</div>
+                <div className="text-sm text-text-tertiary">{story.location}</div>
+                <div className="mt-2 inline-flex items-center rounded-full bg-success-bg px-3 py-1 text-xs font-medium text-success-text">
                   {story.program}
                 </div>
               </div>
@@ -379,18 +379,18 @@ export default function ImpactClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="group flex items-center gap-4 rounded-2xl border border-navy-100 bg-white p-6 transition-all hover:shadow-lg hover:border-gold-200"
+              className="group flex items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-all hover:shadow-lg hover:border-accent"
             >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-navy-600 transition-colors group-hover:bg-gold-50 group-hover:text-gold-600">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent">
                 <FileText className="h-7 w-7" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-navy-900">
+                <h3 className="font-semibold text-text-primary">
                   Annual Report {year}
                 </h3>
-                <p className="text-sm text-navy-500">PDF Document</p>
+                <p className="text-sm text-text-tertiary">PDF Document</p>
               </div>
-              <Download className="h-5 w-5 text-navy-400 transition-colors group-hover:text-gold-600" />
+              <Download className="h-5 w-5 text-text-muted transition-colors group-hover:text-accent" />
             </motion.div>
           ))}
         </div>

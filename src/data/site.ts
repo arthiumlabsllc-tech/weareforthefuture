@@ -46,7 +46,7 @@ export const siteConfig = {
     title: "Founder & President",
     quote:
       "I believe that no one came to this world without a purpose. Every single human being has a special God-given and inbuilt gift within them which must be unearthed.",
-    image: "/images/team/kezia-sanie.png",
+    image: "/images/team/exec-kezia.png"
   },
 };
 

@@ -36,10 +36,10 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 
   return (
     <div ref={ref} className="text-center">
-      <div className="text-4xl md:text-5xl font-bold text-gold-400 tabular-nums">
+      <div className="text-4xl md:text-5xl font-bold text-accent tabular-nums">
         {fmt(displayed)}{suffix}
       </div>
-      <div className="text-xs text-white/50 mt-2 uppercase tracking-wider">{label}</div>
+      <div className="text-xs text-text-on-primary/50 mt-2 uppercase tracking-wider">{label}</div>
     </div>
   );
 }
@@ -62,8 +62,8 @@ export default function ImpactStoriesClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
         </div>
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-8 text-center">
           <motion.div
@@ -71,14 +71,14 @@ export default function ImpactStoriesClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-gold-400/10 border border-gold-400/20 px-5 py-2 text-xs font-semibold text-gold-400 uppercase tracking-wider mb-6 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6 backdrop-blur-sm">
               <Heart className="h-3.5 w-3.5" />
               Real Lives Changed
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-text-on-primary sm:text-5xl lg:text-6xl">
               Impact Stories
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70">
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
               See How Your Support is Transforming Lives.
             </p>
           </motion.div>
@@ -86,7 +86,7 @@ export default function ImpactStoriesClient() {
       </section>
 
       {/* ===== STATS BAR ===== */}
-      <div className="bg-navy-900 border-y border-white/5">
+      <div className="bg-primary border-y border-white/5">
         <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <StatCounter value={90} suffix="+" label="Years of Foundation" />
@@ -119,7 +119,7 @@ export default function ImpactStoriesClient() {
             >
               {/* Image */}
               <div className="relative flex-1 w-full">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-navy-100 shadow-2xl">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-bg-tertiary shadow-2xl">
                   <Image
                     src={story.image}
                     alt={story.name}
@@ -127,37 +127,37 @@ export default function ImpactStoriesClient() {
                     className="object-cover"
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/30 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
                 </div>
                 {/* Decorative quote badge */}
-                <div className="absolute -top-4 -left-4 h-14 w-14 rounded-full bg-gold-400 flex items-center justify-center shadow-lg shadow-gold-400/30">
-                  <Quote className="h-5 w-5 text-navy-900" />
+                <div className="absolute -top-4 -left-4 h-14 w-14 rounded-full bg-accent flex items-center justify-center shadow-lg shadow-accent/30">
+                  <Quote className="h-5 w-5 text-text-primary" />
                 </div>
               </div>
 
               {/* Content */}
               <div className="flex-1 w-full">
                 <div className="mb-4">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-700 border border-emerald-100">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-success-bg px-3.5 py-1.5 text-xs font-semibold text-success-text border border-success/20">
                     <BookOpen className="h-3 w-3" />
                     {story.program}
                   </span>
                 </div>
-                <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-navy-900 sm:text-4xl">
+                <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary sm:text-4xl">
                   {story.name}
                 </h2>
-                <p className="text-base font-medium text-gold-600 mt-2">
+                <p className="text-base font-medium text-accent mt-2">
                   {story.title}
                 </p>
-                <p className="mt-5 text-base leading-relaxed text-navy-600">
+                <p className="mt-5 text-base leading-relaxed text-text-secondary">
                   {story.story}
                 </p>
                 <div className="mt-8">
                   <Link
                     href="/donate"
-                    className="inline-flex items-center gap-2 rounded-full bg-navy-900 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-navy-800 hover:scale-[1.02] shadow-lg shadow-navy-900/20"
+                    className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-text-on-primary transition-all hover:bg-primary-hover hover:scale-[1.02] shadow-lg shadow-primary/20"
                   >
-                    <Heart className="h-4 w-4 text-gold-400" />
+                    <Heart className="h-4 w-4 text-accent" />
                     Be Part of {story.name}&apos;s Journey
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -185,7 +185,7 @@ export default function ImpactStoriesClient() {
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.02 }}
               onClick={() => setLightbox(src)}
-              className="group relative aspect-square overflow-hidden rounded-xl bg-navy-100 cursor-pointer"
+              className="group relative aspect-square overflow-hidden rounded-xl bg-bg-tertiary cursor-pointer"
             >
               <Image
                 src={src}
@@ -194,8 +194,8 @@ export default function ImpactStoriesClient() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 unoptimized
               />
-              <div className="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/40 transition-colors duration-300 flex items-center justify-center">
-                <Camera className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 transition-colors duration-300 flex items-center justify-center">
+                <Camera className="h-5 w-5 text-text-on-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </motion.button>
           ))}
@@ -214,7 +214,7 @@ export default function ImpactStoriesClient() {
           >
             <button
               onClick={() => setLightbox(null)}
-              className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+              className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-surface/10 text-text-on-primary transition-colors hover:bg-surface/20"
               aria-label="Close lightbox"
             >
               <X className="h-5 w-5" />
@@ -236,25 +236,25 @@ export default function ImpactStoriesClient() {
       {/* ===== CTA ===== */}
       <SectionWrapper background="navy">
         <div className="mx-auto max-w-3xl text-center">
-          <Heart className="mx-auto h-10 w-10 text-gold-400 mb-4" />
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white sm:text-4xl">
+          <Heart className="mx-auto h-10 w-10 text-accent mb-4" />
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl">
             Help Us Write More Success Stories
           </h2>
-          <p className="mt-4 text-lg text-white/60">
+          <p className="mt-4 text-lg text-text-on-primary/60">
             Every donation, every volunteer hour, every share brings hope to
             another child. Join us in transforming lives across Africa.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3.5 text-sm font-semibold text-navy-900 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-text-primary shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
             >
               <Heart className="h-4 w-4" />
               Support a Child
             </Link>
             <Link
               href="/volunteer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-text-on-primary transition-all hover:bg-surface/10"
             >
               Become a Volunteer
               <ArrowRight className="h-4 w-4" />

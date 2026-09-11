@@ -35,21 +35,21 @@ const heroSlides = [
     subtitle: "YOUR SUPPORT CAN CHANGE LIVES",
     cta: "Learn More",
     image: "/images/hero/hero-1.png",
-    gradient: "from-navy-900/80 via-navy-900/50 to-navy-900/30",
+    gradient: "from-primary/80 via-primary/50 to-primary/30",
   },
   {
     title: "Creating Lasting Change for Underprivileged Children",
     subtitle: "GIVING CHILDREN HOPE, CARE AND OPPORTUNITY",
     cta: "Our Initiatives",
     image: "/images/hero/hero-2.png",
-    gradient: "from-navy-900/70 via-navy-900/40 to-transparent",
+    gradient: "from-primary/70 via-primary/40 to-transparent",
   },
   {
     title: "A Better Tomorrow for Every Child",
     subtitle: "BE A PART OF THEIR STORY",
     cta: "Get Involved",
     image: "/images/hero/hero-3.png",
-    gradient: "from-navy-900/80 via-navy-900/50 to-navy-900/20",
+    gradient: "from-primary/80 via-primary/50 to-primary/20",
   },
 ];
 
@@ -91,9 +91,9 @@ export default function HomePage() {
               />
             </div>
           ))}
-          <div className="absolute inset-0 z-20 bg-gradient-to-r from-navy-900/85 via-navy-900/60 to-navy-900/30" />
-          <div className="absolute top-1/4 -right-32 h-96 w-96 rounded-full bg-gold-400/10 blur-3xl z-20" />
-          <div className="absolute bottom-1/4 -left-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl z-20" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/30" />
+          <div className="absolute top-1/4 -right-32 h-96 w-96 rounded-full bg-accent/10 blur-3xl z-20" />
+          <div className="absolute bottom-1/4 -left-32 h-96 w-96 rounded-full bg-success/10 blur-3xl z-20" />
         </div>
 
         {/* Content */}
@@ -107,10 +107,10 @@ export default function HomePage() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-6">
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-6">
                   {heroSlides[currentSlide].subtitle}
                 </span>
-                <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl lg:text-7xl">
                   {heroSlides[currentSlide].title}
                 </h1>
               </motion.div>
@@ -120,7 +120,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed"
+              className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed"
             >
               {siteConfig.description}
             </motion.p>
@@ -133,14 +133,14 @@ export default function HomePage() {
             >
               <Link
                 href="/donate"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:shadow-gold-400/30 hover:scale-[1.02]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-primary-contrast shadow-2xl shadow-accent/20 transition-all hover:shadow-accent/30 hover:scale-[1.02]"
               >
                 <Heart className="h-5 w-5 transition-transform group-hover:scale-110" />
                 Donate Now
               </Link>
               <Link
                 href="/volunteer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-text-on-primary/20 px-8 py-4 text-base font-semibold text-text-on-primary transition-all hover:bg-text-on-primary/10 hover:border-text-on-primary/30"
               >
                 Become a Volunteer
                 <ArrowRight className="h-5 w-5" />
@@ -156,8 +156,8 @@ export default function HomePage() {
                 onClick={() => setCurrentSlide(i)}
                 className={`h-1.5 rounded-full transition-all duration-500 ${
                   i === currentSlide
-                    ? "w-12 bg-gold-400"
-                    : "w-6 bg-white/30 hover:bg-white/50"
+                    ? "w-12 bg-accent"
+                    : "w-6 bg-text-on-primary/30 hover:bg-text-on-primary/50"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -172,15 +172,15 @@ export default function HomePage() {
           transition={{ delay: 1.5 }}
           className="absolute bottom-10 right-6 lg:right-8 flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-text-on-primary/40">
             Scroll
           </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            className="h-8 w-5 rounded-full border-2 border-white/20 flex items-start justify-center p-1"
+            className="h-8 w-5 rounded-full border-2 border-text-on-primary/20 flex items-start justify-center p-1"
           >
-            <div className="h-1.5 w-1.5 rounded-full bg-gold-400" />
+            <div className="h-1.5 w-1.5 rounded-full bg-accent" />
           </motion.div>
         </motion.div>
       </section>
@@ -237,10 +237,10 @@ export default function HomePage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute -bottom-6 -right-6 rounded-2xl bg-white p-6 shadow-2xl shadow-navy-900/10 border border-navy-100"
+              className="absolute -bottom-6 -right-6 rounded-2xl bg-surface p-6 shadow-2xl shadow-primary/10 border border-border"
             >
-              <div className="text-3xl font-bold text-gold-600">10+</div>
-              <div className="text-sm text-navy-600">Years of Impact</div>
+              <div className="text-3xl font-bold text-accent-hover">10+</div>
+              <div className="text-sm text-text-secondary">Years of Impact</div>
             </motion.div>
           </motion.div>
 
@@ -251,40 +251,40 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-hover">
               Who We Are
             </span>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-navy-900 md:text-4xl lg:text-5xl leading-tight">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl lg:text-5xl leading-tight">
               Creating Brighter Futures for Every Child in Ghana, Nigeria and Beyond
             </h2>
-            <p className="mt-6 text-lg text-navy-600 leading-relaxed">
+            <p className="mt-6 text-lg text-text-secondary leading-relaxed">
               For The Future Organization (FTF) is a youth-led organization transforming the lives of underprivileged children through education, mentorship, menstrual health, climate action, and sustainable empowerment. What started as a small act of kindness in Ghana has grown into a global movement.
             </p>
-            <p className="mt-4 text-navy-500 leading-relaxed">
+            <p className="mt-4 text-text-tertiary leading-relaxed">
               Through community-driven initiatives and impactful solutions, we provide the support needed to help children thrive and build a better future. Your donations and support help us empower communities and foster sustainable development.
             </p>
 
             {/* Vision / Mission mini cards */}
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-navy-100 bg-navy-50/50 p-5">
+              <div className="rounded-xl border border-border bg-bg-tertiary/50 p-5">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-100">
-                    <Eye className="h-5 w-5 text-gold-600" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-subtle">
+                    <Eye className="h-5 w-5 text-accent-hover" />
                   </div>
-                  <h3 className="font-semibold text-navy-900">Our Vision</h3>
+                  <h3 className="font-semibold text-text-primary">Our Vision</h3>
                 </div>
-                <p className="text-sm text-navy-600 leading-relaxed">
+                <p className="text-sm text-text-secondary leading-relaxed">
                   A world where every child has the opportunity to grow in dignity and build a meaningful future.
                 </p>
               </div>
-              <div className="rounded-xl border border-navy-100 bg-navy-50/50 p-5">
+              <div className="rounded-xl border border-border bg-bg-tertiary/50 p-5">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100">
-                    <Target className="h-5 w-5 text-emerald-600" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-success-subtle">
+                    <Target className="h-5 w-5 text-success-text" />
                   </div>
-                  <h3 className="font-semibold text-navy-900">Our Mission</h3>
+                  <h3 className="font-semibold text-text-primary">Our Mission</h3>
                 </div>
-                <p className="text-sm text-navy-600 leading-relaxed">
+                <p className="text-sm text-text-secondary leading-relaxed">
                   To empower underprivileged children through education, healthcare, mentorship, and sustainable opportunities.
                 </p>
               </div>
@@ -293,14 +293,14 @@ export default function HomePage() {
             <div className="mt-8 flex gap-4">
               <Link
                 href="/donate"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-6 py-3 text-sm font-semibold text-navy-900 shadow-lg shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-3 text-sm font-semibold text-primary-contrast shadow-lg shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 <Heart className="h-4 w-4" />
                 Donate Now
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-navy-200 px-6 py-3 text-sm font-semibold text-navy-700 transition-all hover:border-navy-900 hover:bg-navy-50"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-border px-6 py-3 text-sm font-semibold text-text-secondary transition-all hover:border-primary hover:bg-bg-tertiary"
               >
                 Learn More
                 <ArrowRight className="h-4 w-4" />
@@ -351,13 +351,13 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="group relative overflow-hidden rounded-2xl bg-white p-8 border border-navy-100 transition-all hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl bg-surface p-8 border border-border transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-navy-50 text-navy-600 transition-colors group-hover:bg-gold-50 group-hover:text-gold-600">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent-hover">
                   <Icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-bold text-navy-900 mb-2">{area.title}</h3>
-                <p className="text-sm text-navy-600 leading-relaxed">{area.description}</p>
+                <h3 className="text-lg font-bold text-text-primary mb-2">{area.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{area.description}</p>
               </motion.div>
             );
           })}
@@ -382,9 +382,9 @@ export default function HomePage() {
             >
               <Link
                 href={`/initiatives#${initiative.slug}`}
-                className="group block overflow-hidden rounded-2xl border border-navy-100 bg-white transition-all hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1"
+                className="group block overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-navy-100 to-navy-200">
+                <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-bg-tertiary to-bg-tertiary">
                   <Image
                     src={initiative.image}
                     alt={initiative.title}
@@ -393,21 +393,21 @@ export default function HomePage() {
                     unoptimized
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-navy-700 backdrop-blur-sm">
+                    <span className="inline-flex items-center rounded-full bg-surface/90 px-3 py-1 text-xs font-medium text-text-secondary backdrop-blur-sm">
                       {initiative.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-navy-900 group-hover:text-gold-600 transition-colors">
+                  <h3 className="text-lg font-bold text-text-primary group-hover:text-accent-hover transition-colors">
                     {initiative.title}
                   </h3>
-                  <p className="mt-2 text-sm text-navy-600 leading-relaxed line-clamp-2">
+                  <p className="mt-2 text-sm text-text-secondary leading-relaxed line-clamp-2">
                     {initiative.shortDescription}
                   </p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs text-navy-400">{initiative.country}</span>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-gold-600 group-hover:gap-2 transition-all">
+                    <span className="text-xs text-text-muted">{initiative.country}</span>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent-hover group-hover:gap-2 transition-all">
                       Learn more <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </div>
@@ -419,7 +419,7 @@ export default function HomePage() {
         <div className="mt-12 text-center">
           <Link
             href="/initiatives"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-navy-200 px-8 py-3.5 text-sm font-semibold text-navy-700 transition-all hover:border-navy-900 hover:bg-navy-50"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-border px-8 py-3.5 text-sm font-semibold text-text-secondary transition-all hover:border-primary hover:bg-bg-tertiary"
           >
             View All Initiatives
             <ArrowRight className="h-4 w-4" />
@@ -436,18 +436,18 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Our Biggest Project
             </span>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl lg:text-5xl leading-tight">
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl lg:text-5xl leading-tight">
               For The Future Village
             </h2>
-            <p className="mt-6 text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 text-lg text-text-on-primary/70 leading-relaxed">
               Our 2025/26 objective is to raise GH₵ 500,000 for phase one of
               construction of For The Future Village - a home for orphans,
               homeless kids, and vulnerable children in Ghana.
             </p>
-            <p className="mt-4 text-white/50 leading-relaxed">
+            <p className="mt-4 text-text-on-primary/50 leading-relaxed">
               The village will provide safe housing, education, healthcare, and
               mentorship - creating a nurturing environment where every child can
               thrive.
@@ -456,7 +456,7 @@ export default function HomePage() {
             {/* Progress bar */}
             <div className="mt-8">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-white/70">
+                <span className="text-sm font-medium text-text-on-primary/70">
                   {siteConfig.donation.villageCurrency}
                   {siteConfig.donation.villageRaised.toLocaleString()} raised
                 </span>
@@ -477,10 +477,10 @@ export default function HomePage() {
                   }}
                   viewport={{ once: true }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
-                  className="h-full rounded-full bg-gradient-to-r from-gold-400 to-gold-500"
+                  className="h-full rounded-full bg-gradient-to-r from-accent to-accent-hover"
                 />
               </div>
-              <p className="mt-2 text-xs text-white/40">
+              <p className="mt-2 text-xs text-text-on-primary/40">
                 {Math.round(
                   (siteConfig.donation.villageRaised /
                     siteConfig.donation.villageGoal) *
@@ -493,7 +493,7 @@ export default function HomePage() {
             <div className="mt-8">
               <Link
                 href="/donate"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-primary-contrast shadow-2xl shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 <Heart className="h-5 w-5" />
                 Support This Project
@@ -517,26 +517,26 @@ export default function HomePage() {
                 className="object-cover opacity-60"
                 unoptimized
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
               <div className="relative z-10 p-8 flex flex-col h-full justify-end">
-                <h3 className="text-2xl font-bold text-white mb-1">FTF Village</h3>
-                <p className="text-white/60 text-sm mb-4">Ghana, West Africa</p>
+                <h3 className="text-2xl font-bold text-text-on-primary mb-1">FTF Village</h3>
+                <p className="text-text-on-primary/60 text-sm mb-4">Ghana, West Africa</p>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10">
-                    <div className="text-xl font-bold text-gold-400">200+</div>
-                    <div className="text-[10px] text-white/50">Children Housed</div>
+                    <div className="text-xl font-bold text-accent">200+</div>
+                    <div className="text-[10px] text-text-on-primary/50">Children Housed</div>
                   </div>
                   <div className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10">
-                    <div className="text-xl font-bold text-emerald-400">Safe</div>
-                    <div className="text-[10px] text-white/50">Living Space</div>
+                    <div className="text-xl font-bold text-success-text">Safe</div>
+                    <div className="text-[10px] text-text-on-primary/50">Living Space</div>
                   </div>
                   <div className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10">
-                    <div className="text-xl font-bold text-coral-400">School</div>
-                    <div className="text-[10px] text-white/50">On-site</div>
+                    <div className="text-xl font-bold text-error-text">School</div>
+                    <div className="text-[10px] text-text-on-primary/50">On-site</div>
                   </div>
                   <div className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10">
-                    <div className="text-xl font-bold text-navy-300">Health</div>
-                    <div className="text-[10px] text-white/50">Care Center</div>
+                    <div className="text-xl font-bold text-primary">Health</div>
+                    <div className="text-[10px] text-text-on-primary/50">Care Center</div>
                   </div>
                 </div>
               </div>
@@ -554,12 +554,12 @@ export default function HomePage() {
           transition={{ duration: 0.7 }}
           className="mx-auto max-w-4xl text-center"
         >
-          <Quote className="mx-auto h-12 w-12 text-gold-300 mb-6" />
-          <blockquote className="font-[family-name:var(--font-display)] text-2xl font-bold text-navy-900 md:text-3xl lg:text-4xl leading-snug">
+          <Quote className="mx-auto h-12 w-12 text-accent mb-6" />
+          <blockquote className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-primary md:text-3xl lg:text-4xl leading-snug">
             &ldquo;{siteConfig.founder.quote}&rdquo;
           </blockquote>
           <div className="mt-8 flex items-center justify-center gap-4">
-            <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-gold-300">
+            <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-accent">
               <Image
                 src={siteConfig.founder.image}
                 alt={siteConfig.founder.name}
@@ -569,10 +569,10 @@ export default function HomePage() {
               />
             </div>
             <div className="text-left">
-              <div className="font-semibold text-navy-900">
+              <div className="font-semibold text-text-primary">
                 {siteConfig.founder.name}
               </div>
-              <div className="text-sm text-navy-500">
+              <div className="text-sm text-text-muted">
                 {siteConfig.founder.title}
               </div>
             </div>
@@ -623,28 +623,28 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="group relative overflow-hidden rounded-2xl border border-navy-100 bg-white p-8 transition-all hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-8 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
             >
               <div
                 className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl transition-transform group-hover:scale-110 ${
                   item.color === "gold"
-                    ? "bg-gold-50 text-gold-600"
+                    ? "bg-accent-subtle text-accent-hover"
                     : item.color === "emerald"
-                    ? "bg-emerald-50 text-emerald-600"
-                    : "bg-coral-50 text-coral-500"
+                    ? "bg-success-bg text-success-text"
+                    : "bg-error-bg text-error-text"
                 }`}
               >
                 <item.icon className="h-7 w-7" />
               </div>
-              <h3 className="text-xl font-bold text-navy-900 mb-3">
+              <h3 className="text-xl font-bold text-text-primary mb-3">
                 {item.title}
               </h3>
-              <p className="text-navy-600 leading-relaxed mb-6">
+              <p className="text-text-secondary leading-relaxed mb-6">
                 {item.description}
               </p>
               <Link
                 href={item.href}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 transition-all hover:gap-2.5"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-hover transition-all hover:gap-2.5"
               >
                 {item.cta}
                 <ArrowRight className="h-4 w-4" />
@@ -661,13 +661,13 @@ export default function HomePage() {
           title="Trusted by Leading Organizations"
         />
         <div className="relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-warm-white to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-warm-white to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-bg-primary to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-bg-primary to-transparent z-10" />
           <div className="flex partners-track">
             {[...partners, ...partners].map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
-                className="mx-4 flex h-20 min-w-[180px] items-center justify-center rounded-xl border border-navy-100 bg-white px-6"
+                className="mx-4 flex h-20 min-w-[180px] items-center justify-center rounded-xl border border-border bg-surface px-6"
               >
                 <Image
                   src={partner.image}
@@ -684,8 +684,8 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* ===== NEWSLETTER ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 py-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(212,168,67,0.1),transparent_50%)]" />
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary to-primary py-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,color-mix(in_srgb,var(--ftf-accent)_10%,transparent),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -694,10 +694,10 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-2xl text-center"
           >
-            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Stay Updated on Our Impact
             </h2>
-            <p className="mt-4 text-lg text-white/60">
+            <p className="mt-4 text-lg text-text-on-primary/60">
               Get the latest news, stories, and updates from For The Future
               delivered to your inbox.
             </p>
@@ -708,16 +708,16 @@ export default function HomePage() {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 rounded-full bg-white/10 border border-white/10 px-6 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400/50"
+                className="flex-1 rounded-full bg-text-on-primary/10 border border-text-on-primary/10 px-6 py-4 text-text-on-primary placeholder:text-text-on-primary/40 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50"
               />
               <button
                 type="submit"
-                className="rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-sm font-semibold text-navy-900 shadow-lg shadow-gold-400/20 transition-all hover:scale-[1.02] sm:rounded-l-none sm:rounded-r-full"
+                className="rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-sm font-semibold text-primary-contrast shadow-lg shadow-accent/20 transition-all hover:scale-[1.02] sm:rounded-l-none sm:rounded-r-full"
               >
                 Subscribe
               </button>
             </form>
-            <p className="mt-3 text-xs text-white/30">
+            <p className="mt-3 text-xs text-text-on-primary/30">
               We respect your privacy. Unsubscribe at any time.
             </p>
           </motion.div>

@@ -38,8 +38,8 @@ export default function InitiativesClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -49,13 +49,13 @@ export default function InitiativesClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               Our Work
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               Initiatives That Create Lasting Change
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               From education and mentorship to health and digital empowerment -
               discover the programs transforming the lives of underprivileged
               children across Ghana, Nigeria, and beyond.
@@ -68,7 +68,7 @@ export default function InitiativesClient() {
       <SectionWrapper background="warm">
         {/* Category Filters */}
         <div className="flex flex-wrap items-center gap-2 mb-12">
-          <div className="flex items-center gap-2 mr-2 text-sm font-medium text-navy-500">
+          <div className="flex items-center gap-2 mr-2 text-sm font-medium text-text-tertiary">
             <Filter className="h-4 w-4" />
             Filter:
           </div>
@@ -78,8 +78,8 @@ export default function InitiativesClient() {
               onClick={() => setActiveCategory(cat)}
               className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
                 activeCategory === cat
-                  ? "bg-navy-900 text-white shadow-lg shadow-navy-900/20"
-                  : "bg-white text-navy-600 border border-navy-200 hover:border-navy-400 hover:bg-navy-50"
+                  ? "bg-primary text-text-on-primary shadow-lg shadow-primary/20"
+                  : "bg-surface text-text-secondary border border-border-strong hover:border-border hover:bg-bg-tertiary"
               }`}
             >
               {cat}
@@ -100,9 +100,9 @@ export default function InitiativesClient() {
                 transition={{ duration: 0.3, delay: i * 0.05 }}
                 id={initiative.slug}
               >
-                <div className="group h-full overflow-hidden rounded-2xl border border-navy-100 bg-white transition-all hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1">
+                <div className="group h-full overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1">
                   {/* Image placeholder */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-navy-100 to-navy-200">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-bg-tertiary to-border">
                     <Image
                       src={initiative.image}
                       alt={initiative.title}
@@ -115,15 +115,15 @@ export default function InitiativesClient() {
                       <span
                         className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium backdrop-blur-sm ${
                           initiative.status === "active"
-                            ? "bg-emerald-500/90 text-white"
+                            ? "bg-success/90 text-text-on-primary"
                             : initiative.status === "upcoming"
-                            ? "bg-gold-400/90 text-navy-900"
-                            : "bg-navy-600/90 text-white"
+                            ? "bg-accent/90 text-text-primary"
+                            : "bg-text-tertiary/90 text-text-on-primary"
                         }`}
                       >
                         <div
                           className={`h-1.5 w-1.5 rounded-full ${
-                            initiative.status === "active" ? "bg-white" : "bg-navy-900"
+                            initiative.status === "active" ? "bg-surface" : "bg-primary"
                           }`}
                         />
                         {initiative.status === "active"
@@ -135,17 +135,17 @@ export default function InitiativesClient() {
                     </div>
                     {/* Category badge */}
                     <div className="absolute top-4 right-4">
-                      <span className="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-navy-700 backdrop-blur-sm">
+                      <span className="inline-flex items-center rounded-full bg-surface/90 px-3 py-1 text-xs font-medium text-text-secondary backdrop-blur-sm">
                         {initiative.category}
                       </span>
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-navy-900 group-hover:text-gold-600 transition-colors mb-2">
+                    <h3 className="text-xl font-bold text-text-primary group-hover:text-accent transition-colors mb-2">
                       {initiative.title}
                     </h3>
-                    <p className="text-sm text-navy-600 leading-relaxed mb-4">
+                    <p className="text-sm text-text-secondary leading-relaxed mb-4">
                       {initiative.shortDescription}
                     </p>
 
@@ -153,25 +153,25 @@ export default function InitiativesClient() {
                     <div className="space-y-2 mb-4">
                       {initiative.highlights.slice(0, 3).map((h) => (
                         <div key={h} className="flex items-center gap-2">
-                          <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                          <span className="text-xs text-navy-500">{h}</span>
+                          <Check className="h-3.5 w-3.5 text-success shrink-0" />
+                          <span className="text-xs text-text-tertiary">{h}</span>
                         </div>
                       ))}
                     </div>
 
                     {/* Meta */}
-                    <div className="flex items-center justify-between pt-4 border-t border-navy-100">
+                    <div className="flex items-center justify-between pt-4 border-t border-border">
                       <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1 text-xs text-navy-400">
+                        <span className="flex items-center gap-1 text-xs text-text-muted">
                           <MapPin className="h-3 w-3" />
                           {initiative.country}
                         </span>
-                        <span className="flex items-center gap-1 text-xs text-navy-400">
+                        <span className="flex items-center gap-1 text-xs text-text-muted">
                           <Users className="h-3 w-3" />
                           {initiative.beneficiaries}+
                         </span>
                       </div>
-                      <span className="flex items-center gap-1 text-xs text-navy-400">
+                      <span className="flex items-center gap-1 text-xs text-text-muted">
                         <Calendar className="h-3 w-3" />
                         {initiative.year}
                       </span>
@@ -185,7 +185,7 @@ export default function InitiativesClient() {
       </SectionWrapper>
 
       {/* ===== CTA ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 py-20">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary to-primary py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(212,168,67,0.1),transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <motion.div
@@ -194,24 +194,24 @@ export default function InitiativesClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Want to Support Our Initiatives?
             </h2>
-            <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-text-on-primary/60 max-w-2xl mx-auto">
               Your donation directly funds these programs, helping us reach more
               children and create lasting impact.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row justify-center">
               <Link
                 href="/donate"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-2xl shadow-gold-400/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-2xl shadow-accent/20 transition-all hover:scale-[1.02]"
               >
                 <Heart className="h-5 w-5" />
                 Donate Now
               </Link>
               <Link
                 href="/volunteer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-white transition-all hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 px-8 py-4 text-base font-semibold text-text-on-primary transition-all hover:bg-surface/10"
               >
                 Become a Volunteer
                 <ArrowRight className="h-5 w-5" />

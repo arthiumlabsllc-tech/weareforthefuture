@@ -40,9 +40,9 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-navy-900 text-white overflow-hidden">
+    <footer className="relative bg-primary text-text-on-primary overflow-hidden">
       {/* Decorative gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-400/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
       {/* CTA Banner */}
       <div className="border-b border-white/10">
@@ -59,7 +59,7 @@ export default function Footer() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/donate"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-gold-400/20 transition-all hover:shadow-xl hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:scale-[1.02]"
               >
                 <Heart className="h-4 w-4" />
                 Donate Now
@@ -103,7 +103,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/50 transition-all hover:bg-gold-400/20 hover:text-gold-400"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/50 transition-all hover:bg-accent/20 hover:text-accent"
                   aria-label={social.label}
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +124,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-gold-400"
+                    className="text-sm text-white/60 transition-colors hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -143,7 +143,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-gold-400"
+                    className="text-sm text-white/60 transition-colors hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -162,7 +162,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-gold-400"
+                    className="text-sm text-white/60 transition-colors hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -178,25 +178,25 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <Mail className="h-4 w-4 mt-0.5 text-gold-400/70 shrink-0" />
+                <Mail className="h-4 w-4 mt-0.5 text-accent/70 shrink-0" />
                 <a
                   href={`mailto:${siteConfig.contact.emails[0]}`}
-                  className="text-sm text-white/60 hover:text-gold-400 transition-colors"
+                  className="text-sm text-white/60 hover:text-accent transition-colors"
                 >
                   {siteConfig.contact.emails[0]}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="h-4 w-4 mt-0.5 text-gold-400/70 shrink-0" />
+                <Phone className="h-4 w-4 mt-0.5 text-accent/70 shrink-0" />
                 <a
                   href={`tel:${siteConfig.contact.phones[0]}`}
-                  className="text-sm text-white/60 hover:text-gold-400 transition-colors"
+                  className="text-sm text-white/60 hover:text-accent transition-colors"
                 >
                   {siteConfig.contact.phones[0]}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 mt-0.5 text-gold-400/70 shrink-0" />
+                <MapPin className="h-4 w-4 mt-0.5 text-accent/70 shrink-0" />
                 <span className="text-sm text-white/60">
                   Ghana · Nigeria · United States
                 </span>
@@ -224,7 +224,7 @@ export default function Footer() {
                   href="https://arthiumlabs.live/about"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/40 underline decoration-white/20 underline-offset-2 transition-colors hover:text-gold-400 hover:decoration-gold-400/40"
+                  className="text-white/40 underline decoration-white/20 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent/40"
                 >
                   Arthium Labs
                 </a>

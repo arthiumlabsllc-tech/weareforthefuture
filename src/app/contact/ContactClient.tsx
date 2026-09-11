@@ -79,8 +79,8 @@ export default function ContactClient() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-navy-900/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-navy-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
@@ -90,13 +90,13 @@ export default function ContactClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-gold-400 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
               Get in Touch
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
               We&apos;d Love to Hear From You
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               Whether you have a question, want to volunteer, or explore
               partnership opportunities - your voice matters to us.
             </p>
@@ -113,15 +113,15 @@ export default function ContactClient() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-2xl bg-emerald-50 border border-emerald-200 p-12 text-center"
+                className="rounded-2xl bg-success-bg border border-success/20 p-12 text-center"
               >
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-                  <Check className="h-8 w-8 text-emerald-600" />
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success-bg">
+                  <Check className="h-8 w-8 text-success-text" />
                 </div>
-                <h3 className="text-2xl font-bold text-navy-900 mb-2">
+                <h3 className="text-2xl font-bold text-text-primary mb-2">
                   Message Sent!
                 </h3>
-                <p className="text-navy-600">
+                <p className="text-text-secondary">
                   Thank you for reaching out. Our team will get back to you
                   within 24-48 hours.
                 </p>
@@ -134,15 +134,15 @@ export default function ContactClient() {
                 onSubmit={handleSubmit}
                 className="space-y-6"
               >
-                <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-navy-900 mb-2">
+                <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-primary mb-2">
                   Send Us a Message
                 </h2>
-                <p className="text-navy-600 mb-6">
+                <p className="text-text-secondary mb-6">
                   Reach out - your voice, support, and ideas matter to us.
                 </p>
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-navy-700 mb-2">
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
                       Full Name *
                     </label>
                     <input
@@ -152,12 +152,12 @@ export default function ContactClient() {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-900 placeholder:text-navy-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/20"
+                      className="w-full rounded-xl border border-border-strong px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                       placeholder="Your full name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-navy-700 mb-2">
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
                       Email Address *
                     </label>
                     <input
@@ -167,13 +167,13 @@ export default function ContactClient() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-900 placeholder:text-navy-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/20"
+                      className="w-full rounded-xl border border-border-strong px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                       placeholder="you@example.com"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-navy-700 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary mb-2">
                     Subject *
                   </label>
                   <select
@@ -182,7 +182,7 @@ export default function ContactClient() {
                     onChange={(e) =>
                       setFormData({ ...formData, subject: e.target.value })
                     }
-                    className="w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-900 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/20"
+                    className="w-full rounded-xl border border-border-strong px-4 py-3 text-text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   >
                     <option value="">Select a subject</option>
                     <option value="general">General Inquiry</option>
@@ -194,7 +194,7 @@ export default function ContactClient() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-navy-700 mb-2">
+                  <label className="block text-sm font-medium text-text-secondary mb-2">
                     Message *
                   </label>
                   <textarea
@@ -204,13 +204,13 @@ export default function ContactClient() {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full rounded-xl border border-navy-200 px-4 py-3 text-navy-900 placeholder:text-navy-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/20 resize-none"
+                    className="w-full rounded-xl border border-border-strong px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 resize-none"
                     placeholder="Tell us how we can help..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-4 text-base font-semibold text-navy-900 shadow-lg shadow-gold-400/20 transition-all hover:scale-[1.01]"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-lg shadow-accent/20 transition-all hover:scale-[1.01]"
                 >
                   <Send className="h-5 w-5" />
                   Send Message
@@ -221,34 +221,34 @@ export default function ContactClient() {
 
           {/* Contact Info */}
           <div className="lg:col-span-2">
-            <div className="rounded-2xl bg-navy-900 p-8 text-white">
+            <div className="rounded-2xl bg-primary p-8 text-text-on-primary">
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                    <Mail className="h-5 w-5 text-gold-400" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
+                    <Mail className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/50 mb-1">Email</p>
+                    <p className="text-sm font-medium text-text-on-primary/50 mb-1">Email</p>
                     <a
                       href={`mailto:${siteConfig.contact.emails[0]}`}
-                      className="text-white hover:text-gold-400 transition-colors"
+                      className="text-text-on-primary hover:text-accent transition-colors"
                     >
                       {siteConfig.contact.emails[0]}
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                    <Phone className="h-5 w-5 text-gold-400" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
+                    <Phone className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/50 mb-1">Phone</p>
+                    <p className="text-sm font-medium text-text-on-primary/50 mb-1">Phone</p>
                     {siteConfig.contact.phones.map((phone) => (
                       <a
                         key={phone}
                         href={`tel:${phone.replace(/\s/g, "")}`}
-                        className="block text-white hover:text-gold-400 transition-colors"
+                        className="block text-text-on-primary hover:text-accent transition-colors"
                       >
                         {phone}
                       </a>
@@ -256,34 +256,34 @@ export default function ContactClient() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                    <Globe className="h-5 w-5 text-gold-400" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
+                    <Globe className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/50 mb-1">Locations</p>
-                    <p className="text-white">Ghana</p>
-                    <p className="text-white">Nigeria</p>
-                    <p className="text-white">United States</p>
+                    <p className="text-sm font-medium text-text-on-primary/50 mb-1">Locations</p>
+                    <p className="text-text-on-primary">Ghana</p>
+                    <p className="text-text-on-primary">Nigeria</p>
+                    <p className="text-text-on-primary">United States</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10">
-                    <Clock className="h-5 w-5 text-gold-400" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
+                    <Clock className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/50 mb-1">Response Time</p>
-                    <p className="text-white">24-48 hours</p>
+                    <p className="text-sm font-medium text-text-on-primary/50 mb-1">Response Time</p>
+                    <p className="text-text-on-primary">24-48 hours</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Quick CTA */}
-            <div className="mt-6 rounded-2xl border border-navy-100 bg-gold-50 p-6">
-              <h4 className="font-bold text-navy-900 mb-2">
+            <div className="mt-6 rounded-2xl border border-border bg-accent-subtle p-6">
+              <h4 className="font-bold text-text-primary mb-2">
                 A Call to Changemakers
               </h4>
-              <p className="text-sm text-navy-600 leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 If you believe in equal opportunity for all children and have the
                 passion to create change, join us. Start an FTF chapter in your
                 country.
@@ -308,19 +308,19 @@ export default function ContactClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="rounded-xl border border-navy-100 bg-white overflow-hidden"
+              className="rounded-xl border border-border bg-surface overflow-hidden"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left"
               >
-                <span className="font-semibold text-navy-900 pr-4">
+                <span className="font-semibold text-text-primary pr-4">
                   {faq.question}
                 </span>
                 {openFaq === i ? (
-                  <ChevronUp className="h-5 w-5 text-navy-400 shrink-0" />
+                  <ChevronUp className="h-5 w-5 text-text-muted shrink-0" />
                 ) : (
-                  <ChevronDown className="h-5 w-5 text-navy-400 shrink-0" />
+                  <ChevronDown className="h-5 w-5 text-text-muted shrink-0" />
                 )}
               </button>
               {openFaq === i && (
@@ -330,7 +330,7 @@ export default function ContactClient() {
                   transition={{ duration: 0.3 }}
                   className="px-6 pb-5"
                 >
-                  <p className="text-navy-600 leading-relaxed">{faq.answer}</p>
+                  <p className="text-text-secondary leading-relaxed">{faq.answer}</p>
                 </motion.div>
               )}
             </motion.div>

@@ -15,14 +15,14 @@ export const teamMembers: TeamMember[] = [
     country: "Ghana",
     category: "leadership",
     bio: "A 23-year-old budding lawyer, visionary social entrepreneur, and advocate for children's rights. Kezia founded FTF in 2016 and has led the organization from a small community initiative to a global movement.",
-    image: "/images/team/kezia-sanie.png",
+    image: "/images/team/exec-kezia.png"
   },
   {
     name: "Aaron Ohene Yeboah",
     role: "Vice President",
     country: "Ghana",
     category: "leadership",
-    image: "/images/team/aaron-yeboah.png",
+    image: "/images/team/exec-aaron.png"
   },
   {
     name: "Foluke Babatunde-Lawal",

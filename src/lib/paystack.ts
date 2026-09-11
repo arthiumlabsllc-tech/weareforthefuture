@@ -7,32 +7,54 @@ export interface PaystackTransaction {
   accessCode: string;
 }
 
+interface InitOptions {
+  email: string;
+  amountInPesewas: number;
+  metadata?: Record<string, unknown>;
+  /** Restrict to specific payment channels */
+  channels?: string[];
+  /** Mobile Money phone number (for direct MoMo prompt) */
+  phone?: string;
+}
+
 export async function initializeTransaction(
   email: string,
   amountInPesewas: number,
-  metadata?: Record<string, unknown>
+  metadata?: Record<string, unknown>,
+  channels?: string[],
+  phone?: string
 ): Promise<PaystackTransaction> {
+  const payload: Record<string, unknown> = {
+    email,
+    amount: amountInPesewas, // amount in pesewas (GH₵1 = 100 pesewas)
+    currency: "GHS",
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Organization",
+          variable_name: "organization",
+          value: "For The Future Organization",
+        },
+      ],
+      ...metadata,
+    },
+  };
+
+  if (channels && channels.length > 0) {
+    payload.channels = channels;
+  }
+
+  if (phone) {
+    payload.mobile_money = { phone };
+  }
+
   const response = await fetch(`${PAYSTACK_BASE_URL}/transaction/initialize`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email,
-      amount: amountInPesewas, // amount in pesewas (GH₵1 = 100 pesewas)
-      currency: "GHS",
-      metadata: {
-        custom_fields: [
-          {
-            display_name: "Organization",
-            variable_name: "organization",
-            value: "For The Future Organization",
-          },
-        ],
-        ...metadata,
-      },
-    }),
+    body: JSON.stringify(payload),
   });
 
   const data = await response.json();

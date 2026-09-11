@@ -4,7 +4,7 @@ import { initializeTransaction } from "@/lib/paystack";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, amount, metadata } = body;
+    const { email, amount, metadata, channels, phone } = body;
 
     if (!email || !amount || amount <= 0) {
       return NextResponse.json(
@@ -16,7 +16,13 @@ export async function POST(request: NextRequest) {
     // Convert GHS to pesewas (GH₵1 = 100 pesewas)
     const amountInPesewas = Math.round(amount * 100);
 
-    const transaction = await initializeTransaction(email, amountInPesewas, metadata);
+    const transaction = await initializeTransaction(
+      email,
+      amountInPesewas,
+      metadata,
+      channels,
+      phone
+    );
 
     return NextResponse.json({
       success: true,

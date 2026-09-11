@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,7 +36,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-navy-900/5"
+          ? "bg-surface/80 backdrop-blur-xl shadow-lg shadow-navy-900/5"
           : "bg-transparent"
       }`}
     >
@@ -66,13 +67,13 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-navy-900/5 ${
+                className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-primary/5 ${
                   isActive
                     ? isScrolled
-                      ? "text-gold-600"
-                      : "text-gold-400"
+                      ? "text-accent-hover"
+                      : "text-accent"
                     : isScrolled
-                    ? "text-navy-700 hover:text-navy-900"
+                    ? "text-text-secondary hover:text-text-primary"
                     : "text-white/80 hover:text-white"
                 }`}
               >
@@ -81,7 +82,7 @@ export default function Navbar() {
                   <motion.div
                     layoutId="navbar-indicator"
                     className={`absolute bottom-0 left-3 right-3 h-0.5 rounded-full ${
-                      isScrolled ? "bg-gold-500" : "bg-gold-400"
+                      isScrolled ? "bg-accent" : "bg-accent"
                     }`}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
@@ -91,36 +92,40 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA + Theme Toggle */}
         <div className="hidden lg:flex lg:items-center lg:gap-3">
+          <ThemeToggle />
           <Link
             href="/donate"
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-gold-400/25 transition-all hover:shadow-xl hover:shadow-gold-400/30 hover:scale-[1.02] active:scale-[0.98]"
+            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/25 transition-all hover:shadow-xl hover:shadow-accent/30 hover:scale-[1.02] active:scale-[0.98]"
           >
             <Heart className="h-4 w-4 transition-transform group-hover:scale-110" />
             Donate Now
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className={`lg:hidden relative z-50 flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-            isMobileOpen
-              ? "bg-navy-900 text-white"
-              : isScrolled
-              ? "bg-navy-50 text-navy-900"
-              : "bg-white/10 text-white"
-          }`}
-          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMobileOpen}
-        >
-          {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Mobile Menu Button + Theme Toggle */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className={`relative z-50 flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+              isMobileOpen
+                ? "bg-primary text-text-on-primary"
+                : isScrolled
+                ? "bg-bg-tertiary text-text-primary"
+                : "bg-white/10 text-white"
+            }`}
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileOpen}
+          >
+            {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </nav>
     </header>
 
-      {/* Mobile Menu Overlay - outside header to avoid stacking context issues */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -128,7 +133,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-navy-900/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[60] bg-primary/95 backdrop-blur-xl lg:hidden"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -167,7 +172,7 @@ export default function Navbar() {
                     onClick={() => setIsMobileOpen(false)}
                     className={`block px-6 py-3 text-center text-xl font-medium transition-colors rounded-xl ${
                       pathname === link.href
-                        ? "text-gold-400 bg-white/5"
+                        ? "text-accent bg-white/5"
                         : "text-white/80 hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -184,7 +189,7 @@ export default function Navbar() {
                 <Link
                   href="/donate"
                   onClick={() => setIsMobileOpen(false)}
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 px-8 py-3 text-base font-semibold text-navy-900 shadow-lg"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-base font-semibold text-navy-900 shadow-lg"
                 >
                   <Heart className="h-5 w-5" />
                   Donate Now
