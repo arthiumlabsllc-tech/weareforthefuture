@@ -1,3 +1,7 @@
+// Prisma schema for FTF Admin Dashboard + CMS
+// Database: PostgreSQL (Neon)
+// Generated: 2026-09-11
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,34 +11,832 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ============================================
+// AUTH & USERS
+// ============================================
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  STORE_MANAGER
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String
+  role          Role      @default(VIEWER)
+  avatar        String?
+  emailVerified Boolean   @default(false)
+  suspended     Boolean   @default(false)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  // Relations
+  sessions        Session[]
+  passwordResets  PasswordReset[]
+  auditLogs       AuditLog[]     @relation("AuditActor")
+  createdContent  ContentAudit[] @relation("ContentCreator")
+  updatedContent  ContentAudit[] @relation("ContentUpdater")
+
+  @@index([email])
+  @@index([role])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  lastActiveAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String   // CREATE, UPDATE, DELETE, LOGIN, LOGOUT, etc.
+  entity     String   // User, Product, Order, BlogPost, etc.
+  entityId   String?
+  before     Json?
+  after      Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation("AuditActor", fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+}
+
+// ============================================
+// SITE SETTINGS & GLOBAL CONFIG
+// ============================================
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  description String?
+  updatedAt   DateTime @updatedAt
+  updatedBy   String?
+
+  @@index([key])
+}
+
+model ContactInfo {
+  id        String   @id @default(cuid())
+  type      String   // phone, email, address, whatsapp
+  label     String?  // "Ghana Office", "Support", etc.
+  value     String
+  order     Int      @default(0)
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  @@index([type])
+  @@index([order])
+}
+
+model SocialLink {
+  id        String   @id @default(cuid())
+  platform  String   // facebook, twitter, instagram, linkedin, youtube, tiktok
+  url       String
+  label     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  @@index([platform])
+  @@index([order])
+}
+
+// ============================================
+// PAGE CONTENT (CMS)
+// ============================================
+
+model Page {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+  createdBy       String?
+  updatedBy       String?
+
+  sections PageSection[]
+
+  @@index([slug])
+  @@index([published])
+}
+
+model PageSection {
+  id        String   @id @default(cuid())
+  pageId    String
+  key       String   // hero, stats, testimonials, etc.
+  content   Json
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId])
+  @@index([key])
+  @@index([order])
+}
+
+// ============================================
+// CONTENT: BLOG, NEWS, STORIES
+// ============================================
+
+model BlogCategory {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  posts BlogPost[]
+
+  @@index([slug])
+  @@index([order])
+}
+
+model BlogTag {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  posts BlogPost[]
+
+  @@index([slug])
+}
+
+model BlogPost {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  excerpt         String?
+  content         String    // Rich text HTML
+  featuredImage   String?
+  categoryId      String?
+  authorId        String?   // Team member ID
+  published       Boolean   @default(false)
+  featured        Boolean   @default(false)
+  publishDate     DateTime?
+  readingTime     Int?
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+  createdBy       String?
+  updatedBy       String?
+
+  category BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  tags     BlogTag[]
+  author   TeamMember?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  @@index([slug])
+  @@index([published])
+  @@index([categoryId])
+  @@index([publishDate])
+  @@index([createdAt])
+}
+
+model ImpactStory {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  excerpt         String?
+  content         String   // Rich text HTML
+  featuredImage   String?
+  gallery         Json     // Array of image URLs
+  childName       String?
+  age             Int?
+  location        String?
+  program         String?
+  pullQuote       String?
+  consentGiven    Boolean  @default(false)
+  published       Boolean  @default(false)
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+  createdBy       String?
+  updatedBy       String?
+
+  @@index([slug])
+  @@index([published])
+  @@index([createdAt])
+}
+
+// ============================================
+// CONTENT: TEAM & BOARDS
+// ============================================
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?
+  image       String?
+  department  String?
+  country     String?
+  email       String?
+  linkedin    String?
+  twitter     String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  blogPosts BlogPost[]
+
+  @@index([published])
+  @@index([order])
+  @@index([department])
+}
+
+model ExecutiveBoardMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?
+  image       String?
+  country     String?
+  email       String?
+  linkedin    String?
+  twitter     String?
+  termStart   DateTime?
+  termEnd     DateTime?
+  committee   String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  @@index([published])
+  @@index([order])
+  @@index([country])
+}
+
+model AdvisoryBoardMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?
+  image       String?
+  country     String?
+  email       String?
+  linkedin    String?
+  twitter     String?
+  termStart   DateTime?
+  termEnd     DateTime?
+  committee   String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  @@index([published])
+  @@index([order])
+  @@index([country])
+}
+
+// ============================================
+// CONTENT: PROGRAMS, PARTNERS, FAQ, DOCS
+// ============================================
+
+model Program {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  icon            String?
+  image           String?
+  shortDescription String?
+  description     String   // Rich text
+  impactMetrics   Json?    // { metric: "500 children", description: "reached" }
+  campaignId      String?
+  order           Int      @default(0)
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+  createdBy       String?
+  updatedBy       String?
+
+  @@index([slug])
+  @@index([published])
+  @@index([order])
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  logo        String?
+  website     String?
+  description String?
+  type        String   // Corporate, NGO, Government, Individual
+  tier        String   // Platinum, Gold, Silver, Bronze
+  sinceYear   Int?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  @@index([type])
+  @@index([tier])
+  @@index([published])
+  @@index([order])
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   // Rich text
+  category  String   // Donations, Store, Programs, General
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  @@index([category])
+  @@index([published])
+  @@index([order])
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileUrl     String
+  fileSize    Int?
+  category    String   // Annual Report, Financial, 990, Impact Report
+  year        Int?
+  downloads   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  @@index([category])
+  @@index([year])
+  @@index([published])
+  @@index([createdAt])
+}
+
+model LegalPage {
+  id          String   @id @default(cuid())
+  slug        String   @unique // privacy, terms
+  title       String
+  content     String   // Rich text
+  lastUpdated DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  @@index([slug])
+}
+
+// ============================================
+// IMPACT STATS & TESTIMONIALS
+// ============================================
+
+model ImpactStat {
+  id          String   @id @default(cuid())
+  label       String
+  value       Int
+  suffix      String?  // "+", "%", etc.
+  icon        String?
+  description String?
+  order       Int      @default(0)
+  page        String   // home, impact, about
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  @@index([page])
+  @@index([order])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String
+  author    String
+  role      String?
+  image     String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  @@index([published])
+  @@index([order])
+}
+
+// ============================================
+// STORE: PRODUCTS, ORDERS, SHIPPING
+// ============================================
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  products Product[]
+
+  @@index([slug])
+  @@index([order])
+}
+
+model Product {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String?  // Rich text
+  shortDescription String?
+  impactStatement String?
+  price           Int      // in pesewas (GHS)
+  compareAtPrice  Int?
+  sku             String?  @unique
+  stock           Int      @default(0)
+  lowStockThreshold Int    @default(5)
+  weight          Float?   // for shipping
+  categoryId      String?
+  badge           String?  // Best Seller, Most Needed, Premium
+  status          String   @default("draft") // draft, active, out_of_stock, archived
+  images          Json     // Array of image URLs, first = featured
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+  createdBy       String?
+  updatedBy       String?
+
+  category Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images_  ProductImage[]
+  variants ProductVariant[]
+  orderItems OrderItem[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([categoryId])
+  @@index([order])
+  @@index([createdAt])
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([order])
+}
+
+model ProductVariant {
+  id        String   @id @default(cuid())
+  productId String
+  name      String   // Size, Color, etc.
+  value     String   // S, M, L, Red, Blue, etc.
+  price     Int?     // override price if different
+  stock     Int      @default(0)
+  sku       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
 model Order {
   id                String    @id @default(cuid())
-  orderId           String    @unique // e.g., FTF-2026-0001
+  orderId           String    @unique // E.g., FTF-2026-0001
   customerName      String
   email             String
   phone             String
-  deliveryMethod    String    // "home_delivery" | "pickup"
+  deliveryMethod    String    // home_delivery | pickup
   region            String?
   city              String?
   area              String?
   streetAddress     String?
   notes             String?
-  momoProvider      String?   // "mtn" | "vod" | "tgo"
+  momoProvider      String?   // mtn | vod | tgo
   momoPhone         String?
   items             Json      // [{ productId, name, price, quantity }]
   subtotal          Int       // in pesewas
   deliveryFee       Int       // in pesewas
   total             Int       // in pesewas
   currency          String    @default("GHS")
-  paymentStatus     String    @default("pending") // pending | paid | failed | refunded
+  paymentStatus     String    @default("pending") // pending, paid, failed, refunded
   paymentReference  String?
-  channel           String?   // mobile_money | card | bank_transfer
-  fulfillmentStatus String    @default("pending") // pending | processing | shipped | delivered | picked_up
+  channel           String?   // mobile_money, card, bank_transfer
+  fulfillmentStatus String    @default("pending") // pending, processing, shipped, delivered, picked_up
+  trackingNumber    String?
   paidAt            DateTime?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
 
+  items_ OrderItem[]
+
+  @@index([orderId])
   @@index([paymentStatus])
   @@index([fulfillmentStatus])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  productId String
+  name      String
+  price     Int    // in pesewas
+  quantity  Int
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model ShippingZone {
+  id              String   @id @default(cuid())
+  region          String
+  fee             Int      // in pesewas
+  freeThreshold   Int?     // free delivery above this amount (pesewas)
+  heavySurcharge  Int?     // extra fee for heavy items
+  pickupEnabled   Boolean  @default(false)
+  pickupAddress   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+
+  cities ShippingCity[]
+
+  @@index([region])
+}
+
+model ShippingCity {
+  id        String @id @default(cuid())
+  zoneId    String
+  city      String
+
+  zone ShippingZone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+
+  @@index([zoneId])
+  @@index([city])
+}
+
+// ============================================
+// DONATIONS & CAMPAIGNS
+// ============================================
+
+model DonationCampaign {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  heroImage   String?
+  goalAmount  Int      // in pesewas
+  raisedAmount Int     @default(0) // manual override or auto-sum
+  startDate   DateTime?
+  endDate     DateTime?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  createdBy   String?
+  updatedBy   String?
+
+  presets  DonationAmountPreset[]
+  donations Donation[]
+
+  @@index([slug])
+  @@index([published])
+}
+
+model DonationAmountPreset {
+  id          String @id @default(cuid())
+  campaignId  String?
+  amount      Int    // in pesewas
+  impactText  String // "Feeds 20 children for a week"
+  order       Int    @default(0)
+
+  campaign DonationCampaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([order])
+}
+
+model Donation {
+  id              String    @id @default(cuid())
+  donorName       String?
+  donorEmail      String?
+  amount          Int       // in pesewas
+  currency        String    @default("GHS")
+  campaignId      String?
+  paymentStatus   String    @default("pending") // pending, paid, failed, refunded
+  paymentReference String?
+  channel         String?
+  anonymous       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  campaign DonationCampaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+
+  @@index([campaignId])
+  @@index([paymentStatus])
+  @@index([createdAt])
+}
+
+model Campaign {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String?  // Rich text
+  heroImage       String?
+  goalAmount      Int      // in pesewas
+  raisedAmount    Int      @default(0)
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+  createdBy       String?
+  updatedBy       String?
+
+  milestones CampaignMilestone[]
+  updates    CampaignUpdate[]
+
+  @@index([slug])
+  @@index([published])
+}
+
+model CampaignMilestone {
+  id          String  @id @default(cuid())
+  campaignId  String
+  title       String
+  description String?
+  status      String  @default("pending") // pending, in_progress, complete
+  order       Int     @default(0)
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([order])
+}
+
+model CampaignUpdate {
+  id         String   @id @default(cuid())
+  campaignId String
+  title      String
+  content    String   // Rich text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([createdAt])
+}
+
+// ============================================
+// MESSAGES & SUBSCRIPTIONS
+// ============================================
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  status    String   @default("unread") // unread, read, replied, archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  source    String?  // homepage, blog, donate, etc.
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  @@index([email])
+  @@index([active])
+  @@index([createdAt])
+}
+
+// ============================================
+// CONTENT AUDIT TRAIL
+// ============================================
+
+model ContentAudit {
+  id         String   @id @default(cuid())
+  entity     String   // BlogPost, Product, etc.
+  entityId   String
+  action     String   // CREATE, UPDATE, DELETE, PUBLISH, UNPUBLISH
+  before     Json?
+  after      Json?
+  createdById String?
+  updatedById String?
+  createdAt  DateTime @default(now())
+
+  createdBy User? @relation("ContentCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy User? @relation("ContentUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([entity])
+  @@index([entityId])
+  @@index([action])
   @@index([createdAt])
 }
