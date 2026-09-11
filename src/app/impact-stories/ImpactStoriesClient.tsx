@@ -6,7 +6,14 @@ import Link from "next/link";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Heart, ArrowRight, Quote, BookOpen, Camera, X } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { impactStories, galleryImages } from "@/data/impactStories";
+
+interface Story {
+  name: string;
+  title: string;
+  story: string;
+  image: string;
+  program: string;
+}
 
 /* ===== INLINE STAT COUNTER (for dark bg) ===== */
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
@@ -46,7 +53,8 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 
 /* Need to import hooks - already imported above */
 
-export default function ImpactStoriesClient() {
+export default function ImpactStoriesClient({ initialStories = [], galleryImages = [] }: { initialStories?: Story[]; galleryImages?: string[] }) {
+  const impactStories = initialStories;
   const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (

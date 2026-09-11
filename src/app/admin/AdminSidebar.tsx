@@ -14,6 +14,8 @@ import {
   HelpCircle,
   FileCheck,
   GraduationCap,
+  BarChart3,
+  Quote,
   ShoppingBag,
   Package,
   Truck,
@@ -61,6 +63,8 @@ const NAV_SECTIONS: NavSection[] = [
       { label: "Partners", href: "/admin/partners", icon: Handshake },
       { label: "FAQ", href: "/admin/faq", icon: HelpCircle },
       { label: "Documents", href: "/admin/documents", icon: FileCheck },
+      { label: "Impact Stats", href: "/admin/impact-stats", icon: BarChart3 },
+      { label: "Testimonials", href: "/admin/testimonials", icon: Quote },
     ],
   },
   {
@@ -105,7 +109,7 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
 
   async function handleLogout() {
     await fetch("/api/admin/auth/logout", { method: "POST" });
-    router.push("/admin/login");
+    router.push("/login");
     router.refresh();
   }
 
@@ -121,10 +125,12 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-border px-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-          <Shield className="h-5 w-5 text-accent" />
-        </div>
+      <div className="flex h-20 items-center gap-3 border-b border-border px-4">
+        <img
+          src="/images/misc/ftf-logo.png"
+          alt="FTF Logo"
+          className="h-14 w-14 rounded-lg object-contain"
+        />
         <div>
           <p className="text-sm font-bold text-text-primary">FTF Admin</p>
           <p className="text-[10px] text-text-muted uppercase tracking-wider">{session.role.replace("_", " ")}</p>

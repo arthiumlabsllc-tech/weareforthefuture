@@ -6,9 +6,17 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Shield, Users } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { executiveBoard, executiveCountries } from "@/data/executiveBoard";
 
-export default function ExecutiveBoardClient() {
+interface BoardMember {
+  name: string;
+  role: string;
+  image: string;
+  country: string;
+}
+
+export default function ExecutiveBoardClient({ initialMembers = [] }: { initialMembers?: BoardMember[] }) {
+  const executiveBoard = initialMembers;
+  const executiveCountries = ["All", ...Array.from(new Set(executiveBoard.map((m) => m.country).filter(Boolean)))];
   const [activeCountry, setActiveCountry] = useState("All");
 
   const filtered =

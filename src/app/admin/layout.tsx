@@ -9,9 +9,8 @@ export default async function AdminLayout({
 }) {
   const session = await getSessionFromCookie();
 
-  // Login page handles its own layout
   if (!session) {
-    redirect("/admin/login");
+    redirect("/login");
   }
 
   return (
@@ -33,9 +32,11 @@ export default async function AdminLayout({
             >
               View Site
             </a>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-text-on-primary">
-              {(session.name || session.email).charAt(0).toUpperCase()}
-            </div>
+            <img
+              src="/images/team/exec-kezia.png"
+              alt="Admin"
+              className="h-8 w-8 rounded-full object-cover"
+            />
           </div>
         </div>
         <div className="p-4 lg:p-8">{children}</div>

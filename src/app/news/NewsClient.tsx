@@ -12,108 +12,30 @@ import {
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 
+interface Article {
+  title: string;
+  category: string;
+  date: string;
+  author: string;
+  excerpt: string;
+  featured: boolean;
+  readTime: string;
+  image: string;
+  slug: string;
+}
+
 const newsCategories = ["All", "News", "Stories", "Press"];
 
-const newsArticles = [
-  {
-    title: "FTF Impact Store Launches with Inspiring Book Fair: A New Chapter for Childhood Empowerment",
-    category: "News",
-    date: "July 21, 2025",
-    author: "ftfghana",
-    excerpt:
-      "The FTF Impact Store officially opened its doors with a vibrant book fair, bringing together children, parents, and community members to celebrate the power of reading and learning.",
-    featured: true,
-    readTime: "5 min read",
-    image: "/images/news/impact-store-bookfair.jpg",
-  },
-  {
-    title: "For The Future (FTF) Launches Impact Store to Support Deprived Kids",
-    category: "Press",
-    date: "July 21, 2025",
-    author: "B&FTonline",
-    excerpt:
-      "For The Future Organization has launched its Impact Store, where 100% of proceeds go directly toward supporting underprivileged children with education, healthcare, and mentorship.",
-    featured: false,
-    readTime: "4 min read",
-    image: "/images/news/impact-store-launch.jpg",
-  },
-  {
-    title: "FTF and Chess in Slums: Developing Critical Thinkers",
-    category: "Stories",
-    date: "June 1, 2025",
-    author: "ftfghana",
-    excerpt:
-      "For the Future Ghana partnered with Chess in Slums, a Nigerian-based organization, as its first Global Ambassador, developing critical thinking and strategic skills in children from underserved communities.",
-    featured: false,
-    readTime: "6 min read",
-    image: "/images/initiatives/chess-in-slums.jpg",
-  },
-  {
-    title: "Project Momentum: Empowering Nigeria's Next Generation",
-    category: "News",
-    date: "May 26, 2025",
-    author: "ftfghana",
-    excerpt:
-      "Project Momentum is the official launch initiative of For the Future (FTF) Nigeria, dedicated to empowering secondary school students in underserved communities across Lagos.",
-    featured: false,
-    readTime: "4 min read",
-    image: "/images/initiatives/project-momentum.jpg",
-  },
-  {
-    title: "Kezia Asiedua Sanie Sworn In as Youngest Board of Trustees Member",
-    category: "Press",
-    date: "May 7, 2025",
-    author: "ftfghana",
-    excerpt:
-      "FTF Founder Kezia Asiedua Sanie was sworn in as the youngest member of the Board of Trustees for the Head of State Awards Scheme, recognizing her exceptional leadership at just 23 years old.",
-    featured: false,
-    readTime: "3 min read",
-    image: "/images/news/board-of-trustees.jpg",
-  },
-  {
-    title: "FTF Ghana Wins Community Influencer of the Year at Pulse Awards",
-    category: "Press",
-    date: "May 6, 2025",
-    author: "ftfghana",
-    excerpt:
-      "For The Future Ghana won the prestigious Community Influencer of the Year Award at the Pulse Influencer Awards, recognizing our outstanding impact on youth empowerment across the country.",
-    featured: false,
-    readTime: "3 min read",
-    image: "/images/news/pulse-award.jpg",
-  },
-  {
-    title: "Project Future Ready: Equipping Youth for the Digital Age",
-    category: "News",
-    date: "February 26, 2025",
-    author: "ftfghana",
-    excerpt:
-      "Our newest initiative provides digital literacy, coding basics, and 21st-century skills to underprivileged youth in Ghana, preparing them for opportunities in the modern world.",
-    featured: false,
-    readTime: "4 min read",
-    image: "/images/initiatives/future-ready.jpg",
-  },
-  {
-    title: "Empower Her, Period: Breaking Barriers for the Girl Child",
-    category: "Stories",
-    date: "March 12, 2025",
-    author: "ftfghana",
-    excerpt:
-      "Periods affect the physical and emotional wellbeing of the average girl child. Our Empower Her initiative provides affordable period care and education so no girl misses school.",
-    featured: false,
-    readTime: "5 min read",
-    image: "/images/initiatives/empower-her.jpg",
-  },
-];
-
-export default function NewsClient() {
+export default function NewsClient({ initialArticles = [] }: { initialArticles?: Article[] }) {
+  const articles = initialArticles;
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filtered =
     activeCategory === "All"
-      ? newsArticles
-      : newsArticles.filter((a) => a.category === activeCategory);
+      ? articles
+      : articles.filter((a) => a.category === activeCategory);
 
-  const featured = newsArticles.find((a) => a.featured);
+  const featured = articles.find((a) => a.featured);
 
   return (
     <>

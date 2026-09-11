@@ -6,7 +6,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Users, MapPin, Heart, User } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { teamMembers } from "@/data/team";
+
+interface Member {
+  name: string;
+  role: string;
+  country: string;
+  category: "leadership" | "ghana" | "nigeria" | "us";
+  bio?: string;
+  image?: string;
+}
 
 const tabs = [
   { key: "leadership", label: "Leadership", icon: Users },
@@ -15,7 +23,8 @@ const tabs = [
   { key: "us", label: "United States", icon: MapPin },
 ];
 
-export default function TeamClient() {
+export default function TeamClient({ initialMembers = [] }: { initialMembers?: Member[] }) {
+  const teamMembers = initialMembers;
   const [activeTab, setActiveTab] = useState("leadership");
 
   const filteredMembers = teamMembers.filter(

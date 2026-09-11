@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import BackToTop from "@/components/ui/BackToTop";
-import ImpactMarquee from "@/components/ui/ImpactMarquee";
+import PublicShell from "@/components/layout/PublicShell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -88,13 +85,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
-        <Navbar />
-        <ImpactMarquee />
+        <PublicShell />
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <Footer />
-        <BackToTop />
       </body>
     </html>
   );

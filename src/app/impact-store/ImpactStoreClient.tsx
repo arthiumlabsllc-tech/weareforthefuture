@@ -20,11 +20,21 @@ import {
   CreditCard,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { products, storeCategories, type Product } from "@/data/store";
 
 /* ===== TYPES ===== */
+interface StoreProduct {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+  impact: string;
+  description: string;
+  badge?: string;
+}
+
 interface CartItem {
-  product: Product;
+  product: StoreProduct;
   qty: number;
 }
 
@@ -39,7 +49,9 @@ function getImpactMessage(total: number): string {
   return "Every cedi makes a difference!";
 }
 
-export default function ImpactStoreClient() {
+export default function ImpactStoreClient({ initialProducts = [], initialCategories = ["All"] }: { initialProducts?: StoreProduct[]; initialCategories?: string[] }) {
+  const products = initialProducts;
+  const storeCategories = initialCategories;
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
@@ -66,7 +78,7 @@ export default function ImpactStoreClient() {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
           const mapped: CartItem[] = parsed
-            .map((item: { product: Product; qty: number }) => {
+            .map((item: { product: StoreProduct; qty: number }) => {
               const product = products.find((p) => p.id === item.product.id);
               if (!product) return null;
               return { product, qty: item.qty };
@@ -80,7 +92,7 @@ export default function ImpactStoreClient() {
     }
   }, []);
 
-  const addToCart = useCallback((product: Product) => {
+  const addToCart = useCallback((product: StoreProduct) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.product.id === product.id);
       if (existing) {

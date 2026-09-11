@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PrismaClient } from "@prisma/client";
 import TeamClient from "./TeamClient";
 
 export const metadata: Metadata = {
@@ -7,6 +8,24 @@ export const metadata: Metadata = {
     "Meet the passionate individuals leading For The Future Organization across Ghana, Nigeria, and the United States.",
 };
 
-export default function TeamPage() {
-  return <TeamClient />;
+const prisma = new PrismaClient();
+
+export const dynamic = "force-dynamic";
+
+export default async function TeamPage() {
+  const members = await prisma.teamMember.findMany({
+    where: { published: true, deletedAt: null },
+    orderBy: { order: "asc" },
+  });
+
+  const dbMembers = members.map((m) => ({
+    name: m.name,
+    role: m.role,
+    country: m.country || "",
+    category: (m.department || "leadership") as "leadership" | "ghana" | "nigeria" | "us",
+    bio: m.bio || undefined,
+    image: m.image || undefined,
+  }));
+
+  return <TeamClient initialMembers={dbMembers} />;
 }

@@ -6,9 +6,17 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Compass, Users } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { advisoryBoard, advisoryCountries } from "@/data/advisoryBoard";
 
-export default function AdvisoryBoardClient() {
+interface AdvisoryMember {
+  name: string;
+  role: string;
+  image: string;
+  country: string;
+}
+
+export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMembers?: AdvisoryMember[] }) {
+  const advisoryBoard = initialMembers;
+  const advisoryCountries = ["All", ...Array.from(new Set(advisoryBoard.map((m) => m.country).filter(Boolean)))];
   const [activeCountry, setActiveCountry] = useState("All");
 
   const filtered =

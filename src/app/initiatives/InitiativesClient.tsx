@@ -15,9 +15,24 @@ import {
   Check,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { initiatives, categories } from "@/data/initiatives";
 
-export default function InitiativesClient() {
+interface Initiative {
+  slug: string;
+  title: string;
+  shortDescription: string;
+  fullDescription: string;
+  category: string;
+  country: string;
+  year: number;
+  image: string;
+  beneficiaries: number;
+  status: "active" | "completed" | "upcoming";
+  highlights: string[];
+}
+
+export default function InitiativesClient({ initialInitiatives = [], initialCategories = ["All"] }: { initialInitiatives?: Initiative[]; initialCategories?: string[] }) {
+  const initiatives = initialInitiatives;
+  const categories = initialCategories;
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filtered =

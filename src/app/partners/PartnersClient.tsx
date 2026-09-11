@@ -16,28 +16,12 @@ import {
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 
-import { partnerLogos } from "@/data/site";
-
-const partnerCategories = [
-  {
-    title: "Corporate Partners",
-    description: "Leading businesses supporting our mission through CSR programs and sponsorships.",
-    icon: Building2,
-    partners: ["Unilever", "Promasidor", "Bel Aqua / Bel Beverages", "PETROSOL", "Samboad"],
-  },
-  {
-    title: "Institutional Partners",
-    description: "Organizations and institutions aligned with our vision for children's empowerment.",
-    icon: Globe,
-    partners: ["UNFPA Ghana", "The Wit Schools", "Asustem Robotics", "Jambo Spaces"],
-  },
-  {
-    title: "Community Partners",
-    description: "Grassroots organizations and community groups working alongside us on the ground.",
-    icon: Users,
-    partners: ["Chess in Slums", "I Was Here", "Flood-gates Foundation", "School in a Bag"],
-  },
-];
+interface Partner {
+  name: string;
+  logo: string;
+  type: string;
+  tier: string;
+}
 
 const partnershipTypes = [
   {
@@ -78,7 +62,24 @@ const partnershipTypes = [
   },
 ];
 
-export default function PartnersClient() {
+export default function PartnersClient({ initialPartners = [] }: { initialPartners?: Partner[] }) {
+  const partners = initialPartners;
+
+  // Group partners by type
+  const grouped: Record<string, Partner[]> = {};
+  for (const p of partners) {
+    const t = p.type || "Other";
+    if (!grouped[t]) grouped[t] = [];
+    grouped[t].push(p);
+  }
+
+  const typeConfig: Record<string, { title: string; icon: typeof Building2; description: string }> = {
+    Corporate: { title: "Corporate Partners", icon: Building2, description: "Leading businesses supporting our mission through CSR programs and sponsorships." },
+    NGO: { title: "Institutional Partners", icon: Globe, description: "Organizations and institutions aligned with our vision for children's empowerment." },
+    Government: { title: "Government Partners", icon: Users, description: "Government agencies collaborating with us for systemic change." },
+    Individual: { title: "Community Partners", icon: Heart, description: "Individual supporters and community groups working alongside us on the ground." },
+  };
+
   return (
     <>
       {/* ===== HERO ===== */}
@@ -125,40 +126,37 @@ export default function PartnersClient() {
           title="Our Partner Ecosystem"
           description="We collaborate with diverse organizations to maximize our impact."
         />
-        <div className="grid gap-8 md:grid-cols-3">
-          {partnerCategories.map((category, i) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="rounded-2xl border border-border bg-surface p-8"
-            >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent">
-                <category.icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-bold text-text-primary mb-2">
-                {category.title}
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed mb-6">
-                {category.description}
-              </p>
-              <div className="space-y-3">
-                {category.partners.map((partner) => {
-                  const logoData = partnerLogos.find(p =>
-                    partner.toLowerCase().includes(p.name.toLowerCase().split(" ")[0]) ||
-                    p.name.toLowerCase().includes(partner.toLowerCase().split(" ")[0])
-                  );
-                  return (
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {Object.entries(grouped).map(([type, members], i) => {
+            const config = typeConfig[type] || { title: type, icon: Building2, description: "Partners supporting our mission." };
+            return (
+              <motion.div
+                key={type}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15, duration: 0.5 }}
+                className="rounded-2xl border border-border bg-surface p-8"
+              >
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent">
+                  <config.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-text-primary mb-2">
+                  {config.title}
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-6">
+                  {config.description}
+                </p>
+                <div className="space-y-3">
+                  {members.map((partner) => (
                     <div
-                      key={partner}
+                      key={partner.name}
                       className="flex items-center gap-3 rounded-lg bg-bg-tertiary/50 px-4 py-3"
                     >
-                      {logoData ? (
+                      {partner.logo ? (
                         <Image
-                          src={logoData.image}
-                          alt={partner}
+                          src={partner.logo}
+                          alt={partner.name}
                           width={32}
                           height={32}
                           className="h-8 w-8 object-contain"
@@ -168,14 +166,14 @@ export default function PartnersClient() {
                         <div className="h-2 w-2 rounded-full bg-accent" />
                       )}
                       <span className="text-sm font-medium text-text-secondary">
-                        {partner}
+                        {partner.name}
                       </span>
                     </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ))}
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </SectionWrapper>
 

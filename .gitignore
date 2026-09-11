@@ -40,3 +40,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# images (served from Cloudinary CDN)
+/public/images/
+!/public/images/misc/ftf-logo-ico.png
+
+# cloudinary upload mapping
+cloudinary-map.json
+
+# upload scripts
+/scripts/
