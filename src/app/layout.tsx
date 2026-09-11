@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import PublicShell from "@/components/layout/PublicShell";
+import BottomShell from "@/components/layout/BottomShell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main-content" className="flex-1">
           {children}
         </main>
+        <BottomShell />
       </body>
     </html>
   );
