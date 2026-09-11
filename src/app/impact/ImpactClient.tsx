@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   TrendingUp,
   Users,
@@ -109,7 +110,7 @@ export default function ImpactClient() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/impact-hero.jpg"
+            src={img("/images/page-heroes/impact-hero.jpg")}
             alt="Our Impact"
             fill
             className="object-cover"

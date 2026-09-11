@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   Mail,
   Phone,
@@ -72,7 +73,7 @@ export default function ContactClient() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/contact-hero.jpg"
+            src={img("/images/page-heroes/contact-hero.jpg")}
             alt="Contact Us"
             fill
             className="object-cover"

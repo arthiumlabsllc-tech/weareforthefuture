@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Users, MapPin, Heart, User } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import { img } from "@/lib/imageUrl";
 
 interface Member {
   name: string;
@@ -39,7 +40,7 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/team-hero.png"
+            src={img("/images/page-heroes/team-hero.png")}
             alt="Our Team"
             fill
             className="object-cover"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PrismaClient } from "@prisma/client";
+import { img } from "@/lib/imageUrl";
 import ImpactStoriesClient from "./ImpactStoriesClient";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default async function ImpactStoriesPage() {
     name: s.childName || s.title,
     title: s.title,
     story: s.content.replace(/<[^>]*>/g, ""),
-    image: s.featuredImage || "/images/stories/default.jpg",
+    image: s.featuredImage || img("/images/stories/default.jpg"),
     program: s.program || "",
   }));
 

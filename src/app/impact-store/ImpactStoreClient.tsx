@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   ShoppingBag,
   Heart,
@@ -126,7 +127,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/misc/impact-store-hero.jpg"
+            src={img("/images/misc/impact-store-hero.jpg")}
             alt="Impact Store"
             fill
             className="object-cover"

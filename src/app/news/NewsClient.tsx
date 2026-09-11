@@ -11,6 +11,7 @@ import {
   User,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import { img } from "@/lib/imageUrl";
 
 interface Article {
   title: string;
@@ -43,7 +44,7 @@ export default function NewsClient({ initialArticles = [] }: { initialArticles?:
       <section className="relative min-h-[45vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/news-hero.jpg"
+            src={img("/images/page-heroes/news-hero.jpg")}
             alt="News & Stories"
             fill
             className="object-cover"

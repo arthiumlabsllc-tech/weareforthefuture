@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PrismaClient } from "@prisma/client";
+import { img } from "@/lib/imageUrl";
 import InitiativesClient from "./InitiativesClient";
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default async function InitiativesPage() {
       category: (metrics.category as string) || "Humanitarian",
       country: (metrics.country as string) || "Ghana",
       year: (metrics.year as number) || new Date().getFullYear(),
-      image: p.image || "/images/initiatives/default.jpg",
+      image: p.image || img("/images/initiatives/default.jpg"),
       beneficiaries: (metrics.beneficiaries as number) || 0,
       status: (metrics.status as "active" | "completed" | "upcoming") || "active",
       highlights: (metrics.highlights as string[]) || [],

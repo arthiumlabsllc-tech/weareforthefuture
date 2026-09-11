@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   Heart,
   ArrowRight,
@@ -34,21 +35,21 @@ const heroSlides = [
     title: "Be the Reason a Child Smiles Today",
     subtitle: "YOUR SUPPORT CAN CHANGE LIVES",
     cta: "Learn More",
-    image: "/images/hero/hero-1.png",
+    image: img("/images/hero/hero-1.png"),
     gradient: "from-primary/80 via-primary/50 to-primary/30",
   },
   {
     title: "Creating Lasting Change for Underprivileged Children",
     subtitle: "GIVING CHILDREN HOPE, CARE AND OPPORTUNITY",
     cta: "Our Initiatives",
-    image: "/images/hero/hero-2.png",
+    image: img("/images/hero/hero-2.png"),
     gradient: "from-primary/70 via-primary/40 to-transparent",
   },
   {
     title: "A Better Tomorrow for Every Child",
     subtitle: "BE A PART OF THEIR STORY",
     cta: "Get Involved",
-    image: "/images/hero/hero-3.png",
+    image: img("/images/hero/hero-3.png"),
     gradient: "from-primary/80 via-primary/50 to-primary/20",
   },
 ];
@@ -223,7 +224,7 @@ export default function HomePage() {
           >
             <div className="relative overflow-hidden rounded-3xl">
               <Image
-                src="/images/about/ftf-home-about.png"
+                src={img("/images/about/ftf-home-about.png")}
                 alt="For The Future Organization - Creating brighter futures"
                 width={600}
                 height={700}
@@ -511,7 +512,7 @@ export default function HomePage() {
           >
             <div className="relative aspect-square overflow-hidden rounded-3xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10">
               <Image
-                src="/images/about/ftf-village-1.jpg"
+                src={img("/images/about/ftf-village-1.jpg")}
                 alt="FTF Village Project - Future home for vulnerable children"
                 fill
                 className="object-cover opacity-60"

@@ -32,6 +32,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import type { AdminSession } from "@/lib/admin-auth";
+import { img } from "@/lib/imageUrl";
 
 interface NavItem {
   label: string;
@@ -127,7 +128,7 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
       {/* Logo */}
       <div className="flex h-20 items-center gap-3 border-b border-border px-4">
         <img
-          src="/images/misc/ftf-logo.png"
+          src={img("/images/misc/ftf-logo.png")}
           alt="FTF Logo"
           className="h-14 w-14 rounded-lg object-contain"
         />

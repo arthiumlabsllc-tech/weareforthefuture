@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSessionFromCookie } from "@/lib/admin-auth";
+import { img } from "@/lib/imageUrl";
 import AdminSidebar from "./AdminSidebar";
 
 export default async function AdminLayout({
@@ -33,7 +34,7 @@ export default async function AdminLayout({
               View Site
             </a>
             <img
-              src="/images/team/exec-kezia.png"
+              src={img("/images/team/exec-kezia.png")}
               alt="Admin"
               className="h-8 w-8 rounded-full object-cover"
             />

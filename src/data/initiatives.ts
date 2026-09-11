@@ -1,3 +1,5 @@
+import { img } from "@/lib/imageUrl";
+
 export interface Initiative {
   slug: string;
   title: string;
@@ -23,7 +25,7 @@ export const initiatives: Initiative[] = [
     category: "Education",
     country: "Ghana",
     year: 2024,
-    image: "/images/initiatives/click-4-change.jpg",
+    image: img("/images/initiatives/click-4-change.jpg"),
     beneficiaries: 150,
     status: "active",
     highlights: [
@@ -43,7 +45,7 @@ export const initiatives: Initiative[] = [
     category: "Humanitarian",
     country: "Ghana",
     year: 2020,
-    image: "/images/initiatives/share-aid.jpg",
+    image: img("/images/initiatives/share-aid.jpg"),
     beneficiaries: 500,
     status: "active",
     highlights: [
@@ -63,7 +65,7 @@ export const initiatives: Initiative[] = [
     category: "Infrastructure",
     country: "Ghana",
     year: 2025,
-    image: "/images/initiatives/ftf-village.jpg",
+    image: img("/images/initiatives/ftf-village.jpg"),
     beneficiaries: 200,
     status: "upcoming",
     highlights: [
@@ -83,7 +85,7 @@ export const initiatives: Initiative[] = [
     category: "Education",
     country: "Ghana",
     year: 2021,
-    image: "/images/initiatives/share-aid.jpg",
+    image: img("/images/initiatives/share-aid.jpg"),
     beneficiaries: 300,
     status: "active",
     highlights: [
@@ -103,7 +105,7 @@ export const initiatives: Initiative[] = [
     category: "Education",
     country: "Ghana",
     year: 2019,
-    image: "/images/initiatives/smart-start.jpg",
+    image: img("/images/initiatives/smart-start.jpg"),
     beneficiaries: 250,
     status: "active",
     highlights: [
@@ -123,7 +125,7 @@ export const initiatives: Initiative[] = [
     category: "Education",
     country: "Ghana",
     year: 2021,
-    image: "/images/initiatives/smart-start.jpg",
+    image: img("/images/initiatives/smart-start.jpg"),
     beneficiaries: 400,
     status: "active",
     highlights: [
@@ -143,7 +145,7 @@ export const initiatives: Initiative[] = [
     category: "Health",
     country: "Ghana",
     year: 2022,
-    image: "/images/initiatives/empower-her.jpg",
+    image: img("/images/initiatives/empower-her.jpg"),
     beneficiaries: 1000,
     status: "active",
     highlights: [
@@ -163,7 +165,7 @@ export const initiatives: Initiative[] = [
     category: "Technology",
     country: "Ghana",
     year: 2025,
-    image: "/images/initiatives/future-ready.jpg",
+    image: img("/images/initiatives/future-ready.jpg"),
     beneficiaries: 200,
     status: "active",
     highlights: [
@@ -183,7 +185,7 @@ export const initiatives: Initiative[] = [
     category: "Education",
     country: "Nigeria",
     year: 2025,
-    image: "/images/initiatives/project-momentum.jpg",
+    image: img("/images/initiatives/project-momentum.jpg"),
     beneficiaries: 350,
     status: "active",
     highlights: [
@@ -203,7 +205,7 @@ export const initiatives: Initiative[] = [
     category: "Education",
     country: "Ghana",
     year: 2022,
-    image: "/images/initiatives/chess-in-slums.jpg",
+    image: img("/images/initiatives/chess-in-slums.jpg"),
     beneficiaries: 180,
     status: "active",
     highlights: [

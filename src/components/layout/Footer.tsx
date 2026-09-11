@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { img } from "@/lib/imageUrl";
 import {
   Heart,
   Mail,
@@ -84,7 +85,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <div className="relative h-12 w-auto overflow-hidden">
                 <Image
-                  src="/images/misc/ftf-logo.png"
+                  src={img("/images/misc/ftf-logo.png")}
                   alt="FTF"
                   width={120}
                   height={48}

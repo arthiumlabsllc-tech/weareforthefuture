@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   ArrowRight,
   Heart,
@@ -46,7 +47,7 @@ export default function InitiativesClient({ initialInitiatives = [], initialCate
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/initiatives-hero.jpg"
+            src={img("/images/page-heroes/initiatives-hero.jpg")}
             alt="Our Initiatives"
             fill
             className="object-cover"

@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { img } from "@/lib/imageUrl";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +49,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative h-12 w-auto overflow-hidden transition-transform group-hover:scale-105">
             <Image
-              src="/images/misc/ftf-logo.png"
+              src={img("/images/misc/ftf-logo.png")}
               alt="For The Future Organization"
               width={120}
               height={48}
@@ -151,7 +152,7 @@ export default function Navbar() {
               >
                 <Link href="/" onClick={() => setIsMobileOpen(false)}>
                   <Image
-                    src="/images/misc/ftf-logo.png"
+                    src={img("/images/misc/ftf-logo.png")}
                     alt="For The Future Organization"
                     width={140}
                     height={56}

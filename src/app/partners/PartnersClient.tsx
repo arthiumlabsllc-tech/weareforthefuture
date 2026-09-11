@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   ArrowRight,
   Handshake,
@@ -86,7 +87,7 @@ export default function PartnersClient({ initialPartners = [] }: { initialPartne
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/partners-hero.png"
+            src={img("/images/page-heroes/partners-hero.png")}
             alt="Our Partners"
             fill
             className="object-cover"

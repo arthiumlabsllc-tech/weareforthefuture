@@ -1,3 +1,5 @@
+import { img } from "@/lib/imageUrl";
+
 export const siteConfig = {
   name: "For The Future Organization",
   shortName: "FTF",
@@ -46,22 +48,22 @@ export const siteConfig = {
     title: "Founder & President",
     quote:
       "I believe that no one came to this world without a purpose. Every single human being has a special God-given and inbuilt gift within them which must be unearthed.",
-    image: "/images/team/exec-kezia.png"
+    image: img("/images/team/exec-kezia.png")
   },
 };
 
 export const partnerLogos = [
-  { name: "Jambo Spaces", image: "/images/partners/jambo.png" },
-  { name: "Asustem Robotics", image: "/images/partners/asustem.png" },
-  { name: "The Wit Schools", image: "/images/partners/wit-schools.png" },
-  { name: "Chess in Slums", image: "/images/partners/chess-in-slums.png" },
-  { name: "Bel Aqua", image: "/images/partners/bel-aqua.png" },
-  { name: "Promasidor", image: "/images/partners/promasidor.png" },
-  { name: "Unilever", image: "/images/partners/unilever.png" },
-  { name: "UNFPA Ghana", image: "/images/partners/unfpa.png" },
-  { name: "School in a Bag", image: "/images/partners/school-in-bag.png" },
-  { name: "Samboad", image: "/images/partners/samboad.png" },
-  { name: "PETROSOL", image: "/images/partners/petrosol.png" },
+  { name: "Jambo Spaces", image: img("/images/partners/jambo.png") },
+  { name: "Asustem Robotics", image: img("/images/partners/asustem.png") },
+  { name: "The Wit Schools", image: img("/images/partners/wit-schools.png") },
+  { name: "Chess in Slums", image: img("/images/partners/chess-in-slums.png") },
+  { name: "Bel Aqua", image: img("/images/partners/bel-aqua.png") },
+  { name: "Promasidor", image: img("/images/partners/promasidor.png") },
+  { name: "Unilever", image: img("/images/partners/unilever.png") },
+  { name: "UNFPA Ghana", image: img("/images/partners/unfpa.png") },
+  { name: "School in a Bag", image: img("/images/partners/school-in-bag.png") },
+  { name: "Samboad", image: img("/images/partners/samboad.png") },
+  { name: "PETROSOL", image: img("/images/partners/petrosol.png") },
 ];
 
 export const navLinks = [

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
+import { img } from "@/lib/imageUrl";
 
 /* ===== Confetti piece config ===== */
 const CONFETTI_COLORS = [
@@ -292,7 +293,7 @@ export default function WelcomeSplash() {
             className="relative mb-2"
           >
             <Image
-              src="/images/misc/ftf-logo-white.png"
+              src={img("/images/misc/ftf-logo-white.png")}
               alt="For The Future Organization"
               width={280}
               height={112}

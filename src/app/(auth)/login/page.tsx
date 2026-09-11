@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import { Lock, Mail, Eye, EyeOff, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
@@ -52,7 +53,7 @@ export default function LoginPage() {
         {/* Logo / Branding */}
         <div className="mb-8 text-center">
           <img
-            src="/images/misc/ftf-logo.png"
+            src={img("/images/misc/ftf-logo.png")}
             alt="FTF Logo"
             className="mx-auto mb-4 h-20 w-auto"
           />

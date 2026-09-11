@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   Heart,
   CreditCard,
@@ -83,7 +84,7 @@ export default function DonateClient() {
       <section className="relative min-h-[45vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/donate-hero.png"
+            src={img("/images/page-heroes/donate-hero.png")}
             alt="Donate"
             fill
             className="object-cover"

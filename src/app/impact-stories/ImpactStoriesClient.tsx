@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Heart, ArrowRight, Quote, BookOpen, Camera, X } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import { img } from "@/lib/imageUrl";
 
 interface Story {
   name: string;
@@ -63,7 +64,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/stories/hero-bg.jpg"
+            src={img("/images/stories/hero-bg.jpg")}
             alt="Impact Stories"
             fill
             className="object-cover"

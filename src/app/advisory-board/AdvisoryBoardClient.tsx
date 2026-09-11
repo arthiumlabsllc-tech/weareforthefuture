@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Compass, Users } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import { img } from "@/lib/imageUrl";
 
 interface AdvisoryMember {
   name: string;
@@ -35,7 +36,7 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
       <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/board-hero.png"
+            src={img("/images/page-heroes/board-hero.png")}
             alt="Advisory Board"
             fill
             className="object-cover"

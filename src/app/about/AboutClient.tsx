@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { img } from "@/lib/imageUrl";
 import {
   Heart,
   ArrowRight,
@@ -29,7 +30,7 @@ export default function AboutPageClient() {
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/page-heroes/about-hero.png"
+            src={img("/images/page-heroes/about-hero.png")}
             alt="Our Story"
             fill
             className="object-cover"
