@@ -613,14 +613,17 @@ model Order {
   channel           String?   // mobile_money, card, bank_transfer
   fulfillmentStatus String    @default("pending") // pending, processing, shipped, delivered, picked_up
   trackingNumber    String?
+  supporterId       String?
   paidAt            DateTime?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
   deletedAt         DateTime?
 
-  items_ OrderItem[]
+  items_    OrderItem[]
+  supporter Supporter? @relation(fields: [supporterId], references: [id], onDelete: SetNull)
 
   @@index([orderId])
+  @@index([supporterId])
   @@index([paymentStatus])
   @@index([fulfillmentStatus])
   @@index([createdAt])
@@ -717,6 +720,7 @@ model Donation {
   amount          Int       // in pesewas
   currency        String    @default("GHS")
   campaignId      String?
+  supporterId     String?
   paymentStatus   String    @default("pending") // pending, paid, failed, refunded
   paymentReference String?
   channel         String?
@@ -725,9 +729,11 @@ model Donation {
   updatedAt       DateTime  @updatedAt
   deletedAt       DateTime?
 
-  campaign DonationCampaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  campaign  DonationCampaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  supporter Supporter?        @relation(fields: [supporterId], references: [id], onDelete: SetNull)
 
   @@index([campaignId])
+  @@index([supporterId])
   @@index([paymentStatus])
   @@index([createdAt])
 }
@@ -838,5 +844,81 @@ model ContentAudit {
   @@index([entity])
   @@index([entityId])
   @@index([action])
+  @@index([createdAt])
+}
+
+// ============================================
+// SUPPORTER ACCOUNTS ("My FTF")
+// ============================================
+
+model Supporter {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  phone         String?
+  passwordHash  String
+  avatar        String?
+  emailVerified Boolean   @default(false)
+  country       String?
+  city          String?
+  // Notification preferences
+  emailNotifications  Boolean @default(true)
+  marketingEmails     Boolean @default(false)
+  // Tracking
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  sessions      SupporterSession[]
+  donations     Donation[]
+  orders        Order[]
+  savedItems    SavedItem[]
+  notifications SupporterNotification[]
+
+  @@index([email])
+}
+
+model SupporterSession {
+  id           String   @id @default(cuid())
+  supporterId  String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  supporter Supporter @relation(fields: [supporterId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([supporterId])
+}
+
+model SavedItem {
+  id           String   @id @default(cuid())
+  supporterId  String
+  type         String   // programme, story, campaign
+  itemId       String   // ID of the programme/story/campaign
+  title        String   // Denormalized for display
+  image        String?
+  createdAt    DateTime @default(now())
+
+  supporter Supporter @relation(fields: [supporterId], references: [id], onDelete: Cascade)
+
+  @@unique([supporterId, type, itemId])
+  @@index([supporterId])
+}
+
+model SupporterNotification {
+  id           String   @id @default(cuid())
+  supporterId  String
+  type         String   // donation_received, milestone, programme_update, campaign
+  title        String
+  message      String
+  link         String?
+  read         Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  supporter Supporter @relation(fields: [supporterId], references: [id], onDelete: Cascade)
+
+  @@index([supporterId, read])
   @@index([createdAt])
 }

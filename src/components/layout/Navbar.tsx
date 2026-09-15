@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Heart, ChevronDown } from "lucide-react";
+import { Menu, X, Heart, ChevronDown, User, LogOut, LayoutDashboard } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { img } from "@/lib/imageUrl";
@@ -13,12 +13,24 @@ import { img } from "@/lib/imageUrl";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [supporter, setSupporter] = useState<{ name: string; email: string } | null>(null);
+  const [accountOpen, setAccountOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Check supporter session
+  useEffect(() => {
+    fetch("/api/supporter/me")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.supporter) setSupporter(data.supporter);
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -96,6 +108,67 @@ export default function Navbar() {
         {/* Desktop CTA + Theme Toggle */}
         <div className="hidden lg:flex lg:items-center lg:gap-3">
           <ThemeToggle />
+          {supporter ? (
+            <div className="relative">
+              <button
+                onClick={() => setAccountOpen(!accountOpen)}
+                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  isScrolled
+                    ? "text-text-secondary hover:text-text-primary hover:bg-bg-primary"
+                    : "text-white/80 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                <User className="h-4 w-4" />
+                {supporter.name.split(" ")[0]}
+                <ChevronDown className={`h-3 w-3 transition-transform ${accountOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence>
+                {accountOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setAccountOpen(false)} />
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      className="absolute right-0 top-full z-50 mt-2 w-56 rounded-xl bg-surface border border-border shadow-lg"
+                    >
+                      <div className="border-b border-border px-4 py-3">
+                        <p className="text-sm font-medium text-text-primary">{supporter.name}</p>
+                        <p className="text-xs text-text-muted">{supporter.email}</p>
+                      </div>
+                      <div className="p-1">
+                        <Link href="/my-account" onClick={() => setAccountOpen(false)} className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-text-secondary hover:bg-bg-primary hover:text-text-primary">
+                          <LayoutDashboard className="h-4 w-4" /> My Account
+                        </Link>
+                        <button
+                          onClick={async () => {
+                            await fetch("/api/supporter/logout", { method: "POST" });
+                            setSupporter(null);
+                            setAccountOpen(false);
+                            window.location.reload();
+                          }}
+                          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-text-secondary hover:bg-bg-primary hover:text-error"
+                        >
+                          <LogOut className="h-4 w-4" /> Sign Out
+                        </button>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+          ) : (
+            <Link
+              href="/supporter-login"
+              className={`text-sm font-medium transition-colors ${
+                isScrolled
+                  ? "text-text-secondary hover:text-text-primary"
+                  : "text-white/80 hover:text-white"
+              }`}
+            >
+              Sign In
+            </Link>
+          )}
           <Link
             href="/donate"
             className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/25 transition-all hover:shadow-xl hover:shadow-accent/30 hover:scale-[1.02] active:scale-[0.98]"

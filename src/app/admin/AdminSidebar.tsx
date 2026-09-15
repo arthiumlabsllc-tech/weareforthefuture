@@ -80,6 +80,7 @@ const NAV_SECTIONS: NavSection[] = [
     title: "Donations",
     items: [
       { label: "Donations", href: "/admin/donations", icon: Heart },
+      { label: "Supporters", href: "/admin/supporters", icon: Users },
       { label: "Campaigns", href: "/admin/campaigns", icon: Target },
     ],
   },

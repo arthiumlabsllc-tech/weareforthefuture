@@ -7,8 +7,12 @@ import ImpactMarquee from "@/components/ui/ImpactMarquee";
 export default function PublicShell() {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin") || pathname === "/login";
+  const isSupporter =
+    pathname === "/supporter-login" ||
+    pathname === "/register" ||
+    pathname.startsWith("/my-account");
 
-  if (isAdmin) return null;
+  if (isAdmin || isSupporter) return null;
 
   return (
     <>

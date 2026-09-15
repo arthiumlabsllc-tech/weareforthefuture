@@ -3,6 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Protect /my-account routes (supporter area)
+  if (pathname.startsWith("/my-account")) {
+    const sessionCookie = request.cookies.get("ftf-supporter-session");
+    if (!sessionCookie) {
+      return NextResponse.redirect(new URL("/supporter-login", request.url));
+    }
+    return NextResponse.next();
+  }
+
   // Only intercept /admin routes
   if (!pathname.startsWith("/admin")) {
     return NextResponse.next();
@@ -24,5 +33,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/my-account/:path*"],
 };

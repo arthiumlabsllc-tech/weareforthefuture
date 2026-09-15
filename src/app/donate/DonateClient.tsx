@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -57,6 +57,28 @@ export default function DonateClient() {
   });
 
   const activeAmount = customAmount ? Number(customAmount) : selectedAmount;
+
+  // Auto-fill donor details if supporter is logged in
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    fetch("/api/supporter/profile")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.supporter) {
+          const s = data.supporter;
+          setSignedIn(true);
+          const nameParts = (s.name || "").split(" ");
+          setFormData((prev) => ({
+            ...prev,
+            firstName: prev.firstName || nameParts[0] || "",
+            lastName: prev.lastName || nameParts.slice(1).join(" ") || "",
+            email: prev.email || s.email || "",
+            phone: prev.phone || s.phone || "",
+          }));
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const handleTierSelect = (amount: number) => {
     setSelectedAmount(amount);
@@ -526,6 +548,11 @@ export default function DonateClient() {
                         So we can send you a receipt and say thank you
                       </p>
                     </div>
+                    {signedIn && (
+                      <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600">
+                        Signed in
+                      </span>
+                    )}
                     <button
                       onClick={() => setShowForm(false)}
                       className="flex h-8 w-8 items-center justify-center rounded-lg bg-bg-tertiary text-text-muted hover:bg-bg-tertiary hover:text-text-secondary"
