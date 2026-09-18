@@ -14,132 +14,138 @@
 
 :root,
 [data-theme="light"] {
-  /* Backgrounds */
-  --color-bg-primary: #FDF8F0;
+  /* Backgrounds — cool neutral paper */
+  --color-bg-primary: #F6F7F8;
   --color-bg-secondary: #FFFFFF;
-  --color-bg-tertiary: #F5EDE0;
+  --color-bg-tertiary: #EDF0F2;
   --color-bg-elevated: #FFFFFF;
-  --color-bg-overlay: rgba(27, 58, 107, 0.5);
+  --color-bg-overlay: rgba(73, 73, 73, 0.5);
   --ftf-surface: #FFFFFF;
-  --ftf-surface-hover: #F9F3E9;
-  --ftf-border: #E8DDC9;
-  --ftf-border-strong: #D4C4A8;
-  --ftf-divider: #EDE2D0;
+  --ftf-surface-hover: #F1F3F5;
+  --ftf-border: #E2E6E9;
+  --ftf-border-strong: #C6CDD2;
+  --ftf-divider: #E8EBEE;
 
-  /* Text */
-  --ftf-text-primary: #1A1F2E;
-  --ftf-text-secondary: #4A5064;
-  --ftf-text-tertiary: #6B7185;
-  --ftf-text-muted: #9AA0B0;
-  --ftf-text-inverse: #FDF8F0;
+  /* Text — charcoal family (#494949 brand neutral) */
+  --ftf-text-primary: #333333;
+  --ftf-text-secondary: #494949;
+  --ftf-text-tertiary: #6C7277;
+  --ftf-text-muted: #9AA1A6;
+  --ftf-text-inverse: #F6F7F8;
   --ftf-text-on-primary: #FFFFFF;
-  --ftf-text-link: #1B3A6B;
-  --ftf-text-link-hover: #2E7D5B;
+  --ftf-text-link: #3973B8;
+  --ftf-text-link-hover: #2E5F9C;
 
-  /* Brand */
-  --ftf-primary: #1B3A6B;
-  --ftf-primary-hover: #142C52;
-  --ftf-primary-active: #0E1F3A;
-  --ftf-primary-subtle: #E5EAF3;
+  /* Brand — blue primary (trust), green accent (growth) */
+  --ftf-primary: #3973B8;
+  --ftf-primary-hover: #2E5F9C;
+  --ftf-primary-active: #265085;
+  --ftf-primary-subtle: #EAF1F9;
   --ftf-primary-contrast: #FFFFFF;
-  --ftf-accent: #F2B544;
-  --ftf-accent-hover: #D99A2E;
-  --ftf-accent-subtle: #FDF3DC;
+  --ftf-accent: #4CB64D;
+  --ftf-accent-hover: #2E7D32;
+  --ftf-accent-subtle: #EDF8EE;
+  --ftf-accent-text: #2E7D32;
+  --ftf-accent-bright: #8FD890;
 
   /* Semantic */
-  --ftf-success: #2E7D5B;
-  --ftf-success-bg: #E4F2EB;
-  --ftf-success-text: #1E5A40;
-  --ftf-warning: #F2B544;
-  --ftf-warning-bg: #FDF3DC;
-  --ftf-warning-text: #8A5D0F;
+  --ftf-success: #2E7D32;
+  --ftf-success-bg: #E8F5E9;
+  --ftf-success-text: #1B5E20;
+  --ftf-warning: #D97706;
+  --ftf-warning-bg: #FDF4E3;
+  --ftf-warning-text: #8A5300;
   --ftf-error: #C7442E;
   --ftf-error-bg: #FBE8E4;
   --ftf-error-text: #8A2A1B;
-  --ftf-info: #1B3A6B;
-  --ftf-info-bg: #E5EAF3;
-  --ftf-info-text: #142C52;
+  --ftf-info: #3973B8;
+  --ftf-info-bg: #EAF1F9;
+  --ftf-info-text: #265085;
 
   /* Shadows */
-  --ftf-shadow-color: rgba(27, 58, 107, 0.08);
-  --ftf-focus-ring: 0 0 0 3px rgba(27, 58, 107, 0.35);
-  --ftf-scrollbar-track: #F5EDE0;
-  --ftf-scrollbar-thumb: #D4C4A8;
-  --ftf-selection-bg: #F2B544;
-  --ftf-selection-text: #1A1F2E;
+  --ftf-shadow-color: rgba(73, 73, 73, 0.08);
+  --ftf-focus-ring: 0 0 0 3px rgba(57, 115, 184, 0.35);
+  --ftf-scrollbar-track: #EDF0F2;
+  --ftf-scrollbar-thumb: #C6CDD2;
+  --ftf-selection-bg: #4CB64D;
+  --ftf-selection-text: #0E2E0F;
+  --ftf-on-success: #FFFFFF;
 }
 
 [data-theme="dark"] {
-  /* Backgrounds — deep navy/warm charcoal */
-  --color-bg-primary: #0F1626;
-  --color-bg-secondary: #161F33;
-  --color-bg-tertiary: #1C2740;
-  --color-bg-elevated: #1F2A44;
+  /* Backgrounds — neutral charcoal */
+  --color-bg-primary: #16181A;
+  --color-bg-secondary: #1E2124;
+  --color-bg-tertiary: #262A2D;
+  --color-bg-elevated: #2E3336;
   --color-bg-overlay: rgba(0, 0, 0, 0.7);
-  --ftf-surface: #161F33;
-  --ftf-surface-hover: #1F2A44;
-  --ftf-border: #2A3550;
-  --ftf-border-strong: #3D4A6B;
-  --ftf-divider: #232E48;
+  --ftf-surface: #1E2124;
+  --ftf-surface-hover: #262A2D;
+  --ftf-border: #33383C;
+  --ftf-border-strong: #494949;
+  --ftf-divider: #2C3134;
 
-  /* Text — warm off-white */
-  --ftf-text-primary: #F5EFE3;
-  --ftf-text-secondary: #C4C0B5;
-  --ftf-text-tertiary: #9A9689;
-  --ftf-text-muted: #6E6A60;
-  --ftf-text-inverse: #0F1626;
+  /* Text — cool off-white */
+  --ftf-text-primary: #F2F4F5;
+  --ftf-text-secondary: #C6CBCF;
+  --ftf-text-tertiary: #9BA1A6;
+  --ftf-text-muted: #6E7478;
+  --ftf-text-inverse: #16181A;
   --ftf-text-on-primary: #FFFFFF;
-  --ftf-text-link: #7BA8E8;
-  --ftf-text-link-hover: #A8C6F0;
+  --ftf-text-link: #7FA9DC;
+  --ftf-text-link-hover: #A6C4E8;
 
-  /* Brand — brightened for dark bg contrast */
-  --ftf-primary: #4A7BC8;
-  --ftf-primary-hover: #6B94D6;
-  --ftf-primary-active: #8FB0E0;
-  --ftf-primary-subtle: #1A2740;
-  --ftf-primary-contrast: #0F1626;
-  --ftf-accent: #F5C563;
-  --ftf-accent-hover: #F7D488;
-  --ftf-accent-subtle: #2A2418;
+  /* Brand — same deep blue fills keep white text legible (4.9:1) */
+  --ftf-primary: #3973B8;
+  --ftf-primary-hover: #2E5F9C;
+  --ftf-primary-active: #265085;
+  --ftf-primary-subtle: #1A2634;
+  --ftf-primary-contrast: #FFFFFF;
+  --ftf-accent: #6FCB70;
+  --ftf-accent-hover: #8FD890;
+  --ftf-accent-subtle: #16281A;
+  --ftf-accent-text: #8FD890;
+  --ftf-accent-bright: #8FD890;
 
   /* Semantic — muted bg, bright text */
-  --ftf-success: #4DB88A;
-  --ftf-success-bg: #142A22;
-  --ftf-success-text: #7DDBB0;
-  --ftf-warning: #F5C563;
-  --ftf-warning-bg: #2A2418;
-  --ftf-warning-text: #F7D488;
+  --ftf-success: #6FCB70;
+  --ftf-success-bg: #16281A;
+  --ftf-success-text: #9ADF9B;
+  --ftf-warning: #E5A44A;
+  --ftf-warning-bg: #2A2214;
+  --ftf-warning-text: #EFC078;
   --ftf-error: #E87560;
   --ftf-error-bg: #2E1814;
   --ftf-error-text: #F5A89A;
-  --ftf-info: #4A7BC8;
-  --ftf-info-bg: #14203A;
-  --ftf-info-text: #8FB0E0;
+  --ftf-info: #3973B8;
+  --ftf-info-bg: #14202E;
+  --ftf-info-text: #A6C4E8;
 
   /* Shadows */
   --ftf-shadow-color: rgba(0, 0, 0, 0.5);
-  --ftf-focus-ring: 0 0 0 3px rgba(122, 168, 232, 0.5);
-  --ftf-scrollbar-track: #161F33;
-  --ftf-scrollbar-thumb: #3D4A6B;
-  --ftf-selection-bg: #F5C563;
-  --ftf-selection-text: #0F1626;
+  --ftf-focus-ring: 0 0 0 3px rgba(127, 169, 220, 0.5);
+  --ftf-scrollbar-track: #1E2124;
+  --ftf-scrollbar-thumb: #494949;
+  --ftf-selection-bg: #4CB64D;
+  --ftf-selection-text: #0E2E0F;
+  --ftf-on-success: #16181A;
 }
 
 /* ===== LAYER 2: Tailwind Theme → CSS Variable Mapping ===== */
 
 @theme inline {
   /* Brand palette (exact user-specified values) */
-  --color-royal: #1B3A6B;
-  --color-gold-brand: #F2B544;
-  --color-coral-brand: #E86A4C;
-  --color-forest-brand: #2E7D5B;
-  --color-cream-brand: #FDF8F0;
+  --color-royal: #3973B8;
+  --color-gold-brand: #4CB64D;
+  --color-coral-brand: #C7442E;
+  --color-forest-brand: #2E7D32;
+  --color-cream-brand: #F6F7F8;
 
-  /* Cultural accents */
-  --color-kente-gold: #D4A017;
-  --color-adinkra-red: #A6321F;
-  --color-kente-green: #046A38;
-  --color-ashanti-brown: #6B4226;
+  /* Cultural accents — remapped to brand family */
+  --color-kente-gold: #4CB64D;
+  --color-adinkra-red: #C7442E;
+  --color-kente-green: #2E7D32;
+  --color-ashanti-brown: #494949;
 
   /* Semantic Tailwind utilities → CSS variables */
   --color-primary: var(--ftf-primary);
@@ -151,6 +157,9 @@
   --color-accent: var(--ftf-accent);
   --color-accent-hover: var(--ftf-accent-hover);
   --color-accent-subtle: var(--ftf-accent-subtle);
+  --color-accent-text: var(--ftf-accent-text);
+  --color-accent-bright: var(--ftf-accent-bright);
+  --color-on-success: var(--ftf-on-success);
 
   --color-surface: var(--ftf-surface);
   --color-surface-hover: var(--ftf-surface-hover);
@@ -187,53 +196,57 @@
   --color-divider: var(--ftf-divider);
 
   /* Legacy palette — mapped to theme vars for dark mode auto-adapt */
-  --color-navy-50: #f0f3f8;
-  --color-navy-100: #d9e0ed;
-  --color-navy-200: #b3c1db;
-  --color-navy-300: #8da2c9;
-  --color-navy-400: #6783b7;
-  --color-navy-500: #4164a5;
-  --color-navy-600: #335084;
-  --color-navy-700: #263c63;
-  --color-navy-800: #192842;
-  --color-navy-900: #0A1628;
-  --color-navy-950: #050b14;
+  /* Navy → charcoal (brand neutral #494949 at 700) */
+  --color-navy-50: #F4F5F6;
+  --color-navy-100: #E6E8EA;
+  --color-navy-200: #CFD3D6;
+  --color-navy-300: #ADB3B8;
+  --color-navy-400: #858B90;
+  --color-navy-500: #696F74;
+  --color-navy-600: #575C60;
+  --color-navy-700: #494949;
+  --color-navy-800: #3A3A3A;
+  --color-navy-900: #2B2B2B;
+  --color-navy-950: #1C1C1C;
 
-  --color-gold-50: #fdf8ed;
-  --color-gold-100: #f9edcc;
-  --color-gold-200: #f3db99;
-  --color-gold-300: #edc966;
-  --color-gold-400: #D4A843;
-  --color-gold-500: #c49a30;
-  --color-gold-600: #a37f26;
-  --color-gold-700: #7a5f1d;
-  --color-gold-800: #524013;
-  --color-gold-900: #29200a;
+  /* Gold → brand green (#4CB64D at 500) */
+  --color-gold-50: #F0FAF0;
+  --color-gold-100: #DCF2DC;
+  --color-gold-200: #B9E5BA;
+  --color-gold-300: #8FD890;
+  --color-gold-400: #6FCB70;
+  --color-gold-500: #4CB64D;
+  --color-gold-600: #3DA03E;
+  --color-gold-700: #2E7D32;
+  --color-gold-800: #1B5E20;
+  --color-gold-900: #0E2E0F;
 
-  --color-emerald-50: #ecfdf5;
-  --color-emerald-100: #d1fae5;
-  --color-emerald-200: #a7f3d0;
-  --color-emerald-300: #6ee7b7;
-  --color-emerald-400: #34d399;
-  --color-emerald-500: #10B981;
-  --color-emerald-600: #059669;
-  --color-emerald-700: #047857;
-  --color-emerald-800: #065f46;
-  --color-emerald-900: #064e3b;
+  /* Emerald → growth green */
+  --color-emerald-50: #EDF8EE;
+  --color-emerald-100: #D6EFD8;
+  --color-emerald-200: #AEDDB1;
+  --color-emerald-300: #7FC984;
+  --color-emerald-400: #5BBD60;
+  --color-emerald-500: #4CB64D;
+  --color-emerald-600: #3DA03E;
+  --color-emerald-700: #2E7D32;
+  --color-emerald-800: #1B5E20;
+  --color-emerald-900: #0E2E0F;
 
-  --color-coral-50: #fff7ed;
-  --color-coral-100: #ffedd5;
-  --color-coral-200: #fed7aa;
-  --color-coral-300: #fdba74;
-  --color-coral-400: #fb923c;
-  --color-coral-500: #F97316;
-  --color-coral-600: #ea580c;
-  --color-coral-700: #c2410c;
-  --color-coral-800: #9a3412;
-  --color-coral-900: #7c2d12;
+  /* Coral → warm red (error family) */
+  --color-coral-50: #FBEFEA;
+  --color-coral-100: #F7DCD4;
+  --color-coral-200: #EFB9A9;
+  --color-coral-300: #E5937D;
+  --color-coral-400: #DC6E52;
+  --color-coral-500: #C7442E;
+  --color-coral-600: #A93A26;
+  --color-coral-700: #8A2A1B;
+  --color-coral-800: #6B1F14;
+  --color-coral-900: #4C150D;
 
-  --color-warm-white: #FAFAFA;
-  --color-warm-gray: #F5F5F4;
+  --color-warm-white: #F6F7F8;
+  --color-warm-gray: #EDF0F2;
 
   /* Typography */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;

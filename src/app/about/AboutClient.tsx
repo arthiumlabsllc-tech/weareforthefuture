@@ -48,7 +48,7 @@ export default function AboutPageClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               Our Story
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -105,7 +105,7 @@ export default function AboutPageClient() {
 
                 {/* Content */}
                 <div className={`ml-16 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
-                  <span className="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-sm font-bold text-accent mb-3">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-accent-subtle px-4 py-1.5 text-sm font-bold text-accent-text mb-3">
                     <Calendar className="h-3.5 w-3.5" />
                     {event.year}
                   </span>
@@ -172,7 +172,7 @@ export default function AboutPageClient() {
               <div
                 className={`mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl ${
                   item.color === "gold"
-                    ? "bg-accent-subtle text-accent"
+                    ? "bg-accent-subtle text-accent-text"
                     : item.color === "emerald"
                     ? "bg-success-bg text-success-text"
                     : "bg-coral-50 text-coral-500"
@@ -225,7 +225,7 @@ export default function AboutPageClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
               Volunteer Program
             </span>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl leading-tight">
@@ -273,7 +273,7 @@ export default function AboutPageClient() {
           >
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: BookOpen, label: "Training", color: "bg-accent-subtle text-accent" },
+                { icon: BookOpen, label: "Training", color: "bg-accent-subtle text-accent-text" },
                 { icon: Users, label: "Mentorship", color: "bg-success-bg text-success-text" },
                 { icon: HandHeart, label: "Service", color: "bg-coral-50 text-coral-500" },
                 { icon: Award, label: "Leadership", color: "bg-bg-tertiary text-text-secondary" },
@@ -320,7 +320,7 @@ export default function AboutPageClient() {
                   key={country}
                   className="flex items-center gap-2 rounded-full bg-surface/10 px-5 py-2.5 text-sm font-medium text-text-on-primary border border-white/10"
                 >
-                  <MapPin className="h-4 w-4 text-accent" />
+                  <MapPin className="h-4 w-4 text-accent-text" />
                   {country}
                 </div>
               ))}

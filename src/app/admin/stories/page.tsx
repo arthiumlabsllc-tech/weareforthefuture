@@ -17,6 +17,7 @@ export default function AdminStoriesPage() {
         { name: "program", label: "Linked Program" },
         { name: "location", label: "Location" },
         { name: "pullQuote", label: "Pull Quote", type: "textarea", span: 2 },
+        { name: "consentGiven", label: "Consent Given (required to publish publicly)", type: "checkbox" },
         { name: "published", label: "Published", type: "checkbox" },
       ]}
       tableColumns={[
@@ -24,8 +25,13 @@ export default function AdminStoriesPage() {
         { key: "program", label: "Program" },
         { key: "location", label: "Location" },
         { key: "published", label: "Status", render: (v) => (
-          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent"}`}>
+          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent-text"}`}>
             {v ? "Published" : "Draft"}
+          </span>
+        )},
+        { key: "consentGiven", label: "Consent", render: (v) => (
+          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-error/10 text-error"}`}>
+            {v ? "Given" : "Missing"}
           </span>
         )},
       ]}

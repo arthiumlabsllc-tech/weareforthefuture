@@ -200,7 +200,7 @@ export default function AdminOrdersClient() {
         >
           <div className="rounded-2xl bg-surface p-8 shadow-2xl">
             <div className="text-center mb-6">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-accent">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-accent-text">
                 <Lock className="h-6 w-6" />
               </div>
               <h1 className="text-xl font-bold text-text-primary">Admin Access</h1>

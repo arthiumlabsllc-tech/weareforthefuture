@@ -11,7 +11,8 @@ export default function AdminProgramsPage() {
         { name: "name", label: "Program Name", required: true },
         { name: "slug", label: "Slug", required: true },
         { name: "shortDescription", label: "Short Description", type: "textarea", span: 2 },
-        { name: "description", label: "Full Description (HTML)", type: "textarea", span: 2 },
+        { name: "description", label: "Full Description (plain text)", type: "textarea", span: 2 },
+        { name: "impactMetrics", label: "Programme Content (JSON: detail, pillars, highlights, status, featured)", type: "json", span: 2 },
         { name: "icon", label: "Icon (emoji or URL)" },
         { name: "image", label: "Image URL" },
         { name: "order", label: "Order", type: "number" },
@@ -21,7 +22,7 @@ export default function AdminProgramsPage() {
         { key: "name", label: "Name" },
         { key: "slug", label: "Slug" },
         { key: "published", label: "Status", render: (v) => (
-          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent"}`}>
+          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent-text"}`}>
             {v ? "Published" : "Draft"}
           </span>
         )},

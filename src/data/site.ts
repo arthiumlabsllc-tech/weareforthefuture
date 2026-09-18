@@ -69,7 +69,7 @@ export const partnerLogos = [
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Initiatives", href: "/initiatives" },
+  { label: "Our Work", href: "/initiatives" },
   { label: "Impact", href: "/impact" },
   { label: "Team", href: "/team" },
   { label: "News", href: "/news" },

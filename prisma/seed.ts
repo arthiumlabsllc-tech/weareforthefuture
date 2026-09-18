@@ -11,6 +11,7 @@ import { advisoryBoard } from "../src/data/advisoryBoard";
 import { partnerLogos } from "../src/data/site";
 import { initiatives } from "../src/data/initiatives";
 import { impactStories } from "../src/data/impactStories";
+import { syncFuturePathways } from "./future-pathways";
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -186,7 +187,7 @@ async function main() {
         description: prog.fullDescription,
         shortDescription: prog.shortDescription,
         image: prog.image,
-        impactMetrics: { beneficiaries: prog.beneficiaries, country: prog.country, category: prog.category, status: prog.status, highlights: prog.highlights },
+        impactMetrics: { beneficiaries: prog.beneficiaries, country: prog.country, category: prog.category, status: prog.status, highlights: prog.highlights, pillars: prog.pillars },
       },
       create: {
         name: prog.title,
@@ -194,13 +195,14 @@ async function main() {
         description: prog.fullDescription,
         shortDescription: prog.shortDescription,
         image: prog.image,
-        impactMetrics: { beneficiaries: prog.beneficiaries, country: prog.country, category: prog.category, status: prog.status, highlights: prog.highlights },
+        impactMetrics: { beneficiaries: prog.beneficiaries, country: prog.country, category: prog.category, status: prog.status, highlights: prog.highlights, pillars: prog.pillars },
         order: i,
         published: true,
       },
     });
   }
-  console.log(`✅ ${initiatives.length} programs seeded`);
+  await syncFuturePathways(prisma);
+  console.log(`✅ ${initiatives.length + 1} programs seeded`);
 
   // ─── IMPACT STORIES ───
   for (let i = 0; i < impactStories.length; i++) {
@@ -215,6 +217,7 @@ async function main() {
         featuredImage: s.image,
         childName: s.name,
         program: s.program,
+        consentGiven: true,
       },
       create: {
         title: s.title,
@@ -226,6 +229,7 @@ async function main() {
         childName: s.name,
         program: s.program,
         published: true,
+        consentGiven: true,
       },
     });
   }

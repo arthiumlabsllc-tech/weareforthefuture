@@ -143,7 +143,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent-text uppercase tracking-wider mb-6 backdrop-blur-sm">
               <ShoppingBag className="h-3.5 w-3.5" />
               Shop With Purpose
             </span>
@@ -192,7 +192,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
               <CartIcon className="h-4 w-4" />
               Cart
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-primary-contrast shadow">
+                <span className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-navy-900 shadow">
                   {cartCount}
                 </span>
               )}
@@ -223,10 +223,10 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider shadow-lg ${
                           product.badge === "Best Seller"
-                            ? "bg-accent text-primary-contrast"
+                            ? "bg-accent text-navy-900"
                             : product.badge === "Most Needed"
-                            ? "bg-success text-text-on-primary"
-                            : "bg-primary text-accent"
+                            ? "bg-success text-on-success"
+                            : "bg-primary text-text-on-primary"
                         }`}
                       >
                         <Sparkles className="h-2.5 w-2.5" />
@@ -276,7 +276,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
                         onClick={() => addToCart(product)}
                         className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
                           addedId === product.id
-                            ? "bg-success text-text-on-primary scale-95"
+                            ? "bg-success text-on-success scale-95"
                             : "bg-primary text-text-on-primary hover:bg-primary-hover hover:scale-105 active:scale-95"
                         }`}
                       >
@@ -337,10 +337,10 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="relative text-center group"
             >
-              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-accent transition-transform group-hover:scale-110">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-accent-bright transition-transform group-hover:scale-110">
                 <item.icon className="h-7 w-7" />
               </div>
-              <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-bold text-primary-contrast mx-auto" style={{ right: "calc(50% - 2.5rem)" }}>
+              <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-bold text-navy-900 mx-auto" style={{ right: "calc(50% - 2.5rem)" }}>
                 {item.step}
               </div>
               <h3 className="text-lg font-bold text-text-primary">{item.title}</h3>
@@ -353,7 +353,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
       {/* ===== CTA ===== */}
       <SectionWrapper background="navy">
         <div className="mx-auto max-w-3xl text-center">
-          <Heart className="mx-auto h-10 w-10 text-accent mb-4" />
+          <Heart className="mx-auto h-10 w-10 text-accent-text mb-4" />
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl">
             Can&apos;t Shop Right Now?
           </h2>
@@ -403,7 +403,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
               {/* Header */}
               <div className="flex items-center justify-between border-b border-border px-6 py-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-accent">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-accent-bright">
                     <CartIcon className="h-5 w-5" />
                   </div>
                   <div>

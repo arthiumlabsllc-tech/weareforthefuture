@@ -15,6 +15,7 @@ import {
   Palette,
   Check,
   Send,
+  Loader2,
   Quote,
   Star,
 } from "lucide-react";
@@ -113,10 +114,30 @@ export default function VolunteerClient() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/volunteer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Unable to submit your application. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Unable to submit your application. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -133,7 +154,7 @@ export default function VolunteerClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               Get Involved
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -165,7 +186,7 @@ export default function VolunteerClient() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="text-center p-6"
             >
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-accent-subtle text-accent">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                 <benefit.icon className="h-7 w-7" />
               </div>
               <h3 className="text-lg font-bold text-text-primary mb-2">
@@ -196,7 +217,7 @@ export default function VolunteerClient() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="group rounded-2xl border border-border bg-surface p-8 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent-text">
                 <role.icon className="h-6 w-6" />
               </div>
               <h3 className="text-lg font-bold text-text-primary mb-2">
@@ -229,7 +250,7 @@ export default function VolunteerClient() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="rounded-2xl border border-border bg-surface p-8"
             >
-              <Quote className="h-8 w-8 text-accent mb-4" />
+              <Quote className="h-8 w-8 text-accent-text mb-4" />
               <p className="text-text-secondary leading-relaxed mb-6 italic">
                 &ldquo;{t.quote}&rdquo;
               </p>
@@ -382,12 +403,25 @@ export default function VolunteerClient() {
                   placeholder="Share your skills, experience, and why you'd like to volunteer with FTF..."
                 />
               </div>
+              {error && (
+                <p
+                  role="alert"
+                  className="rounded-xl border border-error/20 bg-error/5 px-4 py-3 text-sm text-error"
+                >
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-lg shadow-accent/20 transition-all hover:scale-[1.01]"
+                disabled={loading}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <Send className="h-5 w-5" />
-                Submit Application
+                {loading ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Send className="h-5 w-5" />
+                )}
+                {loading ? "Submitting..." : "Submit Application"}
               </button>
             </motion.form>
           )}

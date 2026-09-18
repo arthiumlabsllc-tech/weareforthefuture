@@ -54,7 +54,7 @@ export function SectionHeader({
       {overline && (
         <span
           className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-3 ${
-            light ? "text-accent" : "text-accent-hover"
+            light ? "text-accent-bright" : "text-accent-hover"
           }`}
         >
           {overline}

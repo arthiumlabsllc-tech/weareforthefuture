@@ -59,7 +59,7 @@ export default function ImpactMarquee() {
             >
               {/* Gold diamond separator */}
               <span className="inline-block w-1.5 h-1.5 bg-accent rotate-45 mr-3 shrink-0 opacity-60" />
-              <span className={i % 3 === 0 ? "text-accent" : "text-text-on-primary/70"}>
+              <span className={i % 3 === 0 ? "text-text-on-primary font-semibold" : "text-text-on-primary/70"}>
                 {msg}
               </span>
             </span>

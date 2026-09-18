@@ -1,9 +1,19 @@
 import type { MetadataRoute } from "next";
+import { getPublicProgrammes } from "@/lib/programmes";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://weareforthefuture.org";
+  const programmes = await getPublicProgrammes();
+  const detailPages: MetadataRoute.Sitemap = programmes.filter((program) => program.href).map((program) => ({
+    url: `${baseUrl}${program.href}`,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
 
   return [
+    ...detailPages,
     { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/initiatives`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },

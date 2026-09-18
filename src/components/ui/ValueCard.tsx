@@ -15,7 +15,7 @@ interface ValueCardProps {
 const colorMap: Record<string, { bg: string; icon: string; border: string }> = {
   gold: {
     bg: "bg-accent-subtle",
-    icon: "text-accent",
+    icon: "text-accent-text",
     border: "border-accent/20",
   },
   coral: {

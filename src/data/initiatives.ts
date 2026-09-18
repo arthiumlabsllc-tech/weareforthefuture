@@ -8,8 +8,11 @@ export interface Initiative {
   category: string;
   country: string;
   year: number;
-  image: string;
-  beneficiaries: number;
+  image: string | null;
+  beneficiaries: number | null;
+  href?: string;
+  pillars?: string[];
+  featured?: boolean;
   status: "active" | "completed" | "upcoming";
   highlights: string[];
 }
@@ -28,6 +31,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/click-4-change.jpg"),
     beneficiaries: 150,
     status: "active",
+    pillars: ["Future-Ready Skills & Digital Inclusion"],
     highlights: [
       "Professional photography training",
       "Digital marketing workshops",
@@ -48,6 +52,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/share-aid.jpg"),
     beneficiaries: 500,
     status: "active",
+    pillars: ["Community & Family Support"],
     highlights: [
       "School supplies distribution",
       "Food and hygiene packages",
@@ -68,6 +73,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/ftf-village.jpg"),
     beneficiaries: 200,
     status: "upcoming",
+    pillars: ["Community & Family Support"],
     highlights: [
       "Safe housing for 200+ children",
       "On-site school and health center",
@@ -88,6 +94,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/share-aid.jpg"),
     beneficiaries: 300,
     status: "active",
+    pillars: ["Foundational Education & Learning Support"],
     highlights: [
       "Full school fee coverage",
       "Mentorship pairing",
@@ -108,6 +115,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/smart-start.jpg"),
     beneficiaries: 250,
     status: "active",
+    pillars: ["Foundational Education & Learning Support"],
     highlights: [
       "Weekly Saturday classes",
       "Core subject tutoring",
@@ -128,6 +136,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/smart-start.jpg"),
     beneficiaries: 400,
     status: "active",
+    pillars: ["Foundational Education & Learning Support"],
     highlights: [
       "Tuition sponsorship",
       "Learning materials provision",
@@ -148,31 +157,12 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/empower-her.jpg"),
     beneficiaries: 1000,
     status: "active",
+    pillars: ["Girls' Education, Dignity & Retention"],
     highlights: [
       "Free sanitary product distribution",
       "Menstrual health workshops",
       "School education programs",
       "Community awareness campaigns",
-    ],
-  },
-  {
-    slug: "project-future-ready",
-    title: "Project Future Ready",
-    shortDescription:
-      "Preparing youth for the future with digital literacy, coding, and 21st-century skills.",
-    fullDescription:
-      "Project Future Ready is our newest initiative, launched in February 2025. The program equips young people with digital literacy, basic coding skills, communication, and problem-solving abilities needed to thrive in the 21st century economy.",
-    category: "Technology",
-    country: "Ghana",
-    year: 2025,
-    image: img("/images/initiatives/future-ready.jpg"),
-    beneficiaries: 200,
-    status: "active",
-    highlights: [
-      "Digital literacy training",
-      "Introduction to coding",
-      "Communication skills",
-      "Entrepreneurship basics",
     ],
   },
   {
@@ -188,6 +178,10 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/project-momentum.jpg"),
     beneficiaries: 350,
     status: "active",
+    pillars: [
+      "Foundational Education & Learning Support",
+      "Mentorship, Leadership & Child Wellbeing",
+    ],
     highlights: [
       "Academic tutoring",
       "Career mentorship",
@@ -208,6 +202,7 @@ export const initiatives: Initiative[] = [
     image: img("/images/initiatives/chess-in-slums.jpg"),
     beneficiaries: 180,
     status: "active",
+    pillars: ["Mentorship, Leadership & Child Wellbeing"],
     highlights: [
       "Chess training sessions",
       "Inter-community tournaments",

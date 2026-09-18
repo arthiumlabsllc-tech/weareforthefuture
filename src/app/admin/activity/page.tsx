@@ -52,7 +52,7 @@ export default function AdminAuditPage() {
                   <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     l.action === "CREATE" ? "bg-success/10 text-success-text" :
                     l.action === "DELETE" ? "bg-error/10 text-error" :
-                    l.action === "LOGIN" ? "bg-info/10 text-info-text" : "bg-accent/10 text-accent"
+                    l.action === "LOGIN" ? "bg-info/10 text-info-text" : "bg-accent/10 text-accent-text"
                   }`}>{l.action}</span>
                 </td>
                 <td className="px-4 py-3 text-text-secondary">{l.entity}{l.entityId ? ` #${l.entityId.slice(0, 8)}` : ""}</td>

@@ -11,6 +11,7 @@ const schema = z.object({
   program: z.string().nullable().optional(), pullQuote: z.string().nullable().optional(),
   published: z.boolean().optional(), metaTitle: z.string().nullable().optional(),
   metaDescription: z.string().nullable().optional(),
+  consentGiven: z.boolean().optional(),
 });
 
 export async function GET() {
@@ -35,6 +36,7 @@ export async function POST(request: NextRequest) {
       age: d.age ?? null, location: d.location ?? null,
       program: d.program ?? null, pullQuote: d.pullQuote ?? null,
       published: d.published ?? false,
+      consentGiven: d.consentGiven ?? false,
       metaTitle: d.metaTitle ?? null, metaDescription: d.metaDescription ?? null,
       createdBy: auth.session.userId, updatedBy: auth.session.userId,
     },

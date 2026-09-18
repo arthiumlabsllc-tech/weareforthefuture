@@ -41,7 +41,7 @@ export default async function AdminBlogPage() {
             <p className="text-text-secondary">No blog posts yet.</p>
             <Link
               href="/admin/blog/new"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent-text hover:text-accent-hover"
             >
               <Plus className="h-4 w-4" />
               Create your first post
@@ -89,7 +89,7 @@ export default async function AdminBlogPage() {
                         className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${
                           post.published
                             ? "bg-success/10 text-success-text"
-                            : "bg-accent/10 text-accent"
+                            : "bg-accent/10 text-accent-text"
                         }`}
                       >
                         {post.published ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}

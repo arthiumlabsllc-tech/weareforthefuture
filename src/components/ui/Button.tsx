@@ -68,7 +68,7 @@ export function LearnMoreLink({ href, text = "Learn more" }: { href: string; tex
   return (
     <Link
       href={href}
-      className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent-hover transition-colors hover:text-accent"
+      className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent-hover transition-colors hover:text-accent-text"
     >
       {text}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

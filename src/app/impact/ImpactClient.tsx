@@ -3,105 +3,25 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { img } from "@/lib/imageUrl";
-import {
-  TrendingUp,
-  Users,
-  MapPin,
-  Calendar,
-  BookOpen,
-  Heart,
-  HandHeart,
-  GraduationCap,
-  Droplets,
-  TreePine,
-  Download,
-  FileText,
-  PieChart,
-  BarChart3,
-  Target,
-  ArrowRight,
-} from "lucide-react";
+import { Heart, Download, FileText } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { siteConfig } from "@/data/site";
+import {
+  impactMetrics,
+  impactByYear,
+  fundAllocation,
+  successStories,
+} from "@/data/impact";
 
-const impactMetrics = [
-  {
-    icon: Users,
-    value: "100,000+",
-    label: "Children Reached",
-    description: "Underprivileged children supported through our programs since 2016.",
-    color: "gold",
-  },
-  {
-    icon: BookOpen,
-    value: "5,000+",
-    label: "Students Sponsored",
-    description: "Children enrolled in school with full tuition, books, and mentorship.",
-    color: "emerald",
-  },
-  {
-    icon: Heart,
-    value: "50,000+",
-    label: "Health Kits Distributed",
-    description: "Hygiene and menstrual health products provided to girls and families.",
-    color: "coral",
-  },
-  {
-    icon: MapPin,
-    value: "30+",
-    label: "Communities Served",
-    description: "Underserved communities across Ghana, Nigeria, and the United States.",
-    color: "navy",
-  },
-];
+export interface ReportDocument {
+  id: string;
+  title: string;
+  description: string | null;
+  fileUrl: string;
+  year: number | null;
+  category: string;
+}
 
-const impactByYear = [
-  { year: "2016", children: 50, volunteers: 10, initiatives: 2 },
-  { year: "2017", children: 200, volunteers: 50, initiatives: 4 },
-  { year: "2018", children: 800, volunteers: 150, initiatives: 6 },
-  { year: "2019", children: 2000, volunteers: 400, initiatives: 8 },
-  { year: "2020", children: 5000, volunteers: 800, initiatives: 10 },
-  { year: "2021", children: 15000, volunteers: 1200, initiatives: 12 },
-  { year: "2022", children: 30000, volunteers: 1800, initiatives: 14 },
-  { year: "2023", children: 50000, volunteers: 2200, initiatives: 16 },
-  { year: "2024", children: 75000, volunteers: 2800, initiatives: 18 },
-  { year: "2025", children: 100000, volunteers: 3000, initiatives: 20 },
-];
-
-const fundAllocation = [
-  { category: "Education Programs", percentage: 40, color: "bg-accent" },
-  { category: "Healthcare & Hygiene", percentage: 20, color: "bg-success" },
-  { category: "Community Development", percentage: 15, color: "bg-coral-500" },
-  { category: "FTF Village Project", percentage: 15, color: "bg-text-secondary" },
-  { category: "Operations & Admin", percentage: 10, color: "bg-border" },
-];
-
-const successStories = [
-  {
-    name: "Ama, Age 14",
-    location: "Jamestown, Ghana",
-    story:
-      "Through the S.T.E.P program, Ama received full school sponsorship and mentorship. She is now top of her class and dreams of becoming a doctor.",
-    program: "S.T.E.P",
-  },
-  {
-    name: "Chidi, Age 16",
-    location: "Lagos, Nigeria",
-    story:
-      "Chidi participated in Project Momentum's leadership workshop. He went on to start a peer tutoring group at his school, helping 30+ students improve their grades.",
-    program: "Project Momentum",
-  },
-  {
-    name: "Abena, Age 12",
-    location: "Takoradi, Ghana",
-    story:
-      "The Empower Her, Period program gave Abena access to sanitary products and confidence. She hasn't missed a day of school since.",
-    program: "Empower Her, Period",
-  },
-];
-
-export default function ImpactClient() {
+export default function ImpactClient({ reports = [] }: { reports?: ReportDocument[] }) {
   const maxChildren = Math.max(...impactByYear.map((d) => d.children));
 
   return (
@@ -128,7 +48,7 @@ export default function ImpactClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               Transparency & Impact
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -157,7 +77,7 @@ export default function ImpactClient() {
               <div
                 className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${
                   metric.color === "gold"
-                    ? "bg-accent-subtle text-accent"
+                    ? "bg-accent-subtle text-accent-text"
                     : metric.color === "emerald"
                     ? "bg-success-bg text-success-text"
                     : metric.color === "coral"
@@ -235,7 +155,7 @@ export default function ImpactClient() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
               Financial Transparency
             </span>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl leading-tight">
@@ -269,7 +189,8 @@ export default function ImpactClient() {
                       whileInView={{ width: `${item.percentage}%` }}
                       viewport={{ once: true }}
                       transition={{ duration: 1, delay: 0.3 + i * 0.1 }}
-                      className={`h-full rounded-full ${item.color}`}
+                      className="h-full rounded-full"
+                      style={{ backgroundColor: item.hex }}
                     />
                   </div>
                 </motion.div>
@@ -288,17 +209,10 @@ export default function ImpactClient() {
             <div className="relative h-72 w-72 md:h-80 md:w-80">
               <svg viewBox="0 0 200 200" className="h-full w-full -rotate-90">
                 {fundAllocation.reduce(
-                  (acc, item, i) => {
+                  (acc, item) => {
                     const circumference = 2 * Math.PI * 70;
                     const strokeLength = (item.percentage / 100) * circumference;
                     const strokeOffset = acc.offset;
-                    const colors = [
-                      "#D4A843",
-                      "#10B981",
-                      "#F97316",
-                      "#263c63",
-                      "#8da2c9",
-                    ];
                     acc.elements.push(
                       <circle
                         key={item.category}
@@ -306,7 +220,7 @@ export default function ImpactClient() {
                         cy="100"
                         r="70"
                         fill="none"
-                        stroke={colors[i]}
+                        stroke={item.hex}
                         strokeWidth="30"
                         strokeDasharray={`${strokeLength} ${circumference - strokeLength}`}
                         strokeDashoffset={-strokeOffset}
@@ -347,7 +261,7 @@ export default function ImpactClient() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="rounded-2xl bg-surface border border-border p-8 transition-all hover:shadow-xl hover:shadow-primary/5"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent-subtle text-accent">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent-subtle text-accent-text">
                 <Heart className="h-6 w-6" />
               </div>
               <p className="text-text-secondary leading-relaxed mb-6 italic">
@@ -366,36 +280,44 @@ export default function ImpactClient() {
       </SectionWrapper>
 
       {/* ===== ANNUAL REPORTS ===== */}
-      <SectionWrapper background="white">
-        <SectionHeader
-          overline="Reports"
-          title="Annual Reports & Documents"
-          description="Download our annual reports to see detailed breakdowns of our activities, finances, and impact."
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[2024, 2023, 2022].map((year, i) => (
-            <motion.div
-              key={year}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="group flex items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-all hover:shadow-lg hover:border-accent"
-            >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent">
-                <FileText className="h-7 w-7" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-text-primary">
-                  Annual Report {year}
-                </h3>
-                <p className="text-sm text-text-tertiary">PDF Document</p>
-              </div>
-              <Download className="h-5 w-5 text-text-muted transition-colors group-hover:text-accent" />
-            </motion.div>
-          ))}
-        </div>
-      </SectionWrapper>
+      {reports.length > 0 && (
+        <SectionWrapper background="white">
+          <SectionHeader
+            overline="Reports"
+            title="Annual Reports & Documents"
+            description="Download our annual reports to see detailed breakdowns of our activities, finances, and impact."
+          />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {reports.map((report, i) => (
+              <motion.a
+                key={report.id}
+                href={`/api/documents/${report.id}/download`}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+                className="group flex items-center gap-4 rounded-2xl border border-border bg-surface p-6 transition-all hover:shadow-lg hover:border-accent"
+              >
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent-text">
+                  <FileText className="h-7 w-7" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-text-primary">
+                    {report.title}
+                  </h3>
+                  <p className="text-sm text-text-tertiary">
+                    {report.category}
+                    {report.year ? ` · ${report.year}` : ""}
+                  </p>
+                </div>
+                <Download className="h-5 w-5 text-text-muted transition-colors group-hover:text-accent-text" />
+              </motion.a>
+            ))}
+          </div>
+        </SectionWrapper>
+      )}
     </>
   );
 }

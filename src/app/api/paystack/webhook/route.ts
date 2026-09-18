@@ -109,33 +109,58 @@ export async function POST(request: NextRequest) {
       await sendOrderConfirmation(emailData);
       await sendAdminNotification(emailData);
     } else {
-      // No matching order - this might be a donation payment
-      // Log the transaction for records
-      const donorNameField = customFields?.find(
-        (f) => f.variable_name === "donor_name" || f.display_name === "Donor Name"
-      );
+      // No matching order - this is a donation payment. Persist a Donation row.
+      const findField = (names: string[]) =>
+        customFields?.find(
+          (f) => names.includes(String(f.variable_name)) || names.includes(String(f.display_name))
+        )?.value as string | undefined;
 
-      const transactionRecord = {
-        timestamp: new Date().toISOString(),
-        reference: data.reference,
-        amount_in_pesewas: data.amount,
-        amount_ghs: typeof data.amount === "number" ? data.amount / 100 : null,
-        currency: data.currency,
-        channel: data.channel,
-        status: data.status,
-        paid_at: data.paid_at,
-        gateway_response: data.gateway_response,
-        customer: {
-          email: customer?.email,
-          first_name: customer?.first_name,
-          last_name: customer?.last_name,
-          phone: customer?.phone,
-        },
-        donor_name: donorNameField?.value || null,
-        source: customFields?.find((f) => f.variable_name === "source")?.value || null,
-      };
+      const donorName =
+        (metadata?.donor_name as string | undefined) ||
+        findField(["donor_name", "Donor Name"]) ||
+        [customer?.first_name, customer?.last_name].filter(Boolean).join(" ") ||
+        null;
+      const donorEmail = (customer?.email as string | undefined) || null;
+      const anonymousRaw = metadata?.anonymous ?? findField(["anonymous", "Anonymous"]);
+      const anonymous = anonymousRaw === true || anonymousRaw === "true";
+      const amount = typeof data.amount === "number" ? data.amount : 0;
 
-      console.log("[Paystack Webhook] Transaction (donation):", JSON.stringify(transactionRecord, null, 2));
+      // Idempotency: Paystack retries webhooks, so never record the same
+      // reference twice.
+      const existingDonation = await prisma.donation.findFirst({
+        where: { paymentReference: reference },
+      });
+
+      if (existingDonation) {
+        console.log(
+          `[Paystack Webhook] Donation already recorded for reference ${reference}`
+        );
+      } else {
+        // Link the donation to a supporter account when the email matches.
+        const supporter = donorEmail
+          ? await prisma.supporter.findUnique({
+              where: { email: donorEmail.toLowerCase() },
+            })
+          : null;
+
+        const donation = await prisma.donation.create({
+          data: {
+            donorName: anonymous ? null : donorName,
+            donorEmail,
+            amount,
+            currency: (data.currency as string) || "GHS",
+            supporterId: supporter?.id || null,
+            paymentStatus: "paid",
+            paymentReference: reference,
+            channel: (data.channel as string) || null,
+            anonymous,
+          },
+        });
+
+        console.log(
+          `[Paystack Webhook] Donation ${donation.id} recorded (${amount / 100} GHS)`
+        );
+      }
     }
   }
 

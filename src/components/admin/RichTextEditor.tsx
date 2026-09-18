@@ -36,7 +36,7 @@ export default function RichTextEditor({
     extensions: [
       StarterKit,
       Image.configure({ inline: false, allowBase64: true }),
-      Link.configure({ openOnClick: false, HTMLAttributes: { class: "text-accent underline" } }),
+      Link.configure({ openOnClick: false, HTMLAttributes: { class: "text-accent-text underline" } }),
     ],
     content,
     editorProps: {

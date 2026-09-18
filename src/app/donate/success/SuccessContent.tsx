@@ -149,7 +149,7 @@ export default function SuccessContent() {
               animate={{ opacity: 1 }}
               className="text-center"
             >
-              <Loader2 className="h-12 w-12 text-accent animate-spin mx-auto mb-4" />
+              <Loader2 className="h-12 w-12 text-accent-text animate-spin mx-auto mb-4" />
               <p className="text-lg text-text-on-primary/70">Verifying your payment...</p>
               <p className="text-sm text-text-on-primary/40 mt-2">Please wait while we confirm your transaction</p>
             </motion.div>
@@ -224,7 +224,7 @@ export default function SuccessContent() {
                   transition={{ delay: 0.6, type: "spring" }}
                   className="absolute -top-2 -right-2"
                 >
-                  <PartyPopper className="h-8 w-8 text-accent" />
+                  <PartyPopper className="h-8 w-8 text-accent-text" />
                 </motion.div>
               </motion.div>
 
@@ -234,7 +234,7 @@ export default function SuccessContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-4 py-1.5 text-xs font-semibold text-accent uppercase tracking-wider mb-4">
+                <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-4 py-1.5 text-xs font-semibold text-accent-text uppercase tracking-wider mb-4">
                   <Sparkles className="h-3 w-3" />
                   Payment Confirmed
                 </span>
@@ -370,7 +370,7 @@ export default function SuccessContent() {
               className="text-center"
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-text-on-primary/5 border border-text-on-primary/10 mx-auto mb-6">
-                <Heart className="h-10 w-10 text-accent" />
+                <Heart className="h-10 w-10 text-accent-text" />
               </div>
               <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-on-primary mb-3">
                 Thank You for Your Support!

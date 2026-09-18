@@ -49,4 +49,6 @@ next-env.d.ts
 cloudinary-map.json
 
 # upload scripts
-/scripts/
+/scripts/*
+!/scripts/sync-future-pathways.ts
+!/scripts/verify-future-pathways.mjs

@@ -11,17 +11,10 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import { img } from "@/lib/imageUrl";
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [supporter, setSupporter] = useState<{ name: string; email: string } | null>(null);
   const [accountOpen, setAccountOpen] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Check supporter session
   useEffect(() => {
@@ -46,13 +39,7 @@ export default function Navbar() {
 
   return (
     <>
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-surface/80 backdrop-blur-xl shadow-lg shadow-navy-900/5"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-surface/85 backdrop-blur-xl shadow-lg shadow-navy-900/5">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8"
         aria-label="Main navigation"
@@ -82,21 +69,15 @@ export default function Navbar() {
                 href={link.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-lg hover:bg-primary/5 ${
                   isActive
-                    ? isScrolled
-                      ? "text-accent-hover"
-                      : "text-accent"
-                    : isScrolled
-                    ? "text-text-secondary hover:text-text-primary"
-                    : "text-white/80 hover:text-white"
+                    ? "text-accent-hover"
+                    : "text-text-secondary hover:text-text-primary"
                 }`}
               >
                 {link.label}
                 {isActive && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className={`absolute bottom-0 left-3 right-3 h-0.5 rounded-full ${
-                      isScrolled ? "bg-accent" : "bg-accent"
-                    }`}
+                    className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-accent"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -112,11 +93,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => setAccountOpen(!accountOpen)}
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  isScrolled
-                    ? "text-text-secondary hover:text-text-primary hover:bg-bg-primary"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors text-text-secondary hover:text-text-primary hover:bg-bg-primary"
               >
                 <User className="h-4 w-4" />
                 {supporter.name.split(" ")[0]}
@@ -160,11 +137,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/supporter-login"
-              className={`text-sm font-medium transition-colors ${
-                isScrolled
-                  ? "text-text-secondary hover:text-text-primary"
-                  : "text-white/80 hover:text-white"
-              }`}
+              className="text-sm font-medium transition-colors text-text-secondary hover:text-text-primary"
             >
               Sign In
             </Link>
@@ -186,9 +159,7 @@ export default function Navbar() {
             className={`relative z-50 flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
               isMobileOpen
                 ? "bg-primary text-text-on-primary"
-                : isScrolled
-                ? "bg-bg-tertiary text-text-primary"
-                : "bg-white/10 text-white"
+                : "bg-bg-tertiary text-text-primary"
             }`}
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
@@ -225,7 +196,7 @@ export default function Navbar() {
               >
                 <Link href="/" onClick={() => setIsMobileOpen(false)}>
                   <Image
-                    src={img("/images/misc/ftf-logo.png")}
+                    src={img("/images/misc/ftf-logo-white.png")}
                     alt="For The Future Organization"
                     width={140}
                     height={56}
@@ -246,7 +217,7 @@ export default function Navbar() {
                     onClick={() => setIsMobileOpen(false)}
                     className={`block px-6 py-3 text-center text-xl font-medium transition-colors rounded-xl ${
                       pathname === link.href
-                        ? "text-accent bg-white/5"
+                        ? "text-accent-bright bg-white/5"
                         : "text-white/80 hover:text-white hover:bg-white/5"
                     }`}
                   >

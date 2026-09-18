@@ -21,7 +21,7 @@ export default function AdminFaqPage() {
         { key: "question", label: "Question" },
         { key: "category", label: "Category" },
         { key: "published", label: "Status", render: (v) => (
-          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent"}`}>
+          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent-text"}`}>
             {v ? "Published" : "Draft"}
           </span>
         )},

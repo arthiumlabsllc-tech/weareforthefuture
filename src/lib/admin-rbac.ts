@@ -82,6 +82,7 @@ export const ROUTE_PERMISSIONS: Record<string, Permission> = {
   "/admin/donations": "donations.view",
   "/admin/campaigns": "campaigns.manage",
   "/admin/messages": "messages.manage",
+  "/admin/volunteers": "messages.manage",
   "/admin/newsletter": "newsletter.manage",
   "/admin/users": "users.manage",
   "/admin/settings": "settings.manage",

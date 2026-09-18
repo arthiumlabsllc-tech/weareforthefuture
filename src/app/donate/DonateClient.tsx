@@ -125,7 +125,7 @@ export default function DonateClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-4 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent-text uppercase tracking-wider mb-4 backdrop-blur-sm">
               <Heart className="h-3.5 w-3.5" />
               Make a Difference
             </span>
@@ -191,7 +191,7 @@ export default function DonateClient() {
                         {tier.label}
                       </span>
                       {selectedAmount === tier.amount && (
-                        <div className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-accent">
+                        <div className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-accent-text">
                           <Check className="h-3 w-3" />
                           Selected
                         </div>
@@ -313,12 +313,12 @@ export default function DonateClient() {
                             : "border-border hover:border-border-strong"
                         }`}
                       >
-                        <CreditCard className={`h-5 w-5 ${paymentMethod === "paystack" ? "text-accent" : "text-text-muted"}`} />
+                        <CreditCard className={`h-5 w-5 ${paymentMethod === "paystack" ? "text-accent-text" : "text-text-muted"}`} />
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-text-primary">Card / Bank</p>
                           <p className="text-xs text-text-tertiary">Visa, Mastercard, Bank Transfer</p>
                         </div>
-                        {paymentMethod === "paystack" && <Check className="h-4 w-4 text-accent" />}
+                        {paymentMethod === "paystack" && <Check className="h-4 w-4 text-accent-text" />}
                       </button>
                       <button
                         onClick={() => setPaymentMethod("momo")}
@@ -328,12 +328,12 @@ export default function DonateClient() {
                             : "border-border hover:border-border-strong"
                         }`}
                       >
-                        <Smartphone className={`h-5 w-5 ${paymentMethod === "momo" ? "text-accent" : "text-text-muted"}`} />
+                        <Smartphone className={`h-5 w-5 ${paymentMethod === "momo" ? "text-accent-text" : "text-text-muted"}`} />
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-text-primary">Mobile Money</p>
                           <p className="text-xs text-text-tertiary">MTN MoMo</p>
                         </div>
-                        {paymentMethod === "momo" && <Check className="h-4 w-4 text-accent" />}
+                        {paymentMethod === "momo" && <Check className="h-4 w-4 text-accent-text" />}
                       </button>
                       <button
                         onClick={() => setPaymentMethod("bank")}
@@ -343,12 +343,12 @@ export default function DonateClient() {
                             : "border-border hover:border-border-strong"
                         }`}
                       >
-                        <Building2 className={`h-5 w-5 ${paymentMethod === "bank" ? "text-accent" : "text-text-muted"}`} />
+                        <Building2 className={`h-5 w-5 ${paymentMethod === "bank" ? "text-accent-text" : "text-text-muted"}`} />
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-text-primary">Direct Bank Transfer</p>
                           <p className="text-xs text-text-tertiary">Ecobank Ghana</p>
                         </div>
-                        {paymentMethod === "bank" && <Check className="h-4 w-4 text-accent" />}
+                        {paymentMethod === "bank" && <Check className="h-4 w-4 text-accent-text" />}
                       </button>
                       <button
                         onClick={() => setPaymentMethod("gofundme")}
@@ -358,12 +358,12 @@ export default function DonateClient() {
                             : "border-border hover:border-border-strong"
                         }`}
                       >
-                        <Heart className={`h-5 w-5 ${paymentMethod === "gofundme" ? "text-accent" : "text-text-muted"}`} />
+                        <Heart className={`h-5 w-5 ${paymentMethod === "gofundme" ? "text-accent-text" : "text-text-muted"}`} />
                         <div className="flex-1">
                           <p className="text-sm font-semibold text-text-primary">GoFundMe</p>
                           <p className="text-xs text-text-tertiary">Start a fundraiser or donate</p>
                         </div>
-                        {paymentMethod === "gofundme" && <Check className="h-4 w-4 text-accent" />}
+                        {paymentMethod === "gofundme" && <Check className="h-4 w-4 text-accent-text" />}
                       </button>
                     </div>
                   </div>
@@ -461,7 +461,7 @@ export default function DonateClient() {
                             href={siteConfig.donation.goFundMeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent"
+                            className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-text hover:text-accent-text"
                           >
                             Visit GoFundMe
                             <ArrowRight className="h-3.5 w-3.5" />
@@ -490,6 +490,10 @@ export default function DonateClient() {
                           frequency,
                           donation_amount: activeAmount,
                           payment_channel: paymentMethod,
+                          donor_name: [formData.firstName, formData.lastName].filter(Boolean).join(" ") || undefined,
+                          donor_phone: formData.phone || undefined,
+                          donor_message: formData.message || undefined,
+                          anonymous: formData.anonymous,
                         }}
                       />
                     ) : (
@@ -653,7 +657,7 @@ export default function DonateClient() {
                             : "border-border bg-surface"
                         }`}
                       >
-                        {formData.anonymous && <Check className="h-3 w-3 text-text-on-primary" />}
+                        {formData.anonymous && <Check className="h-3 w-3 text-navy-900" />}
                       </div>
                       <span className="text-sm text-text-secondary">
                         Make my donation anonymous
@@ -686,7 +690,7 @@ export default function DonateClient() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
             Current Campaign
           </span>
           <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl">
@@ -753,7 +757,7 @@ export default function DonateClient() {
               className="rounded-2xl border border-border bg-surface p-6 transition-all hover:shadow-lg hover:border-accent"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                   <tier.icon className="h-5 w-5" />
                 </div>
                 <span className="text-2xl font-bold text-text-primary">

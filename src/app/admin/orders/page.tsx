@@ -69,12 +69,12 @@ export default function AdminOrdersPage() {
                 <td className="px-4 py-3">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     o.fulfillmentStatus === "delivered" ? "bg-success/10 text-success-text" :
-                    o.fulfillmentStatus === "processing" ? "bg-info/10 text-info-text" : "bg-accent/10 text-accent"
+                    o.fulfillmentStatus === "processing" ? "bg-info/10 text-info-text" : "bg-accent/10 text-accent-text"
                   }`}>{o.fulfillmentStatus}</span>
                 </td>
                 <td className="px-4 py-3 text-text-secondary">{new Date(o.createdAt).toLocaleDateString()}</td>
                 <td className="px-4 py-3">
-                  <button onClick={() => setSelected(o)} className="text-accent hover:underline text-xs">
+                  <button onClick={() => setSelected(o)} className="text-accent-text hover:underline text-xs">
                     <Eye className="h-4 w-4" />
                   </button>
                 </td>

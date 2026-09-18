@@ -11,6 +11,7 @@ const schema = z.object({
   location: z.string().nullable().optional(), program: z.string().nullable().optional(),
   pullQuote: z.string().nullable().optional(), published: z.boolean().optional(),
   metaTitle: z.string().nullable().optional(), metaDescription: z.string().nullable().optional(),
+  consentGiven: z.boolean().optional(),
 });
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {

@@ -26,7 +26,7 @@ export default function AdminUsersPage() {
         { key: "role", label: "Role", render: (v) => (
           <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${
             v === "SUPER_ADMIN" ? "bg-error/10 text-error" :
-            v === "ADMIN" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
+            v === "ADMIN" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent-text"
           }`}>
             {String(v || "").replace("_", " ")}
           </span>

@@ -10,6 +10,7 @@ import {
   MapPin,
   Send,
   Check,
+  Loader2,
   MessageCircle,
   Clock,
   ChevronDown,
@@ -52,6 +53,15 @@ const faqs = [
   },
 ];
 
+const subjectLabels: Record<string, string> = {
+  general: "General Inquiry",
+  volunteer: "Volunteering",
+  donate: "Donations",
+  partner: "Partnerships",
+  media: "Media & Press",
+  chapter: "Start a Chapter",
+};
+
 export default function ContactClient() {
   const [formData, setFormData] = useState({
     name: "",
@@ -60,11 +70,34 @@ export default function ContactClient() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          subject: subjectLabels[formData.subject] || formData.subject || null,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Unable to send your message. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Unable to send your message. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -91,7 +124,7 @@ export default function ContactClient() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               Get in Touch
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -209,12 +242,25 @@ export default function ContactClient() {
                     placeholder="Tell us how we can help..."
                   />
                 </div>
+                {error && (
+                  <p
+                    role="alert"
+                    className="rounded-xl border border-error/20 bg-error/5 px-4 py-3 text-sm text-error"
+                  >
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-lg shadow-accent/20 transition-all hover:scale-[1.01]"
+                  disabled={loading}
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  <Send className="h-5 w-5" />
-                  Send Message
+                  {loading ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <Send className="h-5 w-5" />
+                  )}
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
               </motion.form>
             )}
@@ -227,13 +273,13 @@ export default function ContactClient() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
-                    <Mail className="h-5 w-5 text-accent" />
+                    <Mail className="h-5 w-5 text-accent-bright" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-text-on-primary/50 mb-1">Email</p>
                     <a
                       href={`mailto:${siteConfig.contact.emails[0]}`}
-                      className="text-text-on-primary hover:text-accent transition-colors"
+                      className="text-text-on-primary hover:underline transition-colors"
                     >
                       {siteConfig.contact.emails[0]}
                     </a>
@@ -241,7 +287,7 @@ export default function ContactClient() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
-                    <Phone className="h-5 w-5 text-accent" />
+                    <Phone className="h-5 w-5 text-accent-bright" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-text-on-primary/50 mb-1">Phone</p>
@@ -249,7 +295,7 @@ export default function ContactClient() {
                       <a
                         key={phone}
                         href={`tel:${phone.replace(/\s/g, "")}`}
-                        className="block text-text-on-primary hover:text-accent transition-colors"
+                        className="block text-text-on-primary hover:underline transition-colors"
                       >
                         {phone}
                       </a>
@@ -258,7 +304,7 @@ export default function ContactClient() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
-                    <Globe className="h-5 w-5 text-accent" />
+                    <Globe className="h-5 w-5 text-accent-bright" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-text-on-primary/50 mb-1">Locations</p>
@@ -269,7 +315,7 @@ export default function ContactClient() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface/10">
-                    <Clock className="h-5 w-5 text-accent" />
+                    <Clock className="h-5 w-5 text-accent-bright" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-text-on-primary/50 mb-1">Response Time</p>

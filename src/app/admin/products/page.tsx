@@ -34,7 +34,7 @@ export default function AdminProductsPage() {
         { key: "status", label: "Status", render: (v) => (
           <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${
             v === "active" ? "bg-success/10 text-success-text" :
-            v === "out_of_stock" ? "bg-error/10 text-error" : "bg-accent/10 text-accent"
+            v === "out_of_stock" ? "bg-error/10 text-error" : "bg-accent/10 text-accent-text"
           }`}>
             {String(v || "draft")}
           </span>

@@ -98,11 +98,11 @@ export const timeline: TimelineEvent[] = [
     year: "2025",
     title: "Going Global",
     description:
-      "Expanded to Nigeria and the United States as a 501(c)(3) organization. Launched Project Future Ready and Project Momentum. Began construction planning for FTF Village.",
+      "Expanded to Nigeria and the United States as a 501(c)(3) organization. Launched Future Pathways and Project Momentum. Began construction planning for FTF Village.",
     highlights: [
       "Nigeria & US chapters launched",
       "501(c)(3) status obtained",
-      "Project Future Ready & Momentum",
+      "Future Pathways & Momentum",
       "FTF Village planning begins",
     ],
   },

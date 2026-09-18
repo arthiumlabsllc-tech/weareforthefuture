@@ -64,13 +64,13 @@ export default function AdminMessagesPage() {
                 <td className="px-4 py-3">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     m.status === "unread" ? "bg-primary/10 text-primary" :
-                    m.status === "replied" ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent"
+                    m.status === "replied" ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent-text"
                   }`}>{m.status}</span>
                 </td>
                 <td className="px-4 py-3 text-text-secondary">{new Date(m.createdAt).toLocaleDateString()}</td>
                 <td className="px-4 py-3">
                   <div className="flex gap-1">
-                    <button onClick={() => setSelected(m)} className="rounded p-1 hover:bg-bg-tertiary text-accent" title="View">
+                    <button onClick={() => setSelected(m)} className="rounded p-1 hover:bg-bg-tertiary text-accent-text" title="View">
                       <MailOpen className="h-4 w-4" />
                     </button>
                     {m.status === "unread" && (

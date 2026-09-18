@@ -9,25 +9,22 @@ import {
   Heart,
   ArrowRight,
   Quote,
-  ChevronLeft,
-  ChevronRight,
   Target,
   Eye,
-  Compass,
   Users,
   Globe,
   Brain,
   Lightbulb,
   Leaf,
-  HandHeart,
-  MapPin,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import ValueCard from "@/components/ui/ValueCard";
 import WelcomeSplash from "@/components/ui/WelcomeSplash";
 import { siteConfig, coreValues, focusAreas, partnerLogos } from "@/data/site";
-import { initiatives } from "@/data/initiatives";
+import { pillars } from "@/data/pillars";
+import type { Initiative } from "@/data/initiatives";
+import ProgrammeArtwork from "@/components/ui/ProgrammeArtwork";
 
 /* ===== Hero Slides ===== */
 const heroSlides = [
@@ -58,6 +55,27 @@ const partners = partnerLogos;
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [programmes, setProgrammes] = useState<Initiative[]>([]);
+  const [programmesLoading, setProgrammesLoading] = useState(true);
+  const [programmesError, setProgrammesError] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    async function loadProgrammes() {
+      try {
+        const response = await fetch("/api/programs", { signal: controller.signal });
+        if (!response.ok) throw new Error("Unable to load programmes");
+        const data = await response.json();
+        setProgrammes(data.programs);
+      } catch {
+        if (!controller.signal.aborted) setProgrammesError(true);
+      } finally {
+        if (!controller.signal.aborted) setProgrammesLoading(false);
+      }
+    }
+    loadProgrammes();
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -108,7 +126,7 @@ export default function HomePage() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6 }}
               >
-                <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-6">
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-white mb-6">
                   {heroSlides[currentSlide].subtitle}
                 </span>
                 <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl lg:text-7xl">
@@ -208,6 +226,39 @@ export default function HomePage() {
             end={siteConfig.stats.countries}
             label="Countries"
           />
+        </div>
+      </SectionWrapper>
+
+      {/* ===== FIVE PILLARS ===== */}
+      <SectionWrapper background="warm">
+        <SectionHeader
+          overline="How we create change"
+          title="Our Five Pillars"
+          description="Every initiative and programme sits under one of five strategic pillars, so support reaches every part of a child's journey - from the classroom to the future of work."
+        />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {pillars.map((pillar) => (
+            <Link
+              key={pillar.id}
+              href={`/initiatives#pillar-${pillar.id}`}
+              className="group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-primary/5"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-on-primary transition-colors group-hover:bg-accent group-hover:text-navy-900">
+                  <pillar.icon aria-hidden="true" className="h-5 w-5" />
+                </div>
+                <span className="font-[family-name:var(--font-display)] text-3xl font-bold text-border-strong">
+                  0{pillar.number}
+                </span>
+              </div>
+              <h3 className="mb-2 text-base font-bold text-text-primary">{pillar.title}</h3>
+              <p className="flex-1 text-sm leading-relaxed text-text-tertiary">{pillar.summary}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-hover">
+                Explore
+                <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
         </div>
       </SectionWrapper>
 
@@ -370,10 +421,13 @@ export default function HomePage() {
         <SectionHeader
           overline="Our Work"
           title="Featured Initiatives"
-          description="Discover the impactful initiatives driving change at For The Future. Each campaign creates lasting impact in the lives of underprivileged children."
+          description="Explore programmes supporting children and young people, from education and mentorship to skills and livelihood opportunities."
         />
+        {programmesLoading && <p role="status" className="text-center text-text-secondary">Loading programmes…</p>}
+        {programmesError && <p role="status" className="text-center text-text-secondary">Featured programmes are temporarily unavailable. <Link href="/initiatives" className="underline">Browse our work</Link>.</p>}
+        {!programmesLoading && !programmesError && programmes.length === 0 && <p className="text-center text-text-secondary">Programme updates are coming soon.</p>}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {initiatives.slice(0, 6).map((initiative, i) => (
+          {programmes.map((initiative, i) => (
             <motion.div
               key={initiative.slug}
               initial={{ opacity: 0, y: 30 }}
@@ -382,17 +436,11 @@ export default function HomePage() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
             >
               <Link
-                href={`/initiatives#${initiative.slug}`}
+                href={initiative.href || `/initiatives#${initiative.slug}`}
                 className="group block overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-bg-tertiary to-bg-tertiary">
-                  <Image
-                    src={initiative.image}
-                    alt={initiative.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    unoptimized
-                  />
+                  <ProgrammeArtwork image={initiative.image} title={initiative.title} />
                   <div className="absolute top-4 left-4">
                     <span className="inline-flex items-center rounded-full bg-surface/90 px-3 py-1 text-xs font-medium text-text-secondary backdrop-blur-sm">
                       {initiative.category}
@@ -403,6 +451,7 @@ export default function HomePage() {
                   <h3 className="text-lg font-bold text-text-primary group-hover:text-accent-hover transition-colors">
                     {initiative.title}
                   </h3>
+                  {initiative.pillars?.map((pillar) => <p key={pillar} className="mt-2 text-xs font-semibold text-accent-hover">{pillar}</p>)}
                   <p className="mt-2 text-sm text-text-secondary leading-relaxed line-clamp-2">
                     {initiative.shortDescription}
                   </p>
@@ -437,7 +486,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
               Our Biggest Project
             </span>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl lg:text-5xl leading-tight">
@@ -524,7 +573,7 @@ export default function HomePage() {
                 <p className="text-text-on-primary/60 text-sm mb-4">Ghana, West Africa</p>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10">
-                    <div className="text-xl font-bold text-accent">200+</div>
+                    <div className="text-xl font-bold text-accent-text">200+</div>
                     <div className="text-[10px] text-text-on-primary/50">Children Housed</div>
                   </div>
                   <div className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10">
@@ -555,7 +604,7 @@ export default function HomePage() {
           transition={{ duration: 0.7 }}
           className="mx-auto max-w-4xl text-center"
         >
-          <Quote className="mx-auto h-12 w-12 text-accent mb-6" />
+          <Quote className="mx-auto h-12 w-12 text-accent-text mb-6" />
           <blockquote className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-primary md:text-3xl lg:text-4xl leading-snug">
             &ldquo;{siteConfig.founder.quote}&rdquo;
           </blockquote>

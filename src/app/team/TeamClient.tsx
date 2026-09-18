@@ -58,7 +58,7 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               Our People
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -112,7 +112,7 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
                 )}
               </div>
               <h3 className="text-xl font-bold text-text-primary">{member.name}</h3>
-              <p className="text-sm font-medium text-accent mb-2">{member.role}</p>
+              <p className="text-sm font-medium text-accent-text mb-2">{member.role}</p>
               <p className="text-sm text-text-tertiary flex items-center justify-center gap-1">
                 <MapPin className="h-3 w-3" />
                 {member.country}
@@ -168,7 +168,7 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
               className="group rounded-xl border border-border bg-surface p-5 transition-all hover:shadow-lg hover:border-accent hover:-translate-y-0.5"
             >
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-bg-tertiary text-text-muted transition-colors group-hover:bg-accent-subtle group-hover:text-accent">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-bg-tertiary text-text-muted transition-colors group-hover:bg-accent-subtle group-hover:text-accent-text">
                   <User className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
@@ -193,7 +193,7 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Heart className="h-12 w-12 text-accent mx-auto mb-4" />
+            <Heart className="h-12 w-12 text-accent-text mx-auto mb-4" />
             <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Join Our Team
             </h2>

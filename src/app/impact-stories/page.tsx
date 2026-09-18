@@ -15,7 +15,8 @@ export const dynamic = "force-dynamic";
 
 export default async function ImpactStoriesPage() {
   const stories = await prisma.impactStory.findMany({
-    where: { published: true, deletedAt: null },
+    // Child-safeguarding gate: only publish stories with verified consent.
+    where: { published: true, consentGiven: true, deletedAt: null },
     orderBy: { createdAt: "desc" },
   });
 

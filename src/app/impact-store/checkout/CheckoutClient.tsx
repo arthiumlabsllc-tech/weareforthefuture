@@ -336,7 +336,7 @@ export default function CheckoutClient() {
             <div className="sticky top-28 rounded-2xl bg-surface border border-border shadow-sm overflow-hidden">
               <div className="bg-primary px-6 py-4">
                 <h2 className="text-lg font-bold text-text-on-primary flex items-center gap-2">
-                  <Package className="h-5 w-5 text-accent" />
+                  <Package className="h-5 w-5 text-accent-text" />
                   Order Summary
                 </h2>
               </div>
@@ -394,7 +394,7 @@ export default function CheckoutClient() {
             {/* Contact Information */}
             <div className="rounded-2xl bg-surface border border-border shadow-sm p-6">
               <h3 className="text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
-                <User className="h-5 w-5 text-accent" />
+                <User className="h-5 w-5 text-accent-text" />
                 Contact Information
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -449,7 +449,7 @@ export default function CheckoutClient() {
             {/* Delivery Method */}
             <div className="rounded-2xl bg-surface border border-border shadow-sm p-6">
               <h3 className="text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
-                <Truck className="h-5 w-5 text-accent" />
+                <Truck className="h-5 w-5 text-accent-text" />
                 Delivery Method
               </h3>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -578,7 +578,7 @@ export default function CheckoutClient() {
             {/* Payment Details */}
             <div className="rounded-2xl bg-surface border border-border shadow-sm p-6">
               <h3 className="text-lg font-bold text-text-primary mb-4 flex items-center gap-2">
-                <Smartphone className="h-5 w-5 text-accent" />
+                <Smartphone className="h-5 w-5 text-accent-text" />
                 Mobile Money Payment
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -625,7 +625,7 @@ export default function CheckoutClient() {
                   type="checkbox"
                   checked={agreedToTerms}
                   onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-border text-accent focus:ring-accent"
+                  className="mt-0.5 h-4 w-4 rounded border-border text-accent-text focus:ring-accent"
                 />
                 <span className="text-sm text-text-secondary">
                   I agree to the terms and conditions and the refund policy.

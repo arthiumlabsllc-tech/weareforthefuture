@@ -85,7 +85,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <div className="relative h-12 w-auto overflow-hidden">
                 <Image
-                  src={img("/images/misc/ftf-logo.png")}
+                  src={img("/images/misc/ftf-logo-white.png")}
                   alt="FTF"
                   width={120}
                   height={48}
@@ -104,7 +104,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/50 transition-all hover:bg-accent/20 hover:text-accent"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/50 transition-all hover:bg-accent/20 hover:text-accent-bright"
                   aria-label={social.label}
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +125,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-accent"
+                    className="text-sm text-white/60 transition-colors hover:text-accent-bright"
                   >
                     {link.label}
                   </Link>
@@ -144,7 +144,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-accent"
+                    className="text-sm text-white/60 transition-colors hover:text-accent-bright"
                   >
                     {link.label}
                   </Link>
@@ -163,7 +163,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-accent"
+                    className="text-sm text-white/60 transition-colors hover:text-accent-bright"
                   >
                     {link.label}
                   </Link>
@@ -179,25 +179,25 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <Mail className="h-4 w-4 mt-0.5 text-accent/70 shrink-0" />
+                <Mail className="h-4 w-4 mt-0.5 text-accent-bright/70 shrink-0" />
                 <a
                   href={`mailto:${siteConfig.contact.emails[0]}`}
-                  className="text-sm text-white/60 hover:text-accent transition-colors"
+                  className="text-sm text-white/60 hover:text-accent-bright transition-colors"
                 >
                   {siteConfig.contact.emails[0]}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="h-4 w-4 mt-0.5 text-accent/70 shrink-0" />
+                <Phone className="h-4 w-4 mt-0.5 text-accent-bright/70 shrink-0" />
                 <a
                   href={`tel:${siteConfig.contact.phones[0]}`}
-                  className="text-sm text-white/60 hover:text-accent transition-colors"
+                  className="text-sm text-white/60 hover:text-accent-bright transition-colors"
                 >
                   {siteConfig.contact.phones[0]}
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 mt-0.5 text-accent/70 shrink-0" />
+                <MapPin className="h-4 w-4 mt-0.5 text-accent-bright/70 shrink-0" />
                 <span className="text-sm text-white/60">
                   Ghana · Nigeria · United States
                 </span>
@@ -225,7 +225,7 @@ export default function Footer() {
                   href="https://arthiumlabs.live/about"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/40 underline decoration-white/20 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent/40"
+                  className="text-white/40 underline decoration-white/20 underline-offset-2 transition-colors hover:text-accent-bright hover:decoration-accent/40"
                 >
                   Arthium Labs
                 </a>

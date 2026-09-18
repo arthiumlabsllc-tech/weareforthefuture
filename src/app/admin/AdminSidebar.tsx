@@ -88,6 +88,7 @@ const NAV_SECTIONS: NavSection[] = [
     title: "Messages",
     items: [
       { label: "Inbox", href: "/admin/messages", icon: MessageSquare },
+      { label: "Volunteers", href: "/admin/volunteers", icon: Users },
       { label: "Newsletter", href: "/admin/newsletter", icon: Mail },
     ],
   },

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
-import { Plus, Edit, Trash2, X, Loader2, Save, Eye, EyeOff } from "lucide-react";
+import { useState, useEffect, useCallback, FormEvent } from "react";
+import { Plus, Edit, Trash2, X, Loader2, Save } from "lucide-react";
 
 interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "number" | "checkbox" | "select";
+  type?: "text" | "textarea" | "number" | "checkbox" | "select" | "json";
   required?: boolean;
   options?: { value: string; label: string }[];
   span?: 1 | 2;
@@ -28,45 +28,67 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
   const [isNew, setIsNew] = useState(false);
   const [form, setForm] = useState<Record<string, unknown>>({});
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
-  useEffect(() => { fetchItems(); }, []);
+  const fetchItems = useCallback(() => {
+    return fetch(apiBase)
+      .then((res) => res.json())
+      .then((data) => {
+        const key = Object.keys(data).find((k) => Array.isArray(data[k]));
+        setItems(key ? data[key] : []);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [apiBase]);
 
-  async function fetchItems() {
-    try {
-      const res = await fetch(apiBase);
-      const data = await res.json();
-      const key = Object.keys(data).find((k) => Array.isArray(data[k]));
-      setItems(key ? data[key] : []);
-    } catch { /* ignore */ }
-    setLoading(false);
-  }
+  useEffect(() => { fetchItems(); }, [fetchItems]);
 
   function getEmptyForm(): Record<string, unknown> {
     const obj: Record<string, unknown> = {};
     fields.forEach((f) => {
       if (f.type === "checkbox") obj[f.name] = true;
       else if (f.type === "number") obj[f.name] = 0;
+      else if (f.type === "json") obj[f.name] = "{}";
       else obj[f.name] = "";
     });
     return obj;
   }
 
-  function openNew() { setForm(getEmptyForm()); setEditing({}); setIsNew(true); }
+  function openNew() { setError(""); setForm(getEmptyForm()); setEditing({}); setIsNew(true); }
 
   function openEdit(item: Record<string, unknown>) {
     const f: Record<string, unknown> = {};
-    fields.forEach((field) => { f[field.name] = item[field.name] ?? (field.type === "checkbox" ? true : ""); });
-    setForm(f); setEditing(item); setIsNew(false);
+    fields.forEach((field) => {
+      f[field.name] = field.type === "json"
+        ? JSON.stringify(item[field.name] ?? {}, null, 2)
+        : item[field.name] ?? (field.type === "checkbox" ? true : "");
+    });
+    setError(""); setForm(f); setEditing(item); setIsNew(false);
   }
 
   function close() { setEditing(null); setIsNew(false); }
 
   async function handleSubmit(e: FormEvent) {
-    e.preventDefault(); setSaving(true);
-    const url = isNew ? apiBase : `${apiBase}/${editing!.id as string}`;
-    const method = isNew ? "POST" : "PATCH";
-    await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
-    setSaving(false); close(); fetchItems();
+    e.preventDefault(); setSaving(true); setError("");
+    try {
+      const payload = { ...form };
+      for (const field of fields) {
+        if (field.type === "json") {
+          try { payload[field.name] = JSON.parse(String(form[field.name] || "{}")); }
+          catch { throw new Error(`${field.label} must contain valid JSON.`); }
+        }
+      }
+      const url = isNew ? apiBase : `${apiBase}/${editing!.id as string}`;
+      const method = isNew ? "POST" : "PATCH";
+      const response = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || "Unable to save changes. Please try again.");
+      }
+      close(); await fetchItems();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to save changes.");
+    } finally { setSaving(false); }
   }
 
   async function handleDelete(id: string) {
@@ -115,7 +137,7 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
                     ))}
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-2">
-                        <button onClick={() => openEdit(item)} className="flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"><Edit className="h-4 w-4" /></button>
+                        <button aria-label={`Edit ${item.name || item.title || title}`} onClick={() => openEdit(item)} className="flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"><Edit className="h-4 w-4" /></button>
                         <button onClick={() => handleDelete(item.id as string)} className="flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary hover:bg-error/10 hover:text-error"><Trash2 className="h-4 w-4" /></button>
                       </div>
                     </td>
@@ -130,12 +152,13 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
       {/* Edit Modal */}
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={close}>
-          <div className="w-full max-w-lg rounded-2xl bg-surface border border-border p-6 shadow-xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div role="dialog" aria-modal="true" aria-label={isNew ? `Add ${title}` : `Edit ${title}`} className="w-full max-w-3xl rounded-2xl bg-surface border border-border p-6 shadow-xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg font-bold text-text-primary">{isNew ? `Add ${title}` : `Edit ${title}`}</h2>
               <button onClick={close} className="text-text-muted hover:text-text-primary"><X className="h-5 w-5" /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
+              {error && <p role="alert" className="text-sm text-error">{error}</p>}
               <div className="grid gap-4 sm:grid-cols-2">
                 {fields.map((field) => {
                   const spanCls = field.span === 2 ? "sm:col-span-2" : "";
@@ -153,6 +176,12 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
                       <select value={form[field.name] as string} onChange={(e) => setForm({ ...form, [field.name]: e.target.value })} className={inputCls}>
                         {field.options?.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                       </select>
+                    </div>
+                  );
+                  if (field.type === "json") return (
+                    <div key={field.name} className={spanCls}>
+                      <label htmlFor={`field-${field.name}`} className="mb-1 block text-xs font-semibold text-text-tertiary uppercase">{field.label}</label>
+                      <textarea id={`field-${field.name}`} value={String(form[field.name] || "{}")} onChange={(e) => setForm({ ...form, [field.name]: e.target.value })} rows={14} spellCheck={false} className={`${inputCls} font-mono`} />
                     </div>
                   );
                   if (field.type === "textarea") return (

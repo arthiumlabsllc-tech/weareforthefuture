@@ -105,7 +105,7 @@ export default function PartnersClient({ initialPartners = [] }: { initialPartne
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               Our Partners
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -139,7 +139,7 @@ export default function PartnersClient({ initialPartners = [] }: { initialPartne
                 transition={{ delay: i * 0.15, duration: 0.5 }}
                 className="rounded-2xl border border-border bg-surface p-8"
               >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                   <config.icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold text-text-primary mb-2">
@@ -204,7 +204,7 @@ export default function PartnersClient({ initialPartners = [] }: { initialPartne
               <div
                 className={`mb-5 flex h-14 w-14 items-center justify-center rounded-xl ${
                   type.color === "gold"
-                    ? "bg-accent-subtle text-accent"
+                    ? "bg-accent-subtle text-accent-text"
                     : type.color === "emerald"
                     ? "bg-success-bg text-success-text"
                     : "bg-coral-50 text-coral-500"
@@ -241,7 +241,7 @@ export default function PartnersClient({ initialPartners = [] }: { initialPartne
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Handshake className="h-12 w-12 text-accent mx-auto mb-4" />
+            <Handshake className="h-12 w-12 text-accent-text mx-auto mb-4" />
             <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">
               Let&apos;s Create Impact Together
             </h2>

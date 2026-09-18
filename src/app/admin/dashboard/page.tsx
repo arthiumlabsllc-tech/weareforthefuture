@@ -48,7 +48,7 @@ export default async function AdminDashboardPage() {
       label: "Total Orders",
       value: orderCount.toString(),
       icon: ShoppingBag,
-      color: "bg-accent/10 text-accent",
+      color: "bg-accent/10 text-accent-text",
     },
     {
       label: "Pending Orders",
@@ -72,7 +72,7 @@ export default async function AdminDashboardPage() {
       label: "Blog Posts",
       value: blogPostCount.toString(),
       icon: FileText,
-      color: "bg-accent/10 text-accent",
+      color: "bg-accent/10 text-accent-text",
     },
     {
       label: "Active Products",
@@ -141,7 +141,7 @@ export default async function AdminDashboardPage() {
                 href={action.href}
                 className="flex items-center gap-3 rounded-xl bg-surface border border-border p-4 transition-all hover:border-accent hover:shadow-md"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent-text">
                   <Icon className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium text-text-primary">{action.label}</span>

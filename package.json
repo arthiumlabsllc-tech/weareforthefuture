@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:programmes": "tsx --test tests/programmes.test.ts",
+    "sync:future-pathways": "tsx scripts/sync-future-pathways.ts",
+    "verify:future-pathways": "node scripts/verify-future-pathways.mjs",
     "postinstall": "prisma generate || exit 0"
   },
   "dependencies": {

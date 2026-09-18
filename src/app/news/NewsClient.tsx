@@ -62,7 +62,7 @@ export default function NewsClient({ initialArticles = [] }: { initialArticles?:
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
               News & Stories
             </span>
             <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
@@ -102,7 +102,7 @@ export default function NewsClient({ initialArticles = [] }: { initialArticles?:
             </div>
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <span className="inline-flex items-center rounded-full bg-accent-subtle px-3 py-1 text-xs font-semibold text-accent">
+                <span className="inline-flex items-center rounded-full bg-accent-subtle px-3 py-1 text-xs font-semibold text-accent-text">
                   Featured
                 </span>
                 <span className="inline-flex items-center rounded-full bg-bg-tertiary px-3 py-1 text-xs font-medium text-text-secondary">
@@ -185,7 +185,7 @@ export default function NewsClient({ initialArticles = [] }: { initialArticles?:
                   </span>
                   <span className="text-xs text-text-muted">{article.date}</span>
                 </div>
-                <h3 className="text-lg font-bold text-text-primary group-hover:text-accent transition-colors mb-2 line-clamp-2">
+                <h3 className="text-lg font-bold text-text-primary group-hover:text-accent-text transition-colors mb-2 line-clamp-2">
                   {article.title}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 mb-4">

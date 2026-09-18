@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Heart, ArrowRight, Quote, BookOpen, Camera, X } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import { img } from "@/lib/imageUrl";
+import { storyStats } from "@/data/impact";
 
 interface Story {
   name: string;
@@ -44,7 +45,7 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 
   return (
     <div ref={ref} className="text-center">
-      <div className="text-4xl md:text-5xl font-bold text-accent tabular-nums">
+      <div className="text-4xl md:text-5xl font-bold text-accent-text tabular-nums">
         {fmt(displayed)}{suffix}
       </div>
       <div className="text-xs text-text-on-primary/50 mt-2 uppercase tracking-wider">{label}</div>
@@ -80,7 +81,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6 backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent-text uppercase tracking-wider mb-6 backdrop-blur-sm">
               <Heart className="h-3.5 w-3.5" />
               Real Lives Changed
             </span>
@@ -98,10 +99,14 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
       <div className="bg-primary border-y border-white/5">
         <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            <StatCounter value={90} suffix="+" label="Years of Foundation" />
-            <StatCounter value={1000} suffix="+" label="Amazing Volunteers" />
-            <StatCounter value={70000} suffix="" label="Incredible Beneficiaries" />
-            <StatCounter value={200} suffix="+" label="Successful Campaigns" />
+            {storyStats.map((stat) => (
+              <StatCounter
+                key={stat.label}
+                value={stat.value}
+                suffix={stat.suffix}
+                label={stat.label}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -140,7 +145,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
                 </div>
                 {/* Decorative quote badge */}
                 <div className="absolute -top-4 -left-4 h-14 w-14 rounded-full bg-accent flex items-center justify-center shadow-lg shadow-accent/30">
-                  <Quote className="h-5 w-5 text-text-primary" />
+                  <Quote className="h-5 w-5 text-navy-900" />
                 </div>
               </div>
 
@@ -155,7 +160,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
                 <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary sm:text-4xl">
                   {story.name}
                 </h2>
-                <p className="text-base font-medium text-accent mt-2">
+                <p className="text-base font-medium text-accent-text mt-2">
                   {story.title}
                 </p>
                 <p className="mt-5 text-base leading-relaxed text-text-secondary">
@@ -166,7 +171,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
                     href="/donate"
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-text-on-primary transition-all hover:bg-primary-hover hover:scale-[1.02] shadow-lg shadow-primary/20"
                   >
-                    <Heart className="h-4 w-4 text-accent" />
+                    <Heart className="h-4 w-4 text-accent-text" />
                     Be Part of {story.name}&apos;s Journey
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -245,7 +250,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
       {/* ===== CTA ===== */}
       <SectionWrapper background="navy">
         <div className="mx-auto max-w-3xl text-center">
-          <Heart className="mx-auto h-10 w-10 text-accent mb-4" />
+          <Heart className="mx-auto h-10 w-10 text-accent-text mb-4" />
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl">
             Help Us Write More Success Stories
           </h2>

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { getSupporterSessionFromCookie } from "@/lib/supporter-auth";
-import SupporterNav from "./SupporterNav";
+import SupporterChrome from "./SupporterChrome";
 
 export default async function SupporterLayout({
   children,
@@ -11,9 +11,8 @@ export default async function SupporterLayout({
 
   // Login and register pages don't require auth
   return (
-    <div className="min-h-screen bg-bg-primary">
-      <SupporterNav supporterName={session?.name} />
+    <SupporterChrome supporterName={session?.name}>
       {children}
-    </div>
+    </SupporterChrome>
   );
 }

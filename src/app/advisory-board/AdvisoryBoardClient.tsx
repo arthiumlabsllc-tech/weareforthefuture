@@ -52,7 +52,7 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent uppercase tracking-wider mb-6">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-text uppercase tracking-wider mb-6">
               <Compass className="h-3.5 w-3.5" />
               Guidance & Leadership
             </span>
@@ -79,7 +79,7 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
               { label: "U.S. Board", value: usAdvisory.length },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-2xl font-bold text-accent">
+                <div className="text-2xl font-bold text-accent-text">
                   {stat.value}
                 </div>
                 <div className="text-xs text-text-on-primary/50 mt-1">{stat.label}</div>
@@ -161,7 +161,7 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
       {/* ===== CTA ===== */}
       <SectionWrapper background="navy">
         <div className="mx-auto max-w-3xl text-center">
-          <Users className="mx-auto h-10 w-10 text-accent mb-4" />
+          <Users className="mx-auto h-10 w-10 text-accent-text mb-4" />
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl">
             Interested in advising?
           </h2>

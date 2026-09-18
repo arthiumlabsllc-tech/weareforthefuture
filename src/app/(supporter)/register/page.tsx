@@ -4,7 +4,7 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { User, Mail, Lock, Phone, Eye, EyeOff, Loader2 } from "lucide-react";
+import { User, Mail, Lock, Phone, Eye, EyeOff, Loader2, ArrowLeft } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/supporter/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone: phone || undefined }),
+        body: JSON.stringify({ name, email, phone: phone || undefined, password }),
       });
 
       const data = await res.json();
@@ -57,7 +57,14 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-65px)] items-center justify-center bg-bg-primary px-4 py-12">
+    <div className="relative flex min-h-screen items-center justify-center bg-bg-primary px-4 py-12">
+      <Link
+        href="/"
+        className="absolute left-6 top-6 inline-flex items-center gap-2 text-sm font-medium text-text-tertiary transition-colors hover:text-text-primary"
+      >
+        <ArrowLeft aria-hidden="true" className="h-4 w-4" />
+        Back to site
+      </Link>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

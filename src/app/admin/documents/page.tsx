@@ -23,7 +23,7 @@ export default function AdminDocumentsPage() {
         { key: "category", label: "Category" },
         { key: "year", label: "Year" },
         { key: "published", label: "Status", render: (v) => (
-          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent"}`}>
+          <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${v ? "bg-success/10 text-success-text" : "bg-accent/10 text-accent-text"}`}>
             {v ? "Published" : "Draft"}
           </span>
         )},

@@ -44,7 +44,7 @@ export default function ThemeToggle() {
       className="relative flex h-9 w-9 items-center justify-center rounded-xl transition-colors hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-primary/30"
     >
       {isDark ? (
-        <Moon className="h-4.5 w-4.5 text-accent" />
+        <Moon className="h-4.5 w-4.5 text-accent-text" />
       ) : (
         <Sun className="h-4.5 w-4.5 text-text-secondary" />
       )}
