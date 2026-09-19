@@ -1,0 +1,41 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@theme",
+      "description": "Tailwind CSS v4: define design tokens (colors, spacing, fonts, breakpoints) as CSS custom properties that generate utilities."
+    },
+    {
+      "name": "@import",
+      "description": "CSS at-rule that inlines another stylesheet. Tailwind v4 uses it to load 'tailwindcss' and its layers."
+    },
+    {
+      "name": "@custom-variant",
+      "description": "Tailwind CSS v4: register a custom variant (e.g. a dark-mode or state-based variant) for use in class names."
+    },
+    {
+      "name": "@utility",
+      "description": "Tailwind CSS v4: define a custom utility class that participates in the engine (variants, tree-shaking)."
+    },
+    {
+      "name": "@variant",
+      "description": "Tailwind CSS v4: apply one or more variants to a block of plain CSS."
+    },
+    {
+      "name": "@apply",
+      "description": "Tailwind CSS: inline existing utility classes into a custom CSS rule."
+    },
+    {
+      "name": "@source",
+      "description": "Tailwind CSS v4: explicitly register source paths for the engine to scan for used class names."
+    },
+    {
+      "name": "@reference",
+      "description": "Tailwind CSS v4: reference an existing theme/config (e.g. globals.css) without re-emitting its variables, so @apply works in isolated files."
+    },
+    {
+      "name": "@config",
+      "description": "Tailwind CSS: load a legacy JavaScript tailwind.config file."
+    }
+  ]
+}
