@@ -4,7 +4,7 @@ import DonateClient from "./DonateClient";
 export const metadata: Metadata = {
   title: "Donate",
   description:
-    "Support For The Future Organization. Your donation provides education, healthcare, and opportunities to underprivileged children.",
+    "Support For The Future Organization. Your donation provides education, healthcare, and opportunities to vulnerable children.",
 };
 
 export default function DonatePage() {

@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
+import CookieConsentBanner from "@/components/layout/CookieConsentBanner";
 
 export default function BottomShell() {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ export default function BottomShell() {
     <>
       <Footer />
       <BackToTop />
+      <CookieConsentBanner />
     </>
   );
 }

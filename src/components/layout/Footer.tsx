@@ -9,26 +9,39 @@ import {
   Globe,
   ArrowUpRight,
 } from "lucide-react";
-import { siteConfig, navLinks, footerNavLinks } from "@/data/site";
+import {
+  siteConfig,
+  footerOrgLinks,
+  footerMoreLinks,
+  footerInvolveLinks,
+  footerLegalLinks,
+  type FooterLink,
+} from "@/data/site";
 
-const footerLinks = {
-  organization: [
-    { label: "Our Story", href: "/about" },
-    { label: "Initiatives", href: "/initiatives" },
-    { label: "Impact", href: "/impact" },
-    { label: "Impact Stories", href: "/impact-stories" },
-    { label: "Executive Board", href: "/executive-board" },
-    { label: "Advisory Board", href: "/advisory-board" },
-    { label: "News", href: "/news" },
-  ],
-  getInvolved: [
-    { label: "Donate", href: "/donate" },
-    { label: "Volunteer", href: "/volunteer" },
-    { label: "Impact Store", href: "/impact-store" },
-    { label: "Partners", href: "/partners" },
-    { label: "Contact Us", href: "/contact" },
-  ],
-};
+// Planned-route indicator is dev-only; production renders links normally.
+const isDev = process.env.NODE_ENV === "development";
+
+/** One footer nav entry: label, link and the dev-only "planned" marker. */
+function FooterLinkItem({ link }: { link: FooterLink }) {
+  return (
+    <li>
+      <Link
+        href={link.href}
+        className="text-sm text-white/60 transition-colors hover:text-accent-bright"
+      >
+        {link.label}
+        {isDev && link.status === "planned" && (
+          <span
+            className="ml-1.5 align-middle text-[9px] uppercase tracking-wide text-white/25"
+            title="Planned — route ships in a later phase"
+          >
+            •soon
+          </span>
+        )}
+      </Link>
+    </li>
+  );
+}
 
 const socialLinks = [
   { label: "Facebook", href: siteConfig.social.facebook, path: "M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" },
@@ -51,25 +64,32 @@ export default function Footer() {
           <div className="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
             <div>
               <h3 className="font-[family-name:var(--font-display)] text-3xl font-bold text-white md:text-4xl">
-                Ready to make a difference?
+                It takes all of us.
               </h3>
               <p className="mt-2 text-lg text-white/60">
-                Join thousands of changemakers building a brighter future.
+                Give, volunteer or partner — every route helps a child move from disadvantage to opportunity.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/donate"
+                href="/give"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:scale-[1.02]"
               >
                 <Heart className="h-4 w-4" />
-                Donate Now
+                Give Now
               </Link>
               <Link
-                href="/volunteer"
+                href="/get-involved/volunteer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:scale-[1.02]"
               >
-                Become a Volunteer
+                Volunteer
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/partners"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:scale-[1.02]"
+              >
+                Partner With FTF
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
@@ -121,15 +141,8 @@ export default function Footer() {
               Organization
             </h4>
             <ul className="space-y-3">
-              {footerLinks.organization.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-accent-bright"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+              {footerOrgLinks.map((link) => (
+                <FooterLinkItem key={link.href} link={link} />
               ))}
             </ul>
           </div>
@@ -140,15 +153,8 @@ export default function Footer() {
               More
             </h4>
             <ul className="space-y-3">
-              {footerNavLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-accent-bright"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+              {[...footerMoreLinks, ...footerLegalLinks].map((link) => (
+                <FooterLinkItem key={link.href} link={link} />
               ))}
             </ul>
           </div>
@@ -159,15 +165,8 @@ export default function Footer() {
               Get Involved
             </h4>
             <ul className="space-y-3">
-              {footerLinks.getInvolved.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/60 transition-colors hover:text-accent-bright"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
+              {footerInvolveLinks.map((link) => (
+                <FooterLinkItem key={link.href} link={link} />
               ))}
             </ul>
           </div>
@@ -213,11 +212,11 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-xs text-white/40">
               &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
-              reserved. 501(c)(3) Nonprofit Organization.
+              reserved. {siteConfig.legal.status}.
             </p>
             <div className="flex flex-col items-center gap-1 md:items-end">
               <p className="text-xs text-white/30">
-                Contributions are tax-deductible to the extent permitted by law.
+                {siteConfig.legal.taxNote}
               </p>
               <p className="text-xs text-white/25">
                 Powered by{" "}

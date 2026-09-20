@@ -33,6 +33,23 @@ const colorMap: Record<string, { bg: string; icon: string; border: string }> = {
     icon: "text-primary",
     border: "border-primary/20",
   },
+  /* Brand-semantic keys used by siteConfig.coreValues (brief colour discipline:
+     green accent = hope/growth, blue primary = trust, charcoal = structure). */
+  accent: {
+    bg: "bg-accent-subtle",
+    icon: "text-accent-text",
+    border: "border-accent/20",
+  },
+  primary: {
+    bg: "bg-primary-subtle",
+    icon: "text-primary",
+    border: "border-primary/20",
+  },
+  charcoal: {
+    bg: "bg-bg-tertiary",
+    icon: "text-text-secondary",
+    border: "border-border-strong/40",
+  },
 };
 
 export default function ValueCard({

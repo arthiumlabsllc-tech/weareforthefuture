@@ -52,3 +52,18 @@ cloudinary-map.json
 /scripts/*
 !/scripts/sync-future-pathways.ts
 !/scripts/verify-future-pathways.mjs
+!/scripts/seed-pillars.ts
+!/scripts/check-banned-language.mjs
+!/scripts/sweep-legacy-copy.ts
+
+# local build / server logs and CDP screenshot captures (never commit)
+*.build-log.txt
+*.start-log.txt
+.phase*-shots/
+.cdp-profile*/
+
+# throwaway DB probes + CDP screenshot drivers (live at workspace root, never commit)
+_probe-*.ts
+.dbprobe.mjs
+*.probe.*
+cdp-*.mjs

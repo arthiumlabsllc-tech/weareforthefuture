@@ -2,14 +2,18 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Sun, Moon } from "lucide-react";
-import { getTheme, setTheme, watchSystemTheme } from "@/lib/theme";
+import { setTheme, watchSystemTheme } from "@/lib/theme";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsDark(getTheme() === "dark");
+    // Initialise from the theme the FOUC script actually applied to <html>, so
+    // the icon and aria-pressed always match the rendered theme on first load
+    // (getTheme() can disagree with the applied data-theme attribute).
+    const applied = document.documentElement.getAttribute("data-theme");
+    setIsDark(applied === "dark");
     setMounted(true);
     const cleanup = watchSystemTheme();
     return cleanup;

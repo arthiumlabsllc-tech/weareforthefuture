@@ -134,7 +134,7 @@ export default function DonateClient() {
             </h1>
             <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               Every cedi you give directly supports education, healthcare, and
-              empowerment programs for underprivileged children. 501(c)(3) -
+              empowerment programs for vulnerable children. 501(c)(3) -
               contributions are tax-deductible.
             </p>
           </motion.div>

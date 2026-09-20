@@ -244,7 +244,7 @@ export default function SuccessContent() {
                 <p className="text-lg text-text-on-primary/60 leading-relaxed mb-6">
                   {isStore
                     ? "Your order has been placed successfully. Every purchase directly changes a child's life."
-                    : "Your generous donation has been received. You're directly changing the lives of underprivileged children across Ghana, Nigeria, and beyond."}
+                    : "Your generous donation has been received. You're directly changing the lives of vulnerable children across Ghana, Nigeria, and beyond."}
                 </p>
               </motion.div>
 

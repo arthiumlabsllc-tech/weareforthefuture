@@ -8,6 +8,10 @@ import Link from "next/link";
 
 const RichTextEditor = dynamic(() => import("@/components/admin/RichTextEditor"), { ssr: false });
 
+/* Phase 6 §15: posts carry a country so /news can filter by it. Pillar + programme
+   options now come from the Pillar / Program models (Phase 6.5 relations). */
+const COUNTRY_OPTIONS = ["Ghana", "Nigeria"];
+
 interface BlogEditorProps {
   post?: {
     id: string;
@@ -17,15 +21,22 @@ interface BlogEditorProps {
     content: string;
     featuredImage: string | null;
     categoryId: string | null;
+    pillarSlug: string | null;
+    pillarId: string | null;
+    programId: string | null;
+    country: string | null;
+    archived: boolean;
     published: boolean;
     featured: boolean;
     metaTitle: string | null;
     metaDescription: string | null;
   };
   categories: { id: string; name: string }[];
+  pillars: { id: string; number: number; title: string; slug: string }[];
+  programs: { id: string; name: string; slug: string; pillarIds: string[] }[];
 }
 
-export default function BlogEditor({ post, categories }: BlogEditorProps) {
+export default function BlogEditor({ post, categories, pillars, programs }: BlogEditorProps) {
   const router = useRouter();
   const isEditing = !!post;
 
@@ -35,6 +46,11 @@ export default function BlogEditor({ post, categories }: BlogEditorProps) {
   const [content, setContent] = useState(post?.content || "");
   const [featuredImage, setFeaturedImage] = useState(post?.featuredImage || "");
   const [categoryId, setCategoryId] = useState(post?.categoryId || "");
+  const [pillarSlug, setPillarSlug] = useState(post?.pillarSlug || "");
+  const [pillarId, setPillarId] = useState(post?.pillarId || "");
+  const [programId, setProgramId] = useState(post?.programId || "");
+  const [country, setCountry] = useState(post?.country || "");
+  const [archived, setArchived] = useState(post?.archived || false);
   const [published, setPublished] = useState(post?.published || false);
   const [featured, setFeatured] = useState(post?.featured || false);
   const [metaTitle, setMetaTitle] = useState(post?.metaTitle || "");
@@ -47,6 +63,33 @@ export default function BlogEditor({ post, categories }: BlogEditorProps) {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
+  }
+
+  /* Phase 6.5: choosing a pillar keeps the denormalised pillarSlug (the /news
+     filter) in sync with the pillarId relation, and narrows the programme list
+     to that pillar's programmes. Clearing the pillar also clears an orphaned
+     programme selection. */
+  const programOptions = pillarId
+    ? programs.filter((pr) => pr.pillarIds.includes(pillarId))
+    : programs;
+
+  function handlePillarChange(value: string) {
+    setPillarId(value);
+    setPillarSlug(pillars.find((p) => p.id === value)?.slug || "");
+    if (value && programId && !programOptions.some((pr) => pr.id === programId)) {
+      // programOptions is computed pre-update; re-check against the new pillar.
+      const allowed = programs.filter((pr) => pr.pillarIds.includes(value));
+      if (!allowed.some((pr) => pr.id === programId)) setProgramId("");
+    }
+  }
+
+  function programLabel(pr: { id: string; name: string; pillarIds: string[] }) {
+    if (pillarId) return pr.name;
+    const names = pr.pillarIds
+      .map((id) => pillars.find((p) => p.id === id)?.title)
+      .filter(Boolean)
+      .join(", ");
+    return names ? `${pr.name} — ${names}` : `${pr.name} — no pillar`;
   }
 
   function handleTitleChange(value: string) {
@@ -75,6 +118,11 @@ export default function BlogEditor({ post, categories }: BlogEditorProps) {
           content,
           featuredImage: featuredImage || null,
           categoryId: categoryId || null,
+          pillarSlug: pillarSlug || null,
+          pillarId: pillarId || null,
+          programId: programId || null,
+          country: country || null,
+          archived,
           published,
           featured,
           metaTitle: metaTitle || null,
@@ -227,6 +275,42 @@ export default function BlogEditor({ post, categories }: BlogEditorProps) {
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
               ))}
             </select>
+
+            <h3 className="mt-4 mb-2 text-sm font-semibold text-text-primary">Related pillar</h3>
+            <select
+              value={pillarId}
+              onChange={(e) => handlePillarChange(e.target.value)}
+              className="w-full rounded-lg border border-border-strong bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-accent focus:outline-none"
+            >
+              <option value="">No pillar...</option>
+              {pillars.map((p) => (
+                <option key={p.id} value={p.id}>{`Pillar ${p.number} · ${p.title}`}</option>
+              ))}
+            </select>
+
+            <h3 className="mt-4 mb-2 text-sm font-semibold text-text-primary">Related programme</h3>
+            <select
+              value={programId}
+              onChange={(e) => setProgramId(e.target.value)}
+              className="w-full rounded-lg border border-border-strong bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-accent focus:outline-none"
+            >
+              <option value="">No programme...</option>
+              {programOptions.map((pr) => (
+                <option key={pr.id} value={pr.id}>{programLabel(pr)}</option>
+              ))}
+            </select>
+
+            <h3 className="mt-4 mb-2 text-sm font-semibold text-text-primary">Country</h3>
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="w-full rounded-lg border border-border-strong bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-accent focus:outline-none"
+            >
+              <option value="">Not country-specific...</option>
+              {COUNTRY_OPTIONS.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
           </div>
 
           {/* Options */}
@@ -240,6 +324,17 @@ export default function BlogEditor({ post, categories }: BlogEditorProps) {
                 className="rounded border-border-strong"
               />
               <span className="text-sm text-text-secondary">Featured post</span>
+            </label>
+            <label className="mt-3 flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={archived}
+                onChange={(e) => setArchived(e.target.checked)}
+                className="rounded border-border-strong"
+              />
+              <span className="text-sm text-text-secondary">
+                Archived (hidden from the /news feed)
+              </span>
             </label>
           </div>
 

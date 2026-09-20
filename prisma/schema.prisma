@@ -225,6 +225,11 @@ model BlogPost {
   featuredImage   String?
   categoryId      String?
   authorId        String?   // Team member ID
+  pillarSlug      String?   // Related pillar (feeds the /news pillar filter)
+  country         String?   // Ghana | Nigeria (feeds the /news country filter)
+  archived        Boolean   @default(false) // Old campaign posts — hidden from the feed by default
+  pillarId        String?   // Phase 6.5: explicit pillar relation (Related block on /news/[slug])
+  programId       String?   // Phase 6.5: explicit programme relation (Related block on /news/[slug])
   published       Boolean   @default(false)
   featured        Boolean   @default(false)
   publishDate     DateTime?
@@ -241,12 +246,16 @@ model BlogPost {
   category BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   tags     BlogTag[]
   author   TeamMember?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  pillar   Pillar?       @relation(fields: [pillarId], references: [id], onDelete: SetNull)
+  program  Program?      @relation(fields: [programId], references: [id], onDelete: SetNull)
 
   @@index([slug])
   @@index([published])
   @@index([categoryId])
   @@index([publishDate])
   @@index([createdAt])
+  @@index([pillarId])
+  @@index([programId])
 }
 
 model ImpactStory {
@@ -374,6 +383,8 @@ model Program {
   description     String   // Rich text
   impactMetrics   Json?    // { metric: "500 children", description: "reached" }
   campaignId      String?
+  status          String   @default("active") // active | expanding | campaign | pilot | future_project | archived
+  isFeatured      Boolean  @default(false)
   order           Int      @default(0)
   published       Boolean  @default(true)
   createdAt       DateTime @default(now())
@@ -382,9 +393,54 @@ model Program {
   createdBy       String?
   updatedBy       String?
 
+  pillars         ProgramPillar[]
+  posts           BlogPost[]
+
   @@index([slug])
   @@index([published])
   @@index([order])
+  @@index([status])
+  @@index([isFeatured])
+}
+
+model Pillar {
+  id           String   @id @default(cuid())
+  number       Int      @unique
+  title        String
+  slug         String   @unique
+  summary      String
+  challenge    String   @db.Text
+  whatWeDo     String   @db.Text
+  whoItServes  String   @db.Text
+  whereItWorks String   @db.Text
+  icon         String?
+  accent       String? // 'primary' | 'accent' | 'charcoal'
+  order        Int      @default(0)
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    DateTime?
+
+  programs     ProgramPillar[]
+  posts        BlogPost[]
+
+  @@index([slug])
+  @@index([order])
+  @@index([published])
+}
+
+model ProgramPillar {
+  programId String
+  pillarId  String
+  isPrimary Boolean @default(false)
+  order     Int     @default(0)
+
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  pillar    Pillar  @relation(fields: [pillarId], references: [id], onDelete: Cascade)
+
+  @@id([programId, pillarId])
+  @@index([pillarId])
+  @@index([isPrimary])
 }
 
 model Partner {

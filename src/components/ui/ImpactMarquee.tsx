@@ -3,18 +3,18 @@
 import { useRef, useEffect, useState } from "react";
 
 const messages = [
-  "10 Years of Impact",
-  "9,000+ Lives Reached",
-  "Education for Every Child",
-  "Healthcare & Nutrition",
-  "Digital Literacy Through Click4Change",
-  "Building FTF Village",
-  "Ghana - Nigeria - United States",
-  "100% of Store Proceeds Fund Programs",
-  "Mentorship That Transforms",
-  "Climate Action for Communities",
-  "Empowering Girls Through Empower Her Period",
-  "From Jamestown to a Global Movement",
+  "10 years of impact · 9,000+ children and young people reached",
+  "Education · Dignity · Future-ready skills · Mentorship · Family support",
+  "Ghana · Nigeria",
+  "Five pillars. One pathway. From disadvantage to opportunity.",
+  "500+ volunteers mobilised · 200+ campaigns delivered",
+  "Youth-led. Community-rooted. Safeguarding-led.",
+  "Building the FTF Village — Phase One in planning and fundraising",
+  "Empower Her, Period · Girls' education, dignity and retention",
+  "Future Pathways · From talent to livelihood",
+  "Click4Change · Digital literacy for the future of work",
+  "Sponsor a Future · Support a verified need through FTF",
+  "Reports & transparency · Annual impact reporting underway",
 ];
 
 export default function ImpactMarquee() {

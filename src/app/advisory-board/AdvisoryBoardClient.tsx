@@ -61,7 +61,7 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
               Expert guidance, leadership, and unwavering support to help drive
-              our mission forward and create lasting impact for underprivileged
+              our mission forward and create lasting impact for vulnerable
               children.
             </p>
           </motion.div>
@@ -167,7 +167,7 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
           </h2>
           <p className="mt-4 text-lg text-text-on-primary/60">
             We welcome experienced professionals who share our passion for
-            empowering underprivileged children.
+            empowering vulnerable children.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link

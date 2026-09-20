@@ -58,7 +58,7 @@ export default function ExecutiveBoardClient({ initialMembers = [] }: { initialM
               Executive Board
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
-              Passionate young leaders dedicated to empowering underprivileged
+              Passionate young leaders dedicated to empowering vulnerable
               children through education, healthcare, mentorship, and community
               projects.
             </p>
@@ -92,7 +92,7 @@ export default function ExecutiveBoardClient({ initialMembers = [] }: { initialM
         <SectionHeader
           overline="Our Leadership"
           title="Meet the Executive Board"
-          description="The driving force behind FTF's mission to transform the lives of underprivileged children."
+          description="The driving force behind FTF's mission to transform the lives of vulnerable children."
         />
 
         {/* Filter Tabs */}
@@ -165,7 +165,7 @@ export default function ExecutiveBoardClient({ initialMembers = [] }: { initialM
           </h2>
           <p className="mt-4 text-lg text-text-on-primary/60">
             We're always looking for passionate individuals to join our mission
-            of empowering underprivileged children.
+            of empowering vulnerable children.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link

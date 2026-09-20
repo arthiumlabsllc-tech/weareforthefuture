@@ -320,7 +320,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
               step: "02",
               icon: HandHeart,
               title: "100% Goes to Children",
-              desc: "Every cedi from your purchase directly funds education, healthcare, nutrition, and mentorship for underprivileged children.",
+              desc: "Every cedi from your purchase directly funds education, healthcare, nutrition, and mentorship for vulnerable children and young people.",
             },
             {
               step: "03",

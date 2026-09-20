@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutClient";
 
 export const metadata: Metadata = {
-  title: "Our Story",
+  title: "About",
   description:
-    "From a small charity in Ghana to a global movement - discover the history and mission of For The Future Organization (FTF).",
+    "For The Future Organization is a youth-led, community-rooted child and youth development organization. Explore our story, how we work, where we work, our team and governance, and our safeguarding commitments.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

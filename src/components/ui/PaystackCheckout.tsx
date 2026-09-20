@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackGiveInitiated } from "@/lib/analytics";
 import {
   CreditCard,
   Smartphone,
@@ -142,6 +143,7 @@ export default function PaystackCheckout({
       });
 
       handler.openIframe();
+      trackGiveInitiated(amount, source);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Payment failed");
       setLoading(false);

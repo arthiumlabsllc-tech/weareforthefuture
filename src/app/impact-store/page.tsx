@@ -5,18 +5,26 @@ import ImpactStoreClient from "./ImpactStoreClient";
 export const metadata: Metadata = {
   title: "Impact Store",
   description:
-    "Shop with purpose. Support underprivileged children while shopping for everyday essentials. 100% of proceeds fund our life-changing programs.",
+    "Shop with purpose. Support vulnerable children and young people while shopping for everyday essentials. 100% of proceeds fund our life-changing programmes.",
+  alternates: { canonical: "/impact-store" },
 };
 
 const prisma = new PrismaClient();
 
-export const dynamic = "force-dynamic";
+// Phase 3b.2 ISR audit: the store catalogue is CMS-managed content that does not
+// need per-request freshness — statically generate + revalidate instead of λ.
+// (The /impact-store/checkout child route stays interactive via useSearchParams.)
+export const revalidate = 300;
 
 export default async function ImpactStorePage() {
+  // Guarded: fall back to an empty list if the DB is unreachable (Phase 3a.5).
   const products = await prisma.product.findMany({
     where: { status: "active", deletedAt: null },
     include: { category: true },
     orderBy: { order: "asc" },
+  }).catch((err) => {
+    console.error("[/impact-store] DB query failed:", err);
+    return [];
   });
 
   const dbProducts = products.map((p) => ({

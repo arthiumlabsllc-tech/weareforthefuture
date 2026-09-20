@@ -70,6 +70,42 @@
   --ftf-selection-bg: #4CB64D;
   --ftf-selection-text: #0E2E0F;
   --ftf-on-success: #FFFFFF;
+
+  /* ===== TRUST LAYER ===== */
+  --ftf-trust-bg: #FFFFFF;
+  --ftf-trust-border: #E2E6E9;
+  --ftf-trust-icon: #4CB64D;
+  --ftf-trust-text: #494949;
+  --ftf-trust-meta: #6C7277;
+
+  /* ===== PILLAR ACCENTS ===== */
+  --ftf-pillar-1: #3973B8;
+  --ftf-pillar-2: #C7442E;
+  --ftf-pillar-3: #3973B8;
+  --ftf-pillar-4: #4CB64D;
+  --ftf-pillar-5: #494949;
+
+  /* ===== IMPACT DISPLAY ===== */
+  --ftf-impact-number: #3973B8;
+  --ftf-impact-label: #6C7277;
+  --ftf-impact-meta: #9AA1A6;
+
+  /* ===== JOURNEY / PROGRESS ===== */
+  --ftf-journey-track: #EDF0F2;
+  --ftf-journey-fill: #4CB64D;
+  --ftf-journey-node: #3973B8;
+  --ftf-journey-node-active: #4CB64D;
+
+  /* ===== CONTENT PATTERNS ===== */
+  --ftf-quote-mark: #4CB64D;
+  --ftf-story-bg: #FFFFFF;
+  --ftf-story-tag: #EDF8EE;
+  --ftf-story-tag-text: #2E7D32;
+  --ftf-report-bg: #FFFFFF;
+  --ftf-status-active: #2E7D32;
+  --ftf-status-pilot: #D97706;
+  --ftf-status-archived: #6C7277;
+  --ftf-status-campaign: #C7442E;
 }
 
 [data-theme="dark"] {
@@ -129,6 +165,42 @@
   --ftf-selection-bg: #4CB64D;
   --ftf-selection-text: #0E2E0F;
   --ftf-on-success: #16181A;
+
+  /* ===== TRUST LAYER ===== */
+  --ftf-trust-bg: #1E2124;
+  --ftf-trust-border: #33383C;
+  --ftf-trust-icon: #6FCB70;
+  --ftf-trust-text: #C6CBCF;
+  --ftf-trust-meta: #9BA1A6;
+
+  /* ===== PILLAR ACCENTS ===== */
+  --ftf-pillar-1: #7FA9DC;
+  --ftf-pillar-2: #E87560;
+  --ftf-pillar-3: #7FA9DC;
+  --ftf-pillar-4: #6FCB70;
+  --ftf-pillar-5: #C6CBCF;
+
+  /* ===== IMPACT DISPLAY ===== */
+  --ftf-impact-number: #7FA9DC;
+  --ftf-impact-label: #9BA1A6;
+  --ftf-impact-meta: #6E7478;
+
+  /* ===== JOURNEY / PROGRESS ===== */
+  --ftf-journey-track: #262A2D;
+  --ftf-journey-fill: #6FCB70;
+  --ftf-journey-node: #7FA9DC;
+  --ftf-journey-node-active: #6FCB70;
+
+  /* ===== CONTENT PATTERNS ===== */
+  --ftf-quote-mark: #6FCB70;
+  --ftf-story-bg: #1E2124;
+  --ftf-story-tag: #16281A;
+  --ftf-story-tag-text: #9ADF9B;
+  --ftf-report-bg: #1E2124;
+  --ftf-status-active: #6FCB70;
+  --ftf-status-pilot: #E5A44A;
+  --ftf-status-archived: #9BA1A6;
+  --ftf-status-campaign: #E87560;
 }
 
 /* ===== LAYER 2: Tailwind Theme → CSS Variable Mapping ===== */
@@ -249,8 +321,8 @@
   --color-warm-gray: #EDF0F2;
 
   /* Typography */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
 
   /* Spacing */
   --spacing-section: 5rem;
@@ -268,6 +340,42 @@
   --animate-marquee: marquee 30s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+
+  /* ===== Brief token layer → utilities ===== */
+  --color-trust-bg: var(--ftf-trust-bg);
+  --color-trust-border: var(--ftf-trust-border);
+  --color-trust-icon: var(--ftf-trust-icon);
+  --color-trust-text: var(--ftf-trust-text);
+  --color-trust-meta: var(--ftf-trust-meta);
+
+  /* Pillar accents as Tailwind utilities. NOTE: @theme vars are tree-shaken
+     when only referenced from inline style strings, so inline styles must use
+     the always-emitted --ftf-pillar-N (defined in :root / [data-theme=dark]),
+     NOT --color-pillar-N. See Phase 3a.5. */
+  --color-pillar-1: var(--ftf-pillar-1);
+  --color-pillar-2: var(--ftf-pillar-2);
+  --color-pillar-3: var(--ftf-pillar-3);
+  --color-pillar-4: var(--ftf-pillar-4);
+  --color-pillar-5: var(--ftf-pillar-5);
+
+  --color-impact-number: var(--ftf-impact-number);
+  --color-impact-label: var(--ftf-impact-label);
+  --color-impact-meta: var(--ftf-impact-meta);
+
+  --color-journey-track: var(--ftf-journey-track);
+  --color-journey-fill: var(--ftf-journey-fill);
+  --color-journey-node: var(--ftf-journey-node);
+  --color-journey-node-active: var(--ftf-journey-node-active);
+
+  --color-quote-mark: var(--ftf-quote-mark);
+  --color-story-bg: var(--ftf-story-bg);
+  --color-story-tag: var(--ftf-story-tag);
+  --color-story-tag-text: var(--ftf-story-tag-text);
+  --color-report-bg: var(--ftf-report-bg);
+  --color-status-active: var(--ftf-status-active);
+  --color-status-pilot: var(--ftf-status-pilot);
+  --color-status-archived: var(--ftf-status-archived);
+  --color-status-campaign: var(--ftf-status-campaign);
 }
 
 /* ===== LAYER 3: Dark Mode — Override Tailwind Palette Vars ===== */
@@ -330,6 +438,16 @@
   --color-coral-700: var(--ftf-error-text);
   --color-coral-800: var(--ftf-error-bg);
   --color-coral-900: var(--ftf-error-bg);
+}
+
+/* The site footer sits on --color-primary (blue) in BOTH themes, so the
+   Layer-3 remap of `white` -> dark surface must NOT apply inside it: the
+   footer paints text/borders as text-white/NN on a non-inverting blue band,
+   and inverting those to dark-on-blue fails WCAG AA in dark mode. Scope real
+   white back to the footer subtree (a no-op in light theme, where the
+   `white` token is already #FFFFFF). */
+footer.bg-primary {
+  --color-white: #FFFFFF;
 }
 
 /* ===== Base Styles ===== */

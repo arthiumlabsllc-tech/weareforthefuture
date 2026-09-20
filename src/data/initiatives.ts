@@ -24,7 +24,7 @@ export const initiatives: Initiative[] = [
     shortDescription:
       "A free photography and digital skills training program empowering youth with creative careers.",
     fullDescription:
-      "In March 2024, FTF Ghana collaborated with Jambo Spaces to launch Click4Change, a free photography and digital skills training program. The initiative empowers underprivileged youth with professional photography, videography, and digital marketing skills, providing them with tools and mentorship to build sustainable creative careers.",
+      "In March 2024, FTF Ghana collaborated with Jambo Spaces to launch Click4Change, a free photography and digital skills training program. The initiative empowers underserved youth with professional photography, videography, and digital marketing skills, providing them with tools and mentorship to build sustainable creative careers.",
     category: "Education",
     country: "Ghana",
     year: 2024,
@@ -43,9 +43,9 @@ export const initiatives: Initiative[] = [
     slug: "share-aid-initiative",
     title: "Share Aid Initiative",
     shortDescription:
-      "Supporting over 500 underprivileged children with essential supplies and educational resources.",
+      "Supporting over 500 children facing disadvantage with essential supplies and educational resources.",
     fullDescription:
-      "FTF Ghana has supported over 500 underprivileged children in Ghana over the years through the Share Aid Initiative. The program provides essential supplies including school uniforms, textbooks, hygiene products, and food packages to children in the most vulnerable communities.",
+      "FTF Ghana has supported over 500 children in Ghana over the years through the Share Aid Initiative. The program provides essential supplies including school uniforms, textbooks, hygiene products, and food packages to children in the most vulnerable communities.",
     category: "Humanitarian",
     country: "Ghana",
     year: 2020,
@@ -85,9 +85,9 @@ export const initiatives: Initiative[] = [
     slug: "sponsor-a-child",
     title: "Sponsor A Child Initiative",
     shortDescription:
-      "Connecting sponsors with underprivileged children for holistic educational support.",
+      "Connecting sponsors with children facing disadvantage for holistic educational support.",
     fullDescription:
-      "The Sponsor a Child Project is an initiative under the Student Training and Education Project (S.T.E.P.). It connects individual sponsors with underprivileged children, covering school fees, uniforms, books, and mentorship to ensure every child has access to quality education.",
+      "The Sponsor a Child Project is an initiative under the Student Training and Education Project (S.T.E.P.). It connects individual sponsors with children facing disadvantage, covering school fees, uniforms, books, and mentorship to ensure every child has access to quality education.",
     category: "Education",
     country: "Ghana",
     year: 2021,
@@ -127,9 +127,9 @@ export const initiatives: Initiative[] = [
     slug: "step-project",
     title: "Student Training and Education Project",
     shortDescription:
-      "A comprehensive project sponsoring the holistic education of underprivileged children.",
+      "A comprehensive project sponsoring the holistic education of vulnerable children.",
     fullDescription:
-      "The Organization on 26th February 2021, initiated the Student Training and Education Project (S.T.E.P) to sponsor the holistic education of underprivileged children. The project covers tuition, learning materials, mentorship, and career guidance to help children reach their full potential.",
+      "The Organization on 26th February 2021, initiated the Student Training and Education Project (S.T.E.P) to sponsor the holistic education of vulnerable children. The project covers tuition, learning materials, mentorship, and career guidance to help children reach their full potential.",
     category: "Education",
     country: "Ghana",
     year: 2021,

@@ -1,5 +1,10 @@
 "use client";
 import CrudPage from "@/components/admin/CrudPage";
+import { pillars } from "@/data/pillars";
+
+// Pillar options for the many-to-many assignment (ProgramPillar). The lowest
+// pillar number selected is treated as the primary pillar by the API.
+const pillarOptions = pillars.map((p) => ({ value: p.id, label: `${p.number}. ${p.title}` }));
 
 export default function AdminProgramsPage() {
   return (
@@ -12,6 +17,7 @@ export default function AdminProgramsPage() {
         { name: "slug", label: "Slug", required: true },
         { name: "shortDescription", label: "Short Description", type: "textarea", span: 2 },
         { name: "description", label: "Full Description (plain text)", type: "textarea", span: 2 },
+        { name: "pillarSlugs", label: "Pillars (first by number = primary)", type: "multiselect", options: pillarOptions, span: 2 },
         { name: "impactMetrics", label: "Programme Content (JSON: detail, pillars, highlights, status, featured)", type: "json", span: 2 },
         { name: "icon", label: "Icon (emoji or URL)" },
         { name: "image", label: "Image URL" },

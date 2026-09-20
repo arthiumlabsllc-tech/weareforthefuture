@@ -21,7 +21,7 @@ export const timeline: TimelineEvent[] = [
     year: "2017",
     title: "Growing Impact",
     description:
-      "Organized hygiene education outreach for children in Jamestown. Renovated Mamprobi South 4 Basic School, donating learning materials and furniture under the Caridad project. Hosted Felirati - a Christmas celebration for underprivileged children in Chorkor.",
+      "Organized hygiene education outreach for children in Jamestown. Renovated Mamprobi South 4 Basic School, donating learning materials and furniture under the Caridad project. Hosted Felirati - a Christmas celebration for children facing disadvantage in Chorkor.",
     highlights: [
       "Hygiene education outreach",
       "Mamprobi South 4 Basic School renovation",
@@ -54,7 +54,7 @@ export const timeline: TimelineEvent[] = [
     year: "2020",
     title: "COVID-19 Response",
     description:
-      "Collaborated with Flood-gates Foundation to distribute COVID-19 relief items to underprivileged families in Mamobi, sponsored by Unilever Ghana and the general public.",
+      "Collaborated with Flood-gates Foundation to distribute COVID-19 relief items to vulnerable families in Mamobi, sponsored by Unilever Ghana and the general public.",
     highlights: [
       "COVID-19 relief distribution",
       "Partnership with Flood-gates Foundation",
@@ -65,7 +65,7 @@ export const timeline: TimelineEvent[] = [
     year: "2021",
     title: "S.T.E.P Launch",
     description:
-      "Initiated the Student Training and Education Project (S.T.E.P) to sponsor the holistic education of underprivileged children, covering tuition, materials, and mentorship.",
+      "Initiated the Student Training and Education Project (S.T.E.P) to sponsor the holistic education of vulnerable children, covering tuition, materials, and mentorship.",
     highlights: [
       "S.T.E.P project launched",
       "School sponsorship program",
@@ -87,7 +87,7 @@ export const timeline: TimelineEvent[] = [
     year: "2024",
     title: "Digital Empowerment",
     description:
-      "Launched Click4Change in collaboration with Jambo Spaces - a free photography and digital skills training program for underprivileged youth.",
+      "Launched Click4Change in collaboration with Jambo Spaces - a free photography and digital skills training program for underserved youth.",
     highlights: [
       "Click4Change launched",
       "Jambo Spaces collaboration",
@@ -119,7 +119,7 @@ export const sdgGoals = [
     number: 4,
     title: "Quality Education",
     description:
-      "Ensuring inclusive and equitable quality education for underprivileged children of all ages.",
+      "Ensuring inclusive and equitable quality education for vulnerable children of all ages.",
   },
   {
     number: 5,
@@ -131,7 +131,7 @@ export const sdgGoals = [
     number: 10,
     title: "Reduced Inequalities",
     description:
-      "Bridging the gap between privileged and underprivileged communities through targeted interventions.",
+      "Bridging the gap between advantaged and disadvantaged communities through targeted interventions.",
   },
   {
     number: 13,

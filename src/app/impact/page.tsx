@@ -1,32 +1,23 @@
 import type { Metadata } from "next";
-import { prisma } from "@/lib/db";
+import { getProgrammeIndicators } from "@/lib/pillars";
 import ImpactClient from "./ImpactClient";
 
 export const metadata: Metadata = {
   title: "Our Impact",
   description:
-    "See the measurable impact of For The Future Organization - from lives changed to communities transformed across Ghana, Nigeria, and the US.",
+    "Where your money goes: verified organisational figures, fund allocation across our five programme pillars, programme-level indicators and safeguarding-approved stories of change.",
+  alternates: { canonical: "/impact" },
 };
 
-// Refresh document list periodically so newly published reports appear.
+// Refresh programme indicators periodically so CMS edits appear without a rebuild.
 export const revalidate = 300;
 
 export default async function ImpactPage() {
-  const documents = await prisma.document.findMany({
-    where: { published: true, deletedAt: null },
-    orderBy: [{ year: "desc" }, { createdAt: "desc" }],
-  });
+  // Programme-level indicators come from the CMS via the data-access layer,
+  // which fails soft to [] when the database is unreachable (local dev, CI,
+  // cold-start DB). The dashboard then shows organisation-wide figures only —
+  // never a 500, never invented per-programme numbers.
+  const indicators = await getProgrammeIndicators();
 
-  const reports = documents
-    .filter((d) => Boolean(d.fileUrl))
-    .map((d) => ({
-      id: d.id,
-      title: d.title,
-      description: d.description,
-      fileUrl: d.fileUrl,
-      year: d.year,
-      category: d.category,
-    }));
-
-  return <ImpactClient reports={reports} />;
+  return <ImpactClient indicators={indicators} />;
 }

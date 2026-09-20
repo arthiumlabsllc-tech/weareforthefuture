@@ -34,3 +34,4 @@ export const programMetricsSchema = z.object({
 }).catchall(z.json());
 
 export type ProgrammeDetail = z.infer<typeof programmeDetailSchema>;
+export type ProgrammeMetrics = z.infer<typeof programMetricsSchema>;

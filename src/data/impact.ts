@@ -6,101 +6,39 @@ import { siteConfig } from "@/data/site";
  * /impact-stories. Headline numbers are derived from `siteConfig.stats` so the
  * whole site stays consistent; edit the values there (or below) in one place.
  *
- * NOTE: these figures are placeholders carried over from the previous static
- * site and should be confirmed against FTF's real monitoring data before launch.
+ * Verified institutional record (brief Section 2): 10 years · 9,000+ children
+ * and young people reached · 500+ volunteers · 200+ campaigns. The invented
+ * year-by-year growth chart was removed — it contradicted the verified figures
+ * and was a credibility risk.
  */
 
-const { beneficiaries, volunteers, campaigns, yearsOfFoundation } = siteConfig.stats;
+const { beneficiaries, volunteers, campaigns, yearsOfFoundation, countries } = siteConfig.stats;
 
 export const impactMetrics = [
-  {
-    icon: Users,
-    value: `${beneficiaries.toLocaleString()}+`,
-    label: "Children Reached",
-    description:
-      "Underprivileged children supported through our programs since 2016.",
-    color: "gold",
-  },
-  {
-    icon: BookOpen,
-    value: "5,000+",
-    label: "Students Sponsored",
-    description:
-      "Children enrolled in school with full tuition, books, and mentorship.",
-    color: "emerald",
-  },
-  {
-    icon: Heart,
-    value: "50,000+",
-    label: "Health Kits Distributed",
-    description:
-      "Hygiene and menstrual health products provided to girls and families.",
-    color: "coral",
-  },
-  {
-    icon: MapPin,
-    value: "30+",
-    label: "Communities Served",
-    description:
-      "Underserved communities across Ghana, Nigeria, and the United States.",
-    color: "navy",
-  },
+  { icon: Users,    value: `${beneficiaries.toLocaleString()}+`, label: "Children and young people reached",   description: "Across ten years of community-rooted programming in Ghana and Nigeria.", color: "primary" },
+  { icon: BookOpen, value: `${campaigns}+`,                       label: "Campaigns and activities delivered",  description: "Programme activities, community outreach, and school-based initiatives.", color: "accent" },
+  { icon: Heart,    value: `${volunteers}+`,                      label: "Volunteers mobilised",                description: "Youth-led, community-powered delivery across both countries.",           color: "accent" },
+  { icon: MapPin,   value: `${countries}`,                        label: "Countries of programme delivery",     description: "Ghana (Greater Accra core, 7+ regions) and Nigeria (Ibadan, Oyo State).", color: "charcoal" },
 ];
 
-export const impactByYear = [
-  { year: "2016", children: 50, volunteers: 10, initiatives: 2 },
-  { year: "2017", children: 200, volunteers: 50, initiatives: 4 },
-  { year: "2018", children: 800, volunteers: 150, initiatives: 6 },
-  { year: "2019", children: 2000, volunteers: 400, initiatives: 8 },
-  { year: "2020", children: 5000, volunteers: 800, initiatives: 10 },
-  { year: "2021", children: 15000, volunteers: 1200, initiatives: 12 },
-  { year: "2022", children: 30000, volunteers: 1800, initiatives: 14 },
-  { year: "2023", children: 50000, volunteers: 2200, initiatives: 16 },
-  { year: "2024", children: 75000, volunteers: 2800, initiatives: 18 },
-  { year: "2025", children: beneficiaries, volunteers, initiatives: siteConfig.stats.initiatives },
-];
-
-/**
- * Fund allocation. `hex` drives both the progress bar and the donut chart so
- * the visualisation always uses the FTF brand palette (green / blue / charcoal)
- * instead of the legacy gold-emerald-coral colours.
- */
 export const fundAllocation = [
-  { category: "Education Programs", percentage: 40, hex: "#4CB64D" },
-  { category: "Healthcare & Hygiene", percentage: 20, hex: "#3973B8" },
-  { category: "Community Development", percentage: 15, hex: "#2E7D32" },
-  { category: "FTF Village Project", percentage: 15, hex: "#494949" },
-  { category: "Operations & Admin", percentage: 10, hex: "#9AA1A6" },
+  { category: "Education & Learning Support",  percentage: 40, hex: "#4CB64D" },
+  { category: "Girls' Education & Dignity",    percentage: 20, hex: "#3973B8" },
+  { category: "Future-Ready Skills",           percentage: 15, hex: "#2E7D32" },
+  { category: "Mentorship & Wellbeing",        percentage: 10, hex: "#494949" },
+  { category: "Community & Family Support",    percentage: 10, hex: "#9AA1A6" },
+  { category: "Operations & Governance",       percentage: 5,  hex: "#6C7277" },
 ];
 
 export const successStories = [
-  {
-    name: "Ama, Age 14",
-    location: "Jamestown, Ghana",
-    story:
-      "Through the S.T.E.P program, Ama received full school sponsorship and mentorship. She is now top of her class and dreams of becoming a doctor.",
-    program: "S.T.E.P",
-  },
-  {
-    name: "Chidi, Age 16",
-    location: "Lagos, Nigeria",
-    story:
-      "Chidi participated in Project Momentum's leadership workshop. He went on to start a peer tutoring group at his school, helping 30+ students improve their grades.",
-    program: "Project Momentum",
-  },
-  {
-    name: "Abena, Age 12",
-    location: "Takoradi, Ghana",
-    story:
-      "The Empower Her, Period program gave Abena access to sanitary products and confidence. She hasn't missed a day of school since.",
-    program: "Empower Her, Period",
-  },
+  { name: "Prince",  age: null, location: "Greater Accra", story: "Spotted through STEP for his talent and curiosity, Prince has grown through mentorship and skills exposure. He is now part of FTF's Future Pathways cohort, preparing for technical training.", program: "STEP · Future Pathways", pillar: "Future-Ready Skills & Digital Inclusion", status: "safeguarding-approved" },
+  { name: "Comfort", age: null, location: "Greater Accra", story: "Comfort stayed in school through FTF's girls' dignity and retention programming. Today she mentors younger girls in her community and is exploring a pathway into STEM.", program: "Empower Her, Period · Girls' Dignity & Retention", pillar: "Girls' Education, Dignity & Retention", status: "safeguarding-approved" },
 ];
 
-/** Headline counters for the /impact-stories stat bar. */
+/** Headline counters for the /impact-stories stat bar (static — no count-up). */
 export const storyStats = [
-  { value: yearsOfFoundation, suffix: "+", label: "Years of Foundation" },
-  { value: volunteers, suffix: "+", label: "Amazing Volunteers" },
-  { value: beneficiaries, suffix: "", label: "Incredible Beneficiaries" },
-  { value: campaigns, suffix: "+", label: "Successful Campaigns" },
+  { value: `${yearsOfFoundation}`, suffix: "", label: "Years of continuous impact" },
+  { value: `${beneficiaries.toLocaleString()}`, suffix: "+", label: "Children and young people reached" },
+  { value: `${volunteers}`, suffix: "+", label: "Volunteers mobilised" },
+  { value: `${campaigns}`, suffix: "+", label: "Campaigns and activities" },
 ];

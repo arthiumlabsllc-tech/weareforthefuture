@@ -11,6 +11,11 @@ const blogSchema = z.object({
   content: z.string().optional(),
   featuredImage: z.string().nullable().optional(),
   categoryId: z.string().nullable().optional(),
+  pillarSlug: z.string().nullable().optional(),
+  pillarId: z.string().nullable().optional(),
+  programId: z.string().nullable().optional(),
+  country: z.string().nullable().optional(),
+  archived: z.boolean().optional(),
   published: z.boolean().optional(),
   featured: z.boolean().optional(),
   metaTitle: z.string().nullable().optional(),
@@ -76,12 +81,19 @@ export async function POST(request: NextRequest) {
         featuredImage: data.featuredImage ?? null,
         published: data.published ?? false,
         featured: data.featured ?? false,
+        pillarSlug: data.pillarSlug ?? null,
+        pillarId: data.pillarId ?? null,
+        programId: data.programId ?? null,
+        country: data.country ?? null,
+        archived: data.archived ?? false,
         metaTitle: data.metaTitle ?? null,
         metaDescription: data.metaDescription ?? null,
+        // Scalar FKs only (UncheckedCreateInput): mixing a relational
+        // `category: { connect }` with scalar pillarId/programId violates Prisma's XOR.
+        categoryId: data.categoryId ?? null,
         createdBy: session.userId,
         updatedBy: session.userId,
         readingTime: Math.ceil((data.content || "").split(/\s+/).length / 200),
-        ...(data.categoryId ? { category: { connect: { id: data.categoryId } } } : {}),
       },
     });
 

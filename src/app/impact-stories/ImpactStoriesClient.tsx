@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowRight, Quote, BookOpen, Camera, X } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import { img } from "@/lib/imageUrl";
@@ -17,36 +17,12 @@ interface Story {
   program: string;
 }
 
-/* ===== INLINE STAT COUNTER (for dark bg) ===== */
-function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const [displayed, setDisplayed] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  useEffect(() => {
-    if (!isInView) return;
-    let start: number;
-    const dur = 2000;
-    const step = (ts: number) => {
-      if (!start) start = ts;
-      const p = Math.min((ts - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setDisplayed(Math.floor(eased * value));
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [isInView, value]);
-
-  const fmt = (n: number) => {
-    if (n >= 1000000) return `${(n / 1000000).toFixed(1)}M`;
-    if (n >= 1000) return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}K`;
-    return n.toLocaleString();
-  };
-
+/* ===== INLINE STAT (static — brief bans count-up animations) ===== */
+function StatCounter({ value, suffix, label }: { value: string; suffix: string; label: string }) {
   return (
-    <div ref={ref} className="text-center">
+    <div className="text-center">
       <div className="text-4xl md:text-5xl font-bold text-accent-text tabular-nums">
-        {fmt(displayed)}{suffix}
+        {value}{suffix}
       </div>
       <div className="text-xs text-text-on-primary/50 mt-2 uppercase tracking-wider">{label}</div>
     </div>

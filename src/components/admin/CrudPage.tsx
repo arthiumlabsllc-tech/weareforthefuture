@@ -6,7 +6,7 @@ import { Plus, Edit, Trash2, X, Loader2, Save } from "lucide-react";
 interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "number" | "checkbox" | "select" | "json";
+  type?: "text" | "textarea" | "number" | "checkbox" | "select" | "multiselect" | "json";
   required?: boolean;
   options?: { value: string; label: string }[];
   span?: 1 | 2;
@@ -49,6 +49,7 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
       if (f.type === "checkbox") obj[f.name] = true;
       else if (f.type === "number") obj[f.name] = 0;
       else if (f.type === "json") obj[f.name] = "{}";
+      else if (f.type === "multiselect") obj[f.name] = [];
       else obj[f.name] = "";
     });
     return obj;
@@ -59,9 +60,13 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
   function openEdit(item: Record<string, unknown>) {
     const f: Record<string, unknown> = {};
     fields.forEach((field) => {
-      f[field.name] = field.type === "json"
-        ? JSON.stringify(item[field.name] ?? {}, null, 2)
-        : item[field.name] ?? (field.type === "checkbox" ? true : "");
+      if (field.type === "json") {
+        f[field.name] = JSON.stringify(item[field.name] ?? {}, null, 2);
+      } else if (field.type === "multiselect") {
+        f[field.name] = Array.isArray(item[field.name]) ? [...(item[field.name] as string[])] : [];
+      } else {
+        f[field.name] = item[field.name] ?? (field.type === "checkbox" ? true : "");
+      }
     });
     setError(""); setForm(f); setEditing(item); setIsNew(false);
   }
@@ -178,6 +183,39 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
                       </select>
                     </div>
                   );
+                  if (field.type === "multiselect") {
+                    const selected = (form[field.name] as string[]) || [];
+                    return (
+                      <div key={field.name} className={spanCls}>
+                        <label className="mb-1 block text-xs font-semibold text-text-tertiary uppercase">{field.label}</label>
+                        <div className="flex flex-wrap gap-2">
+                          {field.options?.map((opt) => {
+                            const checked = selected.includes(opt.value);
+                            return (
+                              <button
+                                type="button"
+                                key={opt.value}
+                                aria-pressed={checked}
+                                onClick={() => setForm({
+                                  ...form,
+                                  [field.name]: checked
+                                    ? selected.filter((v) => v !== opt.value)
+                                    : [...selected, opt.value],
+                                })}
+                                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                                  checked
+                                    ? "border-accent bg-accent-subtle text-accent-text"
+                                    : "border-border-strong bg-bg-primary text-text-secondary hover:border-accent/50"
+                                }`}
+                              >
+                                {opt.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  }
                   if (field.type === "json") return (
                     <div key={field.name} className={spanCls}>
                       <label htmlFor={`field-${field.name}`} className="mb-1 block text-xs font-semibold text-text-tertiary uppercase">{field.label}</label>

@@ -5,6 +5,9 @@ import { Plus, Edit, Trash2, Eye, EyeOff } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function AdminBlogPage() {
+  // Intentionally UNGUARDED (Phase 3a.5): auth-gated admin surface. A DB outage
+  // must surface as a 500 here; an empty fallback would read as data loss to an
+  // editor. Public content pages degrade to [] instead (see e.g. /news).
   const posts = await prisma.blogPost.findMany({
     orderBy: { createdAt: "desc" },
     include: {

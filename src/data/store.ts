@@ -65,7 +65,7 @@ export const products: Product[] = [
     price: 150,
     image: img("/images/store/ftf-tshirt.png"),
     category: "Merchandise",
-    impact: "100% of proceeds directly fund FTF programs for underprivileged children",
+    impact: "100% of proceeds directly fund FTF programs for vulnerable children",
     description: "Premium navy cotton tee with the FTF gold emblem. Wear your support and spark conversations that matter.",
   },
   {
