@@ -13,6 +13,14 @@ const volunteerSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Preview safety: never write form submissions to the database from a
+    // non-production deployment (Vercel preview/branch). Production unaffected.
+    if (process.env.VERCEL_ENV !== "production") {
+      return NextResponse.json(
+        { error: "Form submissions are disabled on preview deployments." },
+        { status: 403 }
+      );
+    }
     const body = await request.json();
     const data = volunteerSchema.parse(body);
 
