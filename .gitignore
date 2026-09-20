@@ -62,8 +62,14 @@ cloudinary-map.json
 .phase*-shots/
 .cdp-profile*/
 
-# throwaway DB probes + CDP screenshot drivers (live at workspace root, never commit)
+# throwaway DB probes + CDP screenshot drivers (never commit)
 _probe-*.ts
 .dbprobe.mjs
 *.probe.*
 cdp-*.mjs
+
+# Dev tooling lives in scripts/dev/ (the CDP + QA harness). Keep the two docs
+# tracked so future devs know what each driver does; ignore the throwaway *.mjs
+# drivers themselves (they are recreated from README.md + CDP-HELPERS.md).
+!/scripts/dev/
+/scripts/dev/*.mjs
