@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Preview safety: keep Vercel preview / branch deployments out of search
+  // indexes. On the production deployment (VERCEL_ENV === "production") no
+  // X-Robots-Tag header is emitted, so prod stays indexable.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers:
+          process.env.VERCEL_ENV !== "production"
+            ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]
+            : [],
+      },
+    ];
+  },
   async redirects() {
     return [
       // PHASE 3a — the /our-work tree is live, so the temporary bridge that sent
