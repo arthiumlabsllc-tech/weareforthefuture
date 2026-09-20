@@ -52,9 +52,9 @@ export default function CookieConsentBanner() {
     <div
       role="region"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface/95 backdrop-blur-sm p-4 sm:p-5 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
+      className="fixed z-50 border border-border bg-surface/95 backdrop-blur-sm p-4 shadow-lg bottom-20 left-4 max-w-[min(320px,calc(100vw-2rem))] rounded-2xl lg:inset-x-0 lg:bottom-0 lg:left-0 lg:max-w-none lg:rounded-none lg:border-x-0 lg:border-t lg:border-b-0 lg:p-5 lg:shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
     >
-      <div className="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-4xl flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <p className="text-sm leading-relaxed text-text-secondary">
           We use essential cookies to keep the site working and remember your
           preferences. No tracking or advertising cookies.{" "}
