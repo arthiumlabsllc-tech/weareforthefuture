@@ -293,3 +293,14 @@ Status legend:
 | **Total** | **140** |
 
 The repositioning brief is substantially delivered: architecture, messaging, credibility layer, giving hub, supporter accounts and governance tooling are live in production. The remaining gaps cluster around the beneficiary-support feature (Step 8), Book Club content, recurring payments, and CMS-vs-code ownership of impact figures.
+
+## Phase 13 candidate backlog (post-Phase-12)
+
+The following gaps are known, deferred, and tracked. Do not implement without founder sign-off.
+
+1. Support-a-Future beneficiary system (Phase 12 Step 8)
+2. Book Club sub-section on Impact Store
+3. True Paystack recurring charging (backend)
+4. Impact figures - move from code SSOT (site.ts) to CMS
+5. Dedicated "2026-2031 Direction" public section (brief §14)
+6. Emailed donation receipts (requires email service)
