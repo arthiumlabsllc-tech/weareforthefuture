@@ -296,11 +296,29 @@ The repositioning brief is substantially delivered: architecture, messaging, cre
 
 ## Phase 13 candidate backlog (post-Phase-12)
 
-The following gaps are known, deferred, and tracked. Do not implement without founder sign-off.
+The following gaps are known, deferred, and tracked. Do not implement without founder sign-off. The founder has confirmed all deferred gaps matter; sequencing below.
 
-1. Support-a-Future beneficiary system (Phase 12 Step 8)
-2. Book Club sub-section on Impact Store
-3. True Paystack recurring charging (backend)
-4. Impact figures - move from code SSOT (site.ts) to CMS
-5. Dedicated "2026-2031 Direction" public section (brief §14)
-6. Emailed donation receipts (requires email service)
+**Phase 12 (current):**
+
+- Step 1: C3 motion docs - DONE (DESIGN.md §8)
+- Step 2: A1 hero polish
+- Step 3: A3 section rhythm
+- Step 4: A2 card system
+- Step 5: C2 journey stepper
+- Step 6: A4 fund bars
+- Step 7: C1 celebration
+- Step 7b: Book Club sub-section on Impact Store (NEW - folded into the visual refresh since that page is being touched)
+- Step 8: Support a Future swipe deck (founder's explicit ask)
+
+**Phase 13:**
+
+1. 13.1: Public 2026-2031 Direction section (brief §14)
+2. 13.2: Impact figures → CMS (move siteConfig.stats to ImpactStat)
+3. 13.3: Email donation receipts (recommend Resend)
+4. 13.4: Paystack recurring charging (subscriptions API)
+
+**Phase 14 (post-launch):**
+
+- Additional polish based on real usage
+- Analytics review
+- Performance optimization (Lighthouse simulated gaps)
