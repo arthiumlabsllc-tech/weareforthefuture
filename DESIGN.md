@@ -17,6 +17,8 @@ Source of truth: `src/app/globals.css` (Layer 1 `:root` / `[data-theme="dark"]` 
 | --color-bg-tertiary | #EDF0F2 | #262A2D | hover fills, subtle bands |
 | --color-bg-elevated | #FFFFFF | #2E3336 | popovers, raised panels |
 | --color-bg-overlay | rgba(73,73,73,0.5) | rgba(0,0,0,0.7) | modal/lightbox scrims |
+| --ftf-cream / --color-cream | #FAF7F1 | #16181A | page background, warm paper |
+| --ftf-sand / --color-sand | #EFE9DD | #1E2124 | alternate section, deeper warm |
 | --ftf-surface / --color-surface | #FFFFFF | #1E2124 | cards, inputs |
 | --ftf-surface-hover | #F1F3F5 | #262A2D | card/input hover |
 | --ftf-border / --color-border | #E2E6E9 | #33383C | hairline borders |
@@ -144,6 +146,7 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 - 8pt scale: 4, 8, 12, 16, 24, 32, 48, 64, 96.
 - Section rhythm: --spacing-section 5rem.
 - Fixed-overlay clearance: the navbar (80px) and the ImpactMarquee band (fixed top-[80px], ~33px tall) float over page content. Any section that begins at the top of the viewport needs >=160px top padding below lg (hero uses pt-40); at lg+ the hero's 85vh vertical centering provides the clearance. Never compensate by padding <main> - the overlays are out of flow and main padding creates a white gap on full-bleed heroes.
+- Warm neutral layer: cream (--ftf-cream) and sand (--ftf-sand) sit alongside the cool paper layer (bg-primary/bg-secondary/bg-tertiary). Section rhythm alternation in Step 3 will determine which sections use which. Do NOT replace the cool layer - both coexist.
 - Container widths: body 620px, wide 1200px, full 1440px.
 - Radii: --radius-card 1rem (cards, panels), --radius-button 0.5rem (form controls); shared Button renders pill (rounded-full).
 

@@ -20,6 +20,10 @@
   --color-bg-tertiary: #EDF0F2;
   --color-bg-elevated: #FFFFFF;
   --color-bg-overlay: rgba(73, 73, 73, 0.5);
+  /* Warm neutral layer (Phase 12 Step 2) - editorial paper tones that sit
+     alongside the cool paper layer; both coexist (DESIGN.md §3). */
+  --ftf-cream: #FAF7F1;
+  --ftf-sand: #EFE9DD;
   --ftf-surface: #FFFFFF;
   --ftf-surface-hover: #F1F3F5;
   --ftf-border: #E2E6E9;
@@ -123,6 +127,8 @@
   --color-bg-tertiary: #262A2D;
   --color-bg-elevated: #2E3336;
   --color-bg-overlay: rgba(0, 0, 0, 0.7);
+  --ftf-cream: #16181A;
+  --ftf-sand: #1E2124;
   --ftf-surface: #1E2124;
   --ftf-surface-hover: #262A2D;
   --ftf-border: #33383C;
@@ -257,6 +263,8 @@
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
   --color-bg-tertiary: var(--color-bg-tertiary);
+  --color-cream: var(--ftf-cream);
+  --color-sand: var(--ftf-sand);
   --color-bg-elevated: var(--color-bg-elevated);
   --color-bg-overlay: var(--color-bg-overlay);
 
