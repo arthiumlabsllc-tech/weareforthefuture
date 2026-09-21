@@ -26,6 +26,51 @@ Handoff files are kept OUTSIDE the repo at the workspace root:
 
 Reason: they contain internal sequencing and founder feedback that isn't for public consumption. New agents should ask the user for these before proceeding.
 
+## Installed Agent Skills
+
+The following Qoder Skills are bound to this project's workspace. They live outside
+the repo at `../.qoder/skills/`, junctioned to a CLI-managed store at
+`../.agents/skills/`:
+
+- ftf-design-system (custom, v1.0.0) - FTF design rules: locked tokens, typography,
+  section rhythm, motion, banned anti-patterns. AUTHORITATIVE. Its source of truth
+  is committed in-repo at `ftf-design-system/` (SKILL.md + examples/hero-reference.md
+  + .qoder-plugin/ + PROVENANCE.md); the workspace junction only exposes it.
+- frontend-design - production-grade UI direction and on-screen content discipline
+- ui-craft - visual design craft and anti-generic-UI rules, plus the installed
+  passes: critique, audit, polish, animate, adapt, unhappy, harden, extract, typeset
+- design-system-governance - design system contribution, versioning and deprecation governance
+- interaction-design - micro-interactions, component states, feedback, response time
+- accessibility-catalogue (router) with fixing-accessibility and wcag-22 - WCAG 2.2
+  audits, ARIA/keyboard/focus/contrast remediation, conformance docs
+
+Agents should confirm these are active before starting UI work: the skill appears in
+the session's available-skills list, or `../.qoder/skills/<name>/SKILL.md` resolves.
+
+Precedence: `ftf-design-system` and DESIGN.md outrank every generic design skill.
+Those skills supply method - reviews, audits, checklists, craft rigour. They never
+supply brand decisions: no new hues, no aesthetic anchors or theme presets, no
+foreign typefaces, and no parallel design context (`.ui-craft/` briefs or token
+spines). When one suggests a palette or theme of its own, use its structure and
+FTF tokens.
+
+Upstream provenance, licenses, the ui-craft passes deliberately left out and the
+reinstall/update commands are recorded in `ftf-design-system/PROVENANCE.md`.
+
+## Probe file hygiene
+
+Never leave probe/test/scratch files in the repo. Any file named `*probe*`,
+`*scratch*`, `*test-fix*`, or dropped into `src/` for a one-off verification must be:
+
+1. Written to a temp dir OUTSIDE `src/` (preferred - e.g. `scripts/dev/`, which is
+   already gitignored), OR
+2. Deleted immediately after use, verified with `git status`.
+
+Before every commit, `git status` must show only intentional source changes. The
+`.gitignore` carries `*-probe*.tsx`, `*-scratch*.tsx` and `*-test-fix*.tsx` as a
+backstop, but that is a safety net - it is not a licence to leave scratch files on
+disk. `git ls-files | Select-String "probe"` must return nothing.
+
 ## Non-negotiables
 
 - Follow DESIGN.md for every UI decision
