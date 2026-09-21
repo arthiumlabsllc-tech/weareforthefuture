@@ -122,6 +122,10 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 | --ftf-scrollbar-track / -thumb | #EDF0F2 / #C6CDD2 | #1E2124 / #494949 | scrollbars |
 | --ftf-selection-bg / -text | #4CB64D / #0E2E0F | #4CB64D / #0E2E0F | ::selection |
 
+### Sand AA override (light mode)
+
+Sand (#EFE9DD) fails WCAG AA for text-tertiary, text-muted, accent-text, and trust-meta. A scoped override in globals.css re-maps those tokens within .bg-sand to darker values (#5F6569, #1B5E20). If you use sand as a background, this override applies automatically. Do NOT remove it without verifying contrast.
+
 ### Rules
 
 - Never invent new hues. If a need is not covered above, ask before adding a token (globals.css requires explicit approval).
