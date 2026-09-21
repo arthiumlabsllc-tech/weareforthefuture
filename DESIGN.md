@@ -1,0 +1,189 @@
+# FTF Design System
+
+Last updated: 2026-09-21
+Owner: FTF web team (Arthium Labs LLC)
+Approval required for changes: yes
+
+Source of truth: `src/app/globals.css` (Layer 1 `:root` / `[data-theme="dark"]` custom properties, Layer 2 Tailwind `@theme inline` mapping, Layer 3 dark-mode palette remaps). Every value below is read from that file; if this document and the CSS disagree, the CSS wins and this document must be corrected with a changelog entry.
+
+## 1. Brand colors
+
+### Backgrounds, surfaces, borders
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --color-bg-primary | #F6F7F8 | #16181A | page background |
+| --color-bg-secondary | #FFFFFF | #1E2124 | alternating section background |
+| --color-bg-tertiary | #EDF0F2 | #262A2D | hover fills, subtle bands |
+| --color-bg-elevated | #FFFFFF | #2E3336 | popovers, raised panels |
+| --color-bg-overlay | rgba(73,73,73,0.5) | rgba(0,0,0,0.7) | modal/lightbox scrims |
+| --ftf-surface / --color-surface | #FFFFFF | #1E2124 | cards, inputs |
+| --ftf-surface-hover | #F1F3F5 | #262A2D | card/input hover |
+| --ftf-border / --color-border | #E2E6E9 | #33383C | hairline borders |
+| --ftf-border-strong / --color-border-strong | #C6CDD2 | #494949 | input borders, strong dividers |
+| --ftf-divider / --color-divider | #E8EBEE | #2C3134 | section dividers |
+
+### Text
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-text-primary | #333333 | #F2F4F5 | headings, body emphasis |
+| --ftf-text-secondary | #494949 | #C6CBCF | body copy (brand charcoal) |
+| --ftf-text-tertiary | #6C7277 | #9BA1A6 | labels, meta |
+| --ftf-text-muted | #9AA1A6 | #6E7478 | placeholders, captions |
+| --ftf-text-inverse | #F6F7F8 | #16181A | inverted bands |
+| --ftf-text-on-primary | #FFFFFF | #FFFFFF | text on blue (both themes) |
+| --ftf-text-link / -hover | #3973B8 / #2E5F9C | #7FA9DC / #A6C4E8 | inline links |
+
+### Brand
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-primary | #3973B8 | #3973B8 | trust surfaces: footer band, login brand panel, secondary buttons |
+| --ftf-primary-hover | #2E5F9C | #2E5F9C | blue hover |
+| --ftf-primary-active | #265085 | #265085 | blue pressed |
+| --ftf-primary-subtle | #EAF1F9 | #1A2634 | blue tint backgrounds |
+| --ftf-accent | #4CB64D | #6FCB70 | progress, icons, chips ONLY - never a button background |
+| --ftf-accent-hover | #2E7D32 | #8FD890 | light-mode button green (with white text) |
+| --ftf-accent-subtle | #EDF8EE | #16281A | green tint backgrounds |
+| --ftf-accent-text | #2E7D32 | #8FD890 | green text on light/dark |
+| --ftf-accent-bright | #8FD890 | #8FD890 | accents on blue panels |
+
+### CTA pair (the only green button pattern)
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-cta-bg / --color-cta | #2E7D32 | #6FCB70 | every green CTA background |
+| --ftf-cta-bg-hover / --color-cta-hover | #256428 | #5CB85E | green CTA hover |
+| --ftf-cta-text / --color-on-cta | #FFFFFF | #16181A | green CTA label |
+
+Light pair measures ≈4.78:1, dark pair ≈8.3:1 (WCAG AA). The mid accent green #4CB64D behind white or navy text measures ≈2.5:1 and is BANNED as a button background.
+
+### Semantic
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-success / -bg / -text | #2E7D32 / #E8F5E9 / #1B5E20 | #6FCB70 / #16281A / #9ADF9B | success states, confirmations |
+| --ftf-warning / -bg / -text | #D97706 / #FDF4E3 / #8A5300 | #E5A44A / #2A2214 / #EFC078 | pilot status, cautions |
+| --ftf-error / -bg / -text | #C7442E / #FBE8E4 / #8A2A1B | #E87560 / #2E1814 / #F5A89A | form errors, destructive |
+| --ftf-info / -bg / -text | #3973B8 / #EAF1F9 / #265085 | #3973B8 / #14202E / #A6C4E8 | informational notices |
+| --ftf-on-success | #FFFFFF | #16181A | text on success fills |
+
+### Trust layer
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-trust-bg | #FFFFFF | #1E2124 | trust chip/card background |
+| --ftf-trust-border | #E2E6E9 | #33383C | trust chip border |
+| --ftf-trust-icon | #4CB64D | #6FCB70 | trust iconography |
+| --ftf-trust-text | #494949 | #C6CBCF | trust statement text |
+| --ftf-trust-meta | #6C7277 | #9BA1A6 | trust meta lines |
+
+### Pillar accents
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-pillar-1 | #3973B8 | #7FA9DC | Education pillar |
+| --ftf-pillar-2 | #C7442E | #E87560 | Girls' empowerment pillar |
+| --ftf-pillar-3 | #3973B8 | #7FA9DC | Future-ready skills pillar |
+| --ftf-pillar-4 | #4CB64D | #6FCB70 | Mentorship & wellbeing pillar |
+| --ftf-pillar-5 | #494949 | #C6CBCF | Community support pillar |
+
+Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-pillar-N` (tree-shaken when only used from inline style strings).
+
+### Impact, journey/progress, content patterns
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-impact-number | #3973B8 | #7FA9DC | impact stat numerals |
+| --ftf-impact-label | #6C7277 | #9BA1A6 | impact stat labels |
+| --ftf-impact-meta | #9AA1A6 | #6E7478 | impact stat meta |
+| --ftf-journey-track | #EDF0F2 | #262A2D | journey stepper track |
+| --ftf-journey-fill | #4CB64D | #6FCB70 | journey progress fill |
+| --ftf-journey-node | #3973B8 | #7FA9DC | journey node idle |
+| --ftf-journey-node-active | #4CB64D | #6FCB70 | journey node active |
+| --ftf-quote-mark | #4CB64D | #6FCB70 | pull-quote marks |
+| --ftf-story-bg | #FFFFFF | #1E2124 | story cards |
+| --ftf-story-tag / -text | #EDF8EE / #2E7D32 | #16281A / #9ADF9B | story category tags |
+| --ftf-report-bg | #FFFFFF | #1E2124 | report cards |
+| --ftf-status-active | #2E7D32 | #6FCB70 | status pill: active |
+| --ftf-status-pilot | #D97706 | #E5A44A | status pill: pilot |
+| --ftf-status-archived | #6C7277 | #9BA1A6 | status pill: archived |
+| --ftf-status-campaign | #C7442E | #E87560 | status pill: campaign |
+
+### System
+
+| Token | Light | Dark | Where used |
+| --- | --- | --- | --- |
+| --ftf-shadow-color | rgba(73,73,73,0.08) | rgba(0,0,0,0.5) | card shadows |
+| --ftf-focus-ring | 0 0 0 3px rgba(57,115,184,0.35) | 0 0 0 3px rgba(127,169,220,0.5) | :focus-visible everywhere |
+| --ftf-scrollbar-track / -thumb | #EDF0F2 / #C6CDD2 | #1E2124 / #494949 | scrollbars |
+| --ftf-selection-bg / -text | #4CB64D / #0E2E0F | #4CB64D / #0E2E0F | ::selection |
+
+### Rules
+
+- Never invent new hues. If a need is not covered above, ask before adding a token (globals.css requires explicit approval).
+- Never use raw hex in JSX (`text-[#...]`, `bg-[#...]`, inline `style` hex). Enforced by `npm run check-design-tokens`.
+- Green (#4CB64D) = progress/icons/chips ONLY. Buttons use the CTA pair (accent-hover green + accessible text), never mid accent green.
+- Blue = trust signals, NOT CTAs.
+- Legacy Tailwind palettes (navy-*, gold-*, emerald-*, coral-*) exist only so old classes keep resolving and auto-adapt in dark mode (Layer 3). New code must use semantic tokens.
+- The Tailwind `white` utility INVERTS to the dark surface in dark mode (Layer 3). On surfaces that stay the same colour in both themes (e.g. the blue footer band) use `text-text-on-primary` and opacity variants of it, or the scoped `footer.bg-primary { --color-white: #FFFFFF; }` override already in globals.css.
+
+## 2. Typography
+
+- Display: Playfair Display (`--font-display`) - H1, H2, pull quotes, hero display lines.
+- Body: Inter (`--font-sans`) - body, UI, links, labels.
+- Body line-height: 1.7 (set on `body`).
+- Scale (Tailwind steps in use): text-xs 0.75rem (eyebrows, labels, meta), text-sm 0.875rem (UI, small body), text-base 1rem (body), text-lg 1.125rem (lede), text-xl 1.25rem, text-2xl 1.5rem (H3), text-3xl 1.875rem (H2 mobile), text-4xl 2.25rem (H2/H1 mobile), text-5xl 3rem (H1 desktop).
+- Editorial body column: 620px (not ch-based; Inter ch exceeds average glyph width).
+
+## 3. Spacing
+
+- 8pt scale: 4, 8, 12, 16, 24, 32, 48, 64, 96.
+- Section rhythm: --spacing-section 5rem.
+- Container widths: body 620px, wide 1200px, full 1440px.
+- Radii: --radius-card 1rem (cards, panels), --radius-button 0.5rem (form controls); shared Button renders pill (rounded-full).
+
+## 4. Components
+
+- Buttons (`src/components/ui/Button.tsx`, pill shape, sizes sm/md/lg):
+  - primary: bg-cta + text-on-cta (dark green/white light, bright green/near-black dark)
+  - secondary: bg-primary + text-text-on-primary (blue trust action)
+  - outline: border-2 border-border, hover border-primary + bg-bg-tertiary
+  - ghost: text-text-secondary, hover bg-bg-tertiary
+  - tertiary/text link: LearnMoreLink (accent-hover text + arrow)
+  - destructive: error-token inline pattern (border-error/text-error or bg-error bg-error/10); no shared variant yet - do not invent one without approval
+- Cards: ValueCard (value props), ProgrammeCard (our-work), StatDisplay (impact numerals), story/report cards (rounded-2xl border-border bg-surface + shadow), ImpactGallery tiles (rounded-xl bg-bg-tertiary with skeleton), trust chips (TrustChips).
+- Chips: pillar chips (pillar-N accent or bg-accent-subtle + text-accent-text), category chips on news (bg-story-tag + text-story-tag-text), status pills (status-active/pilot/archived/campaign), trust chips (border-trust-border + trust-icon).
+- Forms: label text-xs font-semibold uppercase tracking-wider text-text-tertiary; input rounded-xl border-border-strong bg-surface py-3 px-4 text-sm, focus:border-accent + focus:ring-2 ring-accent/20; error alert rounded-xl border-error/20 bg-error/10 text-error; help text text-xs text-text-muted.
+- Navigation: Navbar (sticky desktop header + ThemeToggle), MobileMenu (right-side drawer, 56px rows, active row green left border), Footer (blue bg-primary band in both themes, white scoped override, link columns + contact).
+
+## 5. Anti-patterns (BANNED)
+
+- Full-screen blue mobile overlay
+- Count-up animations from 0
+- Rotating hero carousels
+- "underprivileged" / "less privileged" / "poor children" (enforced by check:banned-language)
+- "initiatives" as nav label
+- Pity-led imagery
+- Full legal names for minors
+- Raw hex in JSX (`text-[#...]`, `bg-[#...]`, inline style with hex)
+- New color hues beyond the brand palette
+- Drop caps
+- Social share counts
+
+## 6. Accessibility
+
+- WCAG AA minimum (4.5:1 body, 3:1 large text). Measured pairs: CTA light 4.78:1 / dark 8.3:1; blue primary + white 4.9:1.
+- Focus rings on all interactive elements via :focus-visible + --ftf-focus-ring.
+- Alt text on all images; safeguarding-safe (non-identifying) alt/captions for programme photography.
+- Semantic HTML (article, header, nav, main); skip-to-content link.
+- Respect prefers-reduced-motion (global media query collapses animations/transitions).
+
+## 7. Change log
+
+- 2026-09-21 - Design system lock established (Phase 11.5). Token table captured verbatim from globals.css; check-design-tokens CI gate added; AGENTS.md rewritten. No token values changed.
+- 2026-09-21 - Site-wide copy sweep: em dashes (—) replaced with hyphens (-) in source and DB content.
+- 2026-09-21 - White brand lockup re-uploaded to Cloudinary (ftf/images/misc/ftf-logo-white, v1790007291); footer + supporter-login brand panel now use it.
+- Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
+- Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.

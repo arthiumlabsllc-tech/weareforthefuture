@@ -54,6 +54,7 @@ cloudinary-map.json
 !/scripts/verify-future-pathways.mjs
 !/scripts/seed-pillars.ts
 !/scripts/check-banned-language.mjs
+!/scripts/check-design-tokens.mjs
 !/scripts/sweep-legacy-copy.ts
 
 # local build / server logs and CDP screenshot captures (never commit)
