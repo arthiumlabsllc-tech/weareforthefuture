@@ -17,6 +17,15 @@ You are working on the For The Future Organization website. Before touching anyt
 3. BRIEF-AUDIT.md - current brief coverage (if it exists)
 4. The FTF 2026-2031 website brief
 
+## Session continuity
+
+Handoff files are kept OUTSIDE the repo at the workspace root:
+
+- ../SESSION-HANDOFF.md
+- ../PHASE-12-CONTINUITY.md
+
+Reason: they contain internal sequencing and founder feedback that isn't for public consumption. New agents should ask the user for these before proceeding.
+
 ## Non-negotiables
 
 - Follow DESIGN.md for every UI decision
