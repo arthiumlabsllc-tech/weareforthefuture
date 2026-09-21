@@ -211,6 +211,8 @@ Normative. All animation on the site must fit a pattern below; new patterns requ
 | Scroll-linked fill | journey progress, fund-allocation bars | width/scaleX tied to the containing section's scroll progress, rAF-throttled; final state is the exact token value (no overshoot) |
 | Celebration | donation/payment success | confetti burst using `confettiColors` from `src/lib/chartColors.ts`, one-shot, total ≤ 3s; sequenced reveal (check → receipt) |
 | Carousel/swipe | approved swipe surfaces only | snap points, 200-300ms slide, user-driven only (drag/arrow/dot); indicators in muted tokens |
+
+> **Carousel/swipe status:** No carousel or swipe surface currently exists on the site. This pattern is documented for future use only. Any new carousel/swipe implementation requires brief-level approval per §4 component changes.
 | Micro-interaction | hover/press/focus on buttons, cards, links | CSS transitions 150-250ms on color/background/box-shadow; transform shifts ≤ 2px |
 
 ### Rules
