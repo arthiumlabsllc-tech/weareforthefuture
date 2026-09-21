@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -8,12 +8,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Heart, ChevronDown, User, LogOut, LayoutDashboard } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import MobileMenu from "@/components/layout/MobileMenu";
 import { img } from "@/lib/imageUrl";
 
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [supporter, setSupporter] = useState<{ name: string; email: string } | null>(null);
   const [accountOpen, setAccountOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
   // Check supporter session
@@ -155,8 +157,9 @@ export default function Navbar() {
         <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
           <button
+            ref={hamburgerRef}
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className={`relative z-50 flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+            className={`relative z-50 flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
               isMobileOpen
                 ? "bg-primary text-text-on-primary"
                 : "bg-bg-tertiary text-text-primary"
@@ -170,80 +173,14 @@ export default function Navbar() {
       </nav>
     </header>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-primary/95 backdrop-blur-xl lg:hidden"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex h-full flex-col items-center justify-center gap-2 px-6"
-            >
-              {/* Logo */}
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05, duration: 0.4 }}
-                className="mb-6"
-              >
-                <Link href="/" onClick={() => setIsMobileOpen(false)}>
-                  <Image
-                    src={img("/images/misc/ftf-logo-white.png")}
-                    alt="For The Future Organization"
-                    width={140}
-                    height={56}
-                    className="h-14 w-auto object-contain"
-                    unoptimized
-                  />
-                </Link>
-              </motion.div>
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.05 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsMobileOpen(false)}
-                    className={`block px-6 py-3 text-center text-xl font-medium transition-colors rounded-xl ${
-                      pathname === link.href
-                        ? "text-accent-bright bg-white/5"
-                        : "text-white/80 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6"
-              >
-                <Link
-                  href="/donate"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="inline-flex items-center gap-2 rounded-full bg-cta px-8 py-3 text-base font-semibold text-on-cta shadow-lg"
-                >
-                  <Heart className="h-5 w-5" />
-                  Give Now
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Phase 8.9 — Pattern A right-side drawer (replaces the old
+          full-screen blue overlay entirely). */}
+      <MobileMenu
+        open={isMobileOpen}
+        onClose={() => setIsMobileOpen(false)}
+        hamburgerRef={hamburgerRef}
+        supporterName={supporter?.name ?? null}
+      />
     </>
   );
 }
