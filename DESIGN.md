@@ -188,5 +188,49 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 - 2026-09-21 - Site-wide copy sweep: em dashes (—) replaced with hyphens (-) in source and DB content.
 - 2026-09-21 - White brand lockup re-uploaded to Cloudinary (ftf/images/misc/ftf-logo-white, v1790007291); footer + supporter-login brand panel now use it.
 - 2026-09-21 - Decision 1: token-check violations cleared - confetti + fundAllocation hexes moved to the shared `src/lib/chartColors.ts` map (theme-aware `var()` references); error boundary and theme-color meta literals carry documented `design-tokens-exempt` markers.
+- 2026-09-21 - §8 Motion guidelines added (Phase 12 Step 1 / C3): entrance, scroll-linked, celebration, carousel and micro-interaction patterns with mandatory reduced-motion fallbacks. No token changes.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
+
+## 8. Motion
+
+Normative. All animation on the site must fit a pattern below; new patterns require the same approval as any other change to this document.
+
+### Principles
+
+- Motion serves meaning: it reveals structure, shows progress, or rewards completion. Never decoration for its own sake.
+- Content is fully readable the moment its section is visible - animation must never gate comprehension.
+- LCP safety: hero and above-the-fold text render immediately with no opacity/transform entrance. Entrance animations apply to below-the-fold content only (a Framer Motion opacity entrance on the LCP element is a known past regression).
+- Brand tone: calm and confident. No bounce/elastic overshoot on institutional surfaces; playful easing is reserved for celebration moments.
+
+### Allowed patterns
+
+| Pattern | Use | Spec |
+| --- | --- | --- |
+| Entrance reveal | sections, cards, list items | opacity 0→1 + translateY 12-16px→0, 300-500ms, `whileInView` with `viewport={{ once: true, margin: "-80px" }}`; item stagger ≤ 60ms, max ~10 animated items per section |
+| Scroll-linked fill | journey progress, fund-allocation bars | width/scaleX tied to the containing section's scroll progress, rAF-throttled; final state is the exact token value (no overshoot) |
+| Celebration | donation/payment success | confetti burst using `confettiColors` from `src/lib/chartColors.ts`, one-shot, total ≤ 3s; sequenced reveal (check → receipt) |
+| Carousel/swipe | approved swipe surfaces only | snap points, 200-300ms slide, user-driven only (drag/arrow/dot); indicators in muted tokens |
+| Micro-interaction | hover/press/focus on buttons, cards, links | CSS transitions 150-250ms on color/background/box-shadow; transform shifts ≤ 2px |
+
+### Rules
+
+- Library: Framer Motion for entrance/scroll-linked/celebration; CSS transitions for micro-interactions.
+- Durations: micro 150-250ms; entrance 300-500ms; celebration ≤ 3s; scroll-linked has no fixed duration (tied to scroll).
+- Easing: ease-out for entrances, ease-in for exits; springs only for celebration (damping ≥ 20, no repeated oscillation).
+- Animate transform/opacity wherever possible; width/height only for bars and fills.
+- Entrances use `once: true` - no replay on re-scroll (exception: explicit progress indicators).
+
+### Reduced motion (mandatory)
+
+- The global `prefers-reduced-motion` media query in globals.css collapses CSS animations/transitions.
+- Any JS-driven motion (Framer entrance, scroll-linked fill, confetti) must additionally check `matchMedia("(prefers-reduced-motion: reduce)")` and render the final state immediately: bars at final width, no confetti, no slide animation, content visible.
+
+### Banned motion
+
+- Count-up animations from 0 (numbers render final immediately).
+- Rotating/autoplay hero carousels.
+- Full-screen blue mobile overlay.
+- Parallax background layers.
+- Infinite looping animation on content surfaces (existing exception: the ImpactMarquee band, which collapses under reduced motion).
+- Entrance animation on the LCP element.
