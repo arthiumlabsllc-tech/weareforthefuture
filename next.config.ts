@@ -9,16 +9,15 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_DEPLOY_ENV: process.env.VERCEL_ENV || "development",
   },
   // Preview safety: keep Vercel preview / branch deployments out of search
-  // indexes. On the production deployment (VERCEL_ENV === "production") no
-  // X-Robots-Tag header is emitted, so prod stays indexable.
+  // indexes. On the production deployment (VERCEL_ENV === "production") we emit
+  // NO rule at all — Next rejects a route whose headers array is empty
+  // ("`headers` field cannot be empty for route"), which broke the prod build.
   async headers() {
+    if (process.env.VERCEL_ENV === "production") return [];
     return [
       {
         source: "/:path*",
-        headers:
-          process.env.VERCEL_ENV !== "production"
-            ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]
-            : [],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
   },
