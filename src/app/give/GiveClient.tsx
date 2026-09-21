@@ -117,7 +117,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
       </section>
 
       {/* ===== TWO-COLUMN: ROUTES + TRUST ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
           {/* LEFT - giving routes */}
           <div>
@@ -249,7 +249,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
       </SectionWrapper>
 
       {/* ===== PROGRAMME CHOOSER ===== */}
-      <SectionWrapper background="white" id="programmes">
+      <SectionWrapper background="sand" id="programmes">
         <SectionHeader
           overline="Programme support"
           title="Give to a specific programme"
@@ -298,7 +298,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
       </SectionWrapper>
 
       {/* ===== CAMPAIGNS ===== */}
-      <SectionWrapper background="warm" id="campaigns">
+      <SectionWrapper background="cream" id="campaigns">
         <SectionHeader
           overline="Campaign support"
           title="Time-bound appeals"

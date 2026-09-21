@@ -61,7 +61,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
       </section>
 
       {/* ===== IMPACT DASHBOARD (static - no count-up) ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Impact dashboard"
           title="A decade, measured"
@@ -103,7 +103,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
       </SectionWrapper>
 
       {/* ===== FUND ALLOCATION (real breakdown, no unsubstantiated percentage claim) ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="sand">
         <div className="grid gap-12 lg:grid-cols-2 items-start">
           <div>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
@@ -169,7 +169,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
 
       {/* ===== PROGRAMME-LEVEL INDICATORS (from DB) ===== */}
       {indicators.length > 0 && (
-        <SectionWrapper background="white">
+        <SectionWrapper background="cream">
           <SectionHeader
             overline="Programme-level indicators"
             title="Impact by programme"
@@ -225,7 +225,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
       )}
 
       {/* ===== STORIES OF CHANGE ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="white">
         <SectionHeader
           overline="Stories of change"
           title="Behind the numbers"

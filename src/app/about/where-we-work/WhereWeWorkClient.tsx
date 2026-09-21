@@ -41,7 +41,7 @@ export default function WhereWeWorkClient() {
       </SectionWrapper>
 
       {/* ===== TWO COLUMNS ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="grid gap-8 md:grid-cols-2">
           {/* Ghana */}
           <motion.div
@@ -159,7 +159,7 @@ export default function WhereWeWorkClient() {
       </SectionWrapper>
 
       {/* ===== REACH AT A GLANCE ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="Our reach"
           title="Deep roots, growing reach"
@@ -190,7 +190,7 @@ export default function WhereWeWorkClient() {
       </SectionWrapper>
 
       {/* ===== CTA ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl">
             See the work in these communities

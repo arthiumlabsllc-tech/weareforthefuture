@@ -232,7 +232,7 @@ export default function HomeClient({
       </SectionWrapper>
 
       {/* ===== 4. FIVE PILLARS ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="How we create change"
           title="Our five pillars"
@@ -265,7 +265,7 @@ export default function HomeClient({
       </SectionWrapper>
 
       {/* ===== 5. JOURNEY - HOW FTF CHANGES A FUTURE ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="Our theory of change"
           title="How FTF changes a future"
@@ -275,7 +275,7 @@ export default function HomeClient({
       </SectionWrapper>
 
       {/* ===== 6. FEATURED WORK (hard-coded launch set) ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="white">
         <SectionHeader
           overline="Featured work"
           title="Where we're focused right now"
@@ -421,7 +421,7 @@ export default function HomeClient({
       </SectionWrapper>
 
       {/* ===== 8. STORIES OF CHANGE ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Stories of change"
           title="Behind every number, a name"
@@ -464,7 +464,7 @@ export default function HomeClient({
       </SectionWrapper>
 
       {/* ===== 9. FOUNDER QUOTE ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="sand">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -501,7 +501,7 @@ export default function HomeClient({
       </SectionWrapper>
 
       {/* ===== 11. CURRENT PRIORITIES (CMS-driven) ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Current priorities"
           title="Where support is needed now"
@@ -559,7 +559,7 @@ export default function HomeClient({
       </section>
 
       {/* ===== 13. NEWSLETTER (consent-gated) ===== */}
-      <section className="bg-bg-primary py-16 md:py-20">
+      <section className="bg-sand py-16 md:py-20">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
           <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-primary md:text-3xl">
             Stay close to the work

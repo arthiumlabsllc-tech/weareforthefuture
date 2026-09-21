@@ -76,7 +76,7 @@ export default function AboutPageClient() {
   return (
     <>
       {/* ===== SPLIT HERO ===== */}
-      <SectionWrapper background="white" className="overflow-hidden">
+      <SectionWrapper background="cream" className="overflow-hidden">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -139,7 +139,7 @@ export default function AboutPageClient() {
       </SectionWrapper>
 
       {/* ===== AT-A-GLANCE STATS (static - no count-up) ===== */}
-      <SectionWrapper background="gradient" className="!py-14 md:!py-16">
+      <SectionWrapper background="sand" className="!py-14 md:!py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <StatDisplay value={siteConfig.stats.yearsOfFoundation} label="Years of impact" />
           <StatDisplay value={siteConfig.stats.beneficiaries} suffix="+" label="Lives reached" />
@@ -190,7 +190,7 @@ export default function AboutPageClient() {
       </SectionWrapper>
 
       {/* ===== VISION + MISSION (exact from siteConfig) ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="cream">
         <div className="grid gap-6 md:grid-cols-2">
           {[
             { icon: Eye, label: "Our Vision", body: siteConfig.vision, color: "accent" },
@@ -220,7 +220,7 @@ export default function AboutPageClient() {
       </SectionWrapper>
 
       {/* ===== CORE VALUES (7) ===== */}
-      <SectionWrapper background="white" id="values">
+      <SectionWrapper background="sand" id="values">
         <SectionHeader
           overline="What guides us"
           title="Our core values"
@@ -230,7 +230,7 @@ export default function AboutPageClient() {
       </SectionWrapper>
 
       {/* ===== CLOSING CTA ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="white">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

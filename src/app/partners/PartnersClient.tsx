@@ -150,7 +150,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
       </section>
 
       {/* ===== CREDIBILITY ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Why institutions choose FTF"
           title="A credible partner on the ground"
@@ -192,7 +192,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
       </SectionWrapper>
 
       {/* ===== PARTNERSHIP ROUTES ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="How we can work together"
           title="Partnership routes"
@@ -263,7 +263,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
       </section>
 
       {/* ===== LOGO WALL ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="In good company"
           title="Current partners"
@@ -300,7 +300,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
       </SectionWrapper>
 
       {/* ===== CORPORATE DECK + INQUIRY ===== */}
-      <SectionWrapper background="warm" id="deck">
+      <SectionWrapper background="sand" id="deck">
         <div className="grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           {/* Deck */}
           <div className="min-w-0 rounded-2xl border border-border bg-surface p-7">

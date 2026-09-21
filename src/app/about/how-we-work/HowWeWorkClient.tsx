@@ -85,7 +85,7 @@ export default function HowWeWorkClient() {
       </SectionWrapper>
 
       {/* ===== PRINCIPLES ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {principles.map((p, i) => {
             const t = tone[p.color] || tone.primary;
@@ -115,7 +115,7 @@ export default function HowWeWorkClient() {
       </SectionWrapper>
 
       {/* ===== CTA ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="sand">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl">
             See these principles in action

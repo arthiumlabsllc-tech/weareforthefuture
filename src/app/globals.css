@@ -477,6 +477,20 @@ footer.bg-primary {
   --color-white: #FFFFFF;
 }
 
+/* Sand bands (--ftf-sand #EFE9DD) are the deepest warm surface in light theme.
+   The lightest text tokens (tertiary/muted) and the mid green overline fall just
+   under WCAG AA 4.5:1 on it, so scope slightly darker values to sand surfaces in
+   light theme only (dark theme sand is a dark surface and keeps its light text). */
+[data-theme="light"] .bg-sand {
+  --ftf-text-tertiary: #5F6569;
+  --ftf-text-muted: #5F6569;
+  --ftf-accent-hover: #1B5E20;
+  --ftf-accent-text: #1B5E20;
+  --ftf-trust-meta: #5F6569;
+  --ftf-impact-label: #5F6569;
+  --ftf-impact-meta: #5F6569;
+}
+
 /* ===== Base Styles ===== */
 
 html {

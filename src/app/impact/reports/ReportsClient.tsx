@@ -71,7 +71,7 @@ export default function ReportsClient({
       </SectionWrapper>
 
       {/* ===== AT A GLANCE (static - no count-up) ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <StatDisplay value={`${yearsOfFoundation}`} label="Years of continuous impact" />
           <StatDisplay
@@ -88,7 +88,7 @@ export default function ReportsClient({
       </SectionWrapper>
 
       {/* ===== ANNUAL REPORTS ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="Annual reports"
           title="Published reports"
@@ -174,7 +174,7 @@ export default function ReportsClient({
       </SectionWrapper>
 
       {/* ===== FINANCIAL SUMMARY ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Financial summary"
           title="How funds are allocated"
@@ -230,7 +230,7 @@ export default function ReportsClient({
       </SectionWrapper>
 
       {/* ===== REGISTRATION & AUDIT ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="white">
         <SectionHeader
           overline="Governance"
           title="Registration &amp; audit"
@@ -297,7 +297,7 @@ export default function ReportsClient({
       </SectionWrapper>
 
       {/* ===== POLICIES ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="Policies"
           title="Institutional policies"

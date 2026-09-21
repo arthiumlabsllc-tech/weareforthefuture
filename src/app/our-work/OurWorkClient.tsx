@@ -47,7 +47,7 @@ export default function OurWorkClient({
   return (
     <>
       {/* ===== a. HERO (split) ===== */}
-      <section className="relative overflow-hidden bg-bg-primary">
+      <section className="relative overflow-hidden bg-cream">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,color-mix(in_srgb,var(--ftf-accent)_12%,transparent),transparent_55%)]"
@@ -130,7 +130,7 @@ export default function OurWorkClient({
       </section>
 
       {/* ===== b. DEVELOPMENT PATHWAY INTRO ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="sand">
         <div className="mx-auto max-w-3xl text-center">
           <SectionHeader
             overline="How our work fits together"
@@ -148,7 +148,7 @@ export default function OurWorkClient({
       </SectionWrapper>
 
       {/* ===== c. JOURNEY ===== */}
-      <SectionWrapper background="warm" id="journey" className="scroll-mt-24">
+      <SectionWrapper background="white" id="journey" className="scroll-mt-24">
         <SectionHeader
           overline="Our theory of change"
           title="How FTF changes a future"
@@ -158,7 +158,7 @@ export default function OurWorkClient({
       </SectionWrapper>
 
       {/* ===== d. FIVE PILLARS GRID ===== */}
-      <SectionWrapper background="white" id="pillars" className="scroll-mt-24">
+      <SectionWrapper background="cream" id="pillars" className="scroll-mt-24">
         <SectionHeader
           overline="The five pillars"
           title="Our five programme pillars"
@@ -259,41 +259,40 @@ export default function OurWorkClient({
       })}
 
       {/* ===== f. WHERE WE WORK ===== */}
-      <SectionWrapper background="navy">
+      <SectionWrapper background="sand">
         <SectionHeader
-          light
           overline="Where we work"
           title="Programme delivery in two countries"
           description="FTF delivers programmes in Ghana and Nigeria. Our US 501(c)(3) is a funding vehicle that supports this work - not a third programme country."
         />
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/15 bg-white/5 p-7">
+          <div className="rounded-2xl border border-border bg-surface p-7">
             <div className="flex items-center gap-3">
-              <MapPin aria-hidden="true" className="h-5 w-5 text-accent-bright" />
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-on-primary">Ghana</h3>
+              <MapPin aria-hidden="true" className="h-5 w-5 text-accent-text" />
+              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-primary">Ghana</h3>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-text-on-primary/75">
+            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
               Greater Accra is our core, with regional outreach across {ghana.length} regions.
             </p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {ghana.map((region) => (
-                <li key={region} className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-text-on-primary/85">
+                <li key={region} className="rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary">
                   {region}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/15 bg-white/5 p-7">
+          <div className="rounded-2xl border border-border bg-surface p-7">
             <div className="flex items-center gap-3">
-              <MapPin aria-hidden="true" className="h-5 w-5 text-accent-bright" />
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-on-primary">Nigeria</h3>
+              <MapPin aria-hidden="true" className="h-5 w-5 text-accent-text" />
+              <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-primary">Nigeria</h3>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-text-on-primary/75">
+            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
               Programming is based in Ibadan, Oyo State, delivered with local partners.
             </p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {nigeria.map((region) => (
-                <li key={region} className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-text-on-primary/85">
+                <li key={region} className="rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary">
                   {region}
                 </li>
               ))}

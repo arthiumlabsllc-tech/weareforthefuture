@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface SectionWrapperProps {
   children: ReactNode;
   className?: string;
   id?: string;
-  background?: "white" | "warm" | "navy" | "gradient";
+  background?: "white" | "warm" | "navy" | "gradient" | "cream" | "sand";
 }
 
 const bgStyles = {
@@ -15,6 +15,8 @@ const bgStyles = {
   warm: "bg-bg-primary",
   navy: "bg-primary text-text-on-primary",
   gradient: "bg-gradient-to-b from-bg-primary to-surface",
+  cream: "bg-cream",
+  sand: "bg-sand",
 };
 
 export default function SectionWrapper({
@@ -23,10 +25,18 @@ export default function SectionWrapper({
   id,
   background = "warm",
 }: SectionWrapperProps) {
+  const reduceMotion = useReducedMotion();
   return (
-    <section id={id} className={`py-20 md:py-24 lg:py-28 ${bgStyles[background]} ${className}`}>
+    <motion.section
+      id={id}
+      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
+      className={`py-20 md:py-24 lg:py-28 ${bgStyles[background]} ${className}`}
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">{children}</div>
-    </section>
+    </motion.section>
   );
 }
 

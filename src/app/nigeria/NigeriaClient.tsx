@@ -148,7 +148,7 @@ export default function NigeriaClient() {
       </section>
 
       {/* ===== INTRO + VERIFIED SNAPSHOT ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -206,7 +206,7 @@ export default function NigeriaClient() {
       </SectionWrapper>
 
       {/* ===== PROGRAMMES IN NIGERIA ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="What we run in Ibadan"
           title="Our programmes in Nigeria"
@@ -284,7 +284,7 @@ export default function NigeriaClient() {
       </SectionWrapper>
 
       {/* ===== UNIFIED FIVE-PILLAR FRAMEWORK ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="One framework"
           title="The same five pillars, everywhere we work"
@@ -353,7 +353,7 @@ export default function NigeriaClient() {
       </SectionWrapper>
 
       {/* ===== WHERE WE WORK IN NIGERIA ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="white">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -423,7 +423,7 @@ export default function NigeriaClient() {
       </SectionWrapper>
 
       {/* ===== IMPACT IN NIGERIA (VERIFIED FIGURES ONLY) ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="Impact in Nigeria"
           title="Verified figures only"
@@ -464,7 +464,7 @@ export default function NigeriaClient() {
       </SectionWrapper>
 
       {/* ===== STORIES FROM NIGERIA (SAFEGUARDING-GATED) ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Stories from Nigeria"
           title="Published only with consent"

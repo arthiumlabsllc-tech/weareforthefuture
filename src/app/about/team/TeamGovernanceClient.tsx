@@ -162,7 +162,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
       </div>
 
       {/* ===== LEADERSHIP ===== */}
-      <SectionWrapper background="white" id="leadership" className="scroll-mt-28">
+      <SectionWrapper background="cream" id="leadership" className="scroll-mt-28">
         <SectionHeader
           align="left"
           overline="Leadership"
@@ -200,7 +200,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
       </SectionWrapper>
 
       {/* ===== EXECUTIVE BOARD (governance) ===== */}
-      <SectionWrapper background="gradient" id="governance" className="scroll-mt-28">
+      <SectionWrapper background="sand" id="governance" className="scroll-mt-28">
         <SectionHeader
           align="left"
           overline="Governance"
@@ -214,7 +214,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
       </SectionWrapper>
 
       {/* ===== ADVISORY BOARD ===== */}
-      <SectionWrapper background="white" id="advisory" className="scroll-mt-28">
+      <SectionWrapper background="cream" id="advisory" className="scroll-mt-28">
         <SectionHeader
           align="left"
           overline="Guidance"
@@ -228,7 +228,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
       </SectionWrapper>
 
       {/* ===== PROGRAMME / FUNCTIONAL TEAM ===== */}
-      <SectionWrapper background="gradient" id="team" className="scroll-mt-28">
+      <SectionWrapper background="sand" id="team" className="scroll-mt-28">
         <SectionHeader
           align="left"
           overline="Delivery"
@@ -252,7 +252,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
       </SectionWrapper>
 
       {/* ===== ASSOCIATES & FELLOWS ===== */}
-      <SectionWrapper background="white" id="fellows" className="scroll-mt-28">
+      <SectionWrapper background="cream" id="fellows" className="scroll-mt-28">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
@@ -307,7 +307,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
       </SectionWrapper>
 
       {/* ===== CTA ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="sand">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary md:text-4xl">
             Want to build futures with us?

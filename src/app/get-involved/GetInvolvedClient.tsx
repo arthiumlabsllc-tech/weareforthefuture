@@ -136,7 +136,7 @@ export default function GetInvolvedClient() {
       </section>
 
       {/* ===== PATHWAYS ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Four ways to get involved"
           title="Choose your path"
@@ -173,7 +173,7 @@ export default function GetInvolvedClient() {
       </SectionWrapper>
 
       {/* ===== ONBOARDING + SAFEGUARDING ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="How it works"
           title="A safe, supported onboarding"
@@ -236,7 +236,7 @@ export default function GetInvolvedClient() {
       </section>
 
       {/* ===== CTA ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}

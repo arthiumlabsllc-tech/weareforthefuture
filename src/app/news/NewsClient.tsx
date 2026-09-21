@@ -175,7 +175,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
       </section>
 
       {/* ===== FILTER BAR ===== */}
-      <SectionWrapper background="white" className="!py-10">
+      <SectionWrapper background="cream" className="!py-10">
         <div className="space-y-5">
           {/* Search + selects */}
           <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr_1fr]">
@@ -308,7 +308,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
 
       {/* ===== FEATURED ARTICLE ===== */}
       {featured && (
-        <SectionWrapper background="white">
+        <SectionWrapper background="sand">
           <SectionHeader
             overline="Featured Story"
             title="Editor's Pick"
@@ -381,7 +381,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
       )}
 
       {/* ===== ARTICLES GRID ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="white">
         <SectionHeader
           overline="Latest Updates"
           title="All News & Stories"

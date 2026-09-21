@@ -110,7 +110,7 @@ export default function FTFat10Client() {
       </section>
 
       {/* ===== A DECADE IN NUMBERS (static - no count-up) ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="A decade in numbers"
           title="Ten years, measured"
@@ -129,7 +129,7 @@ export default function FTFat10Client() {
       </SectionWrapper>
 
       {/* ===== TIMELINE (reused component - not duplicated) ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="2016 → 2026"
           title="The road so far"
@@ -147,7 +147,7 @@ export default function FTFat10Client() {
       </SectionWrapper>
 
       {/* ===== KEY MILESTONES + PHOTOS ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="white">
         <SectionHeader
           overline="Key milestones"
           title="Moments that made the decade"
@@ -187,7 +187,7 @@ export default function FTFat10Client() {
       </SectionWrapper>
 
       {/* ===== BENEFICIARY JOURNEYS (safeguarding-approved only) ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Beneficiary journeys"
           title="Ten years, in their own steps"
@@ -227,7 +227,7 @@ export default function FTFat10Client() {
       </SectionWrapper>
 
       {/* ===== DOCUMENTARY / FILM (placeholder until ready) ===== */}
-      <SectionWrapper background="warm">
+      <SectionWrapper background="sand">
         <div className="mx-auto max-w-4xl">
           <SectionHeader
             overline="Film"

@@ -44,7 +44,7 @@ export default function OurStoryClient() {
       </SectionWrapper>
 
       {/* ===== NARRATIVE ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl space-y-6">
           {narrative.map((para, i) => (
             <motion.p
@@ -62,7 +62,7 @@ export default function OurStoryClient() {
       </SectionWrapper>
 
       {/* ===== TIMELINE ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="sand">
         <SectionHeader
           overline="2016 → 2026"
           title="The road so far"
@@ -73,7 +73,7 @@ export default function OurStoryClient() {
       </SectionWrapper>
 
       {/* ===== FOUNDER QUOTE ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

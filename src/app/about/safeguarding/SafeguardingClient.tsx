@@ -76,7 +76,7 @@ export default function SafeguardingClient() {
       </SectionWrapper>
 
       {/* ===== COMMITMENTS ===== */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <SectionHeader
           overline="Our standards"
           title="What we commit to"
@@ -103,7 +103,7 @@ export default function SafeguardingClient() {
       </SectionWrapper>
 
       {/* ===== REPORT A CONCERN ===== */}
-      <SectionWrapper background="gradient">
+      <SectionWrapper background="sand">
         <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-surface p-8 text-center md:p-12">
           <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-subtle text-accent-text">
             <AlertTriangle className="h-7 w-7" aria-hidden="true" />
