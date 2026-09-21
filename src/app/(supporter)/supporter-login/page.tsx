@@ -85,8 +85,8 @@ export default function SupporterLoginPage() {
           <Image
             src={img("/images/misc/ftf-logo-white.png")}
             alt="For The Future Organization"
-            width={150}
-            height={56}
+            width={2559}
+            height={964}
             className="h-12 w-auto object-contain"
             unoptimized
             priority

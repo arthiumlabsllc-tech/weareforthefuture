@@ -30,7 +30,7 @@ const map: Record<string, string> = {
   "/images/misc/bento-1.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126475/ftf/images/misc/bento-1.png",
   "/images/misc/bento-2.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126477/ftf/images/misc/bento-2.png",
   "/images/misc/ftf-logo-ico.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126479/ftf/images/misc/ftf-logo-ico.png",
-  "/images/misc/ftf-logo-white.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126480/ftf/images/misc/ftf-logo-white.png",
+  "/images/misc/ftf-logo-white.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1790007291/ftf/images/misc/ftf-logo-white.png",
   "/images/misc/ftf-logo.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789766528/ftf/images/misc/ftf-logo.png",
   "/images/misc/ftf-patch.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126482/ftf/images/misc/ftf-patch.png",
   "/images/misc/impact-store-hero.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126485/ftf/images/misc/impact-store-hero.jpg",

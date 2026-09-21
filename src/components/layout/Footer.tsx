@@ -107,8 +107,8 @@ export default function Footer() {
                 <Image
                   src={img("/images/misc/ftf-logo-white.png")}
                   alt="FTF"
-                  width={120}
-                  height={48}
+                  width={2559}
+                  height={964}
                   className="h-12 w-auto object-contain"
                   unoptimized
                 />
