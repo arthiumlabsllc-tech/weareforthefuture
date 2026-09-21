@@ -78,6 +78,8 @@ export default function HomeClient({
 }) {
   const featuredProgrammes = featured.length > 0 ? featured : FALLBACK_FEATURED;
   const reduceMotion = useReducedMotion();
+  const { villageCurrency, villageRaised, villageGoal } = siteConfig.donation;
+  const villagePercent = Math.round((villageRaised / villageGoal) * 100);
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [newsletterState, setNewsletterState] = useState<"idle" | "error" | "success">("idle");
@@ -100,100 +102,111 @@ export default function HomeClient({
 
   return (
     <>
-      {/* ===== 1. HERO (split layout) ===== */}
-      <section className="relative overflow-hidden bg-bg-primary">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,color-mix(in_srgb,var(--ftf-primary)_8%,transparent),transparent_45%),radial-gradient(circle_at_85%_80%,color-mix(in_srgb,var(--ftf-accent)_10%,transparent),transparent_45%)]"
-        />
+      {/* ===== 1. HERO (split editorial: text left, campaign card right) =====
+          Craft reference: Givra-style split hero (Phase 12 Step 2 revision) with
+          FTF skin only. Left column is LCP-critical and fully static: the H1
+          paints in the server-rendered HTML at FCP with no JS/opacity gate (an
+          opacity 0→1 fade on the LCP element delays LCP by ~3s on throttled
+          mobile - Phase 7.2 audit). The only entrance motion is the campaign
+          card reveal, disabled under prefers-reduced-motion per DESIGN.md §8. */}
+      <section className="relative overflow-hidden bg-cream">
         {/* Top padding below lg clears the fixed navbar (80px) + the fixed
-            ImpactMarquee band (~37px) so the eyebrow is never covered on
+            ImpactMarquee band (~33px) so the eyebrow is never covered on
             mobile/tablet; at lg the 85vh vertical centering handles it. */}
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pt-40 pb-[var(--spacing-section)] lg:min-h-[85vh] lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-[var(--spacing-section)]">
-          {/* Copy side - LCP-critical (Phase 12 Step 2 editorial polish).
-              Eyebrow + H1 are fully static: the H1 paints in the server-rendered
-              HTML at FCP with no JS/opacity gate (an opacity 0→1 fade on the LCP
-              element delays LCP by ~3s on a throttled mobile profile - see
-              Phase 7.2 Lighthouse audit). The sub-block below the H1 gets a
-              transform-only reveal (no opacity), disabled under
-              prefers-reduced-motion per DESIGN.md §8. */}
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pt-40 pb-[var(--spacing-section)] lg:min-h-[85vh] lg:grid-cols-[3fr_2fr] lg:gap-16 lg:px-8 lg:py-[var(--spacing-section)]">
           <div>
             <span className="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-text-tertiary">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
               We Are For The Future
             </span>
-            <h1 className="mt-7 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-text-primary sm:text-5xl lg:text-[4rem]">
+            <h1 className="mt-7 font-[family-name:var(--font-display)] text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.02] tracking-[-0.02em] text-text-primary">
               {siteConfig.tagline}
             </h1>
-            <motion.div
-              initial={reduceMotion ? false : { y: 12 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-            >
-              <p className="mt-7 max-w-[55ch] text-xl leading-relaxed text-text-secondary">
-                {siteConfig.positioning}
+            <p className="mt-7 max-w-[55ch] text-lg leading-[1.5] text-text-secondary sm:text-xl">
+              {siteConfig.description}
+            </p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <Link
+                href="/donate"
+                className="group inline-flex h-14 items-center justify-center gap-2 rounded-[var(--radius-button)] border-2 border-cta bg-cta px-8 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all duration-200 hover:scale-[1.02] hover:border-cta-hover hover:bg-cta-hover"
+              >
+                <Heart className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
+                Give Now
+              </Link>
+              <Link
+                href="/initiatives"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-[var(--radius-button)] border-2 border-primary bg-transparent px-8 text-base font-semibold text-primary transition-all duration-200 hover:scale-[1.02] hover:bg-primary/5"
+              >
+                See Our Work
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="mt-6 max-w-sm border-t border-border pt-6 sm:max-w-md">
+              <p className="text-sm text-text-muted">
+                Youth-led · Ghana &amp; Nigeria · Since {siteConfig.founded}
               </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Link
-                  href="/donate"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-cta bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all duration-200 hover:border-cta-hover hover:bg-cta-hover hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
-                >
-                  <Heart className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
-                  Give Now
-                </Link>
-                <Link
-                  href="/initiatives"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary bg-transparent px-8 py-4 text-base font-semibold text-primary transition-all duration-200 hover:bg-primary/5 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
-                >
-                  See Our Work
-                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="mt-10 max-w-sm border-t border-border pt-6 sm:max-w-md">
-                <p className="text-sm text-text-muted">
-                  Youth-led · Ghana &amp; Nigeria · Since {siteConfig.founded}
-                </p>
-              </div>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Portrait side - dignified, face-free photograph. Safeguarding
-              §11.1 forbids an identifiable minor without signed consent, so the
-              hero leads with supplies-on-a-desk (no faces). Static load: no
-              parallax / zoom / fade-in (honours prefers-reduced-motion), and the
-              fixed aspect-ratio box reserves space so CLS stays 0. Caption
-              omitted so the placeholder is never mislabelled with a real
-              location; the photo speaks for itself. */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-surface shadow-xl shadow-primary/5 lg:aspect-[4/5]">
+          {/* Campaign card - the hero's only entrance motion (opacity+y, 400ms,
+              once). Figures come from siteConfig.donation so the card can never
+              drift from the FTF Village section below; the render shows no
+              people, so safeguarding consent is not implicated. */}
+          <motion.aside
+            aria-label="FTF Village Phase One campaign"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: reduceMotion ? 0 : 0.4, ease: "easeOut" }}
+            className="w-full rounded-2xl border border-border bg-surface p-6 shadow-xl shadow-primary/5 sm:p-8"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-bg-tertiary">
               <Image
-                src={img("/images/stories/gallery-10.jpg")}
-                alt="A smiling volunteer holding a laughing child in an orange programme shirt, both flashing peace signs at a colourful playground"
+                src={img("/images/about/ftf-village-1.jpg")}
+                alt="Architectural render of For The Future Village - planned safe housing, learning and community spaces in Ghana"
                 fill
                 priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover"
                 data-hero-image="true"
               />
             </div>
-            {/* Floating stat card overlapping the bottom-left of the photo.
-                Reuses the verified storyStats record so the figure can never
-                drift from the impact strip below. */}
-            <div className="absolute -bottom-6 left-4 rounded-2xl border border-border bg-white px-5 py-4 shadow-lg shadow-navy-900/10 sm:left-6">
-              <div className="font-[family-name:var(--font-display)] text-2xl font-bold tabular-nums text-impact-number">
-                {storyStats[1].value}
-                {storyStats[1].suffix}
-              </div>
-              <div className="mt-0.5 max-w-[10rem] text-xs leading-snug text-text-secondary">
-                {storyStats[1].label}
-              </div>
-            </div>
-            {isDev && (
-              <span className="absolute inset-x-3 top-3 rounded-lg bg-navy-900/85 px-3 py-2 text-center text-[10px] font-medium leading-snug text-white">
-                [Dignified placeholder (no faces) - swap for a consented, safeguarding-approved programme photo before launch]
+            <h2 className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
+              FTF Village · Phase One
+            </h2>
+            <p className="mt-3 text-sm text-text-secondary">
+              <span className="font-[family-name:var(--font-display)] text-3xl font-bold tabular-nums text-text-primary">
+                {villageCurrency}
+                {villageRaised.toLocaleString()}
+              </span>{" "}
+              raised of{" "}
+              <span className="font-[family-name:var(--font-display)] text-xl font-bold tabular-nums text-text-primary">
+                {villageCurrency}
+                {villageGoal.toLocaleString()}
               </span>
-            )}
-          </div>
+            </p>
+            <div
+              role="progressbar"
+              aria-valuenow={villagePercent}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="FTF Village Phase One funding progress"
+              className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-journey-track"
+            >
+              <div
+                className="h-full rounded-full bg-accent"
+                style={{ width: `${villagePercent}%` }}
+              />
+            </div>
+            <p className="mt-2 text-sm text-text-muted">{villagePercent}% of goal</p>
+            <Link
+              href="/give/ftf-village-project"
+              className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-button)] bg-cta px-6 text-base font-semibold text-on-cta transition-all duration-200 hover:scale-[1.02] hover:bg-cta-hover"
+            >
+              Support this phase
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </motion.aside>
         </div>
       </section>
 

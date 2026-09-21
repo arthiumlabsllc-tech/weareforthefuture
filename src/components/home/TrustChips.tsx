@@ -37,7 +37,7 @@ export default function TrustChips() {
   ];
 
   return (
-    <div className="border-y border-trust-border bg-trust-bg">
+    <div className="border-y border-border bg-sand">
       <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
         <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           {chips.map((chip, i) => (
