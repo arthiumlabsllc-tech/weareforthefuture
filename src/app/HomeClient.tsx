@@ -162,8 +162,8 @@ export default function HomeClient({
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-bg-tertiary">
               <Image
-                src={img("/images/about/ftf-village-1.jpg")}
-                alt="Architectural render of For The Future Village - planned safe housing, learning and community spaces in Ghana"
+                src={img("/images/misc/bento-1.png")}
+                alt="Young learners in yellow uniforms seen from behind as a For The Future team member welcomes them - the children FTF Village Phase One will serve"
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, 100vw"
