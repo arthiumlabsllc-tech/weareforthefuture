@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  GraduationCap,
   Handshake,
   Heart,
   Quote,
@@ -148,35 +147,43 @@ export default function HomeClient({
             </p>
           </motion.div>
 
-          {/* Portrait side — dignity-first placeholder (no identifiable child) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="relative mx-auto w-full max-w-md"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary-subtle via-bg-primary to-accent-subtle">
-              <div aria-hidden="true" className="absolute -right-10 -top-10 h-52 w-52 rounded-full border-[24px] border-accent/10" />
-              <div aria-hidden="true" className="absolute -bottom-14 -left-10 h-56 w-56 rounded-full border-[28px] border-primary/10" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-10 text-center">
-                <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-surface text-primary shadow-sm">
-                  <GraduationCap className="h-8 w-8" aria-hidden="true" />
-                </span>
-                <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-primary">
-                  Every child, a future
-                </p>
-                <p className="max-w-xs text-sm leading-relaxed text-text-tertiary">
-                  A place to learn, grow in dignity, and build a meaningful
-                  future — supported from access to opportunity.
-                </p>
-              </div>
-              {isDev && (
-                <span className="absolute inset-x-3 bottom-3 rounded-lg bg-navy-900/85 px-3 py-2 text-center text-[10px] font-medium leading-snug text-white">
-                  [Photo: consented, safeguarding-approved — replace before launch]
-                </span>
-              )}
+          {/* Portrait side — dignified, face-free photograph. Safeguarding
+              §11.1 forbids an identifiable minor without signed consent, so the
+              hero leads with supplies-on-a-desk (no faces). Static load: no
+              parallax / zoom / fade-in (honours prefers-reduced-motion), and the
+              fixed aspect-ratio box reserves space so CLS stays 0. Caption
+              omitted so the placeholder is never mislabelled with a real
+              location; the photo speaks for itself. */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[16px] border border-border bg-surface lg:aspect-[4/5]">
+              <Image
+                src={img("/images/hero/hero-main.png")}
+                alt="An open notebook and pencil resting beside a stack of books and a small globe on a sunlit wooden desk"
+                fill
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+                data-hero-image="true"
+              />
             </div>
-          </motion.div>
+            {/* Floating stat card overlapping the bottom-left of the photo.
+                Reuses the verified storyStats record so the figure can never
+                drift from the impact strip below. */}
+            <div className="absolute -bottom-6 left-4 rounded-2xl border border-border bg-white px-5 py-4 shadow-lg shadow-navy-900/10 sm:left-6">
+              <div className="font-[family-name:var(--font-display)] text-2xl font-bold tabular-nums text-impact-number">
+                {storyStats[1].value}
+                {storyStats[1].suffix}
+              </div>
+              <div className="mt-0.5 max-w-[10rem] text-xs leading-snug text-text-secondary">
+                {storyStats[1].label}
+              </div>
+            </div>
+            {isDev && (
+              <span className="absolute inset-x-3 top-3 rounded-lg bg-navy-900/85 px-3 py-2 text-center text-[10px] font-medium leading-snug text-white">
+                [Dignified placeholder (no faces) — swap for a consented, safeguarding-approved programme photo before launch]
+              </span>
+            )}
+          </div>
         </div>
       </section>
 

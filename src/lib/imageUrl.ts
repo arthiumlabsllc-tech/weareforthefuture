@@ -16,6 +16,7 @@ const map: Record<string, string> = {
   "/images/hero/hero-1.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126453/ftf/images/hero/hero-1.png",
   "/images/hero/hero-2.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126455/ftf/images/hero/hero-2.png",
   "/images/hero/hero-3.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126458/ftf/images/hero/hero-3.png",
+  "/images/hero/hero-main.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789978171/ftf/images/hero/hero-main.png",
   "/images/icons/charity.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126460/ftf/images/icons/charity.png",
   "/images/icons/children.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126461/ftf/images/icons/children.png",
   "/images/initiatives/chess-in-slums.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126463/ftf/images/initiatives/chess-in-slums.jpg",
