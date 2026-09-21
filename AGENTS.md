@@ -27,7 +27,7 @@ You are working on the For The Future Organization website. Before touching anyt
 - Wrap every Prisma call in page.tsx / layout.tsx with try/catch → fallback
 - Prefer ISR over Dynamic for DB-backed routes
 
-## Before making changes
+## Before making ANY change
 
 1. Read the relevant brief section for your task
 2. Check BRIEF-AUDIT.md for known gaps
