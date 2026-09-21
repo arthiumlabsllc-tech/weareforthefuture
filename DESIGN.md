@@ -143,6 +143,7 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 
 - 8pt scale: 4, 8, 12, 16, 24, 32, 48, 64, 96.
 - Section rhythm: --spacing-section 5rem.
+- Fixed-overlay clearance: the navbar (80px) and the ImpactMarquee band (fixed top-[80px], ~33px tall) float over page content. Any section that begins at the top of the viewport needs >=160px top padding below lg (hero uses pt-40); at lg+ the hero's 85vh vertical centering provides the clearance. Never compensate by padding <main> - the overlays are out of flow and main padding creates a white gap on full-bleed heroes.
 - Container widths: body 620px, wide 1200px, full 1440px.
 - Radii: --radius-card 1rem (cards, panels), --radius-button 0.5rem (form controls); shared Button renders pill (rounded-full).
 
@@ -189,6 +190,7 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 - 2026-09-21 - White brand lockup re-uploaded to Cloudinary (ftf/images/misc/ftf-logo-white, v1790007291); footer + supporter-login brand panel now use it.
 - 2026-09-21 - Decision 1: token-check violations cleared - confetti + fundAllocation hexes moved to the shared `src/lib/chartColors.ts` map (theme-aware `var()` references); error boundary and theme-color meta literals carry documented `design-tokens-exempt` markers.
 - 2026-09-21 - §8 Motion guidelines added (Phase 12 Step 1 / C3): entrance, scroll-linked, celebration, carousel and micro-interaction patterns with mandatory reduced-motion fallbacks. No token changes.
+- 2026-09-21 - Phase 12 Step 2 (A1): homepage hero editorial polish - 64px Playfair H1 (-0.02em / 1.05), plain tertiary eyebrow, 55ch subhead, equal-height 60px CTA pair (filled green + blue outline), divider above trust microcopy, 85vh desktop centering, transform-only sub-block reveal gated by prefers-reduced-motion. Hero stays a one-off (no §4 component); new fixed-overlay clearance rule recorded in §3.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Handshake,
@@ -77,6 +77,7 @@ export default function HomeClient({
   featured?: FeaturedProgramme[];
 }) {
   const featuredProgrammes = featured.length > 0 ? featured : FALLBACK_FEATURED;
+  const reduceMotion = useReducedMotion();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [newsletterState, setNewsletterState] = useState<"idle" | "error" | "success">("idle");
@@ -105,47 +106,56 @@ export default function HomeClient({
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,color-mix(in_srgb,var(--ftf-primary)_8%,transparent),transparent_45%),radial-gradient(circle_at_85%_80%,color-mix(in_srgb,var(--ftf-accent)_10%,transparent),transparent_45%)]"
         />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
-          {/* Copy side - LCP-critical. The entrance is transform-only (no
-              opacity:0 gate) so the H1 paints in the server-rendered HTML at
-              FCP instead of waiting for JS hydration + Framer Motion. An
-              opacity 0→1 fade on the LCP element delays LCP by ~3s on a
-              throttled mobile profile. See Phase 7.2 Lighthouse audit. */}
-          <motion.div
-            initial={{ y: 16 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-text-secondary">
-              <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
+        {/* Top padding below lg clears the fixed navbar (80px) + the fixed
+            ImpactMarquee band (~37px) so the eyebrow is never covered on
+            mobile/tablet; at lg the 85vh vertical centering handles it. */}
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pt-40 pb-[var(--spacing-section)] lg:min-h-[85vh] lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-[var(--spacing-section)]">
+          {/* Copy side - LCP-critical (Phase 12 Step 2 editorial polish).
+              Eyebrow + H1 are fully static: the H1 paints in the server-rendered
+              HTML at FCP with no JS/opacity gate (an opacity 0→1 fade on the LCP
+              element delays LCP by ~3s on a throttled mobile profile - see
+              Phase 7.2 Lighthouse audit). The sub-block below the H1 gets a
+              transform-only reveal (no opacity), disabled under
+              prefers-reduced-motion per DESIGN.md §8. */}
+          <div>
+            <span className="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-text-tertiary">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
               We Are For The Future
             </span>
-            <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.08] text-text-primary sm:text-5xl lg:text-6xl">
+            <h1 className="mt-7 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-text-primary sm:text-5xl lg:text-[4rem]">
               {siteConfig.tagline}
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
-              {siteConfig.positioning}
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/donate"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
-              >
-                <Heart className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
-                Give Now
-              </Link>
-              <Link
-                href="/initiatives"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-border bg-surface px-8 py-4 text-base font-semibold text-text-secondary transition-all hover:border-primary hover:text-primary"
-              >
-                See Our Work
-                <ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </Link>
-            </div>
-            <p className="mt-7 text-sm text-text-muted">
-              Youth-led · Ghana &amp; Nigeria · Since {siteConfig.founded}
-            </p>
-          </motion.div>
+            <motion.div
+              initial={reduceMotion ? false : { y: 12 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+            >
+              <p className="mt-7 max-w-[55ch] text-xl leading-relaxed text-text-secondary">
+                {siteConfig.positioning}
+              </p>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <Link
+                  href="/donate"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-cta bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all duration-200 hover:border-cta-hover hover:bg-cta-hover hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
+                >
+                  <Heart className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
+                  Give Now
+                </Link>
+                <Link
+                  href="/initiatives"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary bg-transparent px-8 py-4 text-base font-semibold text-primary transition-all duration-200 hover:bg-primary/5 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
+                >
+                  See Our Work
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="mt-10 max-w-sm border-t border-border pt-6 sm:max-w-md">
+                <p className="text-sm text-text-muted">
+                  Youth-led · Ghana &amp; Nigeria · Since {siteConfig.founded}
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Portrait side - dignified, face-free photograph. Safeguarding
               §11.1 forbids an identifiable minor without signed consent, so the
@@ -155,7 +165,7 @@ export default function HomeClient({
               omitted so the placeholder is never mislabelled with a real
               location; the photo speaks for itself. */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[16px] border border-border bg-surface lg:aspect-[4/5]">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-surface shadow-xl shadow-primary/5 lg:aspect-[4/5]">
               <Image
                 src={img("/images/stories/gallery-10.jpg")}
                 alt="A smiling volunteer holding a laughing child in an orange programme shirt, both flashing peace signs at a colourful playground"
