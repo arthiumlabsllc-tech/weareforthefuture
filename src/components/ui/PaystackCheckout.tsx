@@ -160,7 +160,7 @@ export default function PaystackCheckout({
       {/* Trigger Button */}
       <button
         onClick={openCheckout}
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-3.5 text-sm font-bold text-navy-900 shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
+        className="flex w-full items-center justify-center gap-2 rounded-full bg-cta px-6 py-3.5 text-sm font-bold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:shadow-xl hover:scale-[1.01]"
       >
         <CreditCard className="h-4 w-4" />
         {label}

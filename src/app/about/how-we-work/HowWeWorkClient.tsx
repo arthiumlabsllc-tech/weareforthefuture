@@ -127,7 +127,7 @@ export default function HowWeWorkClient() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/our-work"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-on-success shadow-lg shadow-accent/20 transition-all hover:bg-accent-hover hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
             >
               See our work <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

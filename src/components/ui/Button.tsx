@@ -16,8 +16,10 @@ interface ButtonProps {
 }
 
 const variants = {
+  // Accessible green CTA pair (bg-cta/text-on-cta): dark green + white in
+  // light mode (4.78:1), bright green + near-black in dark mode (8.3:1).
   primary:
-    "bg-gradient-to-r from-accent to-accent-hover text-navy-900 shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30",
+    "bg-cta text-on-cta shadow-lg shadow-accent/25 hover:bg-cta-hover hover:shadow-xl hover:shadow-accent/30",
   secondary:
     "bg-primary text-text-on-primary shadow-lg shadow-primary/25 hover:shadow-xl hover:bg-primary-hover",
   outline:

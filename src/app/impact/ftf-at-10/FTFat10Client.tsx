@@ -236,7 +236,7 @@ export default function FTFat10Client() {
           />
           <div className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-primary">
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-              <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-accent text-on-success shadow-lg shadow-accent/30">
+              <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-cta text-on-cta shadow-lg shadow-accent/30">
                 <Play className="h-7 w-7" aria-hidden="true" />
               </span>
               <p className="font-[family-name:var(--font-display)] text-xl font-bold text-text-on-primary">
@@ -265,7 +265,7 @@ export default function FTFat10Client() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/donate"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-on-success shadow-lg shadow-accent/20 transition-all hover:bg-accent-hover hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
             >
               Give Now <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

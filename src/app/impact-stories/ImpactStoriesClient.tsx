@@ -237,7 +237,7 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-text-primary shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3.5 text-sm font-semibold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:shadow-xl hover:scale-[1.02]"
             >
               <Heart className="h-4 w-4" />
               Support a Child

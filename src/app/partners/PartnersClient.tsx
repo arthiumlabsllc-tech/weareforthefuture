@@ -132,7 +132,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
               >
                 <Mail className="h-4 w-4" />
                 Discuss a partnership

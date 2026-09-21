@@ -48,6 +48,14 @@
   --ftf-accent-text: #2E7D32;
   --ftf-accent-bright: #8FD890;
 
+  /* CTA — one accessible green call-to-action pattern.
+     Light: dark green bg + white text (#2E7D32/#FFFFFF ≈ 4.78:1, WCAG AA).
+     Mid accent green (#4CB64D) never sits behind white or navy text — both
+     pairs fail AA (~2.5:1). Use bg-cta / text-on-cta for every green CTA. */
+  --ftf-cta-bg: #2E7D32;
+  --ftf-cta-bg-hover: #256428;
+  --ftf-cta-text: #FFFFFF;
+
   /* Semantic */
   --ftf-success: #2E7D32;
   --ftf-success-bg: #E8F5E9;
@@ -143,6 +151,12 @@
   --ftf-accent-text: #8FD890;
   --ftf-accent-bright: #8FD890;
 
+  /* CTA — dark mode INVERTS the pattern: bright green bg + near-black text
+     (#6FCB70/#16181A ≈ 8.3:1). Hover dims slightly (#5CB85E ≈ 6.6:1). */
+  --ftf-cta-bg: #6FCB70;
+  --ftf-cta-bg-hover: #5CB85E;
+  --ftf-cta-text: #16181A;
+
   /* Semantic — muted bg, bright text */
   --ftf-success: #6FCB70;
   --ftf-success-bg: #16281A;
@@ -232,6 +246,11 @@
   --color-accent-text: var(--ftf-accent-text);
   --color-accent-bright: var(--ftf-accent-bright);
   --color-on-success: var(--ftf-on-success);
+
+  /* Accessible green CTA pair — theme-aware in both modes */
+  --color-cta: var(--ftf-cta-bg);
+  --color-cta-hover: var(--ftf-cta-bg-hover);
+  --color-on-cta: var(--ftf-cta-text);
 
   --color-surface: var(--ftf-surface);
   --color-surface-hover: var(--ftf-surface-hover);

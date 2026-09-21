@@ -144,7 +144,7 @@ export default function Navbar() {
           )}
           <Link
             href="/donate"
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/25 transition-all hover:shadow-xl hover:shadow-accent/30 hover:scale-[1.02] active:scale-[0.98]"
+            className="group inline-flex items-center gap-2 rounded-full bg-cta px-5 py-2.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/25 transition-all hover:shadow-xl hover:shadow-accent/30 hover:scale-[1.02] active:scale-[0.98]"
           >
             <Heart className="h-4 w-4 transition-transform group-hover:scale-110" />
             Give Now
@@ -234,7 +234,7 @@ export default function Navbar() {
                 <Link
                   href="/donate"
                   onClick={() => setIsMobileOpen(false)}
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-base font-semibold text-navy-900 shadow-lg"
+                  className="inline-flex items-center gap-2 rounded-full bg-cta px-8 py-3 text-base font-semibold text-on-cta shadow-lg"
                 >
                   <Heart className="h-5 w-5" />
                   Give Now

@@ -90,7 +90,7 @@ export default function FellowshipClient() {
             </p>
             <Link
               href="#apply"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.02]"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
             >
               Express your interest
               <ArrowRight className="h-4 w-4" />

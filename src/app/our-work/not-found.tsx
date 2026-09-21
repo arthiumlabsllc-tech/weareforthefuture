@@ -50,7 +50,7 @@ export default function OurWorkNotFound() {
           </Link>
           <Link
             href="/donate"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-on-success shadow-lg shadow-accent/20 transition-all hover:bg-accent-hover hover:scale-[1.02]"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
           >
             <Heart className="h-5 w-5" aria-hidden="true" />
             Give Now

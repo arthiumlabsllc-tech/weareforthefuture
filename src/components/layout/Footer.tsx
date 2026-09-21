@@ -73,7 +73,7 @@ export default function Footer() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/give"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:scale-[1.02]"
               >
                 <Heart className="h-4 w-4" />
                 Give Now

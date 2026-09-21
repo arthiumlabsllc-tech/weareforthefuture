@@ -49,7 +49,7 @@ export default async function ProgrammePage({ params }: Props) {
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-on-primary/80">{program.shortDescription}</p>
               {detail.formerName && <p className="mt-3 text-sm text-text-on-primary/70">Previously known as {detail.formerName}.</p>}
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#partner" className={`rounded-full bg-accent px-6 py-3 font-semibold text-navy-900 ${focus}`}>Partner with this programme</a>
+                <a href="#partner" className={`rounded-full bg-cta px-6 py-3 font-semibold text-on-cta ${focus}`}>Partner with this programme</a>
                 <a href="#pathway" className={`rounded-full border border-white/40 px-6 py-3 font-semibold hover:bg-white/10 ${focus}`}>Explore the pathway</a>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default async function ProgrammePage({ params }: Props) {
 
       <section id="partner" className="scroll-mt-28 bg-royal py-16 text-text-on-primary sm:py-20" aria-labelledby="partner-heading">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
-          <div><Handshake aria-hidden="true" className="mb-5 h-10 w-10 text-accent-bright" /><h2 id="partner-heading" className="text-3xl font-bold">Help build the next stage</h2><p className="mt-5 leading-relaxed text-text-on-primary/80">{detail.partnershipIntro}</p><a href={partnerHref} className={`mt-7 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-navy-900 ${focus}`}>Discuss a partnership <ArrowRight aria-hidden="true" className="h-4 w-4" /></a><p className="mt-4 text-sm text-text-on-primary/75">Email FTF at <a href={partnerHref} className="break-all underline">{email}</a>. Support is coordinated through FTF.</p></div>
+          <div><Handshake aria-hidden="true" className="mb-5 h-10 w-10 text-accent-bright" /><h2 id="partner-heading" className="text-3xl font-bold">Help build the next stage</h2><p className="mt-5 leading-relaxed text-text-on-primary/80">{detail.partnershipIntro}</p><a href={partnerHref} className={`mt-7 inline-flex items-center gap-2 rounded-full bg-cta px-6 py-3 font-semibold text-on-cta ${focus}`}>Discuss a partnership <ArrowRight aria-hidden="true" className="h-4 w-4" /></a><p className="mt-4 text-sm text-text-on-primary/75">Email FTF at <a href={partnerHref} className="break-all underline">{email}</a>. Support is coordinated through FTF.</p></div>
           <ul className="space-y-4 self-center">{detail.partnershipOptions.map((option, index) => <li key={index} className="flex items-start gap-3 rounded-xl border border-white/20 p-4"><Check aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-accent-bright" /><span>{option}</span></li>)}</ul>
         </div>
       </section>

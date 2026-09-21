@@ -250,7 +250,7 @@ export default function PartnerInquiryForm() {
       <button
         type="submit"
         disabled={loading || IS_PREVIEW}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
         {loading ? "Sending…" : IS_PREVIEW ? "Submissions disabled on preview" : "Send inquiry"}

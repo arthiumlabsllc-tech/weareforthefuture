@@ -27,7 +27,7 @@ export default function StickyGiveCta() {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 px-4 py-3 backdrop-blur lg:hidden">
       <Link
         href="/give"
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-accent-hover px-5 py-3 text-sm font-bold text-text-inverse transition hover:bg-accent-hover/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        className="flex w-full items-center justify-center gap-2 rounded-full bg-cta px-5 py-3 text-sm font-bold text-on-cta transition hover:bg-cta-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         <Heart className="size-4" aria-hidden="true" />
         Give Now

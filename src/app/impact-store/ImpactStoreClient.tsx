@@ -223,7 +223,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider shadow-lg ${
                           product.badge === "Best Seller"
-                            ? "bg-accent text-navy-900"
+                            ? "bg-cta text-on-cta"
                             : product.badge === "Most Needed"
                             ? "bg-success text-on-success"
                             : "bg-primary text-text-on-primary"
@@ -364,7 +364,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3.5 text-sm font-semibold text-primary-contrast shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3.5 text-sm font-semibold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:shadow-xl hover:scale-[1.02]"
             >
               <Heart className="h-4 w-4" />
               Make a Direct Donation
@@ -536,7 +536,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
                   {/* Proceed to Checkout */}
                   <Link
                     href="/impact-store/checkout"
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-3.5 text-sm font-bold text-primary-contrast shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-cta px-6 py-3.5 text-sm font-bold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:shadow-xl hover:scale-[1.01]"
                   >
                     <CreditCard className="h-4 w-4" />
                     Proceed to Checkout

@@ -518,7 +518,7 @@ export default function DonateClient() {
                   ) : (
                     <button
                       onClick={handleProceedToPayment}
-                      className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 py-4 text-sm font-bold text-text-primary shadow-lg transition-all hover:shadow-xl hover:scale-[1.01]"
+                      className="flex w-full items-center justify-center gap-2 rounded-full bg-cta px-6 py-4 text-sm font-bold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:shadow-xl hover:scale-[1.01]"
                     >
                       <Heart className="h-4 w-4" />
                       {showForm ? "Close Form" : "I've Made the Transfer"}
@@ -724,7 +724,7 @@ export default function DonateClient() {
                 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="h-full rounded-full bg-gradient-to-r from-accent to-accent-hover"
+                className="h-full rounded-full bg-cta"
               />
             </div>
             <p className="mt-2 text-sm text-text-tertiary">

@@ -131,7 +131,7 @@ export default function NigeriaClient() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
                 href="/give"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.02] hover:bg-accent-hover"
+                className="inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
               >
                 Give to Nigeria programmes
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -325,7 +325,7 @@ export default function NigeriaClient() {
                   <span
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
                       active
-                        ? "bg-accent text-navy-900"
+                        ? "bg-cta text-on-cta"
                         : "bg-bg-tertiary text-text-muted"
                     }`}
                   >
@@ -519,7 +519,7 @@ export default function NigeriaClient() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/give"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.02] hover:bg-accent-hover"
+              className="inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
             >
               Give to Nigeria programmes
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -130,7 +130,7 @@ export default function HomeClient({
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/donate"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-on-success shadow-lg shadow-accent/20 transition-all hover:bg-accent-hover hover:scale-[1.02]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
               >
                 <Heart className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
                 Give Now
@@ -216,7 +216,7 @@ export default function HomeClient({
               className="group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-primary/5"
             >
               <div className="mb-4 flex items-center justify-between">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-on-primary transition-colors group-hover:bg-accent group-hover:text-on-success">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-on-primary transition-colors group-hover:bg-cta group-hover:text-on-cta">
                   <pillar.icon aria-hidden="true" className="h-5 w-5" />
                 </div>
                 <span className="font-[family-name:var(--font-display)] text-3xl font-bold text-border-strong">
@@ -350,7 +350,7 @@ export default function HomeClient({
 
             <Link
               href="/donate"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-on-success shadow-lg shadow-accent/20 transition-all hover:bg-accent-hover hover:scale-[1.02]"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
             >
               <Heart className="h-5 w-5" aria-hidden="true" />
               Support the vision
@@ -504,7 +504,7 @@ export default function HomeClient({
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/donate"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-on-success shadow-lg shadow-accent/20 transition-all hover:bg-accent-hover hover:scale-[1.02] sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02] sm:w-auto"
               >
                 <Heart className="h-5 w-5" aria-hidden="true" />
                 Give Now

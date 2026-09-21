@@ -178,7 +178,7 @@ export default function SuccessContent() {
               <div className="flex flex-col gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta"
                 >
                   <Mail className="h-4 w-4" />
                   Contact Support
@@ -337,7 +337,7 @@ export default function SuccessContent() {
                 {isStore ? (
                   <Link
                     href="/impact-store"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast shadow-lg transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:scale-[1.02]"
                   >
                     <Home className="h-4 w-4" />
                     Continue Shopping
@@ -345,7 +345,7 @@ export default function SuccessContent() {
                 ) : (
                   <Link
                     href="/donate"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast shadow-lg transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:scale-[1.02]"
                   >
                     <Heart className="h-4 w-4" />
                     Donate Again
@@ -380,7 +380,7 @@ export default function SuccessContent() {
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-3 text-sm font-semibold text-primary-contrast"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta"
               >
                 <Home className="h-4 w-4" />
                 Back to Home

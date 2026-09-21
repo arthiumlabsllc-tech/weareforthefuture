@@ -205,7 +205,7 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
             <div className="mt-8 flex flex-col gap-4 sm:flex-row justify-center">
               <Link
                 href="/volunteer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-text-primary shadow-2xl shadow-accent/20 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-semibold text-on-cta shadow-2xl shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
               >
                 Apply to Volunteer
                 <ArrowRight className="h-5 w-5" />

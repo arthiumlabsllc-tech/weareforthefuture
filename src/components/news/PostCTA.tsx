@@ -28,7 +28,7 @@ export default function PostCTA({ heading, description, primaryCta, secondaryCta
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <Link
           href={primaryCta.href}
-          className="inline-flex items-center gap-2 rounded-full bg-accent-hover px-6 py-3 text-sm font-bold text-text-inverse transition hover:bg-accent-hover/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          className="inline-flex items-center gap-2 rounded-full bg-cta px-6 py-3 text-sm font-bold text-on-cta transition hover:bg-cta-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
           <Heart className="h-4 w-4" aria-hidden="true" />
           {primaryCta.label}

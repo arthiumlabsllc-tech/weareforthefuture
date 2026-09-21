@@ -463,7 +463,7 @@ export default function CheckoutClient() {
                   }`}
                 >
                   <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                    deliveryMethod === "home_delivery" ? "bg-accent text-text-primary" : "bg-bg-tertiary text-text-tertiary"
+                    deliveryMethod === "home_delivery" ? "bg-cta text-on-cta" : "bg-bg-tertiary text-text-tertiary"
                   }`}>
                     <Truck className="h-5 w-5" />
                   </div>
@@ -482,7 +482,7 @@ export default function CheckoutClient() {
                   }`}
                 >
                   <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                    deliveryMethod === "pickup" ? "bg-accent text-text-primary" : "bg-bg-tertiary text-text-tertiary"
+                    deliveryMethod === "pickup" ? "bg-cta text-on-cta" : "bg-bg-tertiary text-text-tertiary"
                   }`}>
                     <MapPin className="h-5 w-5" />
                   </div>
