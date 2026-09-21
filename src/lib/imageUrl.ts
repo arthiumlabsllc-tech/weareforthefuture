@@ -9,6 +9,10 @@ const map: Record<string, string> = {
   "/images/about/ftf-tamale-2.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126437/ftf/images/about/ftf-tamale-2.jpg",
   "/images/about/ftf-tamale-3.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126439/ftf/images/about/ftf-tamale-3.jpg",
   "/images/about/ftf-village-1.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126440/ftf/images/about/ftf-village-1.jpg",
+  // Watermark-free crops of the watermarked village master render (Cloudinary crop
+  // transforms). Use these instead of the master until a clean render is supplied.
+  "/images/about/ftf-village-1-buildings.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/c_crop,g_north_east,w_0.4,h_0.45/v1789126440/ftf/images/about/ftf-village-1.jpg",
+  "/images/about/ftf-village-1-grounds.jpg": "https://res.cloudinary.com/vyiwmedy/image/upload/c_crop,g_north_west,w_0.45,h_0.45/v1789126440/ftf/images/about/ftf-village-1.jpg",
   "/images/about/ftf-village-2.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126443/ftf/images/about/ftf-village-2.png",
   "/images/hero/ftf-hero-1.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126444/ftf/images/hero/ftf-hero-1.png",
   "/images/hero/ftf-hero-2-new.png": "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126448/ftf/images/hero/ftf-hero-2-new.png",

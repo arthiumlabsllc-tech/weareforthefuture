@@ -396,8 +396,8 @@ export default function HomeClient({
           >
             <div className="relative aspect-square overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10">
               <Image
-                src={img("/images/about/ftf-village-1.jpg")}
-                alt="For The Future Village - a vision for safe housing, learning and community in Ghana"
+                src={img("/images/about/ftf-village-1-buildings.jpg")}
+                alt="Architectural vision of the For The Future Village - modern two-storey homes set among trees in Ghana"
                 fill
                 className="object-cover opacity-70"
                 sizes="(min-width: 1024px) 40vw, 100vw"

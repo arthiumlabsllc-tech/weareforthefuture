@@ -34,7 +34,7 @@ const highlights = [
   {
     year: "2021",
     title: "The FTF Village concept",
-    image: img("/images/about/ftf-village-1.jpg"),
+    image: img("/images/about/ftf-village-1-grounds.jpg"),
     caption: "A long-term vision of housing, learning and belonging takes shape.",
   },
   {
