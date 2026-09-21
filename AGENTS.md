@@ -38,6 +38,16 @@ You are working on the For The Future Organization website. Before touching anyt
 
 Ask the user. Do not guess on brief interpretation. Report any deviation with rationale in the commit message.
 
+## Editorial conventions
+
+- Use hyphens (-) instead of em dashes (—) in all site content,
+  including source code, CMS content (BlogPost, Pillar, LegalPage,
+  Document, DonationCampaign), and any new copy.
+- Reason: consistent typographic style across the site. Approved
+  by the project owner.
+- If you encounter an em dash in code or content, replace it with
+  a hyphen as part of your change.
+
 ## Commit conventions
 
 - feat: / fix: / chore: / refactor: / docs:
