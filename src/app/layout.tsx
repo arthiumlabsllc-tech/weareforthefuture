@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     apple: "/images/misc/ftf-logo-ico.png",
   },
   other: {
-    "theme-color": "#F6F7F8",
+    "theme-color": "#F6F7F8", // design-tokens-exempt
   },
 };
 

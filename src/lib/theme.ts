@@ -36,7 +36,7 @@ export function setTheme(theme: Theme): void {
   // Update theme-color meta tag
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) {
-    meta.setAttribute("content", theme === "dark" ? "#16181A" : "#F6F7F8");
+    meta.setAttribute("content", theme === "dark" ? "#16181A" : "#F6F7F8"); // design-tokens-exempt
   }
 
   try {

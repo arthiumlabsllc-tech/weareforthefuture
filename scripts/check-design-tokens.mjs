@@ -61,6 +61,9 @@ for (const file of files) {
   const lines = fs.readFileSync(file, "utf8").split(/\r?\n/);
   lines.forEach((line, i) => {
     if (isCommentLine(line)) return;
+    // Documented exemptions: lines carrying the design-tokens-exempt marker
+    // (error boundary inline styles, theme-color meta literals).
+    if (line.includes("design-tokens-exempt")) return;
     for (const { name, re } of PATTERNS) {
       re.lastIndex = 0;
       let m;

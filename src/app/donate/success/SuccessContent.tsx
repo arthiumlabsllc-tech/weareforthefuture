@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { confettiColors } from "@/lib/chartColors";
 import {
   Heart,
   Check,
@@ -55,7 +56,7 @@ function ConfettiPiece({ delay, color, left }: { delay: number; color: string; l
   );
 }
 
-const COLORS = ["#D4A843", "#10B981", "#F97316", "#3B82F6", "#EC4899", "#8B5CF6", "#EF4444", "#14B8A6"];
+const COLORS = confettiColors;
 
 export default function SuccessContent() {
   const searchParams = useSearchParams();

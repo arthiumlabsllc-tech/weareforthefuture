@@ -124,6 +124,8 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 
 - Never invent new hues. If a need is not covered above, ask before adding a token (globals.css requires explicit approval).
 - Never use raw hex in JSX (`text-[#...]`, `bg-[#...]`, inline `style` hex). Enforced by `npm run check-design-tokens`.
+- Chart/decorative palettes come from the shared map in `src/lib/chartColors.ts` (theme-aware `var(--ftf-*)` references), never raw hex.
+- Documented exemptions only: lines carrying the `design-tokens-exempt` marker (skipped by the checker) - currently `global-error.tsx` (error boundary must inline styles) and the `theme-color` meta literals in `layout.tsx` / `theme.ts` (browser APIs read raw hex).
 - Green (#4CB64D) = progress/icons/chips ONLY. Buttons use the CTA pair (accent-hover green + accessible text), never mid accent green.
 - Blue = trust signals, NOT CTAs.
 - Legacy Tailwind palettes (navy-*, gold-*, emerald-*, coral-*) exist only so old classes keep resolving and auto-adapt in dark mode (Layer 3). New code must use semantic tokens.
@@ -185,5 +187,6 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 - 2026-09-21 - Design system lock established (Phase 11.5). Token table captured verbatim from globals.css; check-design-tokens CI gate added; AGENTS.md rewritten. No token values changed.
 - 2026-09-21 - Site-wide copy sweep: em dashes (—) replaced with hyphens (-) in source and DB content.
 - 2026-09-21 - White brand lockup re-uploaded to Cloudinary (ftf/images/misc/ftf-logo-white, v1790007291); footer + supporter-login brand panel now use it.
+- 2026-09-21 - Decision 1: token-check violations cleared - confetti + fundAllocation hexes moved to the shared `src/lib/chartColors.ts` map (theme-aware `var()` references); error boundary and theme-color meta literals carry documented `design-tokens-exempt` markers.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.

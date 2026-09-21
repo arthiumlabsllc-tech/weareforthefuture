@@ -1,5 +1,6 @@
 import { Users, BookOpen, Heart, MapPin } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { chartColors } from "@/lib/chartColors";
 
 /**
  * Single source of truth for the public impact figures shown on /impact and
@@ -22,12 +23,12 @@ export const impactMetrics = [
 ];
 
 export const fundAllocation = [
-  { category: "Education & Learning Support",  percentage: 40, hex: "#4CB64D" },
-  { category: "Girls' Education & Dignity",    percentage: 20, hex: "#3973B8" },
-  { category: "Future-Ready Skills",           percentage: 15, hex: "#2E7D32" },
-  { category: "Mentorship & Wellbeing",        percentage: 10, hex: "#494949" },
-  { category: "Community & Family Support",    percentage: 10, hex: "#9AA1A6" },
-  { category: "Operations & Governance",       percentage: 5,  hex: "#6C7277" },
+  { category: "Education & Learning Support",  percentage: 40, hex: chartColors.accent },
+  { category: "Girls' Education & Dignity",    percentage: 20, hex: chartColors.primary },
+  { category: "Future-Ready Skills",           percentage: 15, hex: chartColors.forest },
+  { category: "Mentorship & Wellbeing",        percentage: 10, hex: chartColors.charcoal },
+  { category: "Community & Family Support",    percentage: 10, hex: chartColors.muted },
+  { category: "Operations & Governance",       percentage: 5,  hex: chartColors.tertiary },
 ];
 
 export const successStories = [
