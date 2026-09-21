@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PrismaClient } from "@prisma/client";
 import { img } from "@/lib/imageUrl";
+import { normalizeGallery } from "@/lib/gallery";
 import ImpactStoriesClient from "./ImpactStoriesClient";
 
 export const metadata: Metadata = {
@@ -35,8 +36,11 @@ export default async function ImpactStoriesPage() {
     program: s.program || "",
   }));
 
-  // Gallery images from all stories
-  const allGalleryImages = stories.flatMap((s) => (s.gallery as string[]) || []);
+  // Gallery images from all stories, normalised to the documented
+  // Array<{ url, alt, caption? }> contract (legacy string[] also accepted).
+  const galleryImages = normalizeGallery(
+    stories.flatMap((s) => (Array.isArray(s.gallery) ? s.gallery : []))
+  );
 
-  return <ImpactStoriesClient initialStories={dbStories} galleryImages={allGalleryImages} />;
+  return <ImpactStoriesClient initialStories={dbStories} galleryImages={galleryImages} />;
 }

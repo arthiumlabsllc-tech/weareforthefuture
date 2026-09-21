@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ArrowRight, Quote, BookOpen, Camera, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Heart, ArrowRight, Quote, BookOpen } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import ImpactGallery from "@/components/ui/ImpactGallery";
+import type { GalleryImage } from "@/lib/gallery";
 import { img } from "@/lib/imageUrl";
 import { storyStats } from "@/data/impact";
 
@@ -31,9 +32,8 @@ function StatCounter({ value, suffix, label }: { value: string; suffix: string; 
 
 /* Need to import hooks - already imported above */
 
-export default function ImpactStoriesClient({ initialStories = [], galleryImages = [] }: { initialStories?: Story[]; galleryImages?: string[] }) {
+export default function ImpactStoriesClient({ initialStories = [], galleryImages = [] }: { initialStories?: Story[]; galleryImages?: GalleryImage[] }) {
   const impactStories = initialStories;
-  const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
     <>
@@ -158,70 +158,17 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
         </div>
       </SectionWrapper>
 
-      {/* ===== PHOTO GALLERY ===== */}
-      <SectionWrapper background="white">
-        <SectionHeader
-          overline="Gallery"
-          title="Moments of Impact"
-          description="A visual journey through the lives we've touched and the communities we've served."
-        />
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {galleryImages.map((src, i) => (
-            <motion.button
-              key={src}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.02 }}
-              onClick={() => setLightbox(src)}
-              className="group relative aspect-square overflow-hidden rounded-xl bg-bg-tertiary cursor-pointer"
-            >
-              <Image
-                src={src}
-                alt={`Impact story ${i + 1}`}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 transition-colors duration-300 flex items-center justify-center">
-                <Camera className="h-5 w-5 text-text-on-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            </motion.button>
-          ))}
-        </div>
-      </SectionWrapper>
-
-      {/* ===== LIGHTBOX ===== */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
-            onClick={() => setLightbox(null)}
-          >
-            <button
-              onClick={() => setLightbox(null)}
-              className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-surface/10 text-text-on-primary transition-colors hover:bg-surface/20"
-              aria-label="Close lightbox"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <div className="relative max-h-[85vh] max-w-[85vw] overflow-hidden rounded-2xl">
-              <Image
-                src={lightbox}
-                alt="Impact story"
-                width={800}
-                height={600}
-                className="object-contain"
-                unoptimized
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ===== PHOTO GALLERY (Phase 8.10: reusable accessible <ImpactGallery />) ===== */}
+      {galleryImages.length > 0 && (
+        <SectionWrapper background="white">
+          <SectionHeader
+            overline="Gallery"
+            title="Moments of Impact"
+            description="A visual journey through the lives we've touched and the communities we've served."
+          />
+          <ImpactGallery images={galleryImages} />
+        </SectionWrapper>
+      )}
 
       {/* ===== CTA ===== */}
       <SectionWrapper background="navy">

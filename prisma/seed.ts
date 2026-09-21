@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { hashPassword } from "../src/lib/admin-auth";
 
 const prisma = new PrismaClient();
@@ -558,9 +558,23 @@ The store's first public event, a two-day book fair, followed the launch later t
   console.log(`✅ ${initiatives.length + 1} programs seeded`);
 
   // ─── IMPACT STORIES ───
+  // Phase 8.10 — documented gallery contract: Array<{ url, alt, caption? }>.
+  // FTF's own published, consent-gated programme photos (hosted on Cloudinary).
+  // Alt text and captions carry no identifying details for minors.
+  const STORY_GALLERY: Record<string, { url: string; alt: string; caption?: string }[]> = {
+    "from-abandonment-to-a-bright-future": [
+      { url: "/images/stories/gallery-02.jpg", alt: "A young learner in a school uniform sitting close beside a care worker", caption: "A quiet moment of reassurance on school orientation day" },
+      { url: "/images/stories/gallery-06.jpg", alt: "A care worker holding a smiling child in a school uniform", caption: "Held, safe and smiling — the everyday care behind every story" },
+      { url: "/images/stories/gallery-10.jpg", alt: "A volunteer and a child in an orange programme shirt flashing peace signs at a colourful playground", caption: "Celebration day: peace signs and big smiles at the playground" },
+      { url: "/images/stories/gallery-18.jpg", alt: "A care worker carrying a laughing child in a blue shirt", caption: "Joy on the way home from a programme visit" },
+      { url: "/images/stories/gallery-21.jpg", alt: "A care worker holding a child in a red polka-dot top with a snack in hand", caption: "Comfort and care during a home visit" },
+      { url: "/images/stories/gallery-24.jpg", alt: "A care worker crouching beside a child in a red school kit waving at the camera", caption: "First day of school, ready for a bright future" },
+    ],
+  };
   for (let i = 0; i < impactStories.length; i++) {
     const s = impactStories[i];
     const slug = slugify(s.title);
+    const gallery = (STORY_GALLERY[slug] ?? []) as Prisma.InputJsonValue;
     await prisma.impactStory.upsert({
       where: { slug },
       update: {
@@ -570,6 +584,7 @@ The store's first public event, a two-day book fair, followed the launch later t
         featuredImage: s.image,
         childName: s.name,
         program: s.program,
+        gallery,
         consentGiven: true,
       },
       create: {
@@ -578,7 +593,7 @@ The store's first public event, a two-day book fair, followed the launch later t
         excerpt: s.story.slice(0, 160),
         content: `<p>${s.story}</p>`,
         featuredImage: s.image,
-        gallery: [],
+        gallery,
         childName: s.name,
         program: s.program,
         published: true,

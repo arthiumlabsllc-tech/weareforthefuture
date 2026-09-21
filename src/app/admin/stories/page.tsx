@@ -13,6 +13,7 @@ export default function AdminStoriesPage() {
         { name: "excerpt", label: "Excerpt", type: "textarea", span: 2 },
         { name: "content", label: "Content (HTML)", type: "textarea", span: 2 },
         { name: "featuredImage", label: "Featured Image URL", span: 2 },
+        { name: "gallery", label: "Gallery (JSON: [{ \"url\", \"alt\", \"caption?\" }])", type: "json", span: 2 },
         { name: "childName", label: "Child's First Name" },
         { name: "program", label: "Linked Program" },
         { name: "location", label: "Location" },

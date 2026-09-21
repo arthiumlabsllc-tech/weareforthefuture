@@ -157,8 +157,8 @@ export default function HomeClient({
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <div className="relative aspect-[16/9] overflow-hidden rounded-[16px] border border-border bg-surface lg:aspect-[4/5]">
               <Image
-                src={img("/images/hero/hero-main.png")}
-                alt="An open notebook and pencil resting beside a stack of books and a small globe on a sunlit wooden desk"
+                src={img("/images/stories/gallery-10.jpg")}
+                alt="A smiling volunteer holding a laughing child in an orange programme shirt, both flashing peace signs at a colourful playground"
                 fill
                 priority
                 sizes="(min-width: 1024px) 45vw, 100vw"

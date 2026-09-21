@@ -6,7 +6,7 @@ import { z } from "zod";
 const schema = z.object({
   title: z.string().min(1), slug: z.string().min(1), excerpt: z.string().optional(),
   content: z.string().default(""), featuredImage: z.string().nullable().optional(),
-  gallery: z.array(z.string()).optional(), childName: z.string().nullable().optional(),
+  gallery: z.array(z.union([z.string(), z.object({ url: z.string(), alt: z.string(), caption: z.string().optional() })])).optional(), childName: z.string().nullable().optional(),
   age: z.number().nullable().optional(), location: z.string().nullable().optional(),
   program: z.string().nullable().optional(), pullQuote: z.string().nullable().optional(),
   published: z.boolean().optional(), metaTitle: z.string().nullable().optional(),
