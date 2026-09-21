@@ -74,8 +74,15 @@ export default function ContactClient() {
   const [error, setError] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Build-time deployment flag (baked via next.config `env`): true on Vercel
+  // preview/branch builds and locally, false only on production builds. Lets the
+  // form show a clear notice and skip a doomed request; the API route's 403 is
+  // the bypass-proof backstop.
+  const IS_PREVIEW = process.env.NEXT_PUBLIC_DEPLOY_ENV !== "production";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (IS_PREVIEW) return;
     setError("");
     setLoading(true);
     try {
@@ -174,6 +181,14 @@ export default function ContactClient() {
                 <p className="text-text-secondary mb-6">
                   Reach out - your voice, support, and ideas matter to us.
                 </p>
+                {IS_PREVIEW && (
+                  <p
+                    role="status"
+                    className="rounded-xl border border-border bg-bg-tertiary px-4 py-3 text-sm text-text-secondary"
+                  >
+                    This is a preview build — form submissions are disabled.
+                  </p>
+                )}
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">
@@ -252,7 +267,7 @@ export default function ContactClient() {
                 )}
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || IS_PREVIEW}
                   className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 py-4 text-base font-semibold text-navy-900 shadow-lg shadow-accent/20 transition-all hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading ? (
@@ -260,7 +275,11 @@ export default function ContactClient() {
                   ) : (
                     <Send className="h-5 w-5" />
                   )}
-                  {loading ? "Sending..." : "Send Message"}
+                  {loading
+                    ? "Sending..."
+                    : IS_PREVIEW
+                      ? "Submissions disabled on preview"
+                      : "Send Message"}
                 </button>
               </motion.form>
             )}

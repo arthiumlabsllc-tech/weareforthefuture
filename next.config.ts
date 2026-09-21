@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Bake the deployment context into the client bundle at BUILD time so client
+  // components can show a clear "preview" notice. VERCEL_ENV itself must never be
+  // read in a client component (it is undefined there); Vercel sets VERCEL_ENV
+  // automatically for every build, and this maps it to a NEXT_PUBLIC_ literal.
+  env: {
+    NEXT_PUBLIC_DEPLOY_ENV: process.env.VERCEL_ENV || "development",
+  },
   // Preview safety: keep Vercel preview / branch deployments out of search
   // indexes. On the production deployment (VERCEL_ENV === "production") no
   // X-Robots-Tag header is emitted, so prod stays indexable.
