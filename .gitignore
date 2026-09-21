@@ -69,6 +69,16 @@ _probe-*.ts
 *.probe.*
 cdp-*.mjs
 
+# one-off verification scratch files (never commit - see AGENTS.md "Probe file hygiene")
+*-probe*.tsx
+*-scratch*.tsx
+*-test-fix*.tsx
+
+# local Qoder workspace config (the FTF-authored skill lives in /ftf-design-system/)
+.qoder/skills/
+.qoder/PROVENANCE.md
+extract-wcag.ps1
+
 # Dev tooling lives in scripts/dev/ (the CDP + QA harness). Keep the two docs
 # tracked so future devs know what each driver does; ignore the throwaway *.mjs
 # drivers themselves (they are recreated from README.md + CDP-HELPERS.md).

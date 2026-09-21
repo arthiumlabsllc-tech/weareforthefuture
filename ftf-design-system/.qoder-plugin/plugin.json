@@ -1,0 +1,23 @@
+{
+  "name": "ftf-design-system",
+  "displayName": "FTF Design System",
+  "version": "1.0.0",
+  "description": "Apply the locked For The Future design system to every UI decision on the FTF website: brand tokens, typography, section rhythm, motion rules and banned anti-patterns.",
+  "author": {
+    "name": "Arthium Labs LLC"
+  },
+  "homepage": "https://github.com/arthiumlabsllc-tech/weareforthefuture",
+  "keywords": [
+    "qoder-plugin",
+    "skill",
+    "design-system",
+    "nonprofit",
+    "accessibility"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "skill",
+    "design"
+  ],
+  "skills": "./SKILL.md"
+}
