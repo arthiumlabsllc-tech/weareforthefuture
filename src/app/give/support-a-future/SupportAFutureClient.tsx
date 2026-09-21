@@ -37,7 +37,7 @@ const steps = [
   {
     icon: Users,
     title: "You see the collective impact",
-    body: "We report back through aggregate stories and transparent reporting — how support changed lives, without exposing anyone.",
+    body: "We report back through aggregate stories and transparent reporting - how support changed lives, without exposing anyone.",
   },
 ];
 
@@ -94,7 +94,7 @@ export default function SupportAFutureClient() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
               Privacy-safe, FTF-administered giving that backs a child&apos;s
               learning, dignity and wellbeing. You fund the support; we carry the
-              responsibility of delivering it safely — no identifiable profiles,
+              responsibility of delivering it safely - no identifiable profiles,
               ever.
             </p>
           </motion.div>
@@ -104,7 +104,7 @@ export default function SupportAFutureClient() {
       {/* ===== HOW IT WORKS + PANEL ===== */}
       <SectionWrapper background="warm">
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
-          {/* LEFT — the privacy-safe model */}
+          {/* LEFT - the privacy-safe model */}
           <div>
             <SectionHeader
               align="left"
@@ -150,7 +150,7 @@ export default function SupportAFutureClient() {
             </div>
           </div>
 
-          {/* RIGHT — giving panel */}
+          {/* RIGHT - giving panel */}
           <div className="lg:sticky lg:top-28">
             <GivingPanel
               source="support_a_future"

@@ -20,12 +20,12 @@ const sections = [
   {
     icon: ShieldCheck,
     title: "Our commitment to child protection",
-    body: "Every child who takes part in a For The Future programme has the right to be safe. Safeguarding is a precondition of our work — built into programme design, volunteer onboarding and partner agreements. We hold a zero-tolerance position on abuse, exploitation and neglect, and we act on concerns even when doing so is uncomfortable.",
+    body: "Every child who takes part in a For The Future programme has the right to be safe. Safeguarding is a precondition of our work - built into programme design, volunteer onboarding and partner agreements. We hold a zero-tolerance position on abuse, exploitation and neglect, and we act on concerns even when doing so is uncomfortable.",
   },
   {
     icon: Camera,
     title: "Consent and safe photography & storytelling",
-    body: "We only photograph or share a child's story with informed, documented consent from a parent or guardian, and with the child's own assent where age-appropriate. Stories are told with dignity — never to evoke pity — and consent can be withdrawn at any time. We do not publish identifying details, locations or images that could put a child at risk.",
+    body: "We only photograph or share a child's story with informed, documented consent from a parent or guardian, and with the child's own assent where age-appropriate. Stories are told with dignity - never to evoke pity - and consent can be withdrawn at any time. We do not publish identifying details, locations or images that could put a child at risk.",
   },
   {
     icon: UserCheck,
@@ -35,7 +35,7 @@ const sections = [
   {
     icon: AlertTriangle,
     title: "Incident reporting & referral",
-    body: "Any concern about a child's safety is reported immediately to our designated safeguarding lead. We follow a documented process — record, escalate, and where necessary refer to statutory authorities and child-protection partners. We do not investigate allegations ourselves, and we never promise confidentiality that would leave a child at risk.",
+    body: "Any concern about a child's safety is reported immediately to our designated safeguarding lead. We follow a documented process - record, escalate, and where necessary refer to statutory authorities and child-protection partners. We do not investigate allegations ourselves, and we never promise confidentiality that would leave a child at risk.",
   },
   {
     icon: Database,
@@ -45,7 +45,7 @@ const sections = [
   {
     icon: Handshake,
     title: "Partner safeguarding expectations",
-    body: "Institutions, schools and organizations that partner with FTF are expected to meet equivalent safeguarding standards — covering consent practices, conduct expectations and incident reporting. Safeguarding is assessed as part of our partnership due diligence and ongoing review.",
+    body: "Institutions, schools and organizations that partner with FTF are expected to meet equivalent safeguarding standards - covering consent practices, conduct expectations and incident reporting. Safeguarding is assessed as part of our partnership due diligence and ongoing review.",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function SafeguardingClient() {
           <p className="mt-6 text-lg leading-relaxed text-text-on-primary/70">
             We publish our safeguarding commitments openly so that families,
             volunteers, partners and supporters know exactly what to expect from
-            us — and how to hold us to account.
+            us - and how to hold us to account.
           </p>
         </motion.div>
       </SectionWrapper>

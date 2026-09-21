@@ -6,14 +6,14 @@ import { getDocumentsByCategory } from "@/lib/documents";
 export const metadata: Metadata = {
   title: "Partners",
   description:
-    "Partner with For The Future Organization — a credible, youth-led local implementation partner across Ghana and Nigeria. Programme grants, CSR/CSV, ESG, in-kind, employee volunteering and multi-year alliances.",
+    "Partner with For The Future Organization - a credible, youth-led local implementation partner across Ghana and Nigeria. Programme grants, CSR/CSV, ESG, in-kind, employee volunteering and multi-year alliances.",
   alternates: { canonical: "/partners" },
 };
 
 const prisma = new PrismaClient();
 
 // Phase 3b.2 ISR audit: the partner directory is CMS-managed content that does
-// not need per-request freshness — statically generate + revalidate instead of λ.
+// not need per-request freshness - statically generate + revalidate instead of λ.
 export const revalidate = 300;
 
 export default async function PartnersPage() {

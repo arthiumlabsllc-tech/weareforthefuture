@@ -33,7 +33,7 @@ function FooterLinkItem({ link }: { link: FooterLink }) {
         {isDev && link.status === "planned" && (
           <span
             className="ml-1.5 align-middle text-[9px] uppercase tracking-wide text-white/25"
-            title="Planned — route ships in a later phase"
+            title="Planned - route ships in a later phase"
           >
             •soon
           </span>
@@ -67,7 +67,7 @@ export default function Footer() {
                 It takes all of us.
               </h3>
               <p className="mt-2 text-lg text-white/60">
-                Give, volunteer or partner — every route helps a child move from disadvantage to opportunity.
+                Give, volunteer or partner - every route helps a child move from disadvantage to opportunity.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">

@@ -43,7 +43,7 @@ export default function CookieConsentBanner() {
   };
 
   const handleDismiss = () => {
-    // Dismiss without accepting — hides for this session only (no cookie set).
+    // Dismiss without accepting - hides for this session only (no cookie set).
     // The banner will reappear on next visit.
     setVisible(false);
   };

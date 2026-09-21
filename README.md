@@ -1,4 +1,4 @@
-# For The Future Organization — Website
+# For The Future Organization - Website
 
 A modern, accessible NGO website built with **Next.js 16** (App Router, Turbopack), **Tailwind CSS v4**, **Prisma 6** (Neon PostgreSQL), and **Framer Motion**. Deployed on Vercel with Cloudinary media hosting and Paystack payment processing.
 
@@ -87,7 +87,7 @@ This project uses a **schema-first** workflow (no `prisma/migrations/` directory
 # Push schema changes to the database
 npx prisma db push
 
-# Seed all content (idempotent — safe to re-run)
+# Seed all content (idempotent - safe to re-run)
 npx prisma db seed
 
 # Seed specific data
@@ -183,9 +183,9 @@ npx next build                                # 0 errors, all routes SSG/ISR
 
 ### Code Style
 
-- TypeScript strict mode — no `any` unless justified with a comment.
+- TypeScript strict mode - no `any` unless justified with a comment.
 - Tailwind utility classes; design tokens from `globals.css` (`--ftf-*` custom properties).
-- Never hardcode colors — use token utilities (`text-text-primary`, `bg-accent-hover`, etc.).
+- Never hardcode colors - use token utilities (`text-text-primary`, `bg-accent-hover`, etc.).
 - Server components by default; add `"use client"` only when state/effects are needed.
 - Public pages fetch Prisma data server-side and pass as `initial*` props to client components.
 
@@ -222,7 +222,7 @@ Tailwind CSS v4 at-rules (`@theme`, `@custom-variant`, etc.) are registered in `
 
 ## Key Architecture Decisions
 
-- **No raw HTML rendering:** CMS content is parsed into typed blocks (`PostBody.tsx`) and rendered as React nodes — never `dangerouslySetInnerHTML`.
+- **No raw HTML rendering:** CMS content is parsed into typed blocks (`PostBody.tsx`) and rendered as React nodes - never `dangerouslySetInnerHTML`.
 - **ISR everywhere:** Public pages use `revalidate = 300` (5 min) or `3600` (legal). No `force-dynamic`.
 - **Consent-gated analytics:** GA4 only loads after `ftf-cookie-consent=accepted`. Vercel Analytics (cookieless) is always active.
 - **Token-only colors:** All colors reference CSS custom properties. Dark mode works via `[data-theme="dark"]` on `<html>`.

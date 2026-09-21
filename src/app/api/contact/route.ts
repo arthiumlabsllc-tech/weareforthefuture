@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     // Covers both the /contact form and the partner-inquiry form, which POST here.
     if (process.env.VERCEL_ENV !== "production") {
       return NextResponse.json(
-        { error: "This is a preview build — form submissions are disabled." },
+        { error: "This is a preview build - form submissions are disabled." },
         { status: 403 }
       );
     }

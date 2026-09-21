@@ -7,7 +7,7 @@ import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 /**
  * Phase 7.2: Global error boundary. Next.js App Router renders this when an
  * unhandled error occurs in a server or client component. The default Next.js
- * error page is unstyled and exposes stack traces in development — this
+ * error page is unstyled and exposes stack traces in development - this
  * provides a branded, user-friendly fallback.
  */
 export default function GlobalError({

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const prisma = new PrismaClient();
 
 // Phase 3b.2 ISR audit: impact stories are CMS-managed, consent-gated content
-// that does not need per-request freshness — statically generate + revalidate.
+// that does not need per-request freshness - statically generate + revalidate.
 export const revalidate = 300;
 
 export default async function ImpactStoriesPage() {

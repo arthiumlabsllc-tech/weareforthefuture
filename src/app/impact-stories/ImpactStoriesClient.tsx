@@ -18,7 +18,7 @@ interface Story {
   program: string;
 }
 
-/* ===== INLINE STAT (static — brief bans count-up animations) ===== */
+/* ===== INLINE STAT (static - brief bans count-up animations) ===== */
 function StatCounter({ value, suffix, label }: { value: string; suffix: string; label: string }) {
   return (
     <div className="text-center">

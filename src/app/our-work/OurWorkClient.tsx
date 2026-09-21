@@ -94,7 +94,7 @@ export default function OurWorkClient({
           >
             {/* Shot brief: warm, natural-light photograph of children and an FTF
                 volunteer engaged in a community learning session in Greater Accra,
-                Ghana — candid and dignity-first, never staged "poverty" imagery. */}
+                Ghana - candid and dignity-first, never staged "poverty" imagery. */}
             <div className="overflow-hidden rounded-3xl border border-border shadow-2xl shadow-primary/10">
               <Image
                 src={img("/images/page-heroes/initiatives-hero.jpg")}
@@ -135,7 +135,7 @@ export default function OurWorkClient({
           <SectionHeader
             overline="How our work fits together"
             title="One coherent development pathway"
-            description="Every programme FTF runs sits within one of five pillars — and the pillars are not separate projects. They connect into a single journey that carries a child from access to school, through learning, dignity and future-ready skills, to mentorship, work and leadership. Support anywhere on the pathway reinforces the whole of it."
+            description="Every programme FTF runs sits within one of five pillars - and the pillars are not separate projects. They connect into a single journey that carries a child from access to school, through learning, dignity and future-ready skills, to mentorship, work and leadership. Support anywhere on the pathway reinforces the whole of it."
           />
           <a
             href="#journey"
@@ -152,7 +152,7 @@ export default function OurWorkClient({
         <SectionHeader
           overline="Our theory of change"
           title="How FTF changes a future"
-          description="Seven connected stages, each delivered primarily by one of the five pillars — from staying in school to giving back as a mentor and leader."
+          description="Seven connected stages, each delivered primarily by one of the five pillars - from staying in school to giving back as a mentor and leader."
         />
         <JourneyStepper />
       </SectionWrapper>
@@ -180,7 +180,7 @@ export default function OurWorkClient({
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border border-t-4 bg-surface p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
                 style={{ borderTopColor: accentVar(pillar.number) }}
               >
-                {/* Ghost number — decorative */}
+                {/* Ghost number - decorative */}
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute -right-1 -top-3 font-[family-name:var(--font-display)] text-6xl font-bold opacity-[0.08]"
@@ -264,7 +264,7 @@ export default function OurWorkClient({
           light
           overline="Where we work"
           title="Programme delivery in two countries"
-          description="FTF delivers programmes in Ghana and Nigeria. Our US 501(c)(3) is a funding vehicle that supports this work — not a third programme country."
+          description="FTF delivers programmes in Ghana and Nigeria. Our US 501(c)(3) is a funding vehicle that supports this work - not a third programme country."
         />
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-2xl border border-white/15 bg-white/5 p-7">
@@ -320,7 +320,7 @@ export default function OurWorkClient({
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-on-primary/70">
               Whether you give, volunteer or partner, your support reaches a
-              specific pillar — and a specific child's journey.
+              specific pillar - and a specific child's journey.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link

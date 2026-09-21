@@ -89,7 +89,7 @@ export default function BlogEditor({ post, categories, pillars, programs }: Blog
       .map((id) => pillars.find((p) => p.id === id)?.title)
       .filter(Boolean)
       .join(", ");
-    return names ? `${pr.name} — ${names}` : `${pr.name} — no pillar`;
+    return names ? `${pr.name} - ${names}` : `${pr.name} - no pillar`;
   }
 
   function handleTitleChange(value: string) {

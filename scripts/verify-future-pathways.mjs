@@ -6,7 +6,7 @@ const base = (process.env.BASE_URL || "http://localhost:3000").replace(/\/$/, ""
 const failures = [];
 
 function check(name, ok, detail = "") {
-  console.log(`${ok ? "PASS" : "FAIL"}  ${name}${detail ? ` — ${detail}` : ""}`);
+  console.log(`${ok ? "PASS" : "FAIL"}  ${name}${detail ? ` - ${detail}` : ""}`);
   if (!ok) failures.push(name);
 }
 

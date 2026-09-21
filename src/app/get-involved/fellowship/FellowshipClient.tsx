@@ -20,7 +20,7 @@ const pillarsOfFellowship = [
   {
     icon: Lightbulb,
     title: "Lead a real project",
-    body: "Fellows design and run a community project — from a learning club to a health or digital-skills drive — with FTF support behind them.",
+    body: "Fellows design and run a community project - from a learning club to a health or digital-skills drive - with FTF support behind them.",
   },
   {
     icon: GraduationCap,
@@ -35,7 +35,7 @@ const pillarsOfFellowship = [
   {
     icon: HeartHandshake,
     title: "Give back & lead",
-    body: "Graduates return to mentor and train the next cohort — the cycle that keeps the Fellowship rooted in the community it serves.",
+    body: "Graduates return to mentor and train the next cohort - the cycle that keeps the Fellowship rooted in the community it serves.",
   },
 ];
 
@@ -53,7 +53,7 @@ const fellowshipInterests = [
   { value: "fellowship-digital-creative", label: "Digital & creative skills" },
   { value: "fellowship-advocacy", label: "Advocacy & storytelling" },
   { value: "fellowship-enterprise", label: "Entrepreneurship" },
-  { value: "fellowship-not-sure", label: "Not sure yet — advise me" },
+  { value: "fellowship-not-sure", label: "Not sure yet - advise me" },
 ];
 
 export default function FellowshipClient() {
@@ -84,8 +84,8 @@ export default function FellowshipClient() {
               The FTF Fellowship
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-              A structured pathway for young leaders — including graduates of our
-              own programmes — to lead community projects, build real skills and
+              A structured pathway for young leaders - including graduates of our
+              own programmes - to lead community projects, build real skills and
               give back by mentoring the next cohort.
             </p>
             <Link
@@ -104,7 +104,7 @@ export default function FellowshipClient() {
         <SectionHeader
           overline="What the Fellowship is"
           title="Leadership, grounded in community"
-          description="The Fellowship turns energy and ideas into supported action — and asks fellows to lift others as they rise."
+          description="The Fellowship turns energy and ideas into supported action - and asks fellows to lift others as they rise."
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {pillarsOfFellowship.map((p, i) => (
@@ -133,13 +133,13 @@ export default function FellowshipClient() {
             <SectionHeader align="left" overline="Who it's for" title="Is the Fellowship right for you?" />
             <p className="mt-5 text-sm leading-relaxed text-text-secondary">
               The Fellowship is for young people who want to lead change in their
-              community — whether you&apos;re a student, a recent graduate, an
+              community - whether you&apos;re a student, a recent graduate, an
               alumnus of an FTF programme, or a young professional with an idea
               worth backing.
             </p>
             <ul className="mt-5 space-y-3">
               {[
-                "You care about a specific issue — education, health, girls' empowerment, skills or the environment.",
+                "You care about a specific issue - education, health, girls' empowerment, skills or the environment.",
                 "You can commit time across the cohort to design and deliver a project.",
                 "You want mentorship, training and a peer network, not just a certificate.",
                 "You're willing to uphold our safeguarding standards and give back to the next cohort.",

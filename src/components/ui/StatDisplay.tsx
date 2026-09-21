@@ -6,7 +6,7 @@ interface StatDisplayProps {
 }
 
 /**
- * Static statistic display — no count-up animation.
+ * Static statistic display - no count-up animation.
  *
  * Replaces `AnimatedCounter` (Phase 3b.1). The brief prefers stable, instantly
  * readable numbers over count-up motion (which also caused layout shift and

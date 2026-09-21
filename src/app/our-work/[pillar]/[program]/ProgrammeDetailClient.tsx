@@ -25,7 +25,7 @@ import type {
   ProgrammeUpdate,
 } from "@/lib/pillars";
 
-/** Pillar accent colour (theme-aware) — uses the always-emitted custom property. */
+/** Pillar accent colour (theme-aware) - uses the always-emitted custom property. */
 const accentVar = (n: number) => `var(--ftf-pillar-${n})`;
 const accentTint = (n: number, pct = 14) =>
   `color-mix(in srgb, var(--ftf-pillar-${n}) ${pct}%, transparent)`;
@@ -406,7 +406,7 @@ export default function ProgrammeDetailClient({
           <ol className="space-y-3">
             {updates.map((update) => (
               <li key={update.slug}>
-                {/* No /news/[slug] detail route yet — link to the news listing. */}
+                {/* No /news/[slug] detail route yet - link to the news listing. */}
                 <Link href="/news" className="group flex flex-col gap-1 rounded-2xl border border-border bg-surface p-5 transition-all hover:border-accent/50 hover:shadow-md sm:flex-row sm:items-center sm:justify-between">
                   <span className="font-semibold text-text-primary transition-colors group-hover:text-accent-text">{update.title}</span>
                   {update.date && (

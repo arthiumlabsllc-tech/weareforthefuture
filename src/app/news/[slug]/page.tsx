@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description =
     post.metaDescription ||
     post.excerpt ||
-    `${post.title} — a story from For The Future Organization.`;
+    `${post.title} - a story from For The Future Organization.`;
   const image = post.ogImage || post.featuredImage;
   return {
     title: post.metaTitle || `${post.title} | News & Stories`,
@@ -118,7 +118,7 @@ export default async function NewsPostPage({ params }: Props) {
 
       <div className="bg-bg-primary pb-20 pt-8 sm:pt-10 lg:pb-28">
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8">
-          {/* Back link — above the hero, muted, arrow-left */}
+          {/* Back link - above the hero, muted, arrow-left */}
           <Link
             href="/news"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-text-tertiary transition-colors hover:text-accent-text focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
@@ -128,7 +128,7 @@ export default async function NewsPostPage({ params }: Props) {
           </Link>
 
           <article className="mt-6">
-            {/* Hero — contained, 16:9, max 1200px */}
+            {/* Hero - contained, 16:9, max 1200px */}
             {heroImage && (
               <div className="relative mx-auto aspect-[16/9] w-full max-w-[1200px] overflow-hidden rounded-2xl bg-bg-tertiary">
                 <Image
@@ -143,7 +143,7 @@ export default async function NewsPostPage({ params }: Props) {
               </div>
             )}
 
-            {/* Reading column — measured at ~72 characters per line with Inter
+            {/* Reading column - measured at ~72 characters per line with Inter
                 18px (CSS `ch` is the "0" glyph, ~25% wider than Inter's average
                 prose glyph, so 70ch/720px rendered 83+ characters). 620px keeps
                 the measure inside the required 65-75 range and under 720px. */}
@@ -197,7 +197,7 @@ export default async function NewsPostPage({ params }: Props) {
                 </div>
               </header>
 
-              {/* Body — semantic blocks, 65-75ch column */}
+              {/* Body - semantic blocks, 65-75ch column */}
               <div className="mt-8">
                 <PostBody content={post.content} />
               </div>
@@ -216,7 +216,7 @@ export default async function NewsPostPage({ params }: Props) {
               />
             </div>
 
-            {/* More from this pillar — wider grid */}
+            {/* More from this pillar - wider grid */}
             <div className="mx-auto mt-16 w-full max-w-5xl">
               <MoreFromPillar currentSlug={post.slug} pillarId={post.pillarId} />
             </div>

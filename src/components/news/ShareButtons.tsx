@@ -1,6 +1,6 @@
 "use client";
 
-// Phase 6.6: subtle share row — copy link (with toast), X, Facebook, WhatsApp,
+// Phase 6.6: subtle share row - copy link (with toast), X, Facebook, WhatsApp,
 // LinkedIn. Icon buttons only, no brand colours (text-tertiary per spec),
 // aria-labelled, focus rings preserved. Brand glyphs are inline SVG because the
 // installed lucide-react build no longer ships brand icons.
@@ -54,7 +54,7 @@ export default function ShareButtons({ title }: { title: string }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard unavailable — no-op */
+      /* clipboard unavailable - no-op */
     }
   };
 

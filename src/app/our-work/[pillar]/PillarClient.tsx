@@ -100,7 +100,7 @@ export default function PillarClient({
               </div>
             </div>
 
-            {/* Ghost number — decorative pillar identity */}
+            {/* Ghost number - decorative pillar identity */}
             <div aria-hidden="true" className="hidden justify-self-end lg:block">
               <span
                 className="font-[family-name:var(--font-display)] text-[10rem] font-bold leading-none opacity-25"
@@ -160,7 +160,7 @@ export default function PillarClient({
             ))}
           </div>
         ) : (
-          /* Intentional empty state — no programmes published under this pillar yet. */
+          /* Intentional empty state - no programmes published under this pillar yet. */
           <div
             className="flex flex-col items-start gap-3 rounded-2xl border border-dashed p-8 sm:flex-row sm:items-center"
             style={{ borderColor: accentVar(pillar.number), backgroundColor: accentTint(pillar.number, 6) }}
@@ -175,7 +175,7 @@ export default function PillarClient({
               <h3 className="text-lg font-bold text-text-primary">Programmes launching soon</h3>
               <p className="mt-1 text-sm leading-relaxed text-text-secondary">
                 We are formalising the published programme set for this pillar. Meanwhile, support
-                here strengthens the whole pathway — from access to school to a first livelihood.
+                here strengthens the whole pathway - from access to school to a first livelihood.
               </p>
             </div>
           </div>
@@ -271,7 +271,7 @@ export default function PillarClient({
             Back the work of Pillar {pillar.number}
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-on-primary/70">
-            {pillar.title} — {pillar.summary}
+            {pillar.title} - {pillar.summary}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
@@ -281,7 +281,7 @@ export default function PillarClient({
               <Heart className="h-5 w-5" aria-hidden="true" />
               Give to this pillar
             </Link>
-            {/* Phase 5: the Give tree is live — "Sponsor a Future" deep-links to the
+            {/* Phase 5: the Give tree is live - "Sponsor a Future" deep-links to the
                 privacy-safe /give/support-a-future page; mentors go to the mentor pathway. */}
             <Link
               href={mentorLed ? "/get-involved/mentor" : "/give/support-a-future"}

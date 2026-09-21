@@ -131,7 +131,7 @@ export default function VolunteerApplicationForm({
           role="status"
           className="rounded-xl border border-border bg-bg-tertiary px-4 py-3 text-sm text-text-secondary"
         >
-          This is a preview build — form submissions are disabled.
+          This is a preview build - form submissions are disabled.
         </p>
       )}
 

@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/site";
  *
  * Verified institutional record (brief Section 2): 10 years · 9,000+ children
  * and young people reached · 500+ volunteers · 200+ campaigns. The invented
- * year-by-year growth chart was removed — it contradicted the verified figures
+ * year-by-year growth chart was removed - it contradicted the verified figures
  * and was a credibility risk.
  */
 
@@ -35,7 +35,7 @@ export const successStories = [
   { name: "Comfort", age: null, location: "Greater Accra", story: "Comfort stayed in school through FTF's girls' dignity and retention programming. Today she mentors younger girls in her community and is exploring a pathway into STEM.", program: "Empower Her, Period · Girls' Dignity & Retention", pillar: "Girls' Education, Dignity & Retention", status: "safeguarding-approved" },
 ];
 
-/** Headline counters for the /impact-stories stat bar (static — no count-up). */
+/** Headline counters for the /impact-stories stat bar (static - no count-up). */
 export const storyStats = [
   { value: `${yearsOfFoundation}`, suffix: "", label: "Years of continuous impact" },
   { value: `${beneficiaries.toLocaleString()}`, suffix: "+", label: "Children and young people reached" },

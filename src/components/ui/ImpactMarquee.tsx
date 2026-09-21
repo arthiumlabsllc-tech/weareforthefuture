@@ -9,7 +9,7 @@ const messages = [
   "Five pillars. One pathway. From disadvantage to opportunity.",
   "500+ volunteers mobilised · 200+ campaigns delivered",
   "Youth-led. Community-rooted. Safeguarding-led.",
-  "Building the FTF Village — Phase One in planning and fundraising",
+  "Building the FTF Village - Phase One in planning and fundraising",
   "Empower Her, Period · Girls' education, dignity and retention",
   "Future Pathways · From talent to livelihood",
   "Click4Change · Digital literacy for the future of work",

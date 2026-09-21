@@ -1,6 +1,6 @@
 // Phase 6.6: editorial post body.
 //
-// Parses CMS content into a typed block model and renders React elements only —
+// Parses CMS content into a typed block model and renders React elements only -
 // raw CMS HTML is never injected (project convention). Two source shapes are
 // supported:
 //   1. HTML from the rich-text editor (<p>, <h2>-<h4>, <blockquote>, <ul>/<ol>,
@@ -56,7 +56,7 @@ const attr = (attrs: string, name: string): string => {
 /** A quote with no citation and under ~140 chars reads as a pull-quote. */
 const isPullQuote = (text: string, cite?: string): boolean => !cite && text.length <= 140;
 
-/** Split "Some words. — Author, role" into text + citation. */
+/** Split "Some words. - Author, role" into text + citation. */
 const splitCitation = (raw: string): { text: string; cite?: string } => {
   const m = raw.match(/^(.*?)[\n]*\s*(?:\u2014|--|\u2013)\s*([^.\n][^\n]{1,80})$/);
   if (m && m[1].trim()) return { text: m[1].trim(), cite: m[2].trim() };
@@ -322,7 +322,7 @@ export default function PostBody({ content }: { content: string }) {
           );
         }
 
-        // paragraph — the first one is the lead
+        // paragraph - the first one is the lead
         const isLead = paragraphIndex === 0;
         paragraphIndex += 1;
         return (

@@ -28,7 +28,7 @@ const mentorTracks = [
 ];
 
 const commitment = [
-  "A regular, predictable cadence — typically a scheduled check-in with your mentee.",
+  "A regular, predictable cadence - typically a scheduled check-in with your mentee.",
   "An agreed commitment window so the young person can rely on the relationship.",
   "Completion of our safeguarding briefing and reference/background checks.",
   "Clear boundaries: mentorship is supportive and structured, never a private or personal relationship.",
@@ -74,7 +74,7 @@ export default function MentorClient() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
               Mentors connect children and young people with guidance, role models
               and real-world experience. A consistent, encouraging adult can change
-              the direction of a young life — and it starts with showing up.
+              the direction of a young life - and it starts with showing up.
             </p>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-on-primary/70">
               <span className="inline-flex items-center gap-2">
@@ -132,7 +132,7 @@ export default function MentorClient() {
             <SectionHeader align="left" overline="The commitment" title="What we ask of mentors" />
             <p className="mt-5 text-sm leading-relaxed text-text-secondary">
               Mentorship works through consistency, not intensity. We ask mentors
-              to be dependable, prepared and patient — and we equip you with
+              to be dependable, prepared and patient - and we equip you with
               training, a matching process and ongoing support from our team.
             </p>
             <ul className="mt-5 space-y-3">
@@ -158,7 +158,7 @@ export default function MentorClient() {
               {[
                 "Safeguarding briefing and signed code of conduct.",
                 "Reference and, where required, background checks.",
-                "Structured, supervised matching — no unsupervised private contact.",
+                "Structured, supervised matching - no unsupervised private contact.",
                 "A named safeguarding lead to raise any concern with, at any time.",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-2.5 text-sm text-text-secondary">

@@ -17,7 +17,7 @@ import type { ProgrammeIndicator } from "@/lib/pillars";
  * All figures are static (no count-up): organisation-wide numbers come from the
  * verified `siteConfig.stats`, per-metric cards from `impactMetrics`, and the
  * programme grid from the CMS via getProgrammeIndicators(). Fund allocation
- * renders the real `fundAllocation` breakdown — the earlier unsubstantiated
+ * renders the real `fundAllocation` breakdown - the earlier unsubstantiated
  * single-percentage and per-dollar claims from Phase 2.5 are gone.
  */
 export default function ImpactClient({ indicators = [] }: { indicators?: ProgrammeIndicator[] }) {
@@ -60,7 +60,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
         </div>
       </section>
 
-      {/* ===== IMPACT DASHBOARD (static — no count-up) ===== */}
+      {/* ===== IMPACT DASHBOARD (static - no count-up) ===== */}
       <SectionWrapper background="white">
         <SectionHeader
           overline="Impact dashboard"
@@ -195,7 +195,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
                     {ind.name}
                   </h3>
                   <div className="mt-3 text-2xl font-bold text-text-primary tabular-nums">
-                    {ind.beneficiaries != null ? `${ind.beneficiaries.toLocaleString()}+` : "—"}
+                    {ind.beneficiaries != null ? `${ind.beneficiaries.toLocaleString()}+` : "-"}
                     <span className="ml-2 text-sm font-medium text-text-tertiary">reached</span>
                   </div>
                   {ind.category && (

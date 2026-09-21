@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// Phase 6.6: reusable Related block — pillar row, programme row (needs the
+// Phase 6.6: reusable Related block - pillar row, programme row (needs the
 // pillar to build /our-work/{pillar}/{program}), and tag chips. Unset values
 // are omitted silently; if nothing is set the whole block is not rendered.
 type RelatedBlockProps = {

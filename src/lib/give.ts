@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db";
  * Phase 5 data-access layer for the /give tree. Mirrors src/lib/documents.ts and
  * src/lib/pillars.ts: every accessor is `cache()`'d and degrades to a safe
  * fallback when the database is unreachable, so ISR pages prerender and render an
- * intentional state instead of a 500. Server-only (imports Prisma) — client
+ * intentional state instead of a 500. Server-only (imports Prisma) - client
  * components must import the isomorphic constants from @/data/giving instead.
  */
 
@@ -40,7 +40,7 @@ export const getGivingCampaigns = cache(async (): Promise<GivingCampaign[]> => {
       endDate: r.endDate ? r.endDate.toISOString() : null,
     }));
   } catch (err) {
-    console.error("[give] getGivingCampaigns failed — empty fallback", err);
+    console.error("[give] getGivingCampaigns failed - empty fallback", err);
     return [];
   }
 });
@@ -53,27 +53,27 @@ export interface GivingTarget {
   name: string;
   description: string | null;
   image: string | null;
-  /** pesewas — campaign only */
+  /** pesewas - campaign only */
   goalAmount: number | null;
-  /** pesewas — campaign only */
+  /** pesewas - campaign only */
   raisedAmount: number | null;
   campaignId: string | null;
 }
 
 /**
  * Reserved slugs for the two unrestricted giving routes on the hub. These are not
- * DB rows — they resolve to a general, unrestricted donation page.
+ * DB rows - they resolve to a general, unrestricted donation page.
  */
 export const GENERAL_GIVING = {
   "where-most-needed": {
     name: "Give where it's needed most",
     description:
-      "Unrestricted giving. We direct your gift to the highest-priority need across our five programme pillars — so support reaches children and young people where it matters most, when it matters most.",
+      "Unrestricted giving. We direct your gift to the highest-priority need across our five programme pillars - so support reaches children and young people where it matters most, when it matters most.",
   },
   monthly: {
     name: "Monthly giving",
     description:
-      "Recurring monthly support gives our programmes predictable funding to plan, staff and sustain their work — turning a one-off gift into lasting opportunity.",
+      "Recurring monthly support gives our programmes predictable funding to plan, staff and sustain their work - turning a one-off gift into lasting opportunity.",
   },
 } as const;
 
@@ -152,7 +152,7 @@ export const getGivingSlugs = cache(async (): Promise<string[]> => {
     for (const p of programs) slugs.add(p.slug);
     for (const c of campaigns) slugs.add(c.slug);
   } catch (err) {
-    console.error("[give] getGivingSlugs failed — reserved slugs only", err);
+    console.error("[give] getGivingSlugs failed - reserved slugs only", err);
   }
   return [...slugs];
 });

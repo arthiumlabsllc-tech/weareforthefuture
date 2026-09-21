@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   },
   // Preview safety: keep Vercel preview / branch deployments out of search
   // indexes. On the production deployment (VERCEL_ENV === "production") we emit
-  // NO rule at all — Next rejects a route whose headers array is empty
+  // NO rule at all - Next rejects a route whose headers array is empty
   // ("`headers` field cannot be empty for route"), which broke the prod build.
   async headers() {
     if (process.env.VERCEL_ENV === "production") return [];
@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // PHASE 3a — the /our-work tree is live, so the temporary bridge that sent
+      // PHASE 3a - the /our-work tree is live, so the temporary bridge that sent
       // /our-work -> /initiatives is removed and the direction is reversed:
       // /initiatives now permanently redirects to /our-work. No loop, because
       // nothing redirects /our-work back to /initiatives.
@@ -48,28 +48,28 @@ const nextConfig: NextConfig = {
       { source: "/stories", destination: "/news", permanent: true },
       { source: "/blog", destination: "/news", permanent: true },
 
-      // PHASE 3b.1 — /about/team is live with #leadership / #governance /
+      // PHASE 3b.1 - /about/team is live with #leadership / #governance /
       // #advisory anchors, so the standalone board pages now permanently
       // redirect into it. No loop: /about/team does not redirect back to either
       // source, and the old page files are kept (unreachable) for rollback.
       { source: "/executive-board", destination: "/about/team#governance", permanent: true },
       { source: "/advisory-board", destination: "/about/team#advisory", permanent: true },
 
-      // PHASE 3b.2 — /about/team is the single canonical team/governance page.
+      // PHASE 3b.2 - /about/team is the single canonical team/governance page.
       // The standalone /team route is a duplicate-content risk, so it now
       // permanently (308) redirects there. No loop: /about/team does not
       // redirect back to /team, and the old /team page file is kept (unreachable)
       // for rollback, matching the /executive-board + /advisory-board precedent.
       { source: "/team", destination: "/about/team", permanent: true },
 
-      // PHASE 5 — the /give hub replaces the single-page /donate. This is an
+      // PHASE 5 - the /give hub replaces the single-page /donate. This is an
       // EXACT-match redirect: `source: "/donate"` matches only /donate, so the
       // shared Paystack success route at /donate/success (used by both donations
       // and the Impact Store) keeps working. No loop: /give never redirects to
       // /donate, and the old /donate page file is kept (unreachable) for rollback.
       { source: "/donate", destination: "/give", permanent: true },
 
-      // PHASE 6 — /nigeria is the dedicated Nigeria context page. Project
+      // PHASE 6 - /nigeria is the dedicated Nigeria context page. Project
       // Momentum is FTF Nigeria's launch initiative, so its legacy standalone
       // path permanently (308) redirects there. No loop: /nigeria never
       // redirects back to /project-momentum.

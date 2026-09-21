@@ -27,8 +27,8 @@ const roles = [
   { icon: Laptop, title: "Digital & future-ready skills", body: "Digital literacy, coding and entrepreneurship workshops for young people." },
   { icon: GraduationCap, title: "Mentorship & leadership", body: "Guide a young person through academic, career and leadership pathways." },
   { icon: Palette, title: "Creative arts & sports", body: "Photography, art, music and sport programmes that build confidence." },
-  { icon: Megaphone, title: "Fundraising & communications", body: "Campaigns, storytelling, social media and donor engagement — mostly remote." },
-  { icon: Code2, title: "Tech & data", body: "Web, systems, monitoring & evaluation and data support — remote-friendly." },
+  { icon: Megaphone, title: "Fundraising & communications", body: "Campaigns, storytelling, social media and donor engagement - mostly remote." },
+  { icon: Code2, title: "Tech & data", body: "Web, systems, monitoring & evaluation and data support - remote-friendly." },
   { icon: ClipboardList, title: "Operations & logistics", body: "Programme coordination, events, procurement and community liaison." },
 ];
 
@@ -143,7 +143,7 @@ export default function VolunteerPageClient() {
             />
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-text-secondary">
               <p>
-                We match volunteers to real programme needs — not the other way
+                We match volunteers to real programme needs - not the other way
                 round. After you apply, our team reviews your skills and
                 availability, completes safeguarding checks, and places you with a
                 programme, school or community team where you can add the most

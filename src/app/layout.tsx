@@ -57,7 +57,7 @@ export const metadata: Metadata = {
         url: "https://res.cloudinary.com/vyiwmedy/image/upload/v1789126448/ftf/images/hero/ftf-hero-2-new.png",
         width: 1200,
         height: 630,
-        alt: "For The Future Organization — 10 Years of Impact",
+        alt: "For The Future Organization - 10 Years of Impact",
       },
     ],
   },
@@ -88,7 +88,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
-        {/* FOUC prevention — KEEP next/script beforeInteractive exactly as-is.
+        {/* FOUC prevention - KEEP next/script beforeInteractive exactly as-is.
             It runs the theme bootstrap in the initial HTML <head> BEFORE first
             paint, so a stored/system dark preference never flashes light.
             React 19 logs a DEV-ONLY console warning ("Encountered a script tag

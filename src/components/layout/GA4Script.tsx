@@ -5,7 +5,7 @@ import { useEffect } from "react";
 /**
  * Phase 7.2: Consent-gated GA4 loader.
  * Only injects the gtag.js script when ftf-cookie-consent=accepted.
- * If the user has not consented, nothing loads — no cookies, no tracking.
+ * If the user has not consented, nothing loads - no cookies, no tracking.
  *
  * Set NEXT_PUBLIC_GA4_ID in .env.local to activate. Without it, this
  * component is a no-op (safe to render unconditionally).

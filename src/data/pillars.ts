@@ -1,5 +1,5 @@
 // TODO(tech-debt, LOW priority): this file doubles as the ISR fallback and the
-// seed source. It is small (~143 lines), so this is not urgent — when next
+// seed source. It is small (~143 lines), so this is not urgent - when next
 // touched, consider splitting into src/data/pillars-fallback.ts (minimal) and
 // scripts/seed-data/pillars.ts (full copy).
 import {
@@ -43,7 +43,7 @@ export const pillars: Pillar[] = [
     challenge:
       "Many vulnerable children enrol in school but do not remain, or remain without learning at the expected level. Household income, distance, learning gaps, and competing priorities all contribute.",
     whatWeDo:
-      "We support school access, retention, and learning outcomes through sponsorship, learning clubs, and academic transition support — working alongside schools and caregivers rather than replacing them.",
+      "We support school access, retention, and learning outcomes through sponsorship, learning clubs, and academic transition support - working alongside schools and caregivers rather than replacing them.",
     whoItServes:
       "Vulnerable children and young people, primarily primary and junior secondary age.",
     whereItWorks:
@@ -107,7 +107,7 @@ export const pillars: Pillar[] = [
     challenge:
       "A child's ability to learn and stay safe depends on conditions at home and in the community: household stability, food security, essential supplies, and adults who are supported to care for them. Vulnerability at the family level shows up in the classroom.",
     whatWeDo:
-      "We strengthen the family and community conditions around children through essential supplies, household and caregiver support, community outreach and seasonal campaigns — working with local partners and a safeguarding-first practice.",
+      "We strengthen the family and community conditions around children through essential supplies, household and caregiver support, community outreach and seasonal campaigns - working with local partners and a safeguarding-first practice.",
     whoItServes:
       "Children and their families and caregivers in vulnerable communities, alongside the local partners who support them.",
     whereItWorks:
@@ -127,7 +127,7 @@ export function primaryPillar(tags: string[] | undefined): Pillar | null {
 }
 
 /**
- * "How FTF changes a future" — the theory of change made visual.
+ * "How FTF changes a future" - the theory of change made visual.
  * Each stage maps to the pillar that primarily delivers it, so the journey
  * stepper on the homepage can render a single coherent access-to-opportunity
  * pathway rather than a list of disconnected projects.

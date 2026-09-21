@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/site";
 /**
  * A live donation appeal surfaced on the homepage. Populated server-side from
  * the CMS `DonationCampaign` model and already filtered to published, non-
- * deleted, in-window campaigns (auto-expire) — see src/app/page.tsx.
+ * deleted, in-window campaigns (auto-expire) - see src/app/page.tsx.
  */
 export interface Priority {
   id: string;
@@ -54,7 +54,7 @@ export default function CurrentPriorities({ priorities }: { priorities: Priority
           </span>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-          Help fund the first phase of For The Future Village — a place of
+          Help fund the first phase of For The Future Village - a place of
           safety, learning and belonging for vulnerable children and young
           people in Ghana.
         </p>

@@ -46,7 +46,7 @@ interface PartnersClientProps {
 
 const routes = [
   { icon: Coins, title: "Programme grants", body: "Fund a specific programme or pillar with clear outcomes and honest reporting." },
-  { icon: Building2, title: "CSR / CSV", body: "Align corporate social — or shared — value goals with measurable community impact." },
+  { icon: Building2, title: "CSR / CSV", body: "Align corporate social - or shared - value goals with measurable community impact." },
   { icon: Leaf, title: "ESG & impact reporting", body: "Verified contribution data for the social pillar of your ESG commitments." },
   { icon: Handshake, title: "Implementation partner", body: "We deliver on the ground as your credible local implementation partner." },
   { icon: School, title: "School & community", body: "Partner through the schools and community structures where we already work." },
@@ -58,7 +58,7 @@ const routes = [
 ];
 
 const credibility = [
-  { icon: CalendarCheck, title: "Ten-year history", body: "Founded in 2016 — a decade of continuous, community-rooted delivery." },
+  { icon: CalendarCheck, title: "Ten-year history", body: "Founded in 2016 - a decade of continuous, community-rooted delivery." },
   { icon: Sprout, title: "Youth leadership", body: "Youth-led: young people from the communities we serve shape our priorities and programmes." },
   { icon: MapPin, title: "Local reach", body: "Deep roots across seven regions of Ghana and in Ibadan, Nigeria." },
   { icon: Network, title: "Growing systems", body: "We invest in the safeguarding, operations and data systems that let us scale responsibly." },
@@ -66,12 +66,12 @@ const credibility = [
 ];
 
 const whyPartner = [
-  "Youth-led and community-rooted — decisions are shaped by the people we serve.",
+  "Youth-led and community-rooted - decisions are shaped by the people we serve.",
   "A decade of continuous delivery since 2016, through changing contexts.",
   "Deep local reach across Ghana and Nigeria, with trusted community relationships.",
-  "Five integrated programme pillars — education, girls' empowerment, future-ready skills, mentorship & wellbeing, and community support.",
+  "Five integrated programme pillars - education, girls' empowerment, future-ready skills, mentorship & wellbeing, and community support.",
   "Safeguarding-first standards embedded in every programme and partnership.",
-  "Transparent, honest reporting with reviewed impact figures — no inflated claims.",
+  "Transparent, honest reporting with reviewed impact figures - no inflated claims.",
   "Growing systems and delivery capacity, built to scale responsibly.",
   "Flexible partnership models, from a single-programme grant to a multi-year alliance.",
 ];
@@ -127,7 +127,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
               For The Future Organization is youth-led and community-rooted, with
               a decade of delivery across Ghana and Nigeria. We help
               institutions, foundations and companies turn intent into measurable
-              impact — safely, transparently and locally.
+              impact - safely, transparently and locally.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -196,7 +196,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
         <SectionHeader
           overline="How we can work together"
           title="Partnership routes"
-          description="Ten ways to partner — pick the model that fits your goals, or combine several."
+          description="Ten ways to partner - pick the model that fits your goals, or combine several."
         />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {routes.map((r, i) => (

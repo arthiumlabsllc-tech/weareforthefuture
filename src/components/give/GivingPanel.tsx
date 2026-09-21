@@ -25,7 +25,7 @@ interface GivingPanelProps {
 /**
  * Reusable donation panel for the /give tree (Phase 5). Collects frequency,
  * amount and optional donor details, then hands off to the shared
- * <PaystackCheckout> which redirects to /donate/success on completion — the same
+ * <PaystackCheckout> which redirects to /donate/success on completion - the same
  * flow the legacy /donate page and Impact Store use, so Paystack routing,
  * verification and the webhook are unchanged.
  */

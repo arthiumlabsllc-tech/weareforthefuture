@@ -17,11 +17,11 @@ export const PRIVACY_CONTENT = `## What we collect
 
 We collect the following categories of personal data:
 
-- **Donation data** — name, email address, payment reference, and amount when you make a donation through our website (processed by Paystack).
-- **Contact data** — name, email address, and message content when you use our contact form or newsletter signup.
-- **Volunteer and partner data** — name, email, phone, organisation, and any information you provide in application forms.
-- **Supporter account data** — name, email address, and hashed password when you create a My FTF account.
-- **Usage data** — anonymised, aggregate page-view statistics (no individual tracking profiles). We do not currently deploy advertising or analytics cookies.
+- **Donation data** - name, email address, payment reference, and amount when you make a donation through our website (processed by Paystack).
+- **Contact data** - name, email address, and message content when you use our contact form or newsletter signup.
+- **Volunteer and partner data** - name, email, phone, organisation, and any information you provide in application forms.
+- **Supporter account data** - name, email address, and hashed password when you create a My FTF account.
+- **Usage data** - anonymised, aggregate page-view statistics (no individual tracking profiles). We do not currently deploy advertising or analytics cookies.
 
 ## Why we collect it
 
@@ -39,9 +39,9 @@ Your data is used solely for the purposes above. We do **not** sell, rent, or tr
 
 We use a minimal set of cookies:
 
-- **ftf-cookie-consent** — remembers your cookie preferences (essential, 12 months).
-- **ftf-theme** — remembers your light/dark theme choice (essential, 12 months).
-- **ftf-session** — keeps you logged in to your supporter account (essential, session).
+- **ftf-cookie-consent** - remembers your cookie preferences (essential, 12 months).
+- **ftf-theme** - remembers your light/dark theme choice (essential, 12 months).
+- **ftf-session** - keeps you logged in to your supporter account (essential, session).
 
 No third-party advertising or analytics cookies are currently deployed. See our [Cookie Policy](/cookies) for full details.
 
@@ -49,32 +49,32 @@ No third-party advertising or analytics cookies are currently deployed. See our 
 
 We share data only with service providers who process it on our behalf:
 
-- **Paystack** (payment processing) — receives your name, email, and payment amount to process donations. [Paystack Privacy Policy](https://paystack.com/privacy)
-- **Cloudinary** (media hosting) — stores images uploaded by our admin team. No personal donor data is transmitted.
-- **Vercel** (hosting) — hosts our website infrastructure. Server logs may include IP addresses for security purposes. [Vercel Privacy Policy](https://vercel.com/legal/privacy-policy)
-- **Neon** (database hosting) — stores our application data including donor records. [Neon Privacy Policy](https://neon.com/privacy-policy)
+- **Paystack** (payment processing) - receives your name, email, and payment amount to process donations. [Paystack Privacy Policy](https://paystack.com/privacy)
+- **Cloudinary** (media hosting) - stores images uploaded by our admin team. No personal donor data is transmitted.
+- **Vercel** (hosting) - hosts our website infrastructure. Server logs may include IP addresses for security purposes. [Vercel Privacy Policy](https://vercel.com/legal/privacy-policy)
+- **Neon** (database hosting) - stores our application data including donor records. [Neon Privacy Policy](https://neon.com/privacy-policy)
 
 None of these providers use your data for their own marketing purposes.
 
 ## Data retention
 
-- **Donation records** — retained for 7 years (tax and audit compliance).
-- **Contact form messages** — retained for 2 years, then deleted.
-- **Volunteer and partner applications** — retained for 3 years from last contact.
-- **Supporter accounts** — retained until you request deletion.
-- **Server logs** — rotated every 30 days.
+- **Donation records** - retained for 7 years (tax and audit compliance).
+- **Contact form messages** - retained for 2 years, then deleted.
+- **Volunteer and partner applications** - retained for 3 years from last contact.
+- **Supporter accounts** - retained until you request deletion.
+- **Server logs** - rotated every 30 days.
 
 ## Your rights
 
 Under the GDPR (for EU/UK residents), the Data Protection Act 2012 (Ghana), and the CCPA (for California residents), you have the right to:
 
-- **Access** — request a copy of the personal data we hold about you.
-- **Rectification** — ask us to correct inaccurate or incomplete data.
-- **Erasure** — ask us to delete your personal data ("right to be forgotten").
-- **Restriction** — ask us to limit how we use your data.
-- **Portability** — request your data in a machine-readable format.
-- **Objection** — object to processing based on legitimate interests.
-- **Withdraw consent** — where we rely on consent, withdraw it at any time.
+- **Access** - request a copy of the personal data we hold about you.
+- **Rectification** - ask us to correct inaccurate or incomplete data.
+- **Erasure** - ask us to delete your personal data ("right to be forgotten").
+- **Restriction** - ask us to limit how we use your data.
+- **Portability** - request your data in a machine-readable format.
+- **Objection** - object to processing based on legitimate interests.
+- **Withdraw consent** - where we rely on consent, withdraw it at any time.
 
 To exercise any of these rights, email us at **info@weareforthefuture.org**. We will respond within 30 days.
 
@@ -114,7 +114,7 @@ You may use the Site for lawful, personal, and non-commercial purposes. You agre
 
 ## Intellectual property
 
-All content on the Site — including text, images, logos, graphics, and software — is the property of For The Future Organization or its content suppliers and is protected by international copyright and trademark laws.
+All content on the Site - including text, images, logos, graphics, and software - is the property of For The Future Organization or its content suppliers and is protected by international copyright and trademark laws.
 
 You may share links to our pages and quote brief excerpts with attribution, but may not reproduce substantial portions without written permission.
 
@@ -174,9 +174,9 @@ Cookies are small text files stored on your device when you visit a website. The
 
 These cookies are necessary for the website to function and cannot be disabled:
 
-- **ftf-cookie-consent** — Stores your cookie consent preference so we do not show the banner again. Duration: 12 months.
-- **ftf-theme** — Stores your light/dark mode preference. Duration: 12 months.
-- **ftf-session** — Maintains your login session for supporter accounts. Duration: browser session (deleted when you close the browser).
+- **ftf-cookie-consent** - Stores your cookie consent preference so we do not show the banner again. Duration: 12 months.
+- **ftf-theme** - Stores your light/dark mode preference. Duration: 12 months.
+- **ftf-session** - Maintains your login session for supporter accounts. Duration: browser session (deleted when you close the browser).
 
 ### Analytics cookies (not currently active)
 

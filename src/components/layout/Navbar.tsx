@@ -173,7 +173,7 @@ export default function Navbar() {
       </nav>
     </header>
 
-      {/* Phase 8.9 — Pattern A right-side drawer (replaces the old
+      {/* Phase 8.9 - Pattern A right-side drawer (replaces the old
           full-screen blue overlay entirely). */}
       <MobileMenu
         open={isMobileOpen}

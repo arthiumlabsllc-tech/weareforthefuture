@@ -1,4 +1,4 @@
-# scripts/dev — CDP + QA harness (dev-only)
+# scripts/dev - CDP + QA harness (dev-only)
 
 Throwaway Chrome DevTools Protocol (CDP) drivers and audit scripts used to
 verify the FTF site during phase work. **The `*.mjs` drivers are gitignored**
@@ -8,7 +8,7 @@ recreatable without committing scratch code.
 
 All drivers expect a running Chrome with remote debugging on `:9222` and a
 production server on the configured port (historically `:3125`). They read
-secrets from `.env` / `.env.local` at runtime — none are hardcoded.
+secrets from `.env` / `.env.local` at runtime - none are hardcoded.
 
 See [`CDP-HELPERS.md`](./CDP-HELPERS.md) for the CDP client usage and the
 **theme-determinism gotcha** (localStorage leaks across a persistent profile).

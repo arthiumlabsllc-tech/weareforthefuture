@@ -6,7 +6,7 @@ import OurWorkClient from "./OurWorkClient";
 export const metadata: Metadata = {
   title: "Our Work | Five Pillars, One Pathway",
   description:
-    "Every FTF programme sits within one of five pillars that connect into a single development pathway — from access to school, through learning, dignity and future-ready skills, to mentorship, work and leadership. Explore the pillars and the programmes delivering them across Ghana and Nigeria.",
+    "Every FTF programme sits within one of five pillars that connect into a single development pathway - from access to school, through learning, dignity and future-ready skills, to mentorship, work and leadership. Explore the pillars and the programmes delivering them across Ghana and Nigeria.",
   alternates: { canonical: "/our-work" },
   openGraph: {
     title: "Our Work | For The Future Organization",

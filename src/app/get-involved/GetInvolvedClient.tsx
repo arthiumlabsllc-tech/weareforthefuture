@@ -22,7 +22,7 @@ const pathways = [
     icon: HeartHandshake,
     title: "Volunteer",
     blurb:
-      "Give your time and skills — teaching, tech, health, creative arts, fundraising and more. On-site across Ghana and Nigeria, or remote.",
+      "Give your time and skills - teaching, tech, health, creative arts, fundraising and more. On-site across Ghana and Nigeria, or remote.",
     cta: "Explore volunteering",
   },
   {
@@ -38,7 +38,7 @@ const pathways = [
     icon: GraduationCap,
     title: "Mentor",
     blurb:
-      "Share your professional or lived experience with a young person — academic guidance, career pathways, digital skills and leadership.",
+      "Share your professional or lived experience with a young person - academic guidance, career pathways, digital skills and leadership.",
     cta: "Become a mentor",
   },
   {
@@ -46,7 +46,7 @@ const pathways = [
     icon: Building2,
     title: "Partner",
     blurb:
-      "Corporate, institutional and implementation partnerships — grants, CSR/CSV, ESG, in-kind, employee volunteering and multi-year programmes.",
+      "Corporate, institutional and implementation partnerships - grants, CSR/CSV, ESG, in-kind, employee volunteering and multi-year programmes.",
     cta: "Explore partnership",
   },
 ];
@@ -84,7 +84,7 @@ export default function GetInvolvedClient() {
   const statStrip = [
     { value: stats.beneficiaries.toLocaleString(), suffix: "+", label: "Children & young people reached" },
     { value: stats.volunteers.toLocaleString(), suffix: "+", label: "Volunteers & changemakers" },
-    { value: String(stats.countries), suffix: "", label: "Countries — Ghana & Nigeria" },
+    { value: String(stats.countries), suffix: "", label: "Countries - Ghana & Nigeria" },
     { value: String(stats.yearsOfFoundation), suffix: " yrs", label: "Community-rooted delivery" },
   ];
 
@@ -112,7 +112,7 @@ export default function GetInvolvedClient() {
             </p>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-on-primary/60">
               Whether you give an hour a week, a season of mentorship, or an
-              institutional partnership — every route helps a young person move
+              institutional partnership - every route helps a young person move
               from disadvantage to opportunity.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -177,7 +177,7 @@ export default function GetInvolvedClient() {
         <SectionHeader
           overline="How it works"
           title="A safe, supported onboarding"
-          description="Everyone who works with children and young people follows the same four steps — safeguarding is non-negotiable."
+          description="Everyone who works with children and young people follows the same four steps - safeguarding is non-negotiable."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {onboarding.map((o, i) => (
@@ -249,7 +249,7 @@ export default function GetInvolvedClient() {
             </h2>
             <p className="mt-4 text-lg text-text-secondary">
               Tell us a little about yourself and we&apos;ll point you to the
-              right pathway — or you can support the work directly with a gift.
+              right pathway - or you can support the work directly with a gift.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link

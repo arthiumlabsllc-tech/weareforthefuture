@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import type { DecadeMilestone } from "@/data/milestones";
 
 /**
- * Reusable decade timeline — horizontal rail on desktop, vertical rail on
+ * Reusable decade timeline - horizontal rail on desktop, vertical rail on
  * mobile/tablet. Extracted from /about/our-story (Phase 4) so /impact/ftf-at-10
  * renders the same component instead of duplicating the markup. Renders only
  * the rails; callers supply the surrounding SectionWrapper / SectionHeader.
@@ -12,7 +12,7 @@ import type { DecadeMilestone } from "@/data/milestones";
 export default function Timeline({ milestones }: { milestones: DecadeMilestone[] }) {
   return (
     <>
-      {/* Horizontal rail — desktop */}
+      {/* Horizontal rail - desktop */}
       <div className="hidden lg:block">
         <div className="relative overflow-x-auto pb-4">
           <div className="absolute left-0 right-0 top-[7px] h-px bg-border-strong" />
@@ -38,7 +38,7 @@ export default function Timeline({ milestones }: { milestones: DecadeMilestone[]
         </div>
       </div>
 
-      {/* Vertical rail — mobile / tablet */}
+      {/* Vertical rail - mobile / tablet */}
       <div className="relative lg:hidden">
         <div className="absolute left-[7px] top-0 bottom-0 w-px bg-border-strong" />
         <div className="space-y-8">

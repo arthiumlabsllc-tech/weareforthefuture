@@ -7,14 +7,14 @@ import { ArrowRight, Building2, Landmark, Package, Users } from "lucide-react";
 import { partnerLogos } from "@/data/site";
 
 /**
- * "Partner With Us" — reframes the old partner marquee as an invitation with
+ * "Partner With Us" - reframes the old partner marquee as an invitation with
  * concrete routes in, backed by the real partner tiers in `partnerLogos`.
  */
 const routes = [
   {
     icon: Building2,
     title: "Corporate sponsorship",
-    description: "Fund a programme, a cohort or a campaign — with transparent reporting on reach and outcomes.",
+    description: "Fund a programme, a cohort or a campaign - with transparent reporting on reach and outcomes.",
   },
   {
     icon: Landmark,
@@ -95,7 +95,7 @@ export default function PartnerWithUsBlock() {
             <div
               key={partner.name}
               className="flex h-20 items-center justify-center rounded-xl border border-border bg-surface px-3"
-              title={`${partner.name} — ${partner.tier} partner`}
+              title={`${partner.name} - ${partner.tier} partner`}
             >
               <Image
                 src={partner.image}

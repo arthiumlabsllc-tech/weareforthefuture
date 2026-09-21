@@ -57,7 +57,7 @@ export function toggleTheme(): void {
   setTheme(current === "light" ? "dark" : "light");
 }
 
-/** Initialize theme on page load — call once */
+/** Initialize theme on page load - call once */
 export function initTheme(): Theme {
   const theme = getTheme();
   setTheme(theme);

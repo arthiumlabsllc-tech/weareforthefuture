@@ -4,7 +4,7 @@ import { PRIVACY_CONTENT, PRIVACY_SUMMARY } from "@/data/legal";
 import { DEFAULT_OG_IMAGE } from "@/data/site";
 import LegalPageShell from "@/components/legal/LegalPageShell";
 
-export const revalidate = 3600; // 1 hour — legal pages rarely change
+export const revalidate = 3600; // 1 hour - legal pages rarely change
 
 export const metadata: Metadata = {
   title: "Privacy Policy",

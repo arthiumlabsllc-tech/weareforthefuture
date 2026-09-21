@@ -251,7 +251,7 @@ export default function SupporterLoginPage() {
             </div>
 
             <p className="mt-6 text-center text-sm text-text-secondary">
-              Become a supporter of For The Future —{" "}
+              Become a supporter of For The Future -{" "}
               <Link
                 href="/register"
                 className="font-semibold text-accent-hover underline underline-offset-4 transition-colors hover:text-accent-text"

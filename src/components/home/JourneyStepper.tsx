@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { journeyStages } from "@/data/pillars";
 
 /**
- * "How FTF changes a future" — the theory of change made visual.
+ * "How FTF changes a future" - the theory of change made visual.
  *
  * Seven stages from `journeyStages`, rendered as a horizontal icon-row with a
  * connecting green progress line on desktop and a vertical stepper on mobile

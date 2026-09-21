@@ -13,7 +13,7 @@ import { successStories } from "@/data/impact";
 import { siteConfig } from "@/data/site";
 
 /**
- * /impact/ftf-at-10 — a permanent milestone page (Phase 4).
+ * /impact/ftf-at-10 - a permanent milestone page (Phase 4).
  *
  * This is not ephemeral anniversary content: it frames the first decade
  * (2016 → 2026) as a standing part of FTF's story and reuses the shared
@@ -23,13 +23,13 @@ import { siteConfig } from "@/data/site";
  * film is ready. All numbers are static (no count-up).
  */
 
-/* Curated decade highlights — real, mapped assets only (no invented photos). */
+/* Curated decade highlights - real, mapped assets only (no invented photos). */
 const highlights = [
   {
     year: "2016",
     title: "A first outreach in Ashaiman",
     image: img("/images/about/ftf-tamale-1.jpg"),
-    caption: "Where it began — students showing up for children in their own community.",
+    caption: "Where it began - students showing up for children in their own community.",
   },
   {
     year: "2021",
@@ -100,7 +100,7 @@ export default function FTFat10Client() {
               It takes all of us.
             </p>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-primary/75">
-              Ten years of community-rooted work — from a first outreach in
+              Ten years of community-rooted work - from a first outreach in
               Ashaiman to a five-pillar model across Ghana and Nigeria. This page
               stays as a permanent record of the decade and the commitment behind
               the next one.
@@ -109,7 +109,7 @@ export default function FTFat10Client() {
         </div>
       </section>
 
-      {/* ===== A DECADE IN NUMBERS (static — no count-up) ===== */}
+      {/* ===== A DECADE IN NUMBERS (static - no count-up) ===== */}
       <SectionWrapper background="white">
         <SectionHeader
           overline="A decade in numbers"
@@ -128,12 +128,12 @@ export default function FTFat10Client() {
         </div>
       </SectionWrapper>
 
-      {/* ===== TIMELINE (reused component — not duplicated) ===== */}
+      {/* ===== TIMELINE (reused component - not duplicated) ===== */}
       <SectionWrapper background="gradient">
         <SectionHeader
           overline="2016 → 2026"
           title="The road so far"
-          description="The moments that shaped who we are and how we work today — the same timeline told in Our Story."
+          description="The moments that shaped who we are and how we work today - the same timeline told in Our Story."
         />
         <Timeline milestones={decadeMilestones} />
         <div className="mt-10 text-center">
@@ -252,7 +252,7 @@ export default function FTFat10Client() {
         </div>
       </SectionWrapper>
 
-      {/* ===== CTA — BUILD THE NEXT DECADE ===== */}
+      {/* ===== CTA - BUILD THE NEXT DECADE ===== */}
       <SectionWrapper background="navy">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary md:text-4xl">

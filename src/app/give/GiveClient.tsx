@@ -48,7 +48,7 @@ const routes = [
     href: "#programmes",
     title: "Programme support",
     blurb:
-      "Back a specific pillar or programme — from foundational learning to future-ready skills.",
+      "Back a specific pillar or programme - from foundational learning to future-ready skills.",
     cta: "Choose a programme",
     icon: BookOpen,
   },
@@ -119,7 +119,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
       {/* ===== TWO-COLUMN: ROUTES + TRUST ===== */}
       <SectionWrapper background="warm">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-14">
-          {/* LEFT — giving routes */}
+          {/* LEFT - giving routes */}
           <div>
             <SectionHeader
               align="left"
@@ -164,7 +164,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
             </div>
           </div>
 
-          {/* RIGHT — trust signals */}
+          {/* RIGHT - trust signals */}
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm md:p-8">
               <h2 className="flex items-center gap-2 font-[family-name:var(--font-display)] text-xl font-bold text-text-primary">
@@ -388,7 +388,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
               It takes all of us.
             </h2>
             <p className="mt-4 text-lg text-text-on-primary/70">
-              Not ready to give yet? Volunteer your skills or partner with us —
+              Not ready to give yet? Volunteer your skills or partner with us -
               every route helps a child move from disadvantage to opportunity.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

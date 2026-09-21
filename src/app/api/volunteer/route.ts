@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     // non-production deployment (Vercel preview/branch). Production unaffected.
     if (process.env.VERCEL_ENV !== "production") {
       return NextResponse.json(
-        { error: "This is a preview build — form submissions are disabled." },
+        { error: "This is a preview build - form submissions are disabled." },
         { status: 403 }
       );
     }

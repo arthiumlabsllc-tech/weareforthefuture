@@ -11,9 +11,9 @@ import { siteConfig } from "@/data/site";
 import { decadeMilestones } from "@/data/milestones";
 
 const narrative = [
-  "For The Future Organization began in 2016, founded by students at Wesley Girls' High School who believed that service should start where you stand. Our first outreach — in Ashaiman — was small: essentials, company and encouragement for children who needed to know someone showed up for them.",
+  "For The Future Organization began in 2016, founded by students at Wesley Girls' High School who believed that service should start where you stand. Our first outreach - in Ashaiman - was small: essentials, company and encouragement for children who needed to know someone showed up for them.",
   "What began as a student initiative grew into a youth-led movement. Over a decade, more than 500 volunteers have carried the work into classrooms and communities across Ghana, expanding from Greater Accra into the Eastern, Central, Volta, Bono East, Savannah and Western regions.",
-  "In 2025 we began operations in Ibadan, Nigeria, and established a US 501(c)(3) vehicle to support the mission. Programme delivery remains rooted in two countries — Ghana and Nigeria — while the US entity exists to steward partnerships and giving.",
+  "In 2025 we began operations in Ibadan, Nigeria, and established a US 501(c)(3) vehicle to support the mission. Programme delivery remains rooted in two countries - Ghana and Nigeria - while the US entity exists to steward partnerships and giving.",
   "In 2026, as we mark ten years, our work is organized under the Future Pathways model: five programme pillars that guide a child from foundational learning through to a productive future. The first decade taught us what works. The next is about scale, depth and staying true to the children we serve.",
 ];
 
@@ -37,7 +37,7 @@ export default function OurStoryClient() {
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-text-on-primary/70">
             From a first outreach in Ashaiman to a youth-led movement across Ghana
-            and Nigeria — this is how For The Future grew, and what ten years
+            and Nigeria - this is how For The Future grew, and what ten years
             taught us.
           </p>
         </motion.div>
@@ -112,7 +112,7 @@ export default function OurStoryClient() {
             The next decade starts now
           </h2>
           <p className="mt-4 text-lg text-text-secondary">
-            See the work this story built — or add your chapter to it.
+            See the work this story built - or add your chapter to it.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link

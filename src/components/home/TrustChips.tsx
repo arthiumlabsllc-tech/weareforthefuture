@@ -5,7 +5,7 @@ import { BadgeCheck, CalendarClock, FileText, Globe2, HeartHandshake } from "luc
 import { siteConfig } from "@/data/site";
 
 /**
- * Homepage trust strip. A single calm row of credibility signals — no marketing
+ * Homepage trust strip. A single calm row of credibility signals - no marketing
  * superlatives. Registration identifiers come from `siteConfig.legal` and render
  * as "[pending]" until FTF supplies the real values (see TODO in site.ts).
  */

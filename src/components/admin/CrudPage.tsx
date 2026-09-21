@@ -137,7 +137,7 @@ export default function CrudPage({ title, description, apiBase, fields, tableCol
                   <tr key={item.id as string} className="hover:bg-bg-tertiary/50">
                     {tableColumns.map((col) => (
                       <td key={col.key} className="px-4 py-3 text-sm text-text-secondary">
-                        {col.render ? col.render(item[col.key], item) : <>{String(item[col.key] ?? "—")}</>}
+                        {col.render ? col.render(item[col.key], item) : <>{String(item[col.key] ?? "-")}</>}
                       </td>
                     ))}
                     <td className="px-4 py-3">

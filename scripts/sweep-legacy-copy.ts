@@ -6,7 +6,7 @@
  * brief-aligned wording, in a single transaction, logging before/after per row.
  *
  * Scope: Program (name / shortDescription / description / impactMetrics) and
- * SiteSetting (value) — the two DB surfaces seeded from the old copy.
+ * SiteSetting (value) - the two DB surfaces seeded from the old copy.
  *
  * Run:  npx tsx scripts/sweep-legacy-copy.ts
  * Safe to re-run: rows with no banned language are left untouched.

@@ -21,7 +21,7 @@ import ValuesGrid from "@/components/ui/ValuesGrid";
 import { siteConfig } from "@/data/site";
 
 /* Brand-semantic colour discipline (accent = hope/growth, primary = trust,
-   charcoal = structure) — mirrors ValueCard's colorMap so the About surfaces
+   charcoal = structure) - mirrors ValueCard's colorMap so the About surfaces
    stay visually consistent. */
 const tone: Record<string, { chip: string; icon: string }> = {
   accent: { chip: "bg-accent-subtle", icon: "text-accent-text" },
@@ -35,7 +35,7 @@ const overviewCards = [
     icon: BookOpen,
     title: "Our Story",
     blurb:
-      "A decade of learning — from a first community outreach to five programme pillars across two countries.",
+      "A decade of learning - from a first community outreach to five programme pillars across two countries.",
     color: "accent",
   },
   {
@@ -138,7 +138,7 @@ export default function AboutPageClient() {
         </div>
       </SectionWrapper>
 
-      {/* ===== AT-A-GLANCE STATS (static — no count-up) ===== */}
+      {/* ===== AT-A-GLANCE STATS (static - no count-up) ===== */}
       <SectionWrapper background="gradient" className="!py-14 md:!py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <StatDisplay value={siteConfig.stats.yearsOfFoundation} label="Years of impact" />
@@ -224,7 +224,7 @@ export default function AboutPageClient() {
         <SectionHeader
           overline="What guides us"
           title="Our core values"
-          description="Seven commitments that shape every decision we make — for the children and young people we serve, and the communities and partners we work alongside."
+          description="Seven commitments that shape every decision we make - for the children and young people we serve, and the communities and partners we work alongside."
         />
         <ValuesGrid />
       </SectionWrapper>
@@ -242,7 +242,7 @@ export default function AboutPageClient() {
             Walk with us into the next decade
           </h2>
           <p className="mt-4 text-lg text-text-secondary">
-            The first ten years taught us what works. The next ten will scale it —
+            The first ten years taught us what works. The next ten will scale it -
             with communities, partners and supporters who believe every child
             deserves a future.
           </p>

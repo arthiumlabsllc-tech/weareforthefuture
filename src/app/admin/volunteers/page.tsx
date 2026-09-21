@@ -106,10 +106,10 @@ export default function AdminVolunteersPage() {
                   <div className="text-xs text-text-muted">{a.email}</div>
                 </td>
                 <td className="px-4 py-3">
-                  {a.interest ? interestLabels[a.interest] || a.interest : "—"}
+                  {a.interest ? interestLabels[a.interest] || a.interest : "-"}
                 </td>
                 <td className="px-4 py-3">
-                  {a.country ? countryLabels[a.country] || a.country : "—"}
+                  {a.country ? countryLabels[a.country] || a.country : "-"}
                 </td>
                 <td className="px-4 py-3">
                   <span
@@ -185,13 +185,13 @@ export default function AdminVolunteersPage() {
               <div>
                 <span className="text-text-muted">Interest:</span>{" "}
                 <span className="text-text-primary">
-                  {selected.interest ? interestLabels[selected.interest] || selected.interest : "—"}
+                  {selected.interest ? interestLabels[selected.interest] || selected.interest : "-"}
                 </span>
               </div>
               <div>
                 <span className="text-text-muted">Country:</span>{" "}
                 <span className="text-text-primary">
-                  {selected.country ? countryLabels[selected.country] || selected.country : "—"}
+                  {selected.country ? countryLabels[selected.country] || selected.country : "-"}
                 </span>
               </div>
               {selected.phone && (

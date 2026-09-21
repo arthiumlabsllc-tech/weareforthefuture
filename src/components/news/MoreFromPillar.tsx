@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Calendar } from "lucide-react";
 import { prisma } from "@/lib/db";
 
-// Phase 6.6: "More from this pillar" — 3 recent published posts sharing the
+// Phase 6.6: "More from this pillar" - 3 recent published posts sharing the
 // current post's pillar, topped up with other recent posts when the pillar has
 // fewer (or none) siblings. Cards show image, title and date only.
 type MoreFromPillarProps = {

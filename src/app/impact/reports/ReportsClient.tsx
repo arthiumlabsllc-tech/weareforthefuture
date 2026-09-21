@@ -18,13 +18,13 @@ import { siteConfig } from "@/data/site";
 import type { ReportDocument } from "@/lib/documents";
 
 /**
- * /impact/reports — Reports & Transparency (Phase 4).
+ * /impact/reports - Reports & Transparency (Phase 4).
  *
  * Annual reports are queried from the Document model (category = "Annual
  * Report") in the server page and passed in; the accessor fails soft to [], so
  * this client renders an intentional empty state rather than a broken grid.
  * Registration, auditor and policy files are honest placeholders until legal /
- * finance provide the real documents — nothing here invents a file or a figure.
+ * finance provide the real documents - nothing here invents a file or a figure.
  * All numbers are static (no count-up).
  */
 
@@ -70,7 +70,7 @@ export default function ReportsClient({
         </motion.div>
       </SectionWrapper>
 
-      {/* ===== AT A GLANCE (static — no count-up) ===== */}
+      {/* ===== AT A GLANCE (static - no count-up) ===== */}
       <SectionWrapper background="white">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <StatDisplay value={`${yearsOfFoundation}`} label="Years of continuous impact" />
@@ -159,7 +159,7 @@ export default function ReportsClient({
               For The Future Organization is committed to publishing an annual
               report for every fiscal year. Our reporting cycle is being
               formalised as we complete our first audits under the US
-              501(c)(3) vehicle — each report will appear here as it is
+              501(c)(3) vehicle - each report will appear here as it is
               finalised.
             </p>
             <p className="mt-4 text-sm text-text-tertiary">
@@ -314,7 +314,7 @@ export default function ReportsClient({
               Safeguarding &amp; Child Protection Policy
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-              Our commitment to keeping every child and young person safe —
+              Our commitment to keeping every child and young person safe -
               consent, reporting and conduct standards across all programmes.
             </p>
             <div className="mt-auto flex flex-wrap items-center gap-3 pt-5">
@@ -337,7 +337,7 @@ export default function ReportsClient({
               Financial Management Policy
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-              How contributions are received, allocated, recorded and reported —
+              How contributions are received, allocated, recorded and reported -
               including controls, approvals and review cycles.
             </p>
             <div className="mt-auto pt-5">
@@ -359,7 +359,7 @@ export default function ReportsClient({
             Institutional profile
           </h2>
           <p className="mt-4 text-lg text-text-on-primary/70">
-            A single overview of who we are, what we do and how we are governed —
+            A single overview of who we are, what we do and how we are governed -
             for partners, funders and institutions.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4">

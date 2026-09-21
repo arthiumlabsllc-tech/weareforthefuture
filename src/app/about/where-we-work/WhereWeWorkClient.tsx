@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/site";
 
 /* Programme delivery happens in exactly two countries. The United States is our
    501(c)(3) vehicle (partnerships + giving) and is deliberately NOT presented as
-   a delivery country — see the brief's positioning rules. */
+   a delivery country - see the brief's positioning rules. */
 const GHANA_CORE = "Greater Accra";
 
 export default function WhereWeWorkClient() {
@@ -33,7 +33,7 @@ export default function WhereWeWorkClient() {
             Programme delivery in two countries
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-text-on-primary/70">
-            We work where children already are — in the schools and communities of
+            We work where children already are - in the schools and communities of
             Ghana and Nigeria. Our presence is deep rather than wide, so every
             programme stays close to the people it serves.
           </p>
@@ -135,7 +135,7 @@ export default function WhereWeWorkClient() {
           </motion.div>
         </div>
 
-        {/* US vehicle note — never conflated with delivery */}
+        {/* US vehicle note - never conflated with delivery */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ export default function WhereWeWorkClient() {
             <Building2 className="h-6 w-6" aria-hidden="true" />
           </span>
           <div>
-            <h3 className="font-semibold text-text-primary">United States — 501(c)(3) vehicle</h3>
+            <h3 className="font-semibold text-text-primary">United States - 501(c)(3) vehicle</h3>
             <p className="mt-1 text-sm leading-relaxed text-text-secondary">
               Our US entity exists to steward partnerships, governance and
               tax-deductible giving. It is a supporting vehicle, not a

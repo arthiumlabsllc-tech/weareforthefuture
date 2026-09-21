@@ -1,5 +1,5 @@
 /**
- * Isomorphic giving constants (Phase 5). Plain data only — safe to import from
+ * Isomorphic giving constants (Phase 5). Plain data only - safe to import from
  * both server and client components (no Prisma, no React). Server-side accessors
  * live in src/lib/give.ts.
  */

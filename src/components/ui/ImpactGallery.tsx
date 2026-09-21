@@ -36,7 +36,7 @@ function Tile({ image, onOpen, className }: { image: GalleryImage; onOpen: () =>
 }
 
 /**
- * Phase 8.10 — reusable, accessible impact photo gallery.
+ * Phase 8.10 - reusable, accessible impact photo gallery.
  * Grid on desktop (2–3 cols, aspect-square), swipeable snap carousel on mobile,
  * and a keyboard-navigable lightbox (arrows / Escape / swipe, focus-trapped).
  * Images are FTF's own consent-gated, published programme photos; alt text and

@@ -15,14 +15,14 @@ export default function OurWorkNotFound() {
           <Compass className="h-8 w-8" aria-hidden="true" />
         </div>
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent-text">
-          404 — Our Work
+          404 - Our Work
         </span>
         <h1 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold leading-tight text-text-primary sm:text-4xl">
           This pillar hasn&apos;t been published yet.
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-text-secondary">
           The link may be out of date, or this part of our work is still being
-          built. Explore the five pillars below — everything we do sits within one
+          built. Explore the five pillars below - everything we do sits within one
           of them.
         </p>
 

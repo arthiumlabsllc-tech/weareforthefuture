@@ -48,13 +48,13 @@ export const getDocumentsByCategory = cache(
           downloads: doc.downloads,
         }));
     } catch (err) {
-      console.error("[documents] getDocumentsByCategory failed — using empty fallback", err);
+      console.error("[documents] getDocumentsByCategory failed - using empty fallback", err);
       return [];
     }
   },
 );
 
-/** Annual reports specifically — the /impact/reports grid. */
+/** Annual reports specifically - the /impact/reports grid. */
 export const getAnnualReports = cache((): Promise<ReportDocument[]> =>
   getDocumentsByCategory("Annual Report"),
 );

@@ -1,5 +1,5 @@
 /**
- * Phase 3b.2 seed — pillars, programme↔pillar links, featured/status flags.
+ * Phase 3b.2 seed - pillars, programme↔pillar links, featured/status flags.
  *
  * Idempotent: safe to re-run. Upserts the five pillars from src/data/pillars.ts
  * (single source of truth for copy), creates a ProgramPillar row for each
@@ -48,7 +48,7 @@ const PROGRAM_PILLAR: Record<string, string> = {
 
 /* The four brief-featured programmes shown on the homepage featured-work rail.
    Note: `smart-start-initiative` is the consolidated "Foundational Learning /
-   Learning Clubs" row (see CONSOLIDATED below) — brief 10.2 retires SmartStart
+   Learning Clubs" row (see CONSOLIDATED below) - brief 10.2 retires SmartStart
    as an isolated programme, so it is featured under its learning-clubs name. */
 const FEATURED = [
   "step-project",
@@ -57,7 +57,7 @@ const FEATURED = [
   "empower-her-period",
 ];
 
-/* Brief 10.2 — SmartStart must NOT remain an isolated programme: it consolidates
+/* Brief 10.2 - SmartStart must NOT remain an isolated programme: it consolidates
    under Foundational Learning / Learning Clubs. We rename the legacy row (slug
    kept for URL stability so inbound links and the sitemap stay valid) and reuse
    the site's already-approved learning-clubs copy. After this no row is named

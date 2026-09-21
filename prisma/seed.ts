@@ -64,28 +64,28 @@ async function main() {
 
   // ─── BLOG POSTS (real articles sourced from the original newsroom) ───
   // Excerpts carry brief-aligned language; the B&FT launch piece is archived
-  // (old campaign coverage — hidden from the feed by default).
+  // (old campaign coverage - hidden from the feed by default).
   // Phase 6.6: full editorial bodies for the four reference articles, stored as
   // markdown-ish plain text (## / ### headings, > quotes, - lists, blank-line
-  // paragraphs). PostBody parses these into semantic blocks — raw HTML is never
+  // paragraphs). PostBody parses these into semantic blocks - raw HTML is never
   // injected. Posts without a body keep the placeholder content.
   const bodyMinutes = (text: string): number =>
     Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length / 200));
 
   const PULSE_AWARD_BODY = `The Pulse Influencer Awards brought Ghana's most-followed creators, campaigners and community builders together in Accra this May, and the Community Influencer of the Year award went to an organisation rather than an individual: For The Future Ghana.
 
-The judges' citation pointed to three years of consistent, on-the-ground work — from literacy drives in coastal fishing communities to the Empower Her, Period distribution network that now reaches secondary schools in four regions. What stood out, they noted, was not the scale of any single project but the pattern of returning to the same communities year after year.
+The judges' citation pointed to three years of consistent, on-the-ground work - from literacy drives in coastal fishing communities to the Empower Her, Period distribution network that now reaches secondary schools in four regions. What stood out, they noted, was not the scale of any single project but the pattern of returning to the same communities year after year.
 
 > Recognition like this belongs to the volunteers, the teachers and the parents who open their doors to us. We are simply the ones holding the microphone.
-> — Kezia Asiedua Sanie, Founder, For The Future
+> - Kezia Asiedua Sanie, Founder, For The Future
 
 For the team, the award is also a practical instrument. Organisational visibility in Ghana tends to convert into in-kind support: books from publishers, transport from logistics partners, pro-bono legal and accounting help. Each of those lowers the cost of running a programme, which means more of every cedi raised reaches a classroom.
 
-The category itself has shifted in recent years. Influence once meant reach alone. The 2025 shortlist rewarded sustained commitment, measurable outcomes and the willingness to publish setbacks alongside successes — a change that organisations working with children and young people facing disadvantage have argued for at length.
+The category itself has shifted in recent years. Influence once meant reach alone. The 2025 shortlist rewarded sustained commitment, measurable outcomes and the willingness to publish setbacks alongside successes - a change that organisations working with children and young people facing disadvantage have argued for at length.
 
 FTF Ghana will use the platform to expand two things over the next twelve months: the Impact Store, which funds programme work through the sale of donated books and goods, and the mentorship network that pairs young professionals with students in their final two years of secondary school. Both depend on volunteers, and both remain open to anyone able to commit a few hours a month.
 
-The full list of winners and the judges' citations are published by Pulse Ghana. Congratulations to every nominee — particularly the community health workers and classroom teachers shortlisted alongside us.`;
+The full list of winners and the judges' citations are published by Pulse Ghana. Congratulations to every nominee - particularly the community health workers and classroom teachers shortlisted alongside us.`;
 
   const KEZIA_BODY = `On a Wednesday morning in Accra, Kezia Asiedua Sanie placed her right hand on the Bible and was sworn in as a member of the Board of Trustees for the Head of State Awards Scheme. At twenty-three, she is the youngest person to hold the position in the scheme's history.
 
@@ -98,7 +98,7 @@ The swearing-in ceremony was held at the scheme's secretariat and attended by tr
 In her remarks after the ceremony, Asiedua Sanie described the appointment as a responsibility rather than an honour, and drew a direct line between the awards scheme and the work her own organisation does.
 
 > Both of these institutions exist to tell a young person that their effort is seen. That sentence, delivered at the right moment, changes the direction of a life.
-> — Kezia Asiedua Sanie, Trustee, Head of State Awards Scheme
+> - Kezia Asiedua Sanie, Trustee, Head of State Awards Scheme
 
 Trustees are expected to serve on at least one standing committee. Asiedua Sanie has joined the programme and partnerships committee, where she will focus on widening participation among schools that have not previously nominated candidates, including schools in rural districts and in low-income urban neighbourhoods.
 
@@ -126,9 +126,9 @@ As a trustee, she has said she will press for the same transparency at scheme le
 
 The Board of Trustees meets quarterly. Its next sitting will consider the coming year's participation targets, the volunteer training curriculum, and the scheme's fiftieth-anniversary programme of activities. Students nominated in the current cycle will be assessed between now and the end of the academic year, with ceremonies planned in each region.
 
-For the young people in those ceremonies, the detail of governance will matter less than the moment their name is read out. That is precisely the point of the institution — and, according to its newest trustee, the reason to protect it.`;
+For the young people in those ceremonies, the detail of governance will matter less than the moment their name is read out. That is precisely the point of the institution - and, according to its newest trustee, the reason to protect it.`;
 
-  const BOOK_FAIR_BODY = `The FTF Impact Store opened its doors in July with a book fair that ran for two days and drew children, parents, teachers and curiosity from the surrounding neighbourhood. Tables were stacked with donated titles — picture books for early readers, exam preparation guides, West African fiction, and a shelf of secondhand encyclopedias that the children refused to leave alone.
+  const BOOK_FAIR_BODY = `The FTF Impact Store opened its doors in July with a book fair that ran for two days and drew children, parents, teachers and curiosity from the surrounding neighbourhood. Tables were stacked with donated titles - picture books for early readers, exam preparation guides, West African fiction, and a shelf of secondhand encyclopedias that the children refused to leave alone.
 
 > A book in a child's hands is a door they can open themselves.
 
@@ -148,12 +148,12 @@ The programme team drew three lessons from the weekend:
 
 The store will open on fixed days each week, with a reading hour on Saturday mornings led by volunteers and local teachers. Donations of children's titles are welcome year-round, and the team is building a small grants process so that a teacher who needs thirty copies of a single title can request them rather than raise the money.
 
-Visitors can browse the current stock and the shipping options on the [Impact Store](/impact-store) page. Those who would rather give time than money can sign up to volunteer, sort donations or lead a reading hour — each role takes a few hours a month and no prior experience.`;
+Visitors can browse the current stock and the shipping options on the [Impact Store](/impact-store) page. Those who would rather give time than money can sign up to volunteer, sort donations or lead a reading hour - each role takes a few hours a month and no prior experience.`;
 
   const IMPACT_STORE_LAUNCH_BODY = `Coverage by B&FTonline of the launch of the FTF Impact Store, which directs its proceeds toward supporting children and young people facing disadvantage with education, healthcare and mentorship.
 
 > The store exists so that giving has a route that does not require a bank transfer. You buy a book, a child gets a reading hour.
-> — For The Future Ghana, launch statement
+> - For The Future Ghana, launch statement
 
 The model is deliberately simple. Donated books and goods are sold at low prices, volunteers staff the shop, and the margin funds programme work. Nothing is imported for resale, and no product is priced beyond what a local family would pay at a market stall.
 
@@ -558,13 +558,13 @@ The store's first public event, a two-day book fair, followed the launch later t
   console.log(`✅ ${initiatives.length + 1} programs seeded`);
 
   // ─── IMPACT STORIES ───
-  // Phase 8.10 — documented gallery contract: Array<{ url, alt, caption? }>.
+  // Phase 8.10 - documented gallery contract: Array<{ url, alt, caption? }>.
   // FTF's own published, consent-gated programme photos (hosted on Cloudinary).
   // Alt text and captions carry no identifying details for minors.
   const STORY_GALLERY: Record<string, { url: string; alt: string; caption?: string }[]> = {
     "from-abandonment-to-a-bright-future": [
       { url: "/images/stories/gallery-02.jpg", alt: "A young learner in a school uniform sitting close beside a care worker", caption: "A quiet moment of reassurance on school orientation day" },
-      { url: "/images/stories/gallery-06.jpg", alt: "A care worker holding a smiling child in a school uniform", caption: "Held, safe and smiling — the everyday care behind every story" },
+      { url: "/images/stories/gallery-06.jpg", alt: "A care worker holding a smiling child in a school uniform", caption: "Held, safe and smiling - the everyday care behind every story" },
       { url: "/images/stories/gallery-10.jpg", alt: "A volunteer and a child in an orange programme shirt flashing peace signs at a colourful playground", caption: "Celebration day: peace signs and big smiles at the playground" },
       { url: "/images/stories/gallery-18.jpg", alt: "A care worker carrying a laughing child in a blue shirt", caption: "Joy on the way home from a programme visit" },
       { url: "/images/stories/gallery-21.jpg", alt: "A care worker holding a child in a red polka-dot top with a snack in hand", caption: "Comfort and care during a home visit" },

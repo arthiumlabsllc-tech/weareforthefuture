@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const prisma = new PrismaClient();
 
 // Phase 3b.2 ISR audit: the store catalogue is CMS-managed content that does not
-// need per-request freshness — statically generate + revalidate instead of λ.
+// need per-request freshness - statically generate + revalidate instead of λ.
 // (The /impact-store/checkout child route stays interactive via useSearchParams.)
 export const revalidate = 300;
 

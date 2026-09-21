@@ -238,7 +238,7 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
         <div className="mb-6 flex items-start gap-3 rounded-2xl border border-border-strong/50 bg-bg-secondary p-5">
           <Crown className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" aria-hidden="true" />
           <p className="text-sm leading-relaxed text-text-secondary">
-            This is our core delivery team — not every volunteer. FTF is
+            This is our core delivery team - not every volunteer. FTF is
             volunteer-powered: more than 500 volunteers contribute to programmes
             across Ghana and Nigeria, and they are recognized through the
             fellowship below rather than listed as permanent staff.

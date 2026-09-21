@@ -19,7 +19,7 @@ driver is in [`README.md`](./README.md).
 
 ## Running
 
-These spawn a real `chrome.exe`, which the agent sandbox blocks — run them with
+These spawn a real `chrome.exe`, which the agent sandbox blocks - run them with
 elevated permissions (`required_permissions='all'`). Each driver starts a
 production server (or expects one on the configured port), opens a persistent
 profile, and writes PNGs to its `.phase*-shots/` output dir (also gitignored).
@@ -28,7 +28,7 @@ profile, and writes PNGs to its `.phase*-shots/` output dir (also gitignored).
 node cdp-phase4.mjs
 ```
 
-## GOTCHA — theme determinism (the important one)
+## GOTCHA - theme determinism (the important one)
 
 `public/theme-init.js` resolves the initial theme from
 **`localStorage["ftf-theme"]` first**, falling back to `prefers-color-scheme`
@@ -38,7 +38,7 @@ only when that key is absent. `setTheme()` writes the key, and
 Because the drivers use a **persistent CDP profile**, that localStorage key
 **leaks across shots**. Emulating `prefers-color-scheme: dark` is then ignored
 (the stored key wins), producing **byte-identical "light" and "dark" captures**
-— a silent false pass.
+- a silent false pass.
 
 **Fix:** seed the key to the intended theme *before* each navigation:
 
@@ -51,7 +51,7 @@ await cdp.send("Page.navigate", { url: shot.url });
 ```
 
 **Verify:** light vs dark PNGs for the same route must differ in byte size. If
-they are identical, the theme leaked — re-seed localStorage.
+they are identical, the theme leaked - re-seed localStorage.
 
 ## Other notes
 

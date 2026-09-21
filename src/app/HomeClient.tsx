@@ -27,7 +27,7 @@ import type { FeaturedProgramme } from "@/lib/pillars";
 const isDev = process.env.NODE_ENV === "development";
 
 /**
- * Homepage featured work — DB-driven (Phase 3b.2). The server page passes the
+ * Homepage featured work - DB-driven (Phase 3b.2). The server page passes the
  * CMS `isFeatured` set via getFeaturedProgrammes(); each card deep-links into
  * the /our-work/{pillar}/{programme} detail template. The hard-coded launch set
  * below (decision 5B) is retained ONLY as a last-resort fallback if that call
@@ -39,7 +39,7 @@ const FALLBACK_FEATURED: FeaturedProgramme[] = [
     title: "S.T.E.P.",
     pillar: "Pillar 1 · Foundational Education",
     description:
-      "The Student Training & Education Project sponsors the holistic education of vulnerable children — tuition, learning materials, mentorship and career guidance.",
+      "The Student Training & Education Project sponsors the holistic education of vulnerable children - tuition, learning materials, mentorship and career guidance.",
     image: img("/images/initiatives/smart-start.jpg"),
     href: "/our-work/foundational-education/step-project",
   },
@@ -83,7 +83,7 @@ export default function HomeClient({
 
   function handleSubscribe(e: React.FormEvent) {
     e.preventDefault();
-    // Consent gate — a subscription without explicit consent is not allowed.
+    // Consent gate - a subscription without explicit consent is not allowed.
     if (!consent) {
       setNewsletterState("error");
       return;
@@ -106,7 +106,7 @@ export default function HomeClient({
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,color-mix(in_srgb,var(--ftf-primary)_8%,transparent),transparent_45%),radial-gradient(circle_at_85%_80%,color-mix(in_srgb,var(--ftf-accent)_10%,transparent),transparent_45%)]"
         />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
-          {/* Copy side — LCP-critical. The entrance is transform-only (no
+          {/* Copy side - LCP-critical. The entrance is transform-only (no
               opacity:0 gate) so the H1 paints in the server-rendered HTML at
               FCP instead of waiting for JS hydration + Framer Motion. An
               opacity 0→1 fade on the LCP element delays LCP by ~3s on a
@@ -147,7 +147,7 @@ export default function HomeClient({
             </p>
           </motion.div>
 
-          {/* Portrait side — dignified, face-free photograph. Safeguarding
+          {/* Portrait side - dignified, face-free photograph. Safeguarding
               §11.1 forbids an identifiable minor without signed consent, so the
               hero leads with supplies-on-a-desk (no faces). Static load: no
               parallax / zoom / fade-in (honours prefers-reduced-motion), and the
@@ -180,7 +180,7 @@ export default function HomeClient({
             </div>
             {isDev && (
               <span className="absolute inset-x-3 top-3 rounded-lg bg-navy-900/85 px-3 py-2 text-center text-[10px] font-medium leading-snug text-white">
-                [Dignified placeholder (no faces) — swap for a consented, safeguarding-approved programme photo before launch]
+                [Dignified placeholder (no faces) - swap for a consented, safeguarding-approved programme photo before launch]
               </span>
             )}
           </div>
@@ -190,7 +190,7 @@ export default function HomeClient({
       {/* ===== 2. TRUST STRIP ===== */}
       <TrustChips />
 
-      {/* ===== 3. IMPACT STRIP (static — no count-up) ===== */}
+      {/* ===== 3. IMPACT STRIP (static - no count-up) ===== */}
       <SectionWrapper background="white" className="!py-14 md:!py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {storyStats.map((stat) => (
@@ -213,7 +213,7 @@ export default function HomeClient({
         <SectionHeader
           overline="How we create change"
           title="Our five pillars"
-          description="Every programme sits under one of five strategic pillars, so support reaches every part of a child's journey — from the classroom to the future of work."
+          description="Every programme sits under one of five strategic pillars, so support reaches every part of a child's journey - from the classroom to the future of work."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {pillars.map((pillar) => (
@@ -241,12 +241,12 @@ export default function HomeClient({
         </div>
       </SectionWrapper>
 
-      {/* ===== 5. JOURNEY — HOW FTF CHANGES A FUTURE ===== */}
+      {/* ===== 5. JOURNEY - HOW FTF CHANGES A FUTURE ===== */}
       <SectionWrapper background="white">
         <SectionHeader
           overline="Our theory of change"
           title="How FTF changes a future"
-          description="Support is not a set of disconnected projects. It is one pathway — from access to school, through learning, dignity and skills, to work and leadership."
+          description="Support is not a set of disconnected projects. It is one pathway - from access to school, through learning, dignity and skills, to work and leadership."
         />
         <JourneyStepper />
       </SectionWrapper>
@@ -303,7 +303,7 @@ export default function HomeClient({
         </div>
       </SectionWrapper>
 
-      {/* ===== 7. FTF VILLAGE (vision — not operational) ===== */}
+      {/* ===== 7. FTF VILLAGE (vision - not operational) ===== */}
       <SectionWrapper background="navy">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
@@ -319,7 +319,7 @@ export default function HomeClient({
               For The Future Village
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-text-on-primary/75">
-              A vision for a place of safety, learning and belonging — where
+              A vision for a place of safety, learning and belonging - where
               vulnerable children and young people in Ghana can grow in dignity,
               learn, and be part of a community that believes in them.
             </p>
@@ -327,7 +327,7 @@ export default function HomeClient({
               The Village is in the planning and fundraising stage. Phase one
               would provide safe housing, on-site learning, healthcare and
               mentorship. It is a long-term aspiration, not yet an operational
-              programme — and we will only build it to the standard children
+              programme - and we will only build it to the standard children
               deserve.
             </p>
 
@@ -374,7 +374,7 @@ export default function HomeClient({
             <div className="relative aspect-square overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10">
               <Image
                 src={img("/images/about/ftf-village-1.jpg")}
-                alt="For The Future Village — a vision for safe housing, learning and community in Ghana"
+                alt="For The Future Village - a vision for safe housing, learning and community in Ghana"
                 fill
                 className="object-cover opacity-70"
                 sizes="(min-width: 1024px) 40vw, 100vw"
@@ -487,7 +487,7 @@ export default function HomeClient({
         <CurrentPriorities priorities={initialPriorities} />
       </SectionWrapper>
 
-      {/* ===== 12. CLOSING CTA — "IT TAKES ALL OF US." ===== */}
+      {/* ===== 12. CLOSING CTA - "IT TAKES ALL OF US." ===== */}
       <section className="relative overflow-hidden bg-primary py-20 md:py-24">
         <div
           aria-hidden="true"
@@ -505,7 +505,7 @@ export default function HomeClient({
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-on-primary/70">
               A child&apos;s future is not built by one person or one programme.
-              It is built by a community that shows up — consistently, and with
+              It is built by a community that shows up - consistently, and with
               dignity. Join us.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -543,12 +543,12 @@ export default function HomeClient({
           </h2>
           <p className="mt-3 text-text-secondary">
             Occasional updates on programmes, stories and where support is
-            needed most. No noise — unsubscribe any time.
+            needed most. No noise - unsubscribe any time.
           </p>
 
           {newsletterState === "success" ? (
             <p className="mx-auto mt-8 max-w-md rounded-2xl border border-accent/30 bg-accent-subtle px-6 py-5 text-sm font-medium text-accent-text">
-              Thank you — your subscription is confirmed. Please watch your
+              Thank you - your subscription is confirmed. Please watch your
               inbox for a welcome note.
             </p>
           ) : (

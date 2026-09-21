@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const prisma = new PrismaClient();
 
 /**
- * Phase 6 brief §15 taxonomy — the seven content streams. Used as the build-time
+ * Phase 6 brief §15 taxonomy - the seven content streams. Used as the build-time
  * fallback when the DB is unreachable so the filter bar still renders the real
  * taxonomy (the DB is the source of truth when reachable).
  */
@@ -30,7 +30,7 @@ const slugify = (text: string) =>
   text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 // Phase 3b.2 ISR audit: news is CMS-managed content that does not need
-// per-request freshness — statically generate + revalidate instead of λ dynamic.
+// per-request freshness - statically generate + revalidate instead of λ dynamic.
 export const revalidate = 300;
 
 export default async function NewsPage() {

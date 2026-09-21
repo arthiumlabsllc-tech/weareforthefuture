@@ -52,7 +52,7 @@ const PILLAR_SHORT: Record<string, string> = {
 };
 
 /* The "Impact Stories" stream lives on the Stories of Change template
-   (/impact-stories) per the Phase 6 brief — the chip routes there instead of
+   (/impact-stories) per the Phase 6 brief - the chip routes there instead of
    filtering this feed. */
 const IMPACT_STORIES_SLUG = "impact-stories";
 
@@ -168,7 +168,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
             </h1>
             <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
               Programme updates, impact stories, partnerships, events and insights
-              from across Ghana and Nigeria — filtered the way you read.
+              from across Ghana and Nigeria - filtered the way you read.
             </p>
           </motion.div>
         </div>
@@ -228,7 +228,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
             </div>
           </div>
 
-          {/* Category chips — the §15 taxonomy. "Impact Stories" routes to the
+          {/* Category chips - the §15 taxonomy. "Impact Stories" routes to the
               Stories of Change template instead of filtering this feed. */}
           <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Content type">
             <button className={chipClass(activeCategory === "All")} aria-pressed={activeCategory === "All"} onClick={() => setActiveCategory("All")}>
@@ -396,7 +396,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-text-secondary">
               No posts match the current filters. Stories from this stream are
-              published as they happen — try widening your search.
+              published as they happen - try widening your search.
             </p>
             <button
               onClick={clearFilters}

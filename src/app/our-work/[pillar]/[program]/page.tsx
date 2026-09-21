@@ -15,7 +15,7 @@ import ProgrammeDetailClient from "./ProgrammeDetailClient";
 type Props = { params: Promise<{ pillar: string; program: string }> };
 
 /**
- * Programme detail route — /our-work/{pillar}/{program}.
+ * Programme detail route - /our-work/{pillar}/{program}.
  *
  * Pillar copy and programme↔pillar links come from the CMS (Pillar / Program /
  * ProgramPillar), fetched through src/lib/pillars.ts. Every fetch degrades
@@ -37,7 +37,7 @@ const humanize = (slug: string) =>
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 
-/** Strip CMS rich-text HTML to plain paragraphs (project convention — never render raw HTML). */
+/** Strip CMS rich-text HTML to plain paragraphs (project convention - never render raw HTML). */
 const toParagraphs = (html: string): string[] =>
   html
     .split(/\n+/)
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalPillar = primary?.id ?? decodeURIComponent(pillarSlug);
   const description =
     programme.shortDescription ||
-    `${programme.name} — an FTF programme under ${pillar?.title ?? "our work"}.`;
+    `${programme.name} - an FTF programme under ${pillar?.title ?? "our work"}.`;
 
   return {
     title: `${programme.name} | ${pillar?.title ?? "Our Work"}`,
@@ -97,13 +97,13 @@ export default async function ProgrammePage({ params }: Props) {
   if (!pillar || !programme) notFound();
 
   // A programme can sit under several pillars (many-to-many). Only redirect when
-  // the requested pillar is NOT one of them (a typo / stale link) — send it to
+  // the requested pillar is NOT one of them (a typo / stale link) - send it to
   // the canonical primary pillar. Valid variants render and canonicalise above.
   const isLinked = programme.pillars.some((p) => p.id === pillarSlug);
   if (!isLinked) {
     const primary = programme.pillars.find((p) => p.isPrimary) ?? programme.pillars[0];
     if (primary) redirect(`/our-work/${primary.id}/${encodeURIComponent(programme.slug)}`);
-    // No pillar links at all — render under the requested pillar (defensive).
+    // No pillar links at all - render under the requested pillar (defensive).
   }
 
   const [stories, partners, updates] = await Promise.all([

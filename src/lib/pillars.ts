@@ -19,7 +19,7 @@ import { programMetricsSchema, type ProgrammeDetail, type ProgrammeMetrics } fro
  * Every function is wrapped in try/catch and degrades to the static copy in
  * src/data/pillars.ts / src/data/initiatives.ts when the database is
  * unreachable (e.g. a cold Neon branch at build time). The static fallback
- * keeps ISR pages rendering — and `next build` prerendering — with no 500s.
+ * keeps ISR pages rendering - and `next build` prerendering - with no 500s.
  */
 
 /* ===== View types (serialisable; safe to pass into client components) ===== */
@@ -27,7 +27,7 @@ import { programMetricsSchema, type ProgrammeDetail, type ProgrammeMetrics } fro
 export type PillarAccent = "primary" | "accent" | "charcoal";
 
 export interface PillarData {
-  /** Stable slug — equals Pillar.slug in the DB and Pillar.id in static data. */
+  /** Stable slug - equals Pillar.slug in the DB and Pillar.id in static data. */
   id: string;
   number: number;
   title: string;
@@ -55,7 +55,7 @@ export interface PillarProgramme {
   name: string;
   shortDescription: string;
   image: string | null;
-  /** Program.status — active | expanding | campaign | pilot | future_project | archived. */
+  /** Program.status - active | expanding | campaign | pilot | future_project | archived. */
   status: string;
   isFeatured: boolean;
   /** Linked pillars, primary first. */
@@ -195,7 +195,7 @@ export const getPillars = cache(async (): Promise<PillarData[]> => {
       order: row.order,
     }));
   } catch (err) {
-    console.error("[pillars] getPillars failed — using static fallback", err);
+    console.error("[pillars] getPillars failed - using static fallback", err);
     return staticPillarData;
   }
 });
@@ -222,7 +222,7 @@ export const getPillarBySlug = cache(async (slug: string): Promise<PillarData | 
       };
     }
   } catch (err) {
-    console.error("[pillars] getPillarBySlug failed — using static fallback", err);
+    console.error("[pillars] getPillarBySlug failed - using static fallback", err);
   }
   return staticPillarData.find((pillar) => pillar.id === slug) ?? null;
 });
@@ -261,7 +261,7 @@ const mapProgramRow = (row: {
 });
 
 /**
- * Published programmes linked to a pillar (by pillar slug — the stable public
+ * Published programmes linked to a pillar (by pillar slug - the stable public
  * id), primary-linked first. Falls back to the static initiatives whose
  * primary pillar tag matches.
  */
@@ -287,7 +287,7 @@ export const getProgrammesByPillar = cache(async (pillarSlug: string): Promise<P
         return aPrimary - bPrimary || a.name.localeCompare(b.name);
       });
   } catch (err) {
-    console.error("[pillars] getProgrammesByPillar failed — using static fallback", err);
+    console.error("[pillars] getProgrammesByPillar failed - using static fallback", err);
   }
   return initiatives
     .filter((initiative) => primaryPillar(initiative.pillars)?.id === pillarSlug)
@@ -302,7 +302,7 @@ const pillarLabel = (pillarId: string): string => {
 };
 
 /**
- * Programmes flagged isFeatured in the CMS, primary-pillar order — the
+ * Programmes flagged isFeatured in the CMS, primary-pillar order - the
  * homepage "Featured work" rail. Falls back to the hard-coded launch set
  * (decision 5B) built from the static initiatives when the DB is unreachable.
  */
@@ -332,7 +332,7 @@ export const getFeaturedProgrammes = cache(async (): Promise<FeaturedProgramme[]
       });
     }
   } catch (err) {
-    console.error("[pillars] getFeaturedProgrammes failed — using static fallback", err);
+    console.error("[pillars] getFeaturedProgrammes failed - using static fallback", err);
   }
   return FEATURED_SLUGS.map((slug) => {
     const programme = staticProgramme(slug);
@@ -391,7 +391,7 @@ export const getProgrammeIndicators = cache(async (): Promise<ProgrammeIndicator
       };
     });
   } catch (err) {
-    console.error("[pillars] getProgrammeIndicators failed — using empty fallback", err);
+    console.error("[pillars] getProgrammeIndicators failed - using empty fallback", err);
     return [];
   }
 });
@@ -438,7 +438,7 @@ export const getProgrammeDetail = cache(async (slug: string): Promise<ProgrammeD
 
 /**
  * Safeguarding-approved stories for a programme: ImpactStory rows linked by
- * programme, consentGiven AND published (consent gate — never relaxed).
+ * programme, consentGiven AND published (consent gate - never relaxed).
  *
  * ImpactStory.program is free text and does not equal Program.name (e.g.
  * "Student Training & Education Project (STEP)" vs "Student Training and
@@ -554,7 +554,7 @@ export const getProgrammeUpdates = cache(
 );
 
 /**
- * Every published (pillarSlug, programmeSlug) pair — used by
+ * Every published (pillarSlug, programmeSlug) pair - used by
  * generateStaticParams to pre-render the full /our-work/[pillar]/[program]
  * tree. Falls back to static initiatives so `next build` prerenders even with
  * the DB unreachable.
@@ -571,7 +571,7 @@ export const getProgrammeRouteParams = cache(
       );
       if (params.length > 0) return params;
     } catch (err) {
-      console.error("[pillars] getProgrammeRouteParams failed — using static fallback", err);
+      console.error("[pillars] getProgrammeRouteParams failed - using static fallback", err);
     }
     return initiatives.flatMap((initiative) => {
       const pillar = primaryPillar(initiative.pillars);

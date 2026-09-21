@@ -15,7 +15,7 @@ export const revalidate = 300;
 export default async function ImpactPage() {
   // Programme-level indicators come from the CMS via the data-access layer,
   // which fails soft to [] when the database is unreachable (local dev, CI,
-  // cold-start DB). The dashboard then shows organisation-wide figures only —
+  // cold-start DB). The dashboard then shows organisation-wide figures only -
   // never a 500, never invented per-programme numbers.
   const indicators = await getProgrammeIndicators();
 

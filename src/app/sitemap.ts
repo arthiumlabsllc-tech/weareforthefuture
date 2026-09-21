@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://weareforthefuture.org";
 
-  // Canonical programme-detail URLs — /our-work/{pillar}/{programme} (Phase 3b.2).
+  // Canonical programme-detail URLs - /our-work/{pillar}/{programme} (Phase 3b.2).
   // Both helpers fail soft to static data, so the sitemap still renders when the
   // DB is unreachable.
   const [routeParams, pillars] = await Promise.all([getProgrammeRouteParams(), getPillars()]);

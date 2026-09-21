@@ -27,9 +27,9 @@ export default function NotFound() {
         </div>
 
         <SectionHeader
-          overline="404 — Page not found"
+          overline="404 - Page not found"
           title="This page seems to have wandered off."
-          description="The link may be out of date, or the page may have moved as we build out our new home. No worries — everything you need is one click away."
+          description="The link may be out of date, or the page may have moved as we build out our new home. No worries - everything you need is one click away."
         />
 
         <nav

@@ -1,7 +1,7 @@
 /**
  * Phase 7.2: Analytics event helpers.
  *
- * Vercel Analytics (pageviews) is always active — it uses no cookies and is
+ * Vercel Analytics (pageviews) is always active - it uses no cookies and is
  * privacy-friendly. GA4 is loaded ONLY after the user accepts cookies via the
  * consent banner (ftf-cookie-consent=accepted).
  *
@@ -21,7 +21,7 @@ export function hasConsent(): boolean {
 
 /** Track a conversion/custom event. Always fires to Vercel Analytics; GA4 only with consent. */
 export function trackEvent(name: string, data?: Record<string, string | number | boolean>) {
-  // Vercel Analytics (no consent needed — privacy-friendly, no cookies)
+  // Vercel Analytics (no consent needed - privacy-friendly, no cookies)
   track(name, data);
 
   // GA4 (consent-gated)

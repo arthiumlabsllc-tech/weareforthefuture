@@ -8,7 +8,7 @@ import { X, Heart, Users, Mail, Phone } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/site";
 import { img } from "@/lib/imageUrl";
 
-/** Brand social icons (inline SVG — lucide-react dropped brand marks). */
+/** Brand social icons (inline SVG - lucide-react dropped brand marks). */
 const socialIcons = [
   { label: "Instagram", href: siteConfig.social.instagram, path: "M16 4H8a4 4 0 00-4 4v8a4 4 0 004 4h8a4 4 0 004-4V8a4 4 0 00-4-4zm-4 11a3 3 0 110-6 3 3 0 010 6zm4.5-7.5a1 1 0 110-2 1 1 0 010 2z" },
   { label: "X (Twitter)", href: siteConfig.social.twitter, path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" },
@@ -26,7 +26,7 @@ type MobileMenuProps = {
 };
 
 /**
- * Phase 8.9 — Pattern A right-side navigation drawer. Replaces the old
+ * Phase 8.9 - Pattern A right-side navigation drawer. Replaces the old
  * full-screen blue overlay. Slides in from the right over a dimmed, blurred
  * page; traps focus, closes on Escape / overlay click, and returns focus to
  * the hamburger on close. Transitions are neutralised site-wide by the
@@ -101,7 +101,7 @@ export default function MobileMenu({ open, onClose, hamburgerRef, supporterName 
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* a. Header row — close top-right, 44px tap target */}
+        {/* a. Header row - close top-right, 44px tap target */}
         <div className="flex items-center justify-end px-4 pt-4">
           <button
             ref={closeRef}
@@ -130,7 +130,7 @@ export default function MobileMenu({ open, onClose, hamburgerRef, supporterName 
         {/* c. Divider */}
         <div className="border-t border-border" aria-hidden="true" />
 
-        {/* d. Nav links — 56px rows, active gets a green left border + text */}
+        {/* d. Nav links - 56px rows, active gets a green left border + text */}
         <nav className="divide-y divide-border/50" aria-label="Mobile navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;

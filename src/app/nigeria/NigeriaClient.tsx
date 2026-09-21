@@ -21,7 +21,7 @@ import { siteConfig } from "@/data/site";
 
 /**
  * FTF Nigeria context page (brief §10.9). Every figure on this page is verified
- * against a data source — initiatives.ts (programme facts), executiveBoard.ts
+ * against a data source - initiatives.ts (programme facts), executiveBoard.ts
  * (Nigeria-led governance), milestones/site.ts (2025 start, Ibadan base). We do
  * NOT invent cumulative country totals: where a number is organisation-wide it
  * is labelled as such, and Nigeria-specific stories stay an honest empty state
@@ -51,7 +51,7 @@ const NIGERIA_PROGRAMMES: NigeriaProgramme[] = [
     href: "/our-work/foundational-education",
     image: img("/images/initiatives/smart-start.jpg"),
     blurb:
-      "FTF's flagship education sponsorship — tuition, learning materials, mentorship and career guidance so children enrol, stay in school and progress with confidence.",
+      "FTF's flagship education sponsorship - tuition, learning materials, mentorship and career guidance so children enrol, stay in school and progress with confidence.",
     highlights: [
       "Tuition sponsorship",
       "Learning materials",
@@ -66,7 +66,7 @@ const NIGERIA_PROGRAMMES: NigeriaProgramme[] = [
     href: "/our-work/future-ready-skills",
     image: img("/images/initiatives/project-momentum.jpg"),
     blurb:
-      "The official launch initiative of FTF Nigeria — academic support, career mentorship and leadership development for secondary school students in Ibadan, Oyo State.",
+      "The official launch initiative of FTF Nigeria - academic support, career mentorship and leadership development for secondary school students in Ibadan, Oyo State.",
     highlights: [
       "Academic tutoring",
       "Career mentorship",
@@ -78,7 +78,7 @@ const NIGERIA_PROGRAMMES: NigeriaProgramme[] = [
   },
 ];
 
-/* Nigeria-led governance — verified count from src/data/executiveBoard.ts. */
+/* Nigeria-led governance - verified count from src/data/executiveBoard.ts. */
 const nigeriaBoardCount = executiveBoard.filter((m) => m.country === "Nigeria").length;
 
 /* Pillars active in Ibadan = the Nigeria programmes' pillars, unioned with the
@@ -124,7 +124,7 @@ export default function NigeriaClient() {
               FTF Nigeria · Ibadan, Oyo State
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-primary/75">
-              Community-embedded education, mentorship and future-ready skills —
+              Community-embedded education, mentorship and future-ready skills -
               delivered in Ibadan within the same five-pillar framework we use
               across Ghana. One model, deep roots, local leadership.
             </p>
@@ -165,7 +165,7 @@ export default function NigeriaClient() {
               <p>
                 For The Future (FTF) Nigeria extends ten years of community-rooted
                 programming from Ghana into Nigeria. Operations began in 2025 in
-                Ibadan, Oyo State, with two programmes — the Student Training &amp;
+                Ibadan, Oyo State, with two programmes - the Student Training &amp;
                 Education Project (STEP) and Project Momentum.
               </p>
               <p>
@@ -210,7 +210,7 @@ export default function NigeriaClient() {
         <SectionHeader
           overline="What we run in Ibadan"
           title="Our programmes in Nigeria"
-          description="Two programmes, one framework — each linked to the pillar it primarily delivers under."
+          description="Two programmes, one framework - each linked to the pillar it primarily delivers under."
         />
         <div className="grid gap-8 md:grid-cols-2">
           {NIGERIA_PROGRAMMES.map((programme, i) => {
@@ -288,7 +288,7 @@ export default function NigeriaClient() {
         <SectionHeader
           overline="One framework"
           title="The same five pillars, everywhere we work"
-          description="FTF Nigeria is not a separate model. A child in Ibadan and a child in Greater Accra are supported by one coherent theory of change — the five programme pillars."
+          description="FTF Nigeria is not a separate model. A child in Ibadan and a child in Greater Accra are supported by one coherent theory of change - the five programme pillars."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((pillar, i) => {
@@ -369,7 +369,7 @@ export default function NigeriaClient() {
             <div className="-mt-6 space-y-4 leading-relaxed text-text-secondary">
               <p>
                 Our presence in Nigeria is deep rather than wide. Ibadan, in Oyo
-                State, is the current core of operations — a focused footprint that
+                State, is the current core of operations - a focused footprint that
                 lets us know the children, families and schools we serve by name,
                 and grow deliberately alongside local partners.
               </p>
@@ -406,9 +406,9 @@ export default function NigeriaClient() {
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-text-secondary">
               FTF Nigeria is stewarded by a dedicated executive board of{" "}
-              {nigeriaBoardCount} members based in Nigeria — an Executive Director,
+              {nigeriaBoardCount} members based in Nigeria - an Executive Director,
               programmes, finance, research, monitoring &amp; evaluation,
-              curriculum, volunteers and community engagement leads — so decisions
+              curriculum, volunteers and community engagement leads - so decisions
               stay accountable to the community they serve.
             </p>
             <Link
@@ -484,7 +484,7 @@ export default function NigeriaClient() {
           </h3>
           <p className="mt-3 leading-relaxed text-text-secondary">
             We publish a young person&apos;s story only with informed,
-            safeguarding-approved consent — never before. Approved stories from
+            safeguarding-approved consent - never before. Approved stories from
             across FTF appear on Stories of Change; Nigeria stories will join them
             as consent and safeguarding review are completed.
           </p>

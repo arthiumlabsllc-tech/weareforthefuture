@@ -1,6 +1,6 @@
 "use client";
 
-// Phase 6.6: reading progress bar — fixed 2px track, accent fill, tracks the
+// Phase 6.6: reading progress bar - fixed 2px track, accent fill, tracks the
 // <article> element. Decorative (aria-hidden); honours prefers-reduced-motion
 // by updating instantly with no width transition.
 import { useEffect, useState } from "react";

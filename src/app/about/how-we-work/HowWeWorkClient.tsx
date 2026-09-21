@@ -23,7 +23,7 @@ const principles = [
   {
     icon: MapPin,
     title: "Community-embedded",
-    body: "We work where children already are — in their schools, neighbourhoods and families. Programmes are designed with community input, not dropped in from the outside.",
+    body: "We work where children already are - in their schools, neighbourhoods and families. Programmes are designed with community input, not dropped in from the outside.",
     color: "primary",
   },
   {
@@ -47,7 +47,7 @@ const principles = [
   {
     icon: BarChart3,
     title: "Measured & accountable",
-    body: "We set targets, collect data and report honestly — to communities, partners and supporters. Where we cannot yet measure something, we say so plainly.",
+    body: "We set targets, collect data and report honestly - to communities, partners and supporters. Where we cannot yet measure something, we say so plainly.",
     color: "charcoal",
   },
 ];
