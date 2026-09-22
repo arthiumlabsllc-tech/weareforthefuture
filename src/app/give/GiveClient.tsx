@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -85,6 +86,36 @@ function pesewasToGhs(pesewas: number): number {
 
 export default function GiveClient({ programmes = [], campaigns = [] }: GiveClientProps) {
   const { legal, stats } = siteConfig;
+  const allocationRef = useRef<HTMLDivElement>(null);
+  const [allocationVisible, setAllocationVisible] = useState(false);
+
+  useEffect(() => {
+    const section = allocationRef.current;
+    if (!section) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let observer: IntersectionObserver | undefined;
+    const reveal = () => {
+      setAllocationVisible(true);
+      observer?.disconnect();
+    };
+    const onPreferenceChange = () => {
+      if (preference.matches) reveal();
+    };
+
+    if (preference.matches || !("IntersectionObserver" in window)) {
+      reveal();
+    } else {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) reveal();
+      }, { threshold: 0.25 });
+      observer.observe(section);
+    }
+    preference.addEventListener("change", onPreferenceChange);
+    return () => {
+      observer?.disconnect();
+      preference.removeEventListener("change", onPreferenceChange);
+    };
+  }, []);
 
   return (
     <>
@@ -201,13 +232,13 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
               </dl>
 
               {/* Fund allocation summary */}
-              <div className="mt-7 border-t border-border pt-6">
+              <div ref={allocationRef} data-fund-allocation className="mt-7 border-t border-border pt-6">
                 <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-text-muted">
                   <PieChart className="h-3.5 w-3.5" />
                   Where funds go
                 </h3>
                 <ul className="mt-4 space-y-3">
-                  {fundAllocation.map((f) => (
+                  {fundAllocation.map((f, i) => (
                     <li key={f.category}>
                       <div className="flex items-baseline justify-between gap-3 text-sm">
                         <span className="text-text-secondary">{f.category}</span>
@@ -215,10 +246,22 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
                           {f.percentage}%
                         </span>
                       </div>
-                      <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-bg-tertiary">
+                      <div
+                        role="progressbar"
+                        aria-label={f.category}
+                        aria-valuenow={f.percentage}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-bg-tertiary"
+                      >
                         <div
-                          className="h-full rounded-full"
-                          style={{ width: `${f.percentage}%`, backgroundColor: f.hex }}
+                          className="h-full origin-left rounded-full transition-transform duration-700 ease-out motion-reduce:transform-none! motion-reduce:transition-none! motion-reduce:duration-0! motion-reduce:delay-0!"
+                          style={{
+                            width: `${f.percentage}%`,
+                            backgroundColor: f.hex,
+                            transform: `scaleX(${allocationVisible ? 1 : 0})`,
+                            transitionDelay: `${i * 80}ms`,
+                          }}
                         />
                       </div>
                     </li>

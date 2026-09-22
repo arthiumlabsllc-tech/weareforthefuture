@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -23,6 +24,36 @@ import type { ProgrammeIndicator } from "@/lib/pillars";
  */
 export default function ImpactClient({ indicators = [] }: { indicators?: ProgrammeIndicator[] }) {
   const { yearsOfFoundation, beneficiaries, volunteers, campaigns } = siteConfig.stats;
+  const allocationRef = useRef<HTMLDivElement>(null);
+  const [allocationVisible, setAllocationVisible] = useState(false);
+
+  useEffect(() => {
+    const section = allocationRef.current;
+    if (!section) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let observer: IntersectionObserver | undefined;
+    const reveal = () => {
+      setAllocationVisible(true);
+      observer?.disconnect();
+    };
+    const onPreferenceChange = () => {
+      if (preference.matches) reveal();
+    };
+
+    if (preference.matches || !("IntersectionObserver" in window)) {
+      reveal();
+    } else {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) reveal();
+      }, { threshold: 0.25 });
+      observer.observe(section);
+    }
+    preference.addEventListener("change", onPreferenceChange);
+    return () => {
+      observer?.disconnect();
+      preference.removeEventListener("change", onPreferenceChange);
+    };
+  }, []);
 
   return (
     <>
@@ -119,17 +150,29 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
               below reflects FTF&apos;s current programme-spending priorities.
             </p>
 
-            <div className="mt-8 space-y-4">
-              {fundAllocation.map((item) => (
+            <div ref={allocationRef} data-fund-allocation className="mt-8 space-y-4">
+              {fundAllocation.map((item, i) => (
                 <div key={item.category}>
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-sm font-medium text-text-secondary">{item.category}</span>
                     <span className="text-sm font-bold text-text-primary tabular-nums">{item.percentage}%</span>
                   </div>
-                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-bg-tertiary">
+                  <div
+                    role="progressbar"
+                    aria-label={item.category}
+                    aria-valuenow={item.percentage}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    className="h-2.5 w-full overflow-hidden rounded-full bg-bg-tertiary"
+                  >
                     <div
-                      className="h-full rounded-full"
-                      style={{ width: `${item.percentage}%`, backgroundColor: item.hex }}
+                      className="h-full origin-left rounded-full transition-transform duration-700 ease-out motion-reduce:transform-none! motion-reduce:transition-none! motion-reduce:duration-0! motion-reduce:delay-0!"
+                      style={{
+                        width: `${item.percentage}%`,
+                        backgroundColor: item.hex,
+                        transform: `scaleX(${allocationVisible ? 1 : 0})`,
+                        transitionDelay: `${i * 80}ms`,
+                      }}
                     />
                   </div>
                 </div>
