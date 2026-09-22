@@ -171,6 +171,11 @@ Sand (#EFE9DD) fails WCAG AA for text-tertiary, text-muted, accent-text, and tru
   - Motion: NO transform greater than 2px on cards - hover is a background + shadow change only, never a lift (see §8).
   - Sanctioned variants: (a) default = cardClasses as-is; (b) semantic tint = ValueCard only, keeps its tinted border/bg (7-value colour discipline) but adopts the same radius, padding and hover shadow; (c) dashed empty-state = border-dashed, no hover; (d) media tile = ImpactGallery frame, rounded-2xl bg-bg-tertiary, no border; (e) semantic tint-border = how-we-work principle cards, keep the per-principle tinted border on bg-surface with resting shadow-sm + hover bg-surface-hover/shadow-md (no lift).
   - Consumers: ProgrammeCard, ValueCard, story cards (news/nigeria), report cards, partner logo tiles + partner cards, our-work pillar/country cards, impact metric/indicator cards, give route/project cards (/give), homepage pillar/story/priority cards, about explore cards, safeguarding commitment cards, how-we-work principle cards, team/governance person cards, volunteer role cards, get-involved route cards, impact-store product cards. TrustChips is a chip strip on the sand band, not a card.
+
+### Exception: Campaign card with progress
+
+The FTF Village campaign card (HomeClient L162, DonateClient L272) is intentionally elevated with shadow-xl shadow-primary/5 and is documented as an exception to the card system. Its visual weight reflects its role as a featured donation CTA. Do NOT unify it with other cards.
+
 - Chips: pillar chips (pillar-N accent or bg-accent-subtle + text-accent-text), category chips on news (bg-story-tag + text-story-tag-text), status pills (status-active/pilot/archived/campaign), trust chips (border-trust-border + trust-icon).
 - Forms: label text-xs font-semibold uppercase tracking-wider text-text-tertiary; input rounded-xl border-border-strong bg-surface py-3 px-4 text-sm, focus:border-accent + focus:ring-2 ring-accent/20; error alert rounded-xl border-error/20 bg-error/10 text-error; help text text-xs text-text-muted.
 - Navigation: Navbar (sticky desktop header + ThemeToggle), MobileMenu (right-side drawer, 56px rows, active row green left border), Footer (blue bg-primary band in both themes, white scoped override, link columns + contact).
