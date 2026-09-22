@@ -1,6 +1,6 @@
 # FTF Design System
 
-Last updated: 2026-09-21
+Last updated: 2026-09-22
 Owner: FTF web team (Arthium Labs LLC)
 Approval required for changes: yes
 
@@ -216,6 +216,7 @@ The FTF Village campaign card (HomeClient L162, DonateClient L272) is intentiona
 - 2026-09-21 - Phase 12 Step 3 (A3): section rhythm alternation applied site-wide (15 page clients). SectionWrapper gains cream/sand backgrounds plus the §8 fade-rise entrance reveal; §3 alternation rule codified (cream baseline, sand accent, white contained, navy emphasis bands, no adjacent repeats). Homepage village block and /impact/ftf-at-10 timeline now use watermark-free Cloudinary crops of the Village render (c_crop transforms in src/lib/imageUrl.ts) pending a clean render from the founder.
 - 2026-09-21 - Phase 12 Step 4 (A2): card system unified. New --ftf-shadow-sm / --ftf-shadow-md tokens (blue-tinted in light, neutral in dark) mapped onto Tailwind shadow-sm / shadow-md via @theme inline; shared cardClasses + cardPadding exported from src/lib/ui/cardClasses.ts; every card surface adopts rounded-2xl + border-border + bg-surface + resting shadow-sm + hover bg-surface-hover/shadow-md with no transform >2px; ValueCard semantic tint preserved as a documented variant; ImpactGallery tiles rounded-xl -> rounded-2xl. §4 Card pattern codified.
 - 2026-09-22 - Phase 12 Step 4.5: legacy card sweep. The remaining card surfaces still on the old 4px-lift treatment (homepage pillar/story/priority, about explore, safeguarding, how-we-work, team/governance, volunteer, get-involved, impact-store, give) now spread cardClasses + cardPadding; how-we-work per-principle tint border documented as sanctioned variant (e); the orphaned /initiatives route (fully 308-redirected to /our-work) was deleted. No token changes.
+- 2026-09-22 - Phase 12 Step 5 (C2): JourneyStepper now shares one responsive ordered list on the homepage and /our-work. Transform-only fill, passive rAF scroll updates (minimum 16ms), cached geometry, 150ms debounced resize and full observer/frame/listener cleanup replace the 1.2s time-based draw. User-approved visible-sequence deviation: desktop progresses while the whole row is visible, activating nodes at fill milestones (horizontal nodes share one viewport height, so independent 50%-viewport observers would activate together); mobile fill and per-node IntersectionObservers follow node centers through 50% viewport height, with catch-up for restored scroll/fast jumps. Reached nodes stay active. Filled nodes use journey-node-active with the existing dark selection-text ink; no new tokens. A11y: one `<ol>`, seven `<h3>` headings prefixed "Step N of 7:", one `aria-current="step"` frontier, descriptions remain accessible. Reduced-motion and no-JS render all content and full fill; reduced-motion CSS forces zero transitions immediately. Campaign-card exception recorded in §4; campaign surfaces unchanged.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
 
@@ -235,16 +236,18 @@ Normative. All animation on the site must fit a pattern below; new patterns requ
 | Pattern | Use | Spec |
 | --- | --- | --- |
 | Entrance reveal | sections, cards, list items | opacity 0→1 + translateY 12-16px→0, 300-500ms, `whileInView` with `viewport={{ once: true, margin: "-80px" }}`; item stagger ≤ 60ms, max ~10 animated items per section |
-| Scroll-linked fill | journey progress, fund-allocation bars | width/scaleX tied to the containing section's scroll progress, rAF-throttled; final state is the exact token value (no overshoot) |
+| Scroll-linked progress | journey steppers and progress indicators tied to scroll position | Transform-only `scaleX` / `scaleY`, origin left/top, clamped 0..1. Passive rAF-throttled updates (minimum 16ms), cached measurements and 150ms debounced resize; cancel frames, timers, observers and listeners on unmount. Exact final token fill (`--ftf-journey-fill` over `--ftf-journey-track`), no overshoot or time-based draw. Node changes are 300ms color/opacity only; reached nodes stay active. Reduced-motion: 100% fill and all nodes active instantly, zero transitions. |
 | Celebration | donation/payment success | confetti burst using `confettiColors` from `src/lib/chartColors.ts`, one-shot, total ≤ 3s; sequenced reveal (check → receipt) |
 | Carousel/swipe | approved swipe surfaces only | snap points, 200-300ms slide, user-driven only (drag/arrow/dot); indicators in muted tokens |
 
 > **Carousel/swipe status:** No carousel or swipe surface currently exists on the site. This pattern is documented for future use only. Any new carousel/swipe implementation requires brief-level approval per §4 component changes.
 | Micro-interaction | hover/press/focus on buttons, cards, links | CSS transitions 150-250ms on color/background/box-shadow; transform shifts ≤ 2px |
 
+Journey timing (approved visible sequence): desktop 0% when the complete row clears the viewport bottom by 24px, 100% when its top reaches 160px (fixed-header clearance); node milestones follow the fill. Mobile 0%/100% when the first/last node centers cross the viewport midpoint; each node has a half-viewport IntersectionObserver. A geometry-based catch-up handles fast jumps/restored positions. Fill reverses on scroll-up; reached nodes do not. No pinning, count-ups or changes to native scrolling.
+
 ### Rules
 
-- Library: Framer Motion for entrance/scroll-linked/celebration; CSS transitions for micro-interactions.
+- Library: Framer Motion for entrance/celebration; native passive rAF + IntersectionObserver for the journey's scroll-linked progress; CSS transitions for micro-interactions.
 - Durations: micro 150-250ms; entrance 300-500ms; celebration ≤ 3s; scroll-linked has no fixed duration (tied to scroll).
 - Easing: ease-out for entrances, ease-in for exits; springs only for celebration (damping ≥ 20, no repeated oscillation).
 - Animate transform/opacity wherever possible; width/height only for bars and fills.
