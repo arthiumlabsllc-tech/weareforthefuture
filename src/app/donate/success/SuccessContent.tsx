@@ -1,21 +1,12 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { confettiColors } from "@/lib/chartColors";
-import {
-  Heart,
-  Check,
-  Loader2,
-  AlertCircle,
-  Home,
-  ArrowRight,
-  Mail,
-  Sparkles,
-  PartyPopper,
-} from "lucide-react";
+import { chartColors, confettiColors } from "@/lib/chartColors";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
+import { siteConfig } from "@/data/site";
+import { Check, AlertCircle, ArrowRight, Copy, Mail } from "lucide-react";
 
 interface VerifiedTransaction {
   status: string;
@@ -31,365 +22,324 @@ interface VerifiedTransaction {
   gatewayResponse: string;
 }
 
-/* ===== CONFETTI ===== */
-function ConfettiPiece({ delay, color, left }: { delay: number; color: string; left: number }) {
+const CELEBRATION_KEY = "ftf:donation-celebration:v1";
+
+function claimCelebration(isStore: boolean): boolean {
+  if (isStore) return false;
+  try {
+    const seen = sessionStorage.getItem(CELEBRATION_KEY) === "1";
+    sessionStorage.setItem(CELEBRATION_KEY, "1");
+    return !seen && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch {
+    // Without session storage, keep the receipt static rather than replaying.
+    return false;
+  }
+}
+
+function CelebrationCanvas({ cardRef }: { cardRef: RefObject<HTMLDivElement | null> }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    const styles = getComputedStyle(canvas);
+    const allowed = new Set<string>([chartColors.accent, chartColors.primary, chartColors.charcoal, chartColors.bright]);
+    const colors = confettiColors.filter((color) => allowed.has(color)).map((color) =>
+      styles.getPropertyValue(color.slice(4, -1)).trim()
+    );
+    let width = 0;
+    let height = 0;
+    let cardWidth = 0;
+    let frame = 0;
+    let disposed = false;
+    const measure = () => {
+      width = canvas.clientWidth;
+      height = canvas.clientHeight;
+      cardWidth = cardRef.current?.offsetWidth ?? width;
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    };
+    measure();
+    const resize = new ResizeObserver(measure);
+    resize.observe(canvas);
+    const particles = Array.from({ length: 44 }, (_, i) => ({
+      side: i % 2 ? 1 : -1,
+      spread: 0.25 + Math.random() * 0.75,
+      lift: 15 + Math.random() * 55,
+      fall: 180 + Math.random() * 210,
+      rotation: Math.random() * Math.PI,
+      size: 4 + Math.random() * 3,
+      color: colors[i % colors.length],
+    }));
+    const start = performance.now() + 500;
+    const draw = (now: number) => {
+      if (disposed) return;
+      const progress = Math.min(1, Math.max(0, (now - start) / 1500));
+      context.clearRect(0, 0, width, height);
+      if (progress >= 1) return;
+      context.save();
+      context.beginPath();
+      context.rect(0, 0, width, height);
+      // Exclude the receipt footprint, even while its surface is fading in.
+      context.rect((width - cardWidth) / 2 - 2, 56, cardWidth + 4, height);
+      context.clip("evenodd");
+      context.globalAlpha = Math.min(1, (1 - progress) * 2);
+      const travel = 1 - Math.pow(1 - progress, 3);
+      for (const particle of particles) {
+        const x = width / 2 + particle.side * (30 + travel * width * 0.48 * particle.spread);
+        const y = 46 - Math.sin(progress * Math.PI) * particle.lift + progress * progress * particle.fall;
+        context.save();
+        context.translate(x, y);
+        context.rotate(particle.rotation + particle.side * progress * 3);
+        context.fillStyle = particle.color;
+        context.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size * 1.4);
+        context.restore();
+      }
+      context.restore();
+      frame = requestAnimationFrame(draw);
+    };
+    const timer = window.setTimeout(() => { frame = requestAnimationFrame(draw); }, 500);
+    return () => {
+      disposed = true;
+      clearTimeout(timer);
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      context.clearRect(0, 0, width, height);
+    };
+  }, [cardRef]);
+
+  return <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute -inset-x-6 -top-6 h-[480px] w-[calc(100%+3rem)] motion-reduce:hidden" />;
+}
+
+function VerifiedReceipt({ reference, isStore, transaction, celebrate }: {
+  reference: string;
+  isStore: boolean;
+  transaction: VerifiedTransaction;
+  celebrate: boolean;
+}) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(celebrate);
+  const [actionsRevealed, setActionsRevealed] = useState(false);
+  const [shareMessage, setShareMessage] = useState("");
+  const [manualLink, setManualLink] = useState("");
+
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true });
+  }, []);
+
+  useEffect(() => {
+    if (!playing) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const stop = () => setPlaying(false);
+    const onChange = () => { if (preference.matches) stop(); };
+    if (preference.matches) stop();
+    preference.addEventListener("change", onChange);
+    const timer = window.setTimeout(stop, 2000);
+    return () => {
+      clearTimeout(timer);
+      preference.removeEventListener("change", onChange);
+    };
+  }, [playing]);
+
+  const share = async () => {
+    const url = new URL("/give", window.location.origin).href;
+    try {
+      await navigator.clipboard.writeText(url);
+      setManualLink("");
+      setShareMessage("Support link copied. Thank you for sharing.");
+    } catch {
+      setManualLink(url);
+      setShareMessage("Copy the support link below to share.");
+    }
+  };
+  const firstName = typeof transaction.customer?.first_name === "string" ? transaction.customer.first_name.trim() : "";
+  const email = typeof transaction.customer?.email === "string" ? transaction.customer.email : "";
+  const date = transaction.paidAt ? new Date(transaction.paidAt) : null;
+  const channel = typeof transaction.channel === "string" ? transaction.channel.replaceAll("_", " ") : "Not provided";
+  const amount = new Intl.NumberFormat("en-GH", { style: "currency", currency: transaction.currency, currencyDisplay: "code" }).format(transaction.amount);
+  const actionClass = "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-200 motion-reduce:transition-none! motion-reduce:duration-0!";
+
   return (
-    <motion.div
-      initial={{ y: -20, x: 0, opacity: 1, rotate: 0 }}
-      animate={{
-        y: [null, typeof window !== "undefined" ? window.innerHeight + 20 : 1000],
-        x: [0, (Math.random() - 0.5) * 200],
-        rotate: [0, Math.random() * 720 - 360],
-        opacity: [1, 1, 0],
-      }}
-      transition={{
-        duration: 3 + Math.random() * 2,
-        delay,
-        ease: "easeIn",
-      }}
-      className="absolute top-0 w-2 h-3 rounded-sm"
-      style={{
-        left: `${left}%`,
-        backgroundColor: color,
-      }}
-    />
+    <div data-celebration={playing ? "playing" : "static"} className={playing ? "celebration" : ""}>
+      <h1 ref={headingRef} tabIndex={-1} className="rounded-lg font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
+        {isStore ? "Payment confirmed" : "Donation confirmed"}
+      </h1>
+      <p className="mx-auto mt-4 max-w-lg text-base text-text-secondary">
+        {isStore ? "Your purchase supports our programmes. Thank you for being part of our community."
+          : "Your generosity supports learning, dignity and opportunity for children and young people."}
+      </p>
+
+      <div className="relative isolate mt-8 pt-8">
+        {playing && <CelebrationCanvas cardRef={cardRef} />}
+        <div data-celebration-check aria-hidden="true" className="celebration-check absolute inset-x-0 top-0 z-20 mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-success bg-success-bg text-success">
+          <Check className="h-8 w-8" strokeWidth={2.5} />
+        </div>
+        <div ref={cardRef} data-celebration-card className={`celebration-card relative z-10 ${cardClasses} ${cardPadding.feature} text-left`}>
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-b border-border pb-6">
+            <h2 className="text-sm font-medium text-text-secondary">{isStore ? "Payment receipt" : "Donation receipt"}</h2>
+            <p className="break-all text-3xl font-semibold tabular-nums tracking-tight text-text-primary">{amount}</p>
+          </div>
+          <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
+            <div className="col-span-2">
+              <dt className="text-xs text-text-secondary">Reference</dt>
+              <dd className="mt-1 break-all font-mono text-text-primary">{reference}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-text-secondary">Payment method</dt>
+              <dd className="mt-1 break-words capitalize text-text-primary">{channel || "Not provided"}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-text-secondary">Status</dt>
+              <dd className="mt-1 font-semibold text-success-text">Successful</dd>
+            </div>
+            <div className="col-span-2">
+              <dt className="text-xs text-text-secondary">Date</dt>
+              <dd className="mt-1 text-text-primary">{date && Number.isFinite(date.getTime()) ? date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "Not provided"}</dd>
+            </div>
+          </dl>
+          {email && <p className="mt-6 break-words border-t border-border pt-4 text-xs text-text-secondary">Payment email: {email}</p>}
+        </div>
+      </div>
+
+      <p data-celebration-thanks className="celebration-thanks mt-8 break-words font-[family-name:var(--font-display)] text-2xl leading-snug text-text-primary sm:text-3xl">
+        {isStore ? "Thank you for your support." : firstName ? `Thank you, ${firstName}.` : "Thank you for your generosity."}
+      </p>
+      {!isStore && <p className="mt-3 text-xs text-text-secondary">{siteConfig.legal.taxNote}</p>}
+      <div data-celebration-actions onFocusCapture={() => setActionsRevealed(true)} className={`celebration-actions ${actionsRevealed ? "actions-revealed" : ""} mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap`}>
+        {isStore ? (
+          <>
+            <Link href="/impact-store" className={`${actionClass} bg-cta text-on-cta hover:bg-cta-hover`}>Continue shopping</Link>
+            <Link href="/" className={`${actionClass} text-text-primary hover:bg-bg-tertiary`}>Back to home</Link>
+          </>
+        ) : (
+          <>
+            <button type="button" onClick={share} className={`${actionClass} border border-border bg-surface text-text-primary hover:bg-surface-hover`}>
+              <Copy aria-hidden="true" className="h-4 w-4" /> Share your support
+            </button>
+            <Link href="/impact" className={`${actionClass} bg-cta text-on-cta hover:bg-cta-hover`}>
+              See your impact <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+            <Link href="/give" className={`${actionClass} text-accent-text hover:bg-bg-tertiary`}>Give again</Link>
+          </>
+        )}
+      </div>
+      <p role="status" aria-live="polite" aria-atomic="true" className="mt-3 min-h-5 text-sm text-text-secondary">{shareMessage}</p>
+      {manualLink && (
+        <label className="mt-3 block text-left text-sm text-text-secondary">
+          Support link
+          <input readOnly value={manualLink} onFocus={(event) => event.currentTarget.select()} className="mt-2 w-full rounded-lg border border-border-strong bg-surface p-3 text-text-primary" />
+        </label>
+      )}
+      <style jsx>{`
+        .celebration .celebration-check { animation: verified-check 300ms ease-out 200ms both; }
+        .celebration .celebration-card { animation: receipt-reveal 400ms ease-out 700ms both; }
+        .celebration .celebration-thanks { animation: celebration-fade 300ms ease-out 1200ms both; }
+        .celebration .celebration-actions { animation: celebration-fade 200ms ease-out 1800ms both; }
+        .celebration .celebration-actions:focus-within, .celebration .actions-revealed { animation: none; opacity: 1; }
+        @keyframes verified-check { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes receipt-reveal { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes celebration-fade { from { opacity: 0; } to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) {
+          .celebration-check, .celebration-card, .celebration-thanks, .celebration-actions {
+            animation: none !important;
+            animation-duration: 0s !important;
+            animation-delay: 0s !important;
+            transition: none !important;
+            transition-duration: 0s !important;
+            opacity: 1 !important;
+            transform: none !important;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
 
-const COLORS = confettiColors;
+type VerificationState =
+  | { kind: "loading" }
+  | { kind: "pending"; message: string }
+  | { kind: "verified"; transaction: VerifiedTransaction; celebrate: boolean };
 
 export default function SuccessContent() {
   const searchParams = useSearchParams();
-  const reference = searchParams.get("reference");
-  const source = searchParams.get("source") || "donation";
+  const reference = searchParams.get("reference") || "";
+  const isStore = searchParams.get("source") === "store";
+  return <VerificationResult key={`${isStore}:${reference}`} reference={reference} isStore={isStore} />;
+}
 
-  const [loading, setLoading] = useState(true);
-  const [verified, setVerified] = useState(false);
-  const [transaction, setTransaction] = useState<VerifiedTransaction | null>(null);
-  const [error, setError] = useState("");
-
-  const confetti = useMemo(
-    () =>
-      Array.from({ length: 80 }, (_, i) => ({
-        id: i,
-        delay: Math.random() * 1.5,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        left: Math.random() * 100,
-      })),
-    []
-  );
+function VerificationResult({ reference, isStore }: { reference: string; isStore: boolean }) {
+  const [state, setState] = useState<VerificationState>(reference ? { kind: "loading" } : {
+    kind: "pending",
+    message: "No transaction reference found. If you completed a payment, please contact us.",
+  });
 
   useEffect(() => {
-    if (!reference) {
-      setLoading(false);
-      setError("No transaction reference found. If you completed a payment, please contact us.");
-      return;
-    }
-
+    if (!reference) return;
+    const controller = new AbortController();
     const verify = async () => {
       try {
         const res = await fetch("/api/paystack/verify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ reference }),
+          signal: controller.signal,
         });
         const data = await res.json();
-
-        if (data.success && data.verified) {
-          setVerified(true);
-          setTransaction({
-            status: data.status,
-            amount: data.amount / 100,
-            currency: data.currency,
-            paidAt: data.paidAt,
-            channel: data.channel,
-            customer: data.customer,
-            gatewayResponse: data.gatewayResponse,
+        if (controller.signal.aborted) return;
+        if (res.ok && data.success === true && data.verified === true && data.status === "success"
+          && typeof data.amount === "number" && Number.isFinite(data.amount) && data.amount > 0
+          && typeof data.currency === "string" && /^[A-Z]{3}$/.test(data.currency)) {
+          setState({
+            kind: "verified",
+            transaction: { ...data, amount: data.amount / 100 },
+            celebrate: claimCelebration(isStore),
           });
         } else {
-          setError("We couldn't verify this transaction. Please contact us with your reference number.");
+          setState({ kind: "pending", message: "We couldn't verify this transaction. Your payment may still be processing. Please contact us with your reference before trying again." });
         }
       } catch {
-        setError("Verification failed. Your payment may still be processing. Please check your email for confirmation.");
-      } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) {
+          setState({ kind: "pending", message: "Verification is unavailable. Your payment may still be processing. Please check your email or contact us before trying again." });
+        }
       }
     };
-
-    verify();
-  }, [reference]);
-
-  const isStore = source === "store";
-  const displayName = transaction?.customer?.first_name
-    ? `${transaction.customer.first_name} ${transaction.customer.last_name || ""}`.trim()
-    : transaction?.customer?.email || "Generous Donor";
+    void verify();
+    return () => controller.abort();
+  }, [reference, isStore]);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-primary via-primary to-primary overflow-hidden">
-      {/* Confetti */}
-      {verified && (
-        <div className="fixed inset-0 pointer-events-none z-10">
-          {confetti.map((piece) => (
-            <ConfettiPiece
-              key={piece.id}
-              delay={piece.delay}
-              color={piece.color}
-              left={piece.left}
-            />
-          ))}
+    <div className="mx-auto max-w-[620px] text-center" data-verification={state.kind}>
+      <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {state.kind === "verified" ? (isStore ? "Payment confirmed. Your purchase was successful." : "Donation confirmed. Thank you for your generosity.")
+          : state.kind === "loading" ? "Verifying your payment." : state.message}
+      </p>
+      {state.kind === "loading" && (
+        <div aria-busy="true">
+          <h1 className="font-[family-name:var(--font-display)] text-3xl text-text-primary">Verifying your payment...</h1>
+          <p className="mt-4 text-text-secondary">Please wait while we confirm your transaction.</p>
         </div>
       )}
-
-      {/* Content */}
-      <div className="relative z-20 flex items-start justify-center min-h-screen px-4 pt-36 pb-16">
-        <div className="w-full max-w-lg">
-          {/* Loading State */}
-          {loading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center"
-            >
-              <Loader2 className="h-12 w-12 text-accent-text animate-spin mx-auto mb-4" />
-              <p className="text-lg text-text-on-primary/70">Verifying your payment...</p>
-              <p className="text-sm text-text-on-primary/40 mt-2">Please wait while we confirm your transaction</p>
-            </motion.div>
-          )}
-
-          {/* Error State */}
-          {!loading && error && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center"
-            >
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-500/10 border border-amber-400/20 mx-auto mb-6">
-                <AlertCircle className="h-10 w-10 text-amber-400" />
-              </div>
-              <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-on-primary mb-3">
-                Verification Pending
-              </h1>
-              <p className="text-text-on-primary/60 leading-relaxed mb-6">{error}</p>
-              {reference && (
-                <div className="rounded-xl bg-text-on-primary/5 border border-text-on-primary/10 p-4 mb-6">
-                  <p className="text-xs text-text-on-primary/40 mb-1">Reference</p>
-                  <p className="text-sm text-text-on-primary font-mono">{reference}</p>
-                </div>
-              )}
-              <div className="flex flex-col gap-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta"
-                >
-                  <Mail className="h-4 w-4" />
-                  Contact Support
-                </Link>
-                <Link
-                  href="/"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-text-on-primary/20 px-8 py-3 text-sm font-semibold text-text-on-primary hover:bg-text-on-primary/10"
-                >
-                  <Home className="h-4 w-4" />
-                  Back to Home
-                </Link>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Success State */}
-          {!loading && verified && transaction && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              {/* Success Icon */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", damping: 12, delay: 0.2 }}
-                className="relative mx-auto mb-6"
-              >
-                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-success/10 border-2 border-success/30">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.4, type: "spring" }}
-                  >
-                    <Check className="h-12 w-12 text-success-text" strokeWidth={3} />
-                  </motion.div>
-                </div>
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.6, type: "spring" }}
-                  className="absolute -top-2 -right-2"
-                >
-                  <PartyPopper className="h-8 w-8 text-accent-text" />
-                </motion.div>
-              </motion.div>
-
-              {/* Thank You Message */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-4 py-1.5 text-xs font-semibold text-accent-text uppercase tracking-wider mb-4">
-                  <Sparkles className="h-3 w-3" />
-                  Payment Confirmed
-                </span>
-                <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-on-primary sm:text-4xl mb-3">
-                  {isStore ? "Thank You for Your Purchase!" : "Thank You, " + displayName.split(" ")[0] + "!"}
-                </h1>
-                <p className="text-lg text-text-on-primary/60 leading-relaxed mb-6">
-                  {isStore
-                    ? "Your order has been placed successfully. Every purchase directly changes a child's life."
-                    : "Your generous donation has been received. You're directly changing the lives of vulnerable children across Ghana, Nigeria, and beyond."}
-                </p>
-              </motion.div>
-
-              {/* Transaction Details */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="rounded-2xl bg-text-on-primary/5 border border-text-on-primary/10 p-6 mb-6 text-left space-y-4"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-text-on-primary/50">Amount</span>
-                  <span className="text-2xl font-bold text-text-on-primary">
-                    GH₵{transaction.amount.toLocaleString()}
-                  </span>
-                </div>
-                <div className="border-t border-text-on-primary/10" />
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs text-text-on-primary/40 mb-0.5">Reference</p>
-                    <p className="text-sm text-text-on-primary font-mono truncate">{reference}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-text-on-primary/40 mb-0.5">Payment Method</p>
-                    <p className="text-sm text-text-on-primary capitalize">
-                      {transaction.channel === "mobile_money"
-                        ? "Mobile Money"
-                        : transaction.channel === "bank_transfer"
-                        ? "Bank Transfer"
-                        : transaction.channel || "Card"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-text-on-primary/40 mb-0.5">Status</p>
-                    <p className="text-sm text-success-text font-semibold flex items-center gap-1">
-                      <Check className="h-3 w-3" /> Successful
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-text-on-primary/40 mb-0.5">Date</p>
-                    <p className="text-sm text-text-on-primary">
-                      {new Date(transaction.paidAt).toLocaleDateString("en-GB", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Email Notice */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                className="flex items-center justify-center gap-2 text-sm text-text-on-primary/50 mb-8"
-              >
-                <Mail className="h-4 w-4" />
-                A receipt has been sent to{" "}
-                <span className="text-text-on-primary/70 font-medium">
-                  {transaction.customer?.email || "your email"}
-                </span>
-              </motion.div>
-
-              {/* Tax Notice */}
-              {!isStore && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  className="rounded-xl bg-success/10 border border-success/20 p-4 mb-8"
-                >
-                  <Heart className="h-5 w-5 text-success-text mx-auto mb-2" />
-                  <p className="text-sm text-success-text font-medium">
-                    Your donation is tax-deductible. For The Future Organization is a registered 501(c)(3) nonprofit.
-                  </p>
-                </motion.div>
-              )}
-
-              {/* Actions */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9 }}
-                className="flex flex-col gap-3 sm:flex-row sm:justify-center"
-              >
-                {isStore ? (
-                  <Link
-                    href="/impact-store"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:scale-[1.02]"
-                  >
-                    <Home className="h-4 w-4" />
-                    Continue Shopping
-                  </Link>
-                ) : (
-                  <Link
-                    href="/donate"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta shadow-lg transition-all hover:bg-cta-hover hover:scale-[1.02]"
-                  >
-                    <Heart className="h-4 w-4" />
-                    Donate Again
-                  </Link>
-                )}
-                <Link
-                  href="/"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-text-on-primary/20 px-8 py-3 text-sm font-semibold text-text-on-primary transition-all hover:bg-text-on-primary/10"
-                >
-                  Back to Home
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            </motion.div>
-          )}
-
-          {/* No reference at all */}
-          {!loading && !reference && !error && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center"
-            >
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-text-on-primary/5 border border-text-on-primary/10 mx-auto mb-6">
-                <Heart className="h-10 w-10 text-accent-text" />
-              </div>
-              <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold text-text-on-primary mb-3">
-                Thank You for Your Support!
-              </h1>
-              <p className="text-text-on-primary/60 leading-relaxed mb-6">
-                Your generosity changes lives. If you just completed a payment, you'll receive a confirmation email shortly.
-              </p>
-              <Link
-                href="/"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-8 py-3 text-sm font-semibold text-on-cta"
-              >
-                <Home className="h-4 w-4" />
-                Back to Home
-              </Link>
-            </motion.div>
-          )}
+      {state.kind === "pending" && (
+        <div className={`${cardClasses} ${cardPadding.feature}`}>
+          <AlertCircle aria-hidden="true" className="mx-auto mb-6 h-10 w-10 text-warning-text" />
+          <h1 className="font-[family-name:var(--font-display)] text-3xl text-text-primary">Verification pending</h1>
+          <p className="mt-4 text-text-secondary">{state.message}</p>
+          {reference && <p className="mt-6 break-all text-sm text-text-secondary">Reference: <span className="font-mono">{reference}</span></p>}
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href="/contact" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-cta px-6 py-3 text-sm font-semibold text-on-cta hover:bg-cta-hover">
+              <Mail aria-hidden="true" className="h-4 w-4" /> Contact support
+            </Link>
+            <Link href="/" className="inline-flex min-h-11 items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-text-primary hover:bg-bg-tertiary">Back to home</Link>
+          </div>
         </div>
-      </div>
+      )}
+      {state.kind === "verified" && <VerifiedReceipt reference={reference} isStore={isStore} transaction={state.transaction} celebrate={state.celebrate} />}
     </div>
   );
 }
