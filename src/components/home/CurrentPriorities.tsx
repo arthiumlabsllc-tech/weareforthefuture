@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 
 /**
  * A live donation appeal surfaced on the homepage. Populated server-side from
@@ -102,7 +103,7 @@ export default function CurrentPriorities({ priorities }: { priorities: Priority
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+            className={`${cardClasses} flex flex-col ${cardPadding.compact}`}
           >
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-lg font-bold leading-snug text-text-primary">{priority.name}</h3>

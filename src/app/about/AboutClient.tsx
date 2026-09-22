@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import { img } from "@/lib/imageUrl";
 import {
   ArrowRight,
@@ -168,7 +169,7 @@ export default function AboutPageClient() {
               >
                 <Link
                   href={card.href}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-7 transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-primary/5"
+                  className={`${cardClasses} group flex h-full flex-col ${cardPadding.default}`}
                 >
                   <span
                     className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${t.chip} ${t.icon} transition-transform group-hover:scale-110`}

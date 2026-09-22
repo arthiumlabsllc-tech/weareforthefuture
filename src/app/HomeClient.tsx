@@ -12,6 +12,7 @@ import {
   Users,
 } from "lucide-react";
 import { img } from "@/lib/imageUrl";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import ProgrammeArtwork from "@/components/ui/ProgrammeArtwork";
 import TrustChips from "@/components/home/TrustChips";
@@ -243,7 +244,7 @@ export default function HomeClient({
             <Link
               key={pillar.id}
               href={`/our-work/${pillar.id}`}
-              className="group flex flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-primary/5"
+              className={`${cardClasses} group flex flex-col ${cardPadding.compact}`}
             >
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-on-primary transition-colors group-hover:bg-cta group-hover:text-on-cta">
@@ -292,12 +293,12 @@ export default function HomeClient({
             >
               <Link
                 href={programme.href}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+                className={`${cardClasses} group flex h-full flex-col overflow-hidden`}
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-bg-tertiary">
                   <ProgrammeArtwork image={programme.image} title={programme.title} />
                 </div>
-                <div className="flex flex-1 flex-col p-5">
+                <div className={`flex flex-1 flex-col ${cardPadding.compact}`}>
                   <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-text">
                     {programme.pillar}
                   </span>

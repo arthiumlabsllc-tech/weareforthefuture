@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import {
   HeartHandshake,
   Sparkles,
@@ -153,7 +154,7 @@ export default function GetInvolvedClient() {
             >
               <Link
                 href={p.href}
-                className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-7 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-primary/5"
+                className={`${cardClasses} group flex h-full flex-col ${cardPadding.default}`}
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                   <p.icon className="h-6 w-6" />

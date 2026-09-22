@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import {
   Heart,
   ArrowRight,
@@ -215,7 +216,7 @@ export default function VolunteerClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group rounded-2xl border border-border bg-surface p-8 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
+              className={`${cardClasses} group ${cardPadding.feature}`}
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary transition-colors group-hover:bg-accent-subtle group-hover:text-accent-text">
                 <role.icon className="h-6 w-6" />

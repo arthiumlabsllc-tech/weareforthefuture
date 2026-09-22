@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import {
   AlertTriangle,
   Camera,
@@ -90,7 +91,7 @@ export default function SafeguardingClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.45, delay: i * 0.05 }}
-              className="flex h-full flex-col rounded-2xl border border-border bg-surface p-8 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+              className={`${cardClasses} flex h-full flex-col ${cardPadding.feature}`}
             >
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                 <s.icon className="h-6 w-6" aria-hidden="true" />

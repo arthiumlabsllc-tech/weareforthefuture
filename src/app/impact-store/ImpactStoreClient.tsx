@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { img } from "@/lib/imageUrl";
+import { cardClasses } from "@/lib/ui/cardClasses";
 import {
   ShoppingBag,
   Heart,
@@ -215,7 +216,7 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface shadow-sm border border-border/50 transition-all hover:shadow-xl hover:-translate-y-1"
+                  className={`${cardClasses} group relative flex flex-col overflow-hidden`}
                 >
                   {/* Badge */}
                   {product.badge && (

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import { ArrowRight, Crown, Landmark, Sparkles, Users } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import { siteConfig } from "@/data/site";
@@ -95,7 +96,7 @@ function PersonGrid({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.4, delay: i * 0.04 }}
-            className="rounded-2xl border border-border bg-surface p-6 text-center transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+            className={`${cardClasses} text-center ${cardPadding.compact}`}
           >
             <Avatar person={person} />
             <h3 className="mt-4 font-semibold text-text-primary">{person.name}</h3>
