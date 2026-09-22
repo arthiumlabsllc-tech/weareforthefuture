@@ -220,6 +220,7 @@ The FTF Village campaign card (HomeClient L162, DonateClient L272) is intentiona
 - 2026-09-22 - Step 5 performance profile accepted and recorded in §8: headless rAF sampling baseline, accepted mobile dropped-frame markers, and a like-for-like ~100fps investigation threshold under 4× CPU throttle. No further optimization without measurable cause.
 - 2026-09-22 - Phase 12 Step 6 (A4, brief §11.1): fund-allocation fills on /impact, /impact/reports and /give now use the §8 entrance-reveal variant below: one IntersectionObserver per allocation group at threshold 0.25, 700ms ease-out scaleX growth and 80ms row stagger, no scroll handlers. Percentages remain static and sourced from fundAllocation/chartColors. Added progressbar category/value semantics; reduced-motion renders final widths immediately with zero transition or delay, including live preference changes. Removed Reports' competing per-row slide/fade. Campaign progress bars and tokens unchanged.
 - 2026-09-22 - Phase 12 Step 7 (C1, brief §6.9): /donate/success now has a warm cream confirmation, unified feature receipt card and verified-donation-only 2s celebration. Replaced 80 DOM particles and nested springs with 44 canvas particles and four ease-out CSS reveals. Added session replay prevention, immediate reduced-motion state, live cancellation, persistent polite success status, heading focus and keyboard-safe public-link sharing. Store/pending/error states remain static; verification requests abort on unmount/reference changes. Receipt now uses verified currency, full wrapping reference and first-name-only personalization; email/tax copy avoids unverified delivery or blanket tax claims. §8 celebration contract updated; no API, token or shared palette changes.
+- 2026-09-22 - Step 7 scope clarification: celebration rewards donations only; store receipts, volunteer confirmations and partner inquiry confirmations remain static. Explicit boundary added to §8; no implementation changes.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
 
@@ -264,6 +265,10 @@ Measurement note: these are rAF sampling rates in an approximately 144Hz headles
 #### Fund-allocation entrance reveal (Step 6)
 
 A specific entrance-reveal variant, not continuous scroll-linked progress: observe the allocation group with `IntersectionObserver({ threshold: 0.25 })`, then disconnect after its first qualifying intersection. Set each fill's layout width from `fundAllocation.percentage` and animate only `scaleX(0)` → `scaleX(1)` from the left, 700ms ease-out with 80ms stagger (six bars, 1.1s total). This approved variant uses a 600-800ms duration budget and ~80ms stagger instead of the generic entrance timings. Colors remain the theme-aware `chartColors` references carried by `fundAllocation`; no count-ups, opacity gates, scroll listeners or per-frame React updates. Each track exposes `role="progressbar"`, category label and final `aria-valuenow/min/max`; labels and percentages stay readable throughout. Reduced-motion CSS immediately forces final transforms with zero transition/delay, backed by a live `matchMedia` check. Disconnect observers and remove media-query listeners on unmount; unsupported observers fall back to final fills. No replay on scroll-up or preference toggles.
+
+### Celebration scope
+
+The celebration sequence (Step 7) applies ONLY to the donation success page. Store receipts, volunteer confirmations, and partner inquiry confirmations remain static. The celebration rewards the emotional act of giving - not every transaction.
 
 ### Celebration pattern (success moments)
 
