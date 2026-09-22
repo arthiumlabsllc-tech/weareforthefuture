@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { img } from "@/lib/imageUrl";
-import { cardClasses } from "@/lib/ui/cardClasses";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import {
   ShoppingBag,
   Heart,
@@ -20,6 +20,13 @@ import {
   ExternalLink,
   ShoppingBag as CartIcon,
   CreditCard,
+  BookOpen,
+  BookOpenCheck,
+  Users,
+  MessagesSquare,
+  Mic,
+  PenLine,
+  House,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 
@@ -348,6 +355,74 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
               <p className="mt-2 text-sm text-text-secondary leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ===== BOOK CLUB ===== */}
+      <SectionWrapper
+        id="book-club"
+        background="cream"
+        className="scroll-mt-40 motion-reduce:opacity-100! motion-reduce:transform-none!"
+      >
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="max-w-[620px]">
+            <div aria-hidden="true" className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-subtle text-accent-text">
+              <BookOpen className="h-8 w-8" />
+            </div>
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary sm:text-4xl">
+              FTF Book Club
+            </h2>
+            <p className="mt-4 text-xl font-medium text-text-primary">
+              Read more without buying every book.
+            </p>
+            <div className="mt-6 space-y-4 text-base leading-[1.7] text-text-secondary">
+              <p>
+                The FTF Book Club is a space for children, teens, and adults who
+                want to read more - together. Members borrow, share, and discuss
+                books without needing to buy every title.
+              </p>
+              <p>
+                Activities include reading buddies for younger readers, guided
+                discussions, storytelling sessions, author and book conversations,
+                family reading sessions, and reading challenges throughout the year.
+              </p>
+              <p>
+                Participation supports FTF&apos;s wider work - every membership,
+                every shared book, and every conversation helps build a culture of
+                reading in our communities.
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="mt-8 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-cta px-6 py-3 text-sm font-semibold text-on-cta transition-colors duration-200 hover:bg-cta-hover motion-reduce:transition-none sm:w-auto"
+            >
+              Join the Book Club
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <p className="mt-3 text-sm text-text-secondary">
+              Contact our team about taking part.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-2xl font-semibold text-text-primary">
+              Ways to read together
+            </h3>
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+              {[
+                { label: "Reading buddies", icon: Users },
+                { label: "Guided discussions", icon: MessagesSquare },
+                { label: "Storytelling sessions", icon: Mic },
+                { label: "Author & book conversations", icon: PenLine },
+                { label: "Family reading sessions", icon: House },
+                { label: "Reading challenges", icon: BookOpenCheck },
+              ].map(({ label, icon: Icon }) => (
+                <li key={label} className={`${cardClasses} ${cardPadding.compact} flex items-center gap-4 motion-reduce:transition-none`}>
+                  <Icon className="h-6 w-6 shrink-0 text-accent-text" aria-hidden="true" />
+                  <span className="text-base font-semibold leading-relaxed text-text-primary">{label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </SectionWrapper>
 
