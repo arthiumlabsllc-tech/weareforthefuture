@@ -217,6 +217,7 @@ The FTF Village campaign card (HomeClient L162, DonateClient L272) is intentiona
 - 2026-09-21 - Phase 12 Step 4 (A2): card system unified. New --ftf-shadow-sm / --ftf-shadow-md tokens (blue-tinted in light, neutral in dark) mapped onto Tailwind shadow-sm / shadow-md via @theme inline; shared cardClasses + cardPadding exported from src/lib/ui/cardClasses.ts; every card surface adopts rounded-2xl + border-border + bg-surface + resting shadow-sm + hover bg-surface-hover/shadow-md with no transform >2px; ValueCard semantic tint preserved as a documented variant; ImpactGallery tiles rounded-xl -> rounded-2xl. §4 Card pattern codified.
 - 2026-09-22 - Phase 12 Step 4.5: legacy card sweep. The remaining card surfaces still on the old 4px-lift treatment (homepage pillar/story/priority, about explore, safeguarding, how-we-work, team/governance, volunteer, get-involved, impact-store, give) now spread cardClasses + cardPadding; how-we-work per-principle tint border documented as sanctioned variant (e); the orphaned /initiatives route (fully 308-redirected to /our-work) was deleted. No token changes.
 - 2026-09-22 - Phase 12 Step 5 (C2): JourneyStepper now shares one responsive ordered list on the homepage and /our-work. Transform-only fill, passive rAF scroll updates (minimum 16ms), cached geometry, 150ms debounced resize and full observer/frame/listener cleanup replace the 1.2s time-based draw. User-approved visible-sequence deviation: desktop progresses while the whole row is visible, activating nodes at fill milestones (horizontal nodes share one viewport height, so independent 50%-viewport observers would activate together); mobile fill and per-node IntersectionObservers follow node centers through 50% viewport height, with catch-up for restored scroll/fast jumps. Reached nodes stay active. Filled nodes use journey-node-active with the existing dark selection-text ink; no new tokens. A11y: one `<ol>`, seven `<h3>` headings prefixed "Step N of 7:", one `aria-current="step"` frontier, descriptions remain accessible. Reduced-motion and no-JS render all content and full fill; reduced-motion CSS forces zero transitions immediately. Campaign-card exception recorded in §4; campaign surfaces unchanged.
+- 2026-09-22 - Step 5 performance profile accepted and recorded in §8: headless rAF sampling baseline, accepted mobile dropped-frame markers, and a like-for-like ~100fps investigation threshold under 4× CPU throttle. No further optimization without measurable cause.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
 
@@ -244,6 +245,19 @@ Normative. All animation on the site must fit a pattern below; new patterns requ
 | Micro-interaction | hover/press/focus on buttons, cards, links | CSS transitions 150-250ms on color/background/box-shadow; transform shifts ≤ 2px |
 
 Journey timing (approved visible sequence): desktop 0% when the complete row clears the viewport bottom by 24px, 100% when its top reaches 160px (fixed-header clearance); node milestones follow the fill. Mobile 0%/100% when the first/last node centers cross the viewport midpoint; each node has a half-viewport IntersectionObserver. A geometry-based catch-up handles fast jumps/restored positions. Fill reverses on scroll-up; reached nodes do not. No pinning, count-ups or changes to native scrolling.
+
+#### Reference performance profile
+
+Verified headless (rAF sampling, no long tasks):
+- Desktop: 144fps
+- Mobile: 143fps
+- Mobile with 4× CPU throttling: 123fps
+
+Minor dropped-frame markers observed on throttled mobile during fast scroll - accepted. Scroll-linked transforms on mobile inherently drop occasional frames; the profile above maintains 2× headroom over 60fps under throttle. Do NOT over-optimize below this point without measurable cause.
+
+If a future change regresses below ~100fps under 4× throttle, investigate.
+
+Measurement note: these are rAF sampling rates in an approximately 144Hz headless environment, not rendered-frame rates or physical-device 60fps certification. The 2× comparison and ~100fps regression threshold apply only to like-for-like sampling. Dropped-frame markers also occurred on unthrottled mobile; occasional drops are accepted for this profile, not an unavoidable property of every mobile transform.
 
 ### Rules
 
