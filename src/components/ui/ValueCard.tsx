@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import * as Icons from "lucide-react";
+import { cardPadding } from "@/lib/ui/cardClasses";
 
 interface ValueCardProps {
   title: string;
@@ -69,8 +70,7 @@ export default function ValueCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -4 }}
-      className={`group relative rounded-2xl border ${colors.border} ${colors.bg} p-8 transition-shadow hover:shadow-xl hover:shadow-primary/5`}
+      className={`group relative rounded-2xl border ${colors.border} ${colors.bg} ${cardPadding.default} transition-shadow hover:shadow-md`}
     >
       <div
         className={`mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl ${colors.bg} ${colors.icon} transition-transform group-hover:scale-110`}

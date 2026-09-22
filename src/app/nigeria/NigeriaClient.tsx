@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import { img } from "@/lib/imageUrl";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import { pillars } from "@/data/pillars";
 import { executiveBoard } from "@/data/executiveBoard";
 import { siteConfig } from "@/data/site";
@@ -191,7 +192,7 @@ export default function NigeriaClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="rounded-2xl border border-border bg-surface p-6"
+                className={`${cardClasses} ${cardPadding.compact}`}
               >
                 <s.icon className="h-5 w-5 text-accent-text" aria-hidden="true" />
                 <div className="mt-3 font-[family-name:var(--font-display)] text-3xl font-bold text-text-primary">
@@ -222,7 +223,7 @@ export default function NigeriaClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+                className={`${cardClasses} group flex flex-col overflow-hidden`}
               >
                 <div className="relative aspect-[16/9] overflow-hidden bg-bg-tertiary">
                   <Image
@@ -399,7 +400,7 @@ export default function NigeriaClient() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.12 }}
-            className="rounded-2xl border border-border bg-surface p-8"
+            className={`${cardClasses} ${cardPadding.feature}`}
           >
             <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-text-primary">
               Nigeria-led governance
@@ -442,7 +443,7 @@ export default function NigeriaClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="rounded-2xl border border-border bg-surface p-7 text-center"
+              className={`${cardClasses} ${cardPadding.default} text-center`}
             >
               <div className="font-[family-name:var(--font-display)] text-4xl font-bold text-accent-text">
                 {s.value}

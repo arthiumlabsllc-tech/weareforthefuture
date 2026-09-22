@@ -118,6 +118,8 @@ Inline styles must reference `--ftf-pillar-N` (always emitted), never `--color-p
 | Token | Light | Dark | Where used |
 | --- | --- | --- | --- |
 | --ftf-shadow-color | rgba(73,73,73,0.08) | rgba(0,0,0,0.5) | card shadows |
+| --ftf-shadow-sm | 0 1px 2px rgba(57,115,184,0.05) | 0 1px 2px rgba(0,0,0,0.3) | card resting shadow (shadow-sm) |
+| --ftf-shadow-md | 0 4px 16px rgba(57,115,184,0.08) | 0 4px 16px rgba(0,0,0,0.5) | card hover shadow (shadow-md) |
 | --ftf-focus-ring | 0 0 0 3px rgba(57,115,184,0.35) | 0 0 0 3px rgba(127,169,220,0.5) | :focus-visible everywhere |
 | --ftf-scrollbar-track / -thumb | #EDF0F2 / #C6CDD2 | #1E2124 / #494949 | scrollbars |
 | --ftf-selection-bg / -text | #4CB64D / #0E2E0F | #4CB64D / #0E2E0F | ::selection |
@@ -164,7 +166,11 @@ Sand (#EFE9DD) fails WCAG AA for text-tertiary, text-muted, accent-text, and tru
   - ghost: text-text-secondary, hover bg-bg-tertiary
   - tertiary/text link: LearnMoreLink (accent-hover text + arrow)
   - destructive: error-token inline pattern (border-error/text-error or bg-error bg-error/10); no shared variant yet - do not invent one without approval
-- Cards: ValueCard (value props), ProgrammeCard (our-work), StatDisplay (impact numerals), story/report cards (rounded-2xl border-border bg-surface + shadow), ImpactGallery tiles (rounded-xl bg-bg-tertiary with skeleton), trust chips (TrustChips).
+- Cards (Phase 12 Step 4 unified treatment; shared classes in `src/lib/ui/cardClasses.ts`):
+  - Single surface treatment: `rounded-2xl` (= --radius-card), `border border-border`, `bg-surface`, resting `shadow-sm`, hover `bg-surface-hover` + `shadow-md`; focus-visible via the global :focus-visible ring (§1 System). Spread `cardClasses` on the card root and pick padding from `cardPadding` = compact p-6 / default p-7 / feature p-8.
+  - Motion: NO transform greater than 2px on cards - hover is a background + shadow change only, never a lift (see §8).
+  - Sanctioned variants: (a) default = cardClasses as-is; (b) semantic tint = ValueCard only, keeps its tinted border/bg (7-value colour discipline) but adopts the same radius, padding and hover shadow; (c) dashed empty-state = border-dashed, no hover; (d) media tile = ImpactGallery frame, rounded-2xl bg-bg-tertiary, no border.
+  - Consumers: ProgrammeCard, ValueCard, story cards (news/nigeria), report cards, partner logo tiles + partner cards, our-work pillar/country cards, impact metric/indicator cards, give route/project cards (/give). TrustChips is a chip strip on the sand band, not a card.
 - Chips: pillar chips (pillar-N accent or bg-accent-subtle + text-accent-text), category chips on news (bg-story-tag + text-story-tag-text), status pills (status-active/pilot/archived/campaign), trust chips (border-trust-border + trust-icon).
 - Forms: label text-xs font-semibold uppercase tracking-wider text-text-tertiary; input rounded-xl border-border-strong bg-surface py-3 px-4 text-sm, focus:border-accent + focus:ring-2 ring-accent/20; error alert rounded-xl border-error/20 bg-error/10 text-error; help text text-xs text-text-muted.
 - Navigation: Navbar (sticky desktop header + ThemeToggle), MobileMenu (right-side drawer, 56px rows, active row green left border), Footer (blue bg-primary band in both themes, white scoped override, link columns + contact).
@@ -203,6 +209,7 @@ Sand (#EFE9DD) fails WCAG AA for text-tertiary, text-muted, accent-text, and tru
 - 2026-09-21 - Warm neutral layer added (--ftf-cream #FAF7F1 / --ftf-sand #EFE9DD light; #16181A / #1E2124 dark) as additive background tokens alongside the cool paper layer; §1 table + §3 coexistence note updated. No existing token values changed.
 - 2026-09-21 - Phase 12 Step 2 (A1, revised): homepage hero rebuilt as a Givra-style split editorial hero (60/40) on --ftf-cream with a --ftf-sand trust strip. Left column static/LCP-safe (Playfair clamp H1, 55ch subhead, equal-height 56px CTA pair); right column is a campaign `<aside>` card showing FTF Village Phase One progress (GH₵125,000 of GH₵500,000 = 25%) sourced from siteConfig.donation, with a journey-track/accent progressbar (full ARIA) and card-only whileInView reveal (400ms, reduced-motion instant). V1 floating stat card + radial gradient removed. Two reusable patterns codified in §4 (Editorial hero split; Campaign card with progress). References supplied craft only - FTF palette, typography and content retained.
 - 2026-09-21 - Phase 12 Step 3 (A3): section rhythm alternation applied site-wide (15 page clients). SectionWrapper gains cream/sand backgrounds plus the §8 fade-rise entrance reveal; §3 alternation rule codified (cream baseline, sand accent, white contained, navy emphasis bands, no adjacent repeats). Homepage village block and /impact/ftf-at-10 timeline now use watermark-free Cloudinary crops of the Village render (c_crop transforms in src/lib/imageUrl.ts) pending a clean render from the founder.
+- 2026-09-21 - Phase 12 Step 4 (A2): card system unified. New --ftf-shadow-sm / --ftf-shadow-md tokens (blue-tinted in light, neutral in dark) mapped onto Tailwind shadow-sm / shadow-md via @theme inline; shared cardClasses + cardPadding exported from src/lib/ui/cardClasses.ts; every card surface adopts rounded-2xl + border-border + bg-surface + resting shadow-sm + hover bg-surface-hover/shadow-md with no transform >2px; ValueCard semantic tint preserved as a documented variant; ImpactGallery tiles rounded-xl -> rounded-2xl. §4 Card pattern codified.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
 

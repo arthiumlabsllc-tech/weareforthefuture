@@ -18,7 +18,7 @@ function Tile({ image, onOpen, className }: { image: GalleryImage; onOpen: () =>
       type="button"
       onClick={onOpen}
       aria-label={`Open photo: ${image.alt}`}
-      className={`group relative block overflow-hidden rounded-xl bg-bg-tertiary ${className ?? ""}`}
+      className={`group relative block overflow-hidden rounded-2xl bg-bg-tertiary ${className ?? ""}`}
     >
       {!loaded && <span aria-hidden="true" className="absolute inset-0 animate-pulse bg-bg-tertiary" />}
       <Image

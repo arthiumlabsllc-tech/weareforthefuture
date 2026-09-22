@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { img } from "@/lib/imageUrl";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import { ArrowRight, Heart } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import StatDisplay from "@/components/ui/StatDisplay";
@@ -83,7 +84,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="rounded-2xl border border-border bg-surface p-7"
+              className={`${cardClasses} ${cardPadding.default}`}
             >
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-text-secondary">
                 <metric.icon className="h-6 w-6" />
@@ -136,7 +137,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border bg-surface p-8">
+          <div className={`${cardClasses} ${cardPadding.feature}`}>
             <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-primary">
               Reading this chart
             </h3>
@@ -186,7 +187,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
               >
                 <Link
                   href={ind.href}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:border-accent hover:shadow-lg"
+                  className={`${cardClasses} group flex h-full flex-col ${cardPadding.compact}`}
                 >
                   <span className="text-xs font-semibold uppercase tracking-[0.15em] text-accent-text">
                     {ind.pillarTitle}
@@ -239,7 +240,7 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.5 }}
-              className="rounded-2xl bg-surface border border-border p-8"
+              className={`${cardClasses} ${cardPadding.feature}`}
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent-subtle text-accent-text">
                 <Heart className="h-6 w-6" />

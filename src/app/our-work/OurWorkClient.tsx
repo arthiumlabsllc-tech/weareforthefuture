@@ -19,6 +19,7 @@ import { pillars as staticPillars } from "@/data/pillars";
 import { siteConfig } from "@/data/site";
 import type { PillarData, PillarProgramme } from "@/lib/pillars";
 import { img } from "@/lib/imageUrl";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 
 /** Pillar accent colour (theme-aware): light values in light mode, brighter in dark. */
 const accentVar = (n: number) => `var(--ftf-pillar-${n})`;
@@ -177,7 +178,7 @@ export default function OurWorkClient({
             >
               <Link
                 href={`/our-work/${pillar.id}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border border-t-4 bg-surface p-6 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+                className={`${cardClasses} group relative flex h-full flex-col overflow-hidden border-t-4 ${cardPadding.compact}`}
                 style={{ borderTopColor: accentVar(pillar.number) }}
               >
                 {/* Ghost number - decorative */}
@@ -266,7 +267,7 @@ export default function OurWorkClient({
           description="FTF delivers programmes in Ghana and Nigeria. Our US 501(c)(3) is a funding vehicle that supports this work - not a third programme country."
         />
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} ${cardPadding.default}`}>
             <div className="flex items-center gap-3">
               <MapPin aria-hidden="true" className="h-5 w-5 text-accent-text" />
               <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-primary">Ghana</h3>
@@ -282,7 +283,7 @@ export default function OurWorkClient({
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} ${cardPadding.default}`}>
             <div className="flex items-center gap-3">
               <MapPin aria-hidden="true" className="h-5 w-5 text-accent-text" />
               <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-text-primary">Nigeria</h3>

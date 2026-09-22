@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import { img } from "@/lib/imageUrl";
+import { cardClasses } from "@/lib/ui/cardClasses";
 import { pillars } from "@/data/pillars";
 
 export interface NewsCategory {
@@ -415,7 +416,7 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05, duration: 0.4 }}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
+                  className={`${cardClasses} group flex flex-col overflow-hidden`}
                 >
                   <div className="relative aspect-[16/9] overflow-hidden bg-bg-tertiary">
                     <Image

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ProgrammeArtwork from "@/components/ui/ProgrammeArtwork";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import type { PillarProgramme } from "@/lib/pillars";
 
 /**
@@ -25,7 +26,7 @@ export default function ProgrammeCard({
   return (
     <Link
       href={`/our-work/${pillarId}/${encodeURIComponent(programme.slug)}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
+      className={`${cardClasses} group flex h-full flex-col overflow-hidden`}
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-bg-tertiary to-border">
         <ProgrammeArtwork image={programme.image} title={programme.name} />
@@ -35,7 +36,7 @@ export default function ProgrammeCard({
           </span>
         )}
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className={`flex flex-1 flex-col ${cardPadding.compact}`}>
         <h3 className="text-lg font-bold text-text-primary transition-colors group-hover:text-accent-text">
           {programme.name}
         </h3>

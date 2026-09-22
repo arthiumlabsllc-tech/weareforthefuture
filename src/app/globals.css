@@ -76,6 +76,8 @@
 
   /* Shadows */
   --ftf-shadow-color: rgba(73, 73, 73, 0.08);
+  --ftf-shadow-sm: 0 1px 2px rgba(57, 115, 184, 0.05);
+  --ftf-shadow-md: 0 4px 16px rgba(57, 115, 184, 0.08);
   --ftf-focus-ring: 0 0 0 3px rgba(57, 115, 184, 0.35);
   --ftf-scrollbar-track: #EDF0F2;
   --ftf-scrollbar-thumb: #C6CDD2;
@@ -179,6 +181,8 @@
 
   /* Shadows */
   --ftf-shadow-color: rgba(0, 0, 0, 0.5);
+  --ftf-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ftf-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
   --ftf-focus-ring: 0 0 0 3px rgba(127, 169, 220, 0.5);
   --ftf-scrollbar-track: #1E2124;
   --ftf-scrollbar-thumb: #494949;
@@ -260,6 +264,8 @@
 
   --color-surface: var(--ftf-surface);
   --color-surface-hover: var(--ftf-surface-hover);
+  --shadow-sm: var(--ftf-shadow-sm);
+  --shadow-md: var(--ftf-shadow-md);
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-secondary: var(--color-bg-secondary);
   --color-bg-tertiary: var(--color-bg-tertiary);

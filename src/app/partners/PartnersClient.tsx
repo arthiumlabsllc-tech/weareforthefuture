@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { img } from "@/lib/imageUrl";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import {
   ArrowRight,
   Handshake,
@@ -164,7 +165,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.06, duration: 0.45 }}
-              className="rounded-2xl border border-border bg-surface p-6"
+              className={`${cardClasses} ${cardPadding.compact}`}
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                 <c.icon className="h-5 w-5" />
@@ -175,7 +176,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
           ))}
         </div>
 
-        <dl className="mt-10 grid grid-cols-2 gap-6 rounded-2xl border border-border bg-surface p-8 text-center lg:grid-cols-4">
+        <dl className="mt-10 grid grid-cols-2 gap-6 rounded-2xl border border-border bg-surface p-8 text-center shadow-sm lg:grid-cols-4">
           {statStrip.map((s) => (
             <div key={s.label}>
               <dt className="sr-only">{s.label}</dt>
@@ -206,7 +207,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: (i % 5) * 0.05, duration: 0.4 }}
-              className="flex h-full flex-col rounded-2xl border border-border bg-surface p-5"
+              className={`${cardClasses} flex h-full flex-col ${cardPadding.compact}`}
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
                 <r.icon className="h-5 w-5" />
@@ -277,7 +278,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: (i % 8) * 0.04, duration: 0.35 }}
-              className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface p-6"
+              className={`${cardClasses} flex flex-col items-center justify-center gap-3 ${cardPadding.compact}`}
             >
               <Image
                 src={logo.image}
@@ -303,7 +304,7 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
       <SectionWrapper background="sand" id="deck">
         <div className="grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           {/* Deck */}
-          <div className="min-w-0 rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} min-w-0 ${cardPadding.default}`}>
             <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
               <FileDown className="h-6 w-6" />
             </span>

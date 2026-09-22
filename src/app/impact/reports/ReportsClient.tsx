@@ -15,6 +15,7 @@ import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import StatDisplay from "@/components/ui/StatDisplay";
 import { fundAllocation } from "@/data/impact";
 import { siteConfig } from "@/data/site";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import type { ReportDocument } from "@/lib/documents";
 
 /**
@@ -104,7 +105,7 @@ export default function ReportsClient({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, duration: 0.5 }}
-                className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6"
+                className={`${cardClasses} flex h-full flex-col ${cardPadding.compact}`}
               >
                 <div className="mb-4 flex items-center justify-between">
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-bg-tertiary text-accent-text">
@@ -239,7 +240,7 @@ export default function ReportsClient({
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Registration certificate */}
-          <div className="rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} ${cardPadding.default}`}>
             <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-accent-text">
               <Landmark className="h-6 w-6" aria-hidden="true" />
             </span>
@@ -270,7 +271,7 @@ export default function ReportsClient({
           </div>
 
           {/* Auditor statement */}
-          <div className="rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} ${cardPadding.default}`}>
             <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-accent-text">
               <ShieldCheck className="h-6 w-6" aria-hidden="true" />
             </span>
@@ -306,7 +307,7 @@ export default function ReportsClient({
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Safeguarding policy */}
-          <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} flex h-full flex-col ${cardPadding.default}`}>
             <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-success-bg text-success-text">
               <ShieldCheck className="h-6 w-6" aria-hidden="true" />
             </span>
@@ -329,7 +330,7 @@ export default function ReportsClient({
           </div>
 
           {/* Financial policy */}
-          <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-7">
+          <div className={`${cardClasses} flex h-full flex-col ${cardPadding.default}`}>
             <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-accent-text">
               <FileText className="h-6 w-6" aria-hidden="true" />
             </span>
