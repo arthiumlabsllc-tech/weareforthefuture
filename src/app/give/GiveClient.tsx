@@ -18,6 +18,7 @@ import {
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import { siteConfig } from "@/data/site";
 import { fundAllocation } from "@/data/impact";
+import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import type { ProgrammeIndicator } from "@/lib/pillars";
 import type { GivingCampaign } from "@/lib/give";
 
@@ -138,7 +139,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
                 >
                   <Link
                     href={route.href}
-                    className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-primary/5"
+                    className={`${cardClasses} group flex h-full flex-col ${cardPadding.default}`}
                   >
                     <div className="mb-4 flex items-center justify-between">
                       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-subtle text-accent-text">
@@ -267,7 +268,7 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
               >
                 <Link
                   href={`/give/${p.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
+                  className={`${cardClasses} group flex h-full flex-col ${cardPadding.default}`}
                 >
                   <span className="text-xs font-semibold uppercase tracking-[0.12em] text-accent-hover">
                     {p.pillarTitle}
