@@ -21,6 +21,7 @@ enum Role {
   EDITOR
   STORE_MANAGER
   VIEWER
+  SAFEGUARDING_OFFICER
 }
 
 model User {
@@ -43,6 +44,10 @@ model User {
   auditLogs       AuditLog[]     @relation("AuditActor")
   createdContent  ContentAudit[] @relation("ContentCreator")
   updatedContent  ContentAudit[] @relation("ContentUpdater")
+  createdCases    BeneficiaryCase[] @relation("CaseCreator")
+  updatedCases    BeneficiaryCase[] @relation("CaseUpdater")
+  reviewedCases   BeneficiaryCase[] @relation("CaseReviewer")
+  excessResolutions ExcessResolution[] @relation("ResolutionAdmin")
 
   @@index([email])
   @@index([role])
@@ -395,6 +400,7 @@ model Program {
 
   pillars         ProgramPillar[]
   posts           BlogPost[]
+  beneficiaryCases BeneficiaryCase[]
 
   @@index([slug])
   @@index([published])
@@ -423,6 +429,7 @@ model Pillar {
 
   programs     ProgramPillar[]
   posts        BlogPost[]
+  beneficiaryCases BeneficiaryCase[]
 
   @@index([slug])
   @@index([order])
@@ -778,16 +785,37 @@ model Donation {
   campaignId      String?
   supporterId     String?
   paymentStatus   String    @default("pending") // pending, paid, failed, refunded
-  paymentReference String?
+  paymentReference String?   @unique
   channel         String?
   anonymous       Boolean   @default(false)
+  beneficiaryCaseId String?
+  amountCreditedToCase Int   @default(0)
+  amountExcess    Int        @default(0)
+  refundStatus    String?
+  refundReference String?    @unique
+  refundedAt      DateTime?
+  refundNotes     String?    @db.Text
+  paidAt          DateTime?
+  refundDueAt     DateTime?
+  refundAuditedAt DateTime?
+  financialHoldAt DateTime?
+  financialHoldReason String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   deletedAt       DateTime?
 
   campaign  DonationCampaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
   supporter Supporter?        @relation(fields: [supporterId], references: [id], onDelete: SetNull)
+  beneficiaryCase BeneficiaryCase? @relation(fields: [beneficiaryCaseId], references: [id], onDelete: Restrict)
+  choiceTokens ExcessChoiceToken[]
+  excessResolution ExcessResolution?
+  ledgerEntries DonationLedgerEntry[]
+  notifications NotificationOutbox[]
 
+  @@index([beneficiaryCaseId])
+  @@index([refundStatus, refundDueAt])
+  @@index([financialHoldAt])
+  @@index([paidAt])
   @@index([campaignId])
   @@index([supporterId])
   @@index([paymentStatus])
@@ -949,6 +977,7 @@ model Supporter {
   orders        Order[]
   savedItems    SavedItem[]
   notifications SupporterNotification[]
+  supportPaymentIntents SupportPaymentIntent[]
 
   @@index([email])
 }
@@ -995,4 +1024,198 @@ model SupporterNotification {
 
   @@index([supporterId, read])
   @@index([createdAt])
+}
+
+// Support a Future: all amounts are integer pesewas. Financial rows are retained.
+model CasePublicIdCounter {
+  year       Int @id
+  nextNumber Int @default(1)
+}
+
+model BeneficiaryCase {
+  id                      String   @id @default(cuid())
+  publicId                String   @unique
+  firstName               String?
+  age                     Int?
+  region                  String
+  needType                String
+  needDescription         String   @db.Text
+  storyShort              String
+  storyFull               String   @db.Text
+  amountNeeded            Int
+  amountRaised            Int      @default(0)
+  amountOversubscribed     Int      @default(0)
+  photoUrl                String?
+  photoAssetId            String?
+  photoAlt                String?
+  pillarId                String?
+  programId               String?
+  consentGiven            Boolean  @default(false)
+  consentRecordedAt        DateTime?
+  consentExpiresAt         DateTime?
+  consentRevokedAt         DateTime?
+  consentEvidenceRef       String?
+  safeguardingApproved     Boolean  @default(false)
+  safeguardingApprovedAt   DateTime?
+  safeguardingApprovedBy   String?
+  revision                Int      @default(1)
+  approvedRevision        Int?
+  reviewStatus            String   @default("draft")
+  status                  String   @default("draft")
+  publishedAt             DateTime?
+  closesAt                DateTime?
+  fundedAt                DateTime?
+  createdBy               String?
+  updatedBy               String?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  deletedAt               DateTime?
+
+  pillar       Pillar? @relation(fields: [pillarId], references: [id], onDelete: Restrict)
+  program      Program? @relation(fields: [programId], references: [id], onDelete: Restrict)
+  creator      User? @relation("CaseCreator", fields: [createdBy], references: [id], onDelete: SetNull)
+  updater      User? @relation("CaseUpdater", fields: [updatedBy], references: [id], onDelete: SetNull)
+  reviewer     User? @relation("CaseReviewer", fields: [safeguardingApprovedBy], references: [id], onDelete: SetNull)
+  donations    Donation[]
+  intents      SupportPaymentIntent[]
+  redirects    ExcessResolution[]
+  ledgerEntries DonationLedgerEntry[]
+
+  @@index([status, consentGiven, safeguardingApproved, publishedAt])
+  @@index([closesAt])
+  @@index([pillarId])
+  @@index([programId])
+  @@index([createdAt])
+}
+
+model SupportPaymentIntent {
+  id                    String   @id @default(cuid())
+  reference             String   @unique
+  beneficiaryCaseId     String
+  amount                Int
+  currency              String   @default("GHS")
+  email                 String
+  donorName             String?
+  anonymous             Boolean  @default(false)
+  supporterId           String?
+  status                String   @default("created")
+  providerTransactionId String?  @unique
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  beneficiaryCase BeneficiaryCase @relation(fields: [beneficiaryCaseId], references: [id], onDelete: Restrict)
+  supporter Supporter? @relation(fields: [supporterId], references: [id], onDelete: SetNull)
+
+  @@index([beneficiaryCaseId])
+  @@index([supporterId])
+  @@index([status, createdAt])
+}
+
+model ExcessChoiceToken {
+  id            String   @id @default(cuid())
+  donationId    String
+  nonceHash     String   @unique
+  issuedAt      DateTime @default(now())
+  expiresAt     DateTime
+  consumedAt    DateTime?
+  revokedAt     DateTime?
+  resolutionId  String?
+
+  donation   Donation @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  resolution ExcessResolution? @relation("SelectedResolution", fields: [resolutionId], references: [id], onDelete: Restrict)
+  actedResolution ExcessResolution? @relation("ConsentToken")
+
+  @@index([donationId])
+  @@index([expiresAt])
+}
+
+model ExcessResolution {
+  id                String   @id @default(cuid())
+  donationId        String   @unique
+  choice            String
+  targetCaseId      String?
+  amount            Int
+  actorType         String
+  actorId           String?
+  actorTokenId      String?  @unique
+  consentText       String   @db.Text
+  consentVersion    String
+  consentAt         DateTime
+  consentEvidenceRef String?
+  state             String   @default("requested")
+  providerId        String?  @unique
+  attempts          Int      @default(0)
+  lastError         String?
+  leaseToken        String?
+  leaseUntil        DateTime?
+  nextAttemptAt     DateTime?
+  submittedAt       DateTime?
+  createdAt         DateTime @default(now())
+  completedAt       DateTime?
+
+  donation Donation @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  targetCase BeneficiaryCase? @relation(fields: [targetCaseId], references: [id], onDelete: Restrict)
+  actor User? @relation("ResolutionAdmin", fields: [actorId], references: [id], onDelete: SetNull)
+  actorToken ExcessChoiceToken? @relation("ConsentToken", fields: [actorTokenId], references: [id], onDelete: Restrict)
+  selectedTokens ExcessChoiceToken[] @relation("SelectedResolution")
+  ledgerEntries DonationLedgerEntry[]
+  notifications NotificationOutbox[]
+
+  @@index([targetCaseId])
+  @@index([state, nextAttemptAt])
+  @@index([leaseUntil])
+}
+
+model DonationLedgerEntry {
+  id                String   @id @default(cuid())
+  donationId        String
+  beneficiaryCaseId String?
+  resolutionId      String?
+  operationKey      String   @unique
+  kind              String
+  amount            Int
+  currency          String   @default("GHS")
+  createdAt         DateTime @default(now())
+
+  donation Donation @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  beneficiaryCase BeneficiaryCase? @relation(fields: [beneficiaryCaseId], references: [id], onDelete: Restrict)
+  resolution ExcessResolution? @relation(fields: [resolutionId], references: [id], onDelete: Restrict)
+
+  @@index([donationId])
+  @@index([beneficiaryCaseId])
+  @@index([resolutionId])
+  @@index([kind, createdAt])
+}
+
+model NotificationOutbox {
+  id               String   @id @default(cuid())
+  eventKey         String   @unique
+  donationId       String
+  resolutionId     String?
+  template         String
+  payloadEncrypted String?  @db.Text
+  expiresAt        DateTime?
+  state            String   @default("pending")
+  attempts         Int      @default(0)
+  nextAttemptAt    DateTime @default(now())
+  leaseToken       String?
+  leaseUntil       DateTime?
+  sentAt           DateTime?
+  lastError        String?
+  createdAt        DateTime @default(now())
+
+  donation Donation @relation(fields: [donationId], references: [id], onDelete: Restrict)
+  resolution ExcessResolution? @relation(fields: [resolutionId], references: [id], onDelete: Restrict)
+
+  @@index([donationId])
+  @@index([state, nextAttemptAt])
+  @@index([leaseUntil])
+}
+
+model SupportRateLimit {
+  key       String @id
+  count     Int @default(1)
+  expiresAt DateTime
+
+  @@index([expiresAt])
 }
