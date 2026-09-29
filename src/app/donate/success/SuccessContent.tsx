@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+/* eslint-disable @next/next/no-html-link-for-pages -- Receipt exits cross the private-document analytics boundary. */
+import { caseReceiptSchema, caseReceiptMessage, canCelebrateCaseReceipt, formatGhs, type CaseReceipt } from "@/lib/support-a-future/domain";
 import { chartColors, confettiColors } from "@/lib/chartColors";
 import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import { siteConfig } from "@/data/site";
@@ -20,6 +21,8 @@ interface VerifiedTransaction {
     last_name?: string;
   };
   gatewayResponse: string;
+  paymentKind: "case" | "donation" | "store";
+  caseReceipt: CaseReceipt | null;
 }
 
 const CELEBRATION_KEY = "ftf:donation-celebration:v1";
@@ -163,15 +166,17 @@ function VerifiedReceipt({ reference, isStore, transaction, celebrate }: {
   const date = transaction.paidAt ? new Date(transaction.paidAt) : null;
   const channel = typeof transaction.channel === "string" ? transaction.channel.replaceAll("_", " ") : "Not provided";
   const amount = new Intl.NumberFormat("en-GH", { style: "currency", currency: transaction.currency, currencyDisplay: "code" }).format(transaction.amount);
+  const caseReceipt = transaction.caseReceipt;
+  const allocation = caseReceipt?.allocation;
   const actionClass = "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-200 motion-reduce:transition-none! motion-reduce:duration-0!";
 
   return (
     <div data-celebration={playing ? "playing" : "static"} className={playing ? "celebration" : ""}>
       <h1 ref={headingRef} tabIndex={-1} className="rounded-lg font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
-        {isStore ? "Payment confirmed" : "Donation confirmed"}
+        {caseReceipt ? "Case payment record" : isStore ? "Payment confirmed" : "Donation confirmed"}
       </h1>
       <p className="mx-auto mt-4 max-w-lg text-base text-text-secondary">
-        {isStore ? "Your purchase supports our programmes. Thank you for being part of our community."
+        {caseReceipt ? caseReceiptMessage(caseReceipt) : isStore ? "Your purchase supports our programmes. Thank you for being part of our community."
           : "Your generosity supports learning, dignity and opportunity for children and young people."}
       </p>
 
@@ -182,7 +187,7 @@ function VerifiedReceipt({ reference, isStore, transaction, celebrate }: {
         </div>
         <div ref={cardRef} data-celebration-card className={`celebration-card relative z-10 ${cardClasses} ${cardPadding.feature} text-left`}>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-b border-border pb-6">
-            <h2 className="text-sm font-medium text-text-secondary">{isStore ? "Payment receipt" : "Donation receipt"}</h2>
+            <h2 className="text-sm font-medium text-text-secondary">{caseReceipt ? "Original payment" : isStore ? "Payment receipt" : "Donation receipt"}</h2>
             <p className="break-all text-3xl font-semibold tabular-nums tracking-tight text-text-primary">{amount}</p>
           </div>
           <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
@@ -196,13 +201,31 @@ function VerifiedReceipt({ reference, isStore, transaction, celebrate }: {
             </div>
             <div>
               <dt className="text-xs text-text-secondary">Status</dt>
-              <dd className="mt-1 font-semibold text-success-text">Successful</dd>
+              <dd className={`mt-1 font-semibold ${caseReceipt ? "text-text-primary" : "text-success-text"}`}>{caseReceipt ? "See allocation status" : "Successful"}</dd>
             </div>
             <div className="col-span-2">
               <dt className="text-xs text-text-secondary">Date</dt>
               <dd className="mt-1 text-text-primary">{date && Number.isFinite(date.getTime()) ? date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "Not provided"}</dd>
             </div>
           </dl>
+          {allocation && <section className="mt-6 border-t border-border pt-6" aria-labelledby="case-allocation-heading">
+            <h3 id="case-allocation-heading" className="font-semibold text-text-primary">Recorded allocation</h3>
+            <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-2">
+              {([
+                ["Original case credit", allocation.creditedAmount], ["Original excess", allocation.excessAmount],
+                ["Completed excess refund", allocation.refundedAmount], ["Completed consented redirects", allocation.redirectedAmount],
+                ["Excess still held", allocation.heldAmount], ["Retained funds (including held excess)", allocation.retainedAmount],
+                ["Allocated giving (excludes held excess)", allocation.allocatedAmount],
+              ] as const).map(([label, value]) => <div key={label}><dt className="text-text-secondary">{label}</dt>
+                <dd className="mt-1 tabular-nums text-text-primary">{value === null ? "Awaiting reconciliation" : formatGhs(value)}</dd></div>)}
+            </dl>
+            <p className="mt-4 text-sm text-text-secondary">Held excess is not allocated giving. Requested refunds are shown as completed only after provider confirmation.</p>
+            {allocation.heldAmount > 0 && !allocation.financialHold && !allocation.resolutionState && allocation.refundDueAt && <p className="mt-3 text-sm text-text-secondary">Choice deadline: {new Date(allocation.refundDueAt).toLocaleDateString("en-GB")}. If no choice is recorded, a daily process requests an excess refund after this date. Provider processing takes additional time.</p>}
+          </section>}
+          {caseReceipt && <div className="mt-6 flex flex-wrap gap-3 border-t border-border pt-4">
+            <button type="button" onClick={() => window.location.reload()} className={`${actionClass} border border-border text-text-primary hover:bg-surface-hover`}>Check current status</button>
+            <a href="/contact" className={`${actionClass} text-text-link underline`}>Contact FTF</a>
+          </div>}
           {email && <p className="mt-6 break-words border-t border-border pt-4 text-xs text-text-secondary">Payment email: {email}</p>}
         </div>
       </div>
@@ -214,18 +237,18 @@ function VerifiedReceipt({ reference, isStore, transaction, celebrate }: {
       <div data-celebration-actions onFocusCapture={() => setActionsRevealed(true)} className={`celebration-actions ${actionsRevealed ? "actions-revealed" : ""} mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap`}>
         {isStore ? (
           <>
-            <Link href="/impact-store" className={`${actionClass} bg-cta text-on-cta hover:bg-cta-hover`}>Continue shopping</Link>
-            <Link href="/" className={`${actionClass} text-text-primary hover:bg-bg-tertiary`}>Back to home</Link>
+            <a href="/impact-store" className={`${actionClass} bg-cta text-on-cta hover:bg-cta-hover`}>Continue shopping</a>
+            <a href="/" className={`${actionClass} text-text-primary hover:bg-bg-tertiary`}>Back to home</a>
           </>
         ) : (
           <>
             <button type="button" onClick={share} className={`${actionClass} border border-border bg-surface text-text-primary hover:bg-surface-hover`}>
               <Copy aria-hidden="true" className="h-4 w-4" /> Share your support
             </button>
-            <Link href="/impact" className={`${actionClass} bg-cta text-on-cta hover:bg-cta-hover`}>
-              See your impact <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-            <Link href="/give" className={`${actionClass} text-accent-text hover:bg-bg-tertiary`}>Give again</Link>
+            <a href="/impact" className={`${actionClass} bg-cta text-on-cta hover:bg-cta-hover`}>
+              {caseReceipt ? "Explore FTF’s work" : "See your impact"} <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </a>
+            <a href="/give" className={`${actionClass} text-accent-text hover:bg-bg-tertiary`}>Give again</a>
           </>
         )}
       </div>
@@ -289,16 +312,21 @@ function VerificationResult({ reference, isStore }: { reference: string; isStore
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ reference }),
           signal: controller.signal,
+          cache: "no-store",
         });
         const data = await res.json();
         if (controller.signal.aborted) return;
-        if (res.ok && data.success === true && data.verified === true && data.status === "success"
-          && typeof data.amount === "number" && Number.isFinite(data.amount) && data.amount > 0
+        const caseReceipt = data.paymentKind === "case" ? caseReceiptSchema.parse(data.caseReceipt) : null;
+        if (res.ok && data.success === true && data.verified === true && (data.status === "success" || caseReceipt?.state === "allocated")
+          && ["case", "donation", "store"].includes(data.paymentKind)
+          && typeof data.amount === "number" && Number.isSafeInteger(data.amount) && data.amount > 0
+          && (!caseReceipt?.allocation || caseReceipt.allocation.originalAmount === data.amount)
           && typeof data.currency === "string" && /^[A-Z]{3}$/.test(data.currency)) {
+          const eligible = data.paymentKind === "donation" || (caseReceipt && canCelebrateCaseReceipt(caseReceipt));
           setState({
             kind: "verified",
-            transaction: { ...data, amount: data.amount / 100 },
-            celebrate: claimCelebration(isStore),
+            transaction: { ...data, caseReceipt, amount: data.amount / 100 },
+            celebrate: !!eligible && claimCelebration(data.paymentKind === "store"),
           });
         } else {
           setState({ kind: "pending", message: "We couldn't verify this transaction. Your payment may still be processing. Please contact us with your reference before trying again." });
@@ -316,7 +344,7 @@ function VerificationResult({ reference, isStore }: { reference: string; isStore
   return (
     <div className="mx-auto max-w-[620px] text-center" data-verification={state.kind}>
       <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
-        {state.kind === "verified" ? (isStore ? "Payment confirmed. Your purchase was successful." : "Donation confirmed. Thank you for your generosity.")
+        {state.kind === "verified" ? (state.transaction.caseReceipt ? caseReceiptMessage(state.transaction.caseReceipt) : state.transaction.paymentKind === "store" ? "Payment confirmed. Your purchase was successful." : "Donation confirmed. Thank you for your generosity.")
           : state.kind === "loading" ? "Verifying your payment." : state.message}
       </p>
       {state.kind === "loading" && (
@@ -332,14 +360,14 @@ function VerificationResult({ reference, isStore }: { reference: string; isStore
           <p className="mt-4 text-text-secondary">{state.message}</p>
           {reference && <p className="mt-6 break-all text-sm text-text-secondary">Reference: <span className="font-mono">{reference}</span></p>}
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-cta px-6 py-3 text-sm font-semibold text-on-cta hover:bg-cta-hover">
+            <a href="/contact" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-cta px-6 py-3 text-sm font-semibold text-on-cta hover:bg-cta-hover">
               <Mail aria-hidden="true" className="h-4 w-4" /> Contact support
-            </Link>
-            <Link href="/" className="inline-flex min-h-11 items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-text-primary hover:bg-bg-tertiary">Back to home</Link>
+            </a>
+            <a href="/" className="inline-flex min-h-11 items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-text-primary hover:bg-bg-tertiary">Back to home</a>
           </div>
         </div>
       )}
-      {state.kind === "verified" && <VerifiedReceipt reference={reference} isStore={isStore} transaction={state.transaction} celebrate={state.celebrate} />}
+      {state.kind === "verified" && <VerifiedReceipt reference={reference} isStore={state.transaction.paymentKind === "store"} transaction={state.transaction} celebrate={state.celebrate} />}
     </div>
   );
 }

@@ -4,10 +4,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, ShoppingBag, Bookmark, TrendingUp, ArrowRight } from "lucide-react";
+import type { CaseAllocation } from "@/lib/support-a-future/domain";
+
+type Donation = { id: string; amount: number; currency: string; paymentStatus: string; createdAt: string;
+  retainedGivingAmount: number | null; caseAllocation: CaseAllocation | null };
+type GivingTotal = { currency: string; amount: number; unreconciledCount: number };
 
 export default function DashboardPage() {
   const [profile, setProfile] = useState<{ name: string } | null>(null);
-  const [donations, setDonations] = useState<any[]>([]);
+  const [donations, setDonations] = useState<Donation[]>([]);
+  const [givingTotals, setGivingTotals] = useState<GivingTotal[] | null>(null);
   const [orderCount, setOrderCount] = useState(0);
   const [savedCount, setSavedCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -17,7 +23,7 @@ export default function DashboardPage() {
       try {
         const [profileRes, donationsRes, ordersRes, savedRes] = await Promise.all([
           fetch("/api/supporter/profile"),
-          fetch("/api/supporter/donations"),
+          fetch("/api/supporter/donations", { cache: "no-store" }),
           fetch("/api/supporter/orders"),
           fetch("/api/supporter/saved"),
         ]);
@@ -29,6 +35,7 @@ export default function DashboardPage() {
         ]);
         setProfile(profileData.supporter);
         setDonations(donationsData.donations);
+        setGivingTotals(donationsRes.ok && Array.isArray(donationsData.totals) ? donationsData.totals : null);
         setOrderCount(ordersData.orders.length);
         setSavedCount(savedData.savedItems.length);
       } catch (err) {
@@ -48,8 +55,6 @@ export default function DashboardPage() {
     );
   }
 
-  const totalDonated = donations.reduce((sum: number, d: any) => sum + d.amount, 0);
-
   return (
     <div className="min-h-[60vh] bg-bg-primary lg:pl-64">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
@@ -65,8 +70,10 @@ export default function DashboardPage() {
             <div className="flex items-center gap-3">
               <div className="rounded-xl bg-bg-primary p-2.5 text-rose-500"><Heart className="h-5 w-5" /></div>
               <div>
-                <p className="text-xs font-medium text-text-muted">Total Donated</p>
-                <p className="text-xl font-bold text-text-primary">GHS {(totalDonated / 100).toFixed(2)}</p>
+                <p className="text-xs font-medium text-text-secondary">Retained giving</p>
+                {givingTotals === null ? <p className="text-sm text-warning-text">Currently unavailable</p>
+                  : givingTotals.length === 0 ? <p className="text-xl font-bold text-text-primary">GHS 0.00</p>
+                    : givingTotals.map((total) => <p key={total.currency} className="text-xl font-bold tabular-nums text-text-primary">{total.currency} {(total.amount / 100).toFixed(2)}</p>)}
               </div>
             </div>
           </Link>
@@ -90,6 +97,9 @@ export default function DashboardPage() {
           </Link>
         </div>
 
+        <p className="mb-6 text-sm text-text-secondary">Retained giving excludes completed refunds, pending payments, and unallocated case excess. Consented redirects are counted once.
+          {givingTotals?.some((total) => total.unreconciledCount > 0) && " Gifts awaiting finance reconciliation are also excluded; these totals are incomplete until resolved."}
+        </p>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="rounded-2xl bg-surface border border-border p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-text-primary">Recent Donations</h2>
@@ -97,16 +107,18 @@ export default function DashboardPage() {
               View all <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
-          {donations.length === 0 ? (
+          {givingTotals === null ? <p role="status" className="py-8 text-sm text-warning-text">Donation history could not be loaded. Reload this page to try again.</p> : donations.length === 0 ? (
             <p className="py-8 text-center text-sm text-text-muted">
               No donations yet. <Link href="/donate" className="text-primary hover:underline">Make your first donation</Link>
             </p>
           ) : (
             <div className="space-y-3">
-              {donations.slice(0, 5).map((d: any) => (
+              {donations.slice(0, 5).map((d) => (
                 <div key={d.id} className="flex items-center justify-between rounded-xl bg-bg-primary px-4 py-3">
                   <div>
-                    <p className="text-sm font-medium text-text-primary">GHS {(d.amount / 100).toFixed(2)}</p>
+                    <p className="text-sm font-medium tabular-nums text-text-primary">{d.currency} {(d.amount / 100).toFixed(2)} original</p>
+                    <p className="text-xs text-text-secondary">{d.retainedGivingAmount === null ? "Awaiting finance reconciliation" : `${d.currency} ${(d.retainedGivingAmount / 100).toFixed(2)} retained giving`}</p>
+                    {d.caseAllocation && <p className="text-xs text-text-secondary">Support a Future{d.caseAllocation.refundedAmount > 0 ? " - excess refunded" : d.caseAllocation.heldAmount > 0 ? " - excess held" : ""}</p>}
                     <p className="text-xs text-text-muted">{new Date(d.createdAt).toLocaleDateString()}</p>
                   </div>
                   <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${d.paymentStatus === "paid" ? "bg-green-500/10 text-green-600" : "bg-amber-500/10 text-amber-600"}`}>

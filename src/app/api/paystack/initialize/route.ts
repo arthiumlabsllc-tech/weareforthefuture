@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initializeTransaction } from "@/lib/paystack";
+import { hasCaseMetadata } from "@/lib/support-a-future/payments";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { email, amount, metadata, channels, phone } = body;
+    if (hasCaseMetadata(metadata) || "beneficiaryCaseId" in body || body.type === "support-a-future") {
+      return NextResponse.json({ error: "Case giving requires its dedicated checkout." }, { status: 400 });
+    }
 
     if (!email || !amount || amount <= 0) {
       return NextResponse.json(

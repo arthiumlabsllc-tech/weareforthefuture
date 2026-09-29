@@ -22,7 +22,8 @@ export async function initializeTransaction(
   amountInPesewas: number,
   metadata?: Record<string, unknown>,
   channels?: string[],
-  phone?: string
+  phone?: string,
+  reference?: string
 ): Promise<PaystackTransaction> {
   const payload: Record<string, unknown> = {
     email,
@@ -40,6 +41,8 @@ export async function initializeTransaction(
     },
   };
 
+  if (reference) payload.reference = reference;
+
   if (channels && channels.length > 0) {
     payload.channels = channels;
   }
@@ -55,6 +58,8 @@ export async function initializeTransaction(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    cache: "no-store",
+    signal: AbortSignal.timeout(15_000),
   });
 
   const data = await response.json();
@@ -77,6 +82,8 @@ export async function verifyTransaction(reference: string) {
       headers: {
         Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
       },
+      cache: "no-store",
+      signal: AbortSignal.timeout(15_000),
     }
   );
 
@@ -88,6 +95,9 @@ export async function verifyTransaction(reference: string) {
 
   return {
     status: data.data.status,
+    reference: data.data.reference,
+    providerTransactionId: data.data.id,
+    metadata: data.data.metadata,
     amount: data.data.amount,
     currency: data.data.currency,
     paidAt: data.data.paid_at,

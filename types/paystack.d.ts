@@ -23,7 +23,22 @@ declare module "@paystack/inline-js" {
     cancel: () => void;
   }
 
+  interface ResumedTransaction {
+    getStatus(): { status: string | null; id?: string; checkoutUrl?: string };
+  }
+
+  interface PaystackInstance {
+    resumeTransaction(accessCode: string, callbacks: {
+      onSuccess?: (response: { reference: string }) => void;
+      onCancel?: () => void;
+      onError?: (error: { message: string }) => void;
+      onLoad?: () => void;
+    }): ResumedTransaction;
+    cancelTransaction(transaction: ResumedTransaction): void;
+  }
+
   interface PaystackPopClass {
+    new (): PaystackInstance;
     setup(config: PaystackPopConfig): PaystackTransaction;
     newTransaction(config: PaystackPopConfig): Promise<PaystackTransaction>;
   }

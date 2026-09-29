@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import type { CaseAllocation } from "@/lib/support-a-future/domain";
 
 interface Donation {
   id: string;
@@ -11,23 +12,25 @@ interface Donation {
   anonymous: boolean;
   createdAt: string;
   campaign: { name: string; slug: string } | null;
+  caseAllocation: CaseAllocation | null;
+  retainedGivingAmount: number | null;
 }
 
 export default function DonationsPage() {
   const [donations, setDonations] = useState<Donation[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchDonations() {
       try {
-        const res = await fetch("/api/supporter/donations");
-        if (res.ok) {
-          const data = await res.json();
-          setDonations(data.donations);
-        }
-      } catch (err) {
-        console.error("Fetch donations error:", err);
+        const res = await fetch("/api/supporter/donations", { cache: "no-store" });
+        if (!res.ok) throw new Error("History unavailable");
+        const data = await res.json();
+        setDonations(data.donations);
+      } catch {
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -60,17 +63,19 @@ export default function DonationsPage() {
             Donation History
           </h1>
           <p className="mt-1 text-sm text-text-secondary">
-            Track all your contributions to For The Future.
+            Original payments are shown separately from retained giving. Completed refunds, pending payments, and held excess are excluded from retained giving. Gifts awaiting reconciliation have no confirmed current balance.
           </p>
         </motion.div>
 
         {/* Filters */}
-        <div className="mb-6 flex gap-2">
-          {["all", "paid", "pending"].map((f) => (
+        <div className="mb-6 flex flex-wrap gap-2">
+          {["all", "paid", "pending", "refunded"].map((f) => (
             <button
               key={f}
+              type="button"
+              aria-pressed={filter === f}
               onClick={() => setFilter(f)}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`min-h-11 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                 filter === f
                   ? "bg-primary text-text-on-primary"
                   : "bg-surface text-text-secondary border border-border hover:bg-bg-primary"
@@ -82,23 +87,24 @@ export default function DonationsPage() {
         </div>
 
         {/* Table */}
-        {filtered.length === 0 ? (
+        {error ? <p role="status" className="rounded-2xl border border-border bg-surface p-6 text-warning-text">Donation history is unavailable. Reload this page to try again.</p> : filtered.length === 0 ? (
           <div className="rounded-2xl bg-surface border border-border p-12 text-center">
             <p className="text-text-muted">No donations found.</p>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl bg-surface border border-border">
+          <div className="overflow-x-auto rounded-2xl bg-surface border border-border" role="region" aria-label="Donation history table" tabIndex={0}>
             <table className="w-full">
+              <caption className="sr-only">Original payments, retained giving, designations, and payment status</caption>
               <thead>
                 <tr className="border-b border-border bg-bg-primary">
                   <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
                     Date
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
-                    Amount
+                    Original amount / retained giving
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
-                    Campaign
+                    Designation
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
                     Status
@@ -112,10 +118,14 @@ export default function DonationsPage() {
                       {new Date(d.createdAt).toLocaleDateString()}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-text-primary">
-                      {d.currency} {(d.amount / 100).toFixed(2)}
+                      <p className="tabular-nums">{d.currency} {(d.amount / 100).toFixed(2)} original</p>
+                      <p className="mt-1 text-xs font-normal text-text-secondary">{d.retainedGivingAmount === null ? "Awaiting reconciliation" : `${d.currency} ${(d.retainedGivingAmount / 100).toFixed(2)} retained giving`}</p>
+                      {d.caseAllocation && <p className="mt-1 text-xs font-normal text-text-secondary">
+                        {d.currency} {(d.caseAllocation.refundedAmount / 100).toFixed(2)} refunded · {d.currency} {(d.caseAllocation.heldAmount / 100).toFixed(2)} held
+                      </p>}
                     </td>
                     <td className="px-6 py-4 text-sm text-text-secondary">
-                      {d.campaign?.name || "General"}
+                      {d.caseAllocation ? "Support a Future" : d.campaign?.name || "General"}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       <span

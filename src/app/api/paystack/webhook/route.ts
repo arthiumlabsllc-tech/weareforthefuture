@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/db";
 import { sendOrderConfirmation, sendAdminNotification } from "@/lib/email";
+import { finalizeCasePayment, isCasePayment } from "@/lib/support-a-future/payments";
+import { handleDisputeEvent, handleRefundEvent } from "@/lib/support-a-future/refunds";
+import { dispatchNotifications } from "@/lib/support-a-future/notifications";
+import { z } from "zod";
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || "";
 
@@ -17,10 +21,11 @@ function verifySignature(body: string, signature: string): boolean {
     .update(body)
     .digest("hex");
 
-  return computedHash === signature;
+  if (!/^[a-f0-9]{128}$/i.test(signature)) return false;
+  return crypto.timingSafeEqual(Buffer.from(computedHash, "hex"), Buffer.from(signature, "hex"));
 }
 
-export async function POST(request: NextRequest) {
+async function handleWebhook(request: NextRequest) {
   // Read raw body as text (needed for signature verification)
   const rawBody = await request.text();
   const signature = request.headers.get("x-paystack-signature") || "";
@@ -44,16 +49,23 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const eventType = event.event as string;
-
-  // Log every event for debugging
-  console.log(`[Paystack Webhook] Event: ${eventType}`, {
-    reference: (event.data as Record<string, unknown>)?.reference,
-    amount: (event.data as Record<string, unknown>)?.amount,
-    email: ((event.data as Record<string, unknown>)?.customer as Record<string, unknown>)?.email,
-    paid_at: (event.data as Record<string, unknown>)?.paid_at,
-    channel: (event.data as Record<string, unknown>)?.channel,
-  });
+  const shape = z.object({ event: z.string().max(100), data: z.record(z.string(), z.unknown()) }).safeParse(event);
+  if (!shape.success) return NextResponse.json({ error: "Invalid event" }, { status: 400 });
+  const eventType = shape.data.event;
+  if (["refund.pending", "refund.processing", "refund.processed", "refund.failed", "refund.needs-attention"].includes(eventType)) {
+    await handleRefundEvent(shape.data.data);
+    after(async () => { try { await dispatchNotifications(); } catch { /* Durable outbox retries on the scheduled sweep. */ } });
+    return NextResponse.json({ received: true });
+  }
+  if (["charge.dispute.create", "charge.dispute.remind", "charge.dispute.resolve"].includes(eventType)) {
+    await handleDisputeEvent(shape.data.data);
+    after(async () => { try { await dispatchNotifications(); } catch { /* Retry from the durable outbox. */ } });
+    return NextResponse.json({ received: true });
+  }
+  if (["charge.success", "charge.failed"].includes(eventType) &&
+      !z.string().regex(/^[A-Za-z0-9._=-]{1,100}$/).safeParse(shape.data.data.reference).success) {
+    return NextResponse.json({ error: "Invalid reference" }, { status: 400 });
+  }
 
   // Handle successful charges
   if (eventType === "charge.success") {
@@ -63,6 +75,14 @@ export async function POST(request: NextRequest) {
     const customFields = metadata?.custom_fields as Array<Record<string, unknown>> | undefined;
 
     const reference = data.reference as string;
+    if (await isCasePayment(reference, metadata)) {
+      const donation = await finalizeCasePayment(reference);
+      after(async () => { try { await dispatchNotifications({ donationId: donation.id }); } catch { /* Retry from the outbox. */ } });
+      return NextResponse.json({ received: true });
+    }
+    if (!Number.isSafeInteger(data.amount) || (data.amount as number) <= 0 || (data.amount as number) > 2_147_483_647) {
+      return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+    }
 
     // Try to find and update an existing order by payment reference
     const existingOrder = await prisma.order.findFirst({
@@ -70,17 +90,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingOrder) {
+      if (existingOrder.total !== data.amount || existingOrder.currency !== data.currency) {
+        return NextResponse.json({ error: "Payment mismatch" }, { status: 409 });
+      }
+      const claimed = await prisma.order.updateMany({ where: { id: existingOrder.id, paymentStatus: { notIn: ["paid", "refunded"] } },
+        data: { paymentStatus: "paid", paidAt: new Date(data.paid_at as string || Date.now()), channel: data.channel as string } });
+      if (!claimed.count) return NextResponse.json({ received: true });
       // Update order to paid
-      const updatedOrder = await prisma.order.update({
-        where: { id: existingOrder.id },
-        data: {
-          paymentStatus: "paid",
-          paidAt: new Date(data.paid_at as string || Date.now()),
-          channel: data.channel as string,
-        },
-      });
-
-      console.log(`[Paystack Webhook] Order ${updatedOrder.orderId} marked as paid`);
+      const updatedOrder = await prisma.order.findUniqueOrThrow({ where: { id: existingOrder.id } });
 
       // Send email notifications
       const orderItems = typeof updatedOrder.items === "string"
@@ -127,15 +144,11 @@ export async function POST(request: NextRequest) {
 
       // Idempotency: Paystack retries webhooks, so never record the same
       // reference twice.
-      const existingDonation = await prisma.donation.findFirst({
+      const existingDonation = await prisma.donation.findUnique({
         where: { paymentReference: reference },
       });
 
-      if (existingDonation) {
-        console.log(
-          `[Paystack Webhook] Donation already recorded for reference ${reference}`
-        );
-      } else {
+      if (!existingDonation) {
         // Link the donation to a supporter account when the email matches.
         const supporter = donorEmail
           ? await prisma.supporter.findUnique({
@@ -143,8 +156,10 @@ export async function POST(request: NextRequest) {
             })
           : null;
 
-        const donation = await prisma.donation.create({
-          data: {
+        await prisma.donation.upsert({
+          where: { paymentReference: reference },
+          update: {},
+          create: {
             donorName: anonymous ? null : donorName,
             donorEmail,
             amount,
@@ -157,9 +172,6 @@ export async function POST(request: NextRequest) {
           },
         });
 
-        console.log(
-          `[Paystack Webhook] Donation ${donation.id} recorded (${amount / 100} GHS)`
-        );
       }
     }
   }
@@ -169,28 +181,29 @@ export async function POST(request: NextRequest) {
     const data = event.data as Record<string, unknown>;
     const reference = data.reference as string;
 
-    console.log("[Paystack Webhook] Failed charge:", {
-      reference,
-      amount: data.amount,
-      email: (data.customer as Record<string, unknown>)?.email,
-      gateway_response: data.gateway_response,
-    });
-
     // Update order status to failed if it exists
     const existingOrder = await prisma.order.findFirst({
       where: { paymentReference: reference },
     });
 
     if (existingOrder && existingOrder.paymentStatus !== "paid") {
-      await prisma.order.update({
-        where: { id: existingOrder.id },
+      await prisma.order.updateMany({
+        where: { id: existingOrder.id, paymentStatus: { notIn: ["paid", "refunded"] } },
         data: { paymentStatus: "failed" },
       });
-      console.log(`[Paystack Webhook] Order ${existingOrder.orderId} marked as failed`);
     }
   }
 
   // Always return 200 to acknowledge receipt (Paystack requirement)
   // Returning non-200 causes Paystack to retry the webhook
   return NextResponse.json({ received: true });
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    return await handleWebhook(request);
+  } catch {
+    // Acknowledgment follows durable accounting; failures ask Paystack to retry.
+    return NextResponse.json({ error: "Payment processing is pending" }, { status: 503 });
+  }
 }
