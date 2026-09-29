@@ -5,7 +5,7 @@ import type { AdminSession } from "./admin-auth";
 // ROLE PERMISSIONS
 // ============================================
 
-type Permission =
+export type Permission =
   | "dashboard.view"
   | "blog.manage"
   | "stories.manage"
@@ -25,7 +25,13 @@ type Permission =
   | "newsletter.manage"
   | "users.manage"
   | "settings.manage"
-  | "audit.view";
+  | "audit.view"
+  | "cases.view"
+  | "cases.edit"
+  | "cases.review"
+  | "cases.publish"
+  | "refunds.view"
+  | "refunds.manage";
 
 const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   SUPER_ADMIN: [
@@ -34,6 +40,7 @@ const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     "programs.manage", "pages.edit", "products.manage", "orders.manage",
     "shipping.manage", "donations.view", "campaigns.manage", "messages.manage",
     "newsletter.manage", "users.manage", "settings.manage", "audit.view",
+    "cases.view", "cases.edit", "cases.review", "cases.publish", "refunds.view", "refunds.manage",
   ],
   ADMIN: [
     "dashboard.view", "blog.manage", "stories.manage", "team.manage",
@@ -41,15 +48,19 @@ const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     "programs.manage", "pages.edit", "products.manage", "orders.manage",
     "shipping.manage", "donations.view", "campaigns.manage", "messages.manage",
     "newsletter.manage", "audit.view",
+    "cases.view", "cases.edit", "cases.publish", "refunds.view", "refunds.manage",
   ],
   EDITOR: [
-    "dashboard.view", "blog.manage", "stories.manage",
+    "dashboard.view", "blog.manage", "stories.manage", "cases.view", "cases.edit",
   ],
   STORE_MANAGER: [
     "dashboard.view", "products.manage", "orders.manage", "shipping.manage",
   ],
   VIEWER: [
     "dashboard.view",
+  ],
+  SAFEGUARDING_OFFICER: [
+    "cases.view", "cases.review",
   ],
 };
 
@@ -81,10 +92,26 @@ export const ROUTE_PERMISSIONS: Record<string, Permission> = {
   "/admin/shipping": "shipping.manage",
   "/admin/donations": "donations.view",
   "/admin/campaigns": "campaigns.manage",
+  "/admin/beneficiary-cases": "cases.view",
+  "/admin/beneficiary-cases/new": "cases.edit",
+  "/admin/refunds": "refunds.view",
   "/admin/messages": "messages.manage",
   "/admin/volunteers": "messages.manage",
   "/admin/newsletter": "newsletter.manage",
   "/admin/users": "users.manage",
   "/admin/settings": "settings.manage",
   "/admin/activity": "audit.view",
+  "/admin/supporters": "donations.view",
+  "/admin/impact-stats": "pages.edit",
+  "/admin/testimonials": "pages.edit",
 };
+
+export function adminRoutePermission(pathname: string): Permission | null {
+  const route = Object.keys(ROUTE_PERMISSIONS).sort((a, b) => b.length - a.length)
+    .find((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  return route ? ROUTE_PERMISSIONS[route] : null;
+}
+
+export function adminHome(role: string) {
+  return role === "SAFEGUARDING_OFFICER" ? "/admin/beneficiary-cases" : "/admin/dashboard";
+}

@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keep RSC headers visible to the privacy proxy so sensitive entry uses a new document.
+  skipProxyUrlNormalize: true,
   // Bake the deployment context into the client bundle at BUILD time so client
   // components can show a clear "preview" notice. VERCEL_ENV itself must never be
   // read in a client component (it is undefined there); Vercel sets VERCEL_ENV

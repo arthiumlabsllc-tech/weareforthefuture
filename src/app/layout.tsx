@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import AnalyticsBoundary from "@/components/layout/AnalyticsBoundary";
 import "./globals.css";
 import PublicShell from "@/components/layout/PublicShell";
 import BottomShell from "@/components/layout/BottomShell";
-import GA4Script from "@/components/layout/GA4Script";
 import Script from "next/script";
 
 const inter = Inter({
@@ -113,13 +112,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <BottomShell />
-        <Analytics />
         {/* GA4 mounts only on the production deployment (VERCEL_ENV=production).
             On Vercel preview/branch builds and locally this is never rendered, so
             no gtag.js request fires and preview traffic cannot pollute prod
             analytics. The consent + NEXT_PUBLIC_GA4_ID gates inside GA4Script are
             the second and third layers. */}
-        {process.env.VERCEL_ENV === "production" && <GA4Script />}
+        <AnalyticsBoundary enableGa4={process.env.VERCEL_ENV === "production"} />
       </body>
     </html>
   );

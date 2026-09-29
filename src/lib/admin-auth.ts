@@ -3,9 +3,11 @@ import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import type { Role } from "@prisma/client";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.ADMIN_JWT_SECRET || "ftf-admin-jwt-secret-change-me"
-);
+function adminSigningKey() {
+  const secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret || Buffer.byteLength(secret) < 32 || /change.me|replace.me/i.test(secret)) throw new Error("Admin authentication is unavailable");
+  return new TextEncoder().encode(secret);
+}
 
 const SESSION_COOKIE = "ftf-admin-session";
 const SESSION_MAX_AGE = 30 * 60; // 30 minutes in seconds
@@ -41,14 +43,15 @@ export async function createSessionToken(session: AdminSession): Promise<string>
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(`${SESSION_MAX_AGE}s`)
-    .sign(JWT_SECRET);
+    .sign(adminSigningKey());
 }
 
 export async function verifySessionToken(
   token: string
 ): Promise<AdminSession | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, adminSigningKey(), { algorithms: ["HS256"], requiredClaims: ["iat", "exp"] });
+    if (typeof payload.userId !== "string" || typeof payload.email !== "string" || typeof payload.role !== "string") return null;
     return {
       userId: payload.userId as string,
       email: payload.email as string,
@@ -80,7 +83,16 @@ export async function getSessionFromCookie(): Promise<AdminSession | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  return verifySessionToken(token);
+  return getActiveAdminSession(token);
+}
+
+export async function getActiveAdminSession(token: string): Promise<AdminSession | null> {
+  const session = await verifySessionToken(token);
+  if (!session) return null;
+  const { prisma } = await import("./db");
+  const user = await prisma.user.findFirst({ where: { id: session.userId, suspended: false, deletedAt: null },
+    select: { id: true, name: true, email: true, role: true } });
+  return user ? { userId: user.id, email: user.email, role: user.role, name: user.name ?? undefined } : null;
 }
 
 export async function clearSessionCookie(): Promise<void> {

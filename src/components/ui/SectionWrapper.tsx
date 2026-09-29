@@ -8,6 +8,7 @@ interface SectionWrapperProps {
   className?: string;
   id?: string;
   background?: "white" | "warm" | "navy" | "gradient" | "cream" | "sand";
+  reveal?: boolean;
 }
 
 const bgStyles = {
@@ -24,8 +25,14 @@ export default function SectionWrapper({
   className = "",
   id,
   background = "warm",
+  reveal = true,
 }: SectionWrapperProps) {
   const reduceMotion = useReducedMotion();
+  if (!reveal) return (
+    <section id={id} className={`py-20 md:py-24 lg:py-28 ${bgStyles[background]} ${className}`}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">{children}</div>
+    </section>
+  );
   return (
     <motion.section
       id={id}

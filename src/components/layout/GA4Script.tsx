@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { isSensitivePath, isSensitiveUrl } from "@/lib/privacy";
+
+function trackingBlocked() {
+  return isSensitivePath(window.location.pathname) || !!(document.referrer && isSensitiveUrl(document.referrer));
+}
 
 /**
  * Phase 7.2: Consent-gated GA4 loader.
@@ -14,7 +19,7 @@ const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 export default function GA4Script() {
   useEffect(() => {
-    if (!GA4_ID) return;
+    if (!GA4_ID || trackingBlocked()) return;
     if (!document.cookie.includes("ftf-cookie-consent=accepted")) return;
     // Already loaded?
     if (document.getElementById("ga4-script")) return;
@@ -27,7 +32,7 @@ export default function GA4Script() {
 
     window.dataLayer = window.dataLayer || [];
     window.gtag = function (...args: unknown[]) {
-      window.dataLayer!.push(args);
+      if (!trackingBlocked()) window.dataLayer!.push(args);
     };
     window.gtag("js", new Date());
     window.gtag("config", GA4_ID, { anonymize_ip: true });
@@ -35,9 +40,9 @@ export default function GA4Script() {
 
   // Also listen for consent being granted mid-session (banner accept click)
   useEffect(() => {
-    if (!GA4_ID) return;
+    if (!GA4_ID || trackingBlocked()) return;
     const interval = setInterval(() => {
-      if (document.cookie.includes("ftf-cookie-consent=accepted")) {
+      if (!trackingBlocked() && document.cookie.includes("ftf-cookie-consent=accepted")) {
         clearInterval(interval);
         if (!document.getElementById("ga4-script")) {
           const script = document.createElement("script");
@@ -47,7 +52,7 @@ export default function GA4Script() {
           document.head.appendChild(script);
           window.dataLayer = window.dataLayer || [];
           window.gtag = function (...args: unknown[]) {
-            window.dataLayer!.push(args);
+            if (!trackingBlocked()) window.dataLayer!.push(args);
           };
           window.gtag("js", new Date());
           window.gtag("config", GA4_ID, { anonymize_ip: true });

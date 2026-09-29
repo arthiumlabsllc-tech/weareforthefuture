@@ -12,6 +12,7 @@
 
 // Vercel Analytics custom event tracking
 import { track } from "@vercel/analytics";
+import { isSensitivePath, isSensitiveUrl } from "./privacy";
 
 /** Check whether the user has accepted cookies (GA4 consent gate). */
 export function hasConsent(): boolean {
@@ -21,6 +22,8 @@ export function hasConsent(): boolean {
 
 /** Track a conversion/custom event. Always fires to Vercel Analytics; GA4 only with consent. */
 export function trackEvent(name: string, data?: Record<string, string | number | boolean>) {
+  if (typeof window === "undefined" || isSensitivePath(window.location.pathname)
+      || (document.referrer && isSensitiveUrl(document.referrer))) return;
   // Vercel Analytics (no consent needed - privacy-friendly, no cookies)
   track(name, data);
 
