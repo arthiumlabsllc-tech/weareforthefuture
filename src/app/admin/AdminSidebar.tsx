@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -32,6 +32,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import type { AdminSession } from "@/lib/admin-auth";
+import { adminRoutePermission, hasPermission } from "@/lib/admin-rbac";
 import { img } from "@/lib/imageUrl";
 
 interface NavItem {
@@ -57,6 +58,7 @@ const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: "Blog / News", href: "/admin/blog", icon: FileText },
       { label: "Impact Stories", href: "/admin/stories", icon: BookOpen },
+      { label: "Beneficiary cases", href: "/admin/beneficiary-cases", icon: ShieldCheck },
       { label: "Programs", href: "/admin/programs", icon: GraduationCap },
       { label: "Team", href: "/admin/team", icon: Users },
       { label: "Executive Board", href: "/admin/executive-board", icon: Shield },
@@ -80,6 +82,7 @@ const NAV_SECTIONS: NavSection[] = [
     title: "Donations",
     items: [
       { label: "Donations", href: "/admin/donations", icon: Heart },
+      { label: "Excess refunds", href: "/admin/refunds", icon: Heart },
       { label: "Supporters", href: "/admin/supporters", icon: Users },
       { label: "Campaigns", href: "/admin/campaigns", icon: Target },
     ],
@@ -106,6 +109,22 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileDialog = useRef<HTMLDialogElement>(null);
+  const visibleSections = NAV_SECTIONS.map((section) => ({ ...section, items: section.items.filter((item) => {
+    const permission = adminRoutePermission(item.href);
+    return permission && hasPermission(session, permission);
+  }) })).filter((section) => section.items.length > 0);
+
+  useEffect(() => {
+    if (mobileOpen) mobileDialog.current?.showModal();
+    else mobileDialog.current?.close();
+  }, [mobileOpen]);
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => { if (media.matches) setMobileOpen(false); };
+    media.addEventListener("change", closeOnDesktop);
+    return () => media.removeEventListener("change", closeOnDesktop);
+  }, []);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     () => new Set(NAV_SECTIONS.map((s) => s.title))
   );
@@ -136,17 +155,18 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
         />
         <div>
           <p className="text-sm font-bold text-text-primary">FTF Admin</p>
-          <p className="text-[10px] text-text-muted uppercase tracking-wider">{session.role.replace("_", " ")}</p>
+          <p className="text-[10px] text-text-muted uppercase tracking-wider">{session.role.replaceAll("_", " ")}</p>
         </div>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto p-3 space-y-4">
-        {NAV_SECTIONS.map((section) => (
+        {visibleSections.map((section) => (
           <div key={section.title}>
             <button
               onClick={() => toggleSection(section.title)}
-              className="flex w-full items-center justify-between px-2 py-1.5 text-[10px] font-semibold text-text-muted uppercase tracking-wider hover:text-text-secondary"
+              aria-expanded={expandedSections.has(section.title)}
+              className="flex min-h-11 w-full items-center justify-between px-2 py-1.5 text-xs font-semibold text-text-tertiary uppercase tracking-wider hover:text-text-secondary"
             >
               {section.title}
               <ChevronDown
@@ -165,13 +185,14 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
                       key={item.href}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                      aria-current={isActive ? "page" : undefined}
+                      className={`flex min-h-11 items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                         isActive
                           ? "bg-primary text-text-on-primary"
                           : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
                       }`}
                     >
-                      <Icon className="h-4 w-4 shrink-0" />
+                      <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
                       {item.label}
                     </Link>
                   );
@@ -200,30 +221,29 @@ export default function AdminSidebar({ session }: { session: AdminSession }) {
       {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(true)}
+        aria-label="Open admin navigation"
+        aria-expanded={mobileOpen}
         className="fixed bottom-4 left-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-text-on-primary shadow-lg lg:hidden"
       >
         <Menu className="h-5 w-5" />
       </button>
 
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setMobileOpen(false)} />
-      )}
-
       {/* Mobile sidebar */}
-      <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-surface border-r border-border transition-transform lg:hidden ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+      <dialog
+        ref={mobileDialog}
+        aria-label="Admin navigation"
+        onClose={() => setMobileOpen(false)}
+        className="fixed inset-y-0 left-0 m-0 h-dvh max-h-none w-72 max-w-full border-r border-border bg-surface p-0 text-text-primary backdrop:bg-bg-overlay lg:hidden"
       >
         <button
           onClick={() => setMobileOpen(false)}
-          className="absolute right-3 top-4 text-text-muted hover:text-text-primary"
+          aria-label="Close admin navigation"
+          className="absolute right-1 top-1 flex h-11 w-11 items-center justify-center text-text-secondary hover:text-text-primary"
         >
           <X className="h-5 w-5" />
         </button>
         {sidebarContent}
-      </aside>
+      </dialog>
 
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 bg-surface border-r border-border lg:block">

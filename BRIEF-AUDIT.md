@@ -316,6 +316,14 @@ The following gaps are known, deferred, and tracked. Do not implement without fo
 2. 13.2: Impact figures → CMS (move siteConfig.stats to ImpactStat)
 3. 13.3: Email donation receipts (recommend Resend)
 4. 13.4: Paystack recurring charging (subscriptions API)
+5. 13.5: Legacy Impact Store copy rewrite - accurate purpose-driven social enterprise and literacy framing, including pop-ups, A&C Mall, and Book Club; review unsupported proceeds claims. Deferred, not part of Step 8.
+6. 13.6: Contact `?topic=` prefill - support book-club, volunteer, partner, media, and other valid subjects, including a real Book Club option. Deferred, not part of Step 8.
+7. 13.7: Enhanced donor self-service - refund history within My FTF. The secure three-option excess choice page itself ships in Step 8.
+8. 13.8: Bulk admin refund actions with per-item consent, idempotency, and reconciliation safeguards.
+9. 13.9: Automated monthly excess audit report - held excess, refunded, redirected, and overdue pending/audited balances. The ledger and manual monthly reconciliation begin in Step 8.
+10. 13.10: Refund analytics dashboard using non-identifying financial aggregates.
+
+Step 8 planning boundary: the minimum secure excess-choice page, transactional notifications, and daily auto-refund fallback are launch requirements, not Phase 13 deferrals. These entries record scope only; implementation awaits founder approval of the workspace-root `STEP-8-PLAN.md` proposal.
 
 **Phase 14 (post-launch):**
 

@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { adminHome } from "@/lib/admin-rbac";
 import { motion } from "framer-motion";
 import { img } from "@/lib/imageUrl";
 import { Lock, Mail, Eye, EyeOff, Loader2 } from "lucide-react";
@@ -33,7 +34,7 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/admin/dashboard");
+      router.push(adminHome(data.user?.role));
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");

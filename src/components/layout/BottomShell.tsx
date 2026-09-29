@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { isRefundPath } from "@/lib/privacy";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
 import CookieConsentBanner from "@/components/layout/CookieConsentBanner";
@@ -13,7 +14,7 @@ export default function BottomShell() {
     pathname === "/register" ||
     pathname.startsWith("/my-account");
 
-  if (isAdmin || isSupporter) return null;
+  if (isAdmin || isSupporter || isRefundPath(pathname)) return null;
 
   return (
     <>

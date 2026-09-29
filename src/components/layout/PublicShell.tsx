@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { isRefundPath } from "@/lib/privacy";
 import Navbar from "@/components/layout/Navbar";
 import ImpactMarquee from "@/components/ui/ImpactMarquee";
 
@@ -12,7 +13,7 @@ export default function PublicShell() {
     pathname === "/register" ||
     pathname.startsWith("/my-account");
 
-  if (isAdmin || isSupporter) return null;
+  if (isAdmin || isSupporter || isRefundPath(pathname)) return null;
 
   return (
     <>

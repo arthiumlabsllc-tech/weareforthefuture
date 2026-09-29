@@ -84,3 +84,4 @@ extract-wcag.ps1
 # drivers themselves (they are recreated from README.md + CDP-HELPERS.md).
 !/scripts/dev/
 /scripts/dev/*.mjs
+/scripts/dev/support-a-future-browser.json

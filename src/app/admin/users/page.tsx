@@ -15,6 +15,7 @@ export default function AdminUsersPage() {
           { value: "SUPER_ADMIN", label: "Super Admin" },
           { value: "ADMIN", label: "Admin" },
           { value: "EDITOR", label: "Editor" },
+          { value: "SAFEGUARDING_OFFICER", label: "Safeguarding officer" },
           { value: "STORE_MANAGER", label: "Store Manager" },
           { value: "VIEWER", label: "Viewer" },
         ]},
@@ -28,7 +29,7 @@ export default function AdminUsersPage() {
             v === "SUPER_ADMIN" ? "bg-error/10 text-error" :
             v === "ADMIN" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent-text"
           }`}>
-            {String(v || "").replace("_", " ")}
+            {String(v || "").replaceAll("_", " ")}
           </span>
         )},
         { key: "suspended", label: "Status", render: (v) => (

@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
-import { getSessionFromCookie } from "@/lib/admin-auth";
+import { getSessionFromCookie, type AdminSession } from "@/lib/admin-auth";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { robots: { index: false, follow: false, noarchive: true }, referrer: "no-referrer", openGraph: null, twitter: null };
 import { img } from "@/lib/imageUrl";
 import AdminSidebar from "./AdminSidebar";
 
@@ -8,7 +11,9 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSessionFromCookie();
+  let session: AdminSession | null;
+  try { session = await getSessionFromCookie(); }
+  catch { return <div role="alert" className="p-8">Admin access is temporarily unavailable. Please try again.</div>; }
 
   if (!session) {
     redirect("/login");
@@ -17,7 +22,7 @@ export default async function AdminLayout({
   return (
     <div className="flex min-h-screen bg-bg-primary">
       <AdminSidebar session={session} />
-      <main className="flex-1 lg:ml-64">
+      <div className="min-w-0 flex-1 lg:ml-64">
         <div className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-surface/80 px-4 backdrop-blur-md lg:px-8">
           <div className="flex items-center gap-3">
             <span className="text-sm text-text-secondary">
@@ -41,7 +46,7 @@ export default async function AdminLayout({
           </div>
         </div>
         <div className="p-4 lg:p-8">{children}</div>
-      </main>
+      </div>
     </div>
   );
 }

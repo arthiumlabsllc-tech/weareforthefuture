@@ -1,6 +1,6 @@
 # FTF Design System
 
-Last updated: 2026-09-22
+Last updated: 2026-09-24
 Owner: FTF web team (Arthium Labs LLC)
 Approval required for changes: yes
 
@@ -222,6 +222,7 @@ The FTF Village campaign card (HomeClient L162, DonateClient L272) is intentiona
 - 2026-09-22 - Phase 12 Step 7 (C1, brief §6.9): /donate/success now has a warm cream confirmation, unified feature receipt card and verified-donation-only 2s celebration. Replaced 80 DOM particles and nested springs with 44 canvas particles and four ease-out CSS reveals. Added session replay prevention, immediate reduced-motion state, live cancellation, persistent polite success status, heading focus and keyboard-safe public-link sharing. Store/pending/error states remain static; verification requests abort on unmount/reference changes. Receipt now uses verified currency, full wrapping reference and first-name-only personalization; email/tax copy avoids unverified delivery or blanket tax claims. §8 celebration contract updated; no API, token or shared palette changes.
 - 2026-09-22 - Step 7 scope clarification: celebration rewards donations only; store receipts, volunteer confirmations and partner inquiry confirmations remain static. Explicit boundary added to §8; no implementation changes.
 - 2026-09-22 - Phase 12 Step 7b (brief §10.8): added the FTF Book Club subsection to /impact-store after How It Works and before the final CTA. Cream separates the surface overview from the navy CTA in both themes. Reuses SectionWrapper's one-shot 400ms entrance with an immediate reduced-motion final state, Playfair/Inter, cardClasses + compact padding for six semantic activity-list cards, and decorative Lucide book artwork (no minor imagery). The Join CTA uses the existing /contact route with explanatory copy; that form has no topic-prefill support, so no inert query parameter or out-of-scope form change was added. Existing store copy/catalog/cart/checkout are unchanged; no new patterns or tokens.
+- 2026-09-24 - Approved Step 8 implementation: Support a Future adds the user-driven case deck and support drawer described below. Drag translation is a scoped exception to the 2px card limit; card hover remains color/shadow only. Hero and initial profiles stay static. No token or animation-library changes. Checkout remains acceptance-gated.
 - Earlier - CTA pair introduced (bg-cta/text-on-cta) replacing mid accent green button backgrounds (AA failure).
 - Earlier - Layer 3 dark-mode palette remaps + scoped footer white override added.
 
@@ -245,10 +246,16 @@ Normative. All animation on the site must fit a pattern below; new patterns requ
 | Celebration | verified donation success only | one-shot check → confetti → receipt → thank-you → actions; total ≤ 2.5s; `confettiColors`, ≤1500ms burst, ≤50 particles; see Celebration pattern below |
 | Carousel/swipe | approved swipe surfaces only | snap points, 200-300ms slide, user-driven only (drag/arrow/dot); indicators in muted tokens |
 
-> **Carousel/swipe status:** No carousel or swipe surface currently exists on the site. This pattern is documented for future use only. Any new carousel/swipe implementation requires brief-level approval per §4 component changes.
+> **Carousel/swipe status:** Step 8 approves the Support a Future case deck only. Additional carousel/swipe surfaces require brief-level approval per §4 component changes.
 | Micro-interaction | hover/press/focus on buttons, cards, links | CSS transitions 150-250ms on color/background/box-shadow; transform shifts ≤ 2px |
 
 Journey timing (approved visible sequence): desktop 0% when the complete row clears the viewport bottom by 24px, 100% when its top reaches 160px (fixed-header clearance); node milestones follow the fill. Mobile 0%/100% when the first/last node centers cross the viewport midpoint; each node has a half-viewport IntersectionObserver. A geometry-based catch-up handles fast jumps/restored positions. Fill reverses on scroll-up; reached nodes do not. No pinning, count-ups or changes to native scrolling.
+
+#### Support a Future deck and drawer (Step 8)
+
+The case deck is user-driven, with one exposed card and an equivalent semantic list. Horizontal intent must exceed vertical movement before capture; a drag beyond 25% of card width opens support on the right or advances on the left. A shorter drag snaps back over 250ms, ease-out. Pointer cancellation releases capture; native vertical scrolling and pinch zoom remain available. Only this gesture may translate a case card beyond 2px; hover never lifts, spins, or scales it. Native Previous/Next/Support controls and focus-scoped arrow/Enter shortcuts provide equivalent actions, without autoplay or wraparound.
+
+The support drawer enters over 250ms, ease-out, and exits over 200ms, ease-in. Native Web Animations handle drawer/snap transforms; pointer updates use one requestAnimationFrame at a time, with no per-move React state. Reduced motion disables drag rendering, snap, and drawer transitions immediately, including live preference changes. Frames, animations, listeners, and pointer capture are cleaned up. No hero, initial profile, funding numeral, or refund confirmation entrance animation is introduced. Paystack owns focus only after the native drawer releases its modal trap.
 
 #### Reference performance profile
 

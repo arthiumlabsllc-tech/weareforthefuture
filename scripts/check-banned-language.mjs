@@ -19,6 +19,8 @@ const EXTENSIONS = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"]);
 const EXCLUDE_FILES = new Set([
   join("scripts", "check-banned-language.mjs"),
   join("scripts", "sweep-legacy-copy.ts"),
+  // Runtime rejection patterns, not display copy; all other feature files stay scanned.
+  join("src", "lib", "support-a-future", "content-policy.ts"),
 ]);
 
 /** Brief-banned legacy language. Use brief-aligned alternatives instead. */
