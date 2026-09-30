@@ -47,10 +47,9 @@ export async function POST(request: NextRequest) {
       ...transaction,
     });
   } catch (error) {
-    console.error("Paystack initialization error:", error);
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Payment initialization failed" },
-      { status: 500 }
-    );
+    const name = error instanceof Error ? error.name : "unknown";
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("Paystack initialization failed:", { name, message });
+    return NextResponse.json({ error: "Payment initialization failed" }, { status: 500 });
   }
 }

@@ -210,8 +210,13 @@ export function LedgerExport() {
     setPending(true); setError(""); setMessage(""); setIssues([]); releaseDownload();
     const data = new FormData(event.currentTarget);
     try {
-      const query = new URLSearchParams({ export: "ledger", from: String(data.get("from")), to: String(data.get("to")) });
-      const response = await fetch(`/api/admin/refunds?${query}`, { cache: "no-store", signal: AbortSignal.any([request.signal, AbortSignal.timeout(30000)]) });
+      const response = await fetch("/api/admin/refunds/export", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ from: String(data.get("from")), to: String(data.get("to")) }),
+        cache: "no-store",
+        signal: AbortSignal.any([request.signal, AbortSignal.timeout(30000)]),
+      });
       if (!response.ok) {
         const failure = await response.json();
         if (request.signal.aborted) return;
@@ -234,8 +239,7 @@ export function LedgerExport() {
     <p id="export-help" className="max-w-[620px] text-text-secondary">Opening and closing held excess, new excess, processed refunds, general-fund and case redirects, and closing overdue liabilities in pesewas. Up to 31 days and 5,000 entries; oversized requests fail without truncation.</p>
     <p className="max-w-[620px] text-sm text-text-secondary">Historical audited liabilities had an escalation recorded before the cutoff; this does not mean settlement. Held excess under reconciliation is a subset of the closing balance, not the total value of disputed payments. Finance must reconcile provider balances and sign off monthly.</p>
     {(error || message) && <p ref={status} tabIndex={-1} role={error ? "alert" : "status"} className={error ? "text-error-text" : "text-success-text"}>{error || message}</p>}
-    <form onSubmit={download} method="get" action="/api/admin/refunds" className="grid items-end gap-4 sm:grid-cols-3">
-      <input type="hidden" name="export" value="ledger" />
+    <form onSubmit={download} method="post" className="grid items-end gap-4 sm:grid-cols-3">
       <label className="text-text-secondary">From (UTC, included)<input name="from" type="date" required disabled={pending} className={input} {...attributes("from")} /><FieldError field="from" issues={issues} /></label>
       <label className="text-text-secondary">To (UTC, excluded)<input name="to" type="date" required disabled={pending} className={input} {...attributes("to")} /><FieldError field="to" issues={issues} /></label>
       <Button type="submit" variant="outline" disabled={pending} className="min-h-12 hover:scale-100">{pending ? "Preparing export…" : "Download ledger CSV"}</Button>

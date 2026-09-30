@@ -12,7 +12,7 @@ import { createExcessRefund, fetchRefund, listTransactionRefunds, refundOperatio
 const LEASE_MS = 120_000;
 const RETRY_MS = 15 * 60_000;
 
-async function recordAttention(donationId: string, operationId: string, leaseToken: string, reason: string, retryable = false) {
+async function recordAttention(donationId: string, operationId: string, leaseToken: string, reason: string, retryable = false, detail?: string) {
   await financialTransaction(async (tx) => {
     const donation = await lockDonation(tx, donationId);
     const operation = await tx.excessResolution.findUnique({ where: { id: operationId } });
@@ -23,7 +23,7 @@ async function recordAttention(donationId: string, operationId: string, leaseTok
     } });
     await tx.donation.update({ where: { id: donationId }, data: { refundStatus: "pending" } });
     await financialAudit(tx, { action: "REFUND_ATTENTION_REQUIRED", entityId: donationId,
-      before: financialSnapshot(donation), after: { reason, operationId, alert: true } });
+      before: financialSnapshot(donation), after: { reason, operationId, alert: true, ...(detail ? { providerError: detail } : {}) } });
   });
 }
 
@@ -123,8 +123,12 @@ export async function processRefund(operationId: string) {
     submitted = true;
     const refund = await createExcessRefund(donation.paymentReference!, donation.amountExcess, operationId);
     return await applyProviderRefund(donation.id, operationId, refund);
-  } catch {
-    await recordAttention(donation.id, operationId, leaseToken, submitted ? "submission_or_confirmation_unknown" : "provider_preflight_failed", !submitted);
+  } catch (error) {
+    const detail = error instanceof Error
+      ? `${error.name}: ${error.message.slice(0, 200)}`
+      : "unknown";
+    await recordAttention(donation.id, operationId, leaseToken, submitted ?
+      "submission_or_confirmation_unknown" : "provider_preflight_failed", !submitted, detail);
   }
 }
 
