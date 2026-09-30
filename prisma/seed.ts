@@ -25,13 +25,20 @@ async function main() {
   // ─── SUPER ADMIN ───
   const existingAdmin = await prisma.user.findUnique({ where: { email: "admin@ftf.org" } });
   if (!existingAdmin) {
-    const passwordHash = await hashPassword("admin123");
+    const seedPassword = process.env.SEED_ADMIN_PASSWORD;
+    if (!seedPassword || seedPassword.length < 12) {
+      throw new Error(
+        "SEED_ADMIN_PASSWORD is required (min 12 characters) when creating the initial Super Admin. " +
+        "Set it in your shell for this command only. Do not commit it. Do not use a placeholder."
+      );
+    }
+    const passwordHash = await hashPassword(seedPassword);
     await prisma.user.create({
       data: { email: "admin@ftf.org", name: "Super Admin", passwordHash, role: "SUPER_ADMIN" },
     });
-    console.log("✅ Super Admin created: admin@ftf.org / admin123");
+    console.log("Super Admin created: admin@ftf.org (password set from SEED_ADMIN_PASSWORD)");
   } else {
-    console.log("ℹ️  Super Admin already exists, skipping");
+    console.log("Super Admin already exists, skipping");
   }
 
   // ─── BLOG CATEGORIES (Phase 6 brief §15 taxonomy) ───
@@ -676,7 +683,6 @@ The store's first public event, a two-day book fair, followed the launch later t
   console.log(`✅ ${zones.length} shipping zones seeded`);
 
   console.log("\n🎉 Seed complete! All site content is now in the database.");
-  console.log("\n📋 Admin login: admin@ftf.org / admin123");
 }
 
 main()
