@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
 import { ArrowRight, Crown, Landmark, Sparkles, Users } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import PageHero from "@/components/ui/PageHero";
 import { siteConfig } from "@/data/site";
 
 /* Minimal structural shapes so the DB payloads (which carry extra fields) stay
@@ -125,27 +126,14 @@ export default function TeamGovernanceClient({ executiveBoard, advisory, team }:
   return (
     <>
       {/* ===== HERO ===== */}
-      <SectionWrapper background="navy" className="!py-20 md:!py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-accent-bright">
-            <Users className="h-4 w-4" aria-hidden="true" /> Team &amp; Governance
-          </span>
-          <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl">
-            The people behind the mission
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-text-on-primary/70">
-            For The Future is governed by an independent board and delivered by a
-            youth-led team and hundreds of volunteers. Here is how the
-            responsibility is shared.
-          </p>
-        </motion.div>
-      </SectionWrapper>
+      <PageHero
+        eyebrow="Team & Governance"
+        eyebrowIcon={Users}
+        title="The people behind the mission"
+        description="For The Future is governed by an independent board and delivered by a youth-led team and hundreds of volunteers. Here is how the responsibility is shared."
+        image="/images/page-heroes/team-hero.png"
+        imageAlt="The For The Future team and board members."
+      />
 
       {/* ===== STICKY ANCHOR NAV ===== */}
       <div className="sticky top-16 z-30 border-b border-border bg-surface/95 backdrop-blur">

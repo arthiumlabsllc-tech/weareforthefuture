@@ -4,8 +4,8 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { img } from "@/lib/imageUrl";
 import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
+import PageHero from "@/components/ui/PageHero";
 import {
   ShoppingBag,
   Heart,
@@ -132,46 +132,22 @@ export default function ImpactStoreClient({ initialProducts = [], initialCategor
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/misc/impact-store-hero.jpg")}
-            alt="Impact Store"
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-primary/80" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent-text uppercase tracking-wider mb-6 backdrop-blur-sm">
-              <ShoppingBag className="h-3.5 w-3.5" />
-              Shop With Purpose
+      <PageHero
+        eyebrow="Shop With Purpose"
+        eyebrowIcon={ShoppingBag}
+        title="Impact Store"
+        description="Every purchase funds a child's education, healthcare, or mentorship. 100% of proceeds go directly to life-changing programs."
+        image="/images/misc/impact-store-hero.jpg"
+        imageAlt="Impact Store"
+        actions={
+          <span className="inline-flex items-center gap-2 rounded-full border border-success/20 bg-success/10 px-5 py-2 text-sm text-success-text">
+            <HandHeart className="h-4 w-4" aria-hidden="true" />
+            <span className="font-medium">
+              100% of every purchase changes a child's life
             </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-text-on-primary sm:text-5xl lg:text-6xl">
-              Impact Store
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
-              Every purchase funds a child&apos;s education, healthcare, or
-              mentorship. 100% of proceeds go directly to life-changing
-              programs.
-            </p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-success/10 border border-success/20 px-5 py-2 text-sm text-success-text backdrop-blur-sm">
-              <HandHeart className="h-4 w-4" />
-              <span className="font-medium">
-                100% of every purchase changes a child&apos;s life
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          </span>
+        }
+      />
 
       {/* ===== STORE SECTION ===== */}
       <SectionWrapper background="warm">

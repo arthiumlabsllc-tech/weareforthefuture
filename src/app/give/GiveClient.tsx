@@ -17,6 +17,7 @@ import {
   CalendarClock,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import PageHero from "@/components/ui/PageHero";
 import { siteConfig } from "@/data/site";
 import { fundAllocation } from "@/data/impact";
 import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
@@ -120,33 +121,23 @@ export default function GiveClient({ programmes = [], campaigns = [] }: GiveClie
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-primary text-text-on-primary">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,168,67,0.16),transparent_55%)]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
-              <HeartHandshake className="h-3.5 w-3.5" />
-              Ways to give
-            </span>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.08] sm:text-5xl md:text-6xl">
-              Give where it matters.
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-              {siteConfig.positioning}
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-on-primary/60">
+      <PageHero
+        eyebrow="Ways to give"
+        eyebrowIcon={HeartHandshake}
+        title="Give where it matters."
+        description={
+          <>
+            <p>{siteConfig.positioning}</p>
+            <p className="mt-4 text-base text-text-secondary/80">
               Choose the route that fits how you want to help. Every gift is
               secure, tax-deductible and reported with the same honesty we bring
               to our programmes.
             </p>
-          </motion.div>
-        </div>
-      </section>
+          </>
+        }
+        image="/images/page-heroes/donate-hero.png"
+        imageAlt="Children supported by gifts to For The Future."
+      />
 
       {/* ===== TWO-COLUMN: ROUTES + TRUST ===== */}
       <SectionWrapper background="cream">

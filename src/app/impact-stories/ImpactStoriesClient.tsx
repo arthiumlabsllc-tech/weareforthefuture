@@ -7,8 +7,8 @@ import { Heart, ArrowRight, Quote, BookOpen } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import ImpactGallery from "@/components/ui/ImpactGallery";
 import type { GalleryImage } from "@/lib/gallery";
-import { img } from "@/lib/imageUrl";
 import { storyStats } from "@/data/impact";
+import PageHero from "@/components/ui/PageHero";
 
 interface Story {
   name: string;
@@ -37,39 +37,15 @@ export default function ImpactStoriesClient({ initialStories = [], galleryImages
 
   return (
     <>
-      {/* ===== HERO WITH BACKGROUND IMAGE ===== */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/stories/hero-bg.jpg")}
-            alt="Impact Stories"
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 border border-accent/20 px-5 py-2 text-xs font-semibold text-accent-text uppercase tracking-wider mb-6 backdrop-blur-sm">
-              <Heart className="h-3.5 w-3.5" />
-              Real Lives Changed
-            </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-text-on-primary sm:text-5xl lg:text-6xl">
-              Impact Stories
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
-              See How Your Support is Transforming Lives.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* ===== HERO ===== */}
+      <PageHero
+        eyebrow="Real Lives Changed"
+        eyebrowIcon={Heart}
+        title="Impact Stories"
+        description="See How Your Support is Transforming Lives."
+        image="/images/stories/hero-bg.jpg"
+        imageAlt="Impact Stories"
+      />
 
       {/* ===== STATS BAR ===== */}
       <div className="bg-primary border-y border-white/5">

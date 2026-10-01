@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { img } from "@/lib/imageUrl";
 import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
+import PageHero from "@/components/ui/PageHero";
 import { ArrowRight, Heart } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
 import StatDisplay from "@/components/ui/StatDisplay";
@@ -58,39 +57,13 @@ export default function ImpactClient({ indicators = [] }: { indicators?: Program
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/page-heroes/impact-hero.jpg")}
-            alt="Our Impact"
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-primary/70" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
-              Transparency &amp; Impact
-            </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
-              Where your money goes.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
-              {siteConfig.positioning}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Transparency & Impact"
+        title="Where your money goes."
+        description={siteConfig.positioning}
+        image="/images/page-heroes/impact-hero.jpg"
+        imageAlt="Our Impact"
+      />
 
       {/* ===== IMPACT DASHBOARD (static - no count-up) ===== */}
       <SectionWrapper background="cream">

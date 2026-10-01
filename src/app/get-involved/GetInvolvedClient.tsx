@@ -15,6 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import PageHero from "@/components/ui/PageHero";
 import { siteConfig } from "@/data/site";
 
 const pathways = [
@@ -92,49 +93,41 @@ export default function GetInvolvedClient() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-primary text-text-on-primary">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,168,67,0.16),transparent_55%)]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
-              <HeartHandshake className="h-3.5 w-3.5" />
-              Get involved
-            </span>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.08] sm:text-5xl md:text-6xl">
-              There&apos;s a role for you.
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-              {positioning}
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-on-primary/60">
+      <PageHero
+        eyebrow="Get involved"
+        eyebrowIcon={HeartHandshake}
+        title="There's a role for you."
+        description={
+          <>
+            <p>{positioning}</p>
+            <p className="mt-4 text-base text-text-secondary/80">
               Whether you give an hour a week, a season of mentorship, or an
               institutional partnership - every route helps a young person move
               from disadvantage to opportunity.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/get-involved/volunteer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
-              >
-                <HeartHandshake className="h-4 w-4" />
-                Become a volunteer
-              </Link>
-              <Link
-                href="/give"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
-              >
-                Explore giving
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          </>
+        }
+        image="/images/about/ftf-tamale-1.jpg"
+        imageAlt="Volunteers and young people working together in a Ghanaian community."
+        actions={
+          <>
+            <Link
+              href="/get-involved/volunteer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
+            >
+              <HeartHandshake className="h-4 w-4" />
+              Become a volunteer
+            </Link>
+            <Link
+              href="/give"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-7 py-3.5 text-sm font-semibold text-text-primary transition-all hover:border-accent hover:text-accent-text"
+            >
+              Explore giving
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </>
+        }
+      />
 
       {/* ===== PATHWAYS ===== */}
       <SectionWrapper background="cream">

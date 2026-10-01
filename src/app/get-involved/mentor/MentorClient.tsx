@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowLeft,
   ArrowRight,
   GraduationCap,
   BookOpen,
@@ -16,6 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import PageHero from "@/components/ui/PageHero";
 import VolunteerApplicationForm from "@/components/get-involved/VolunteerApplicationForm";
 
 const mentorTracks = [
@@ -48,55 +48,37 @@ export default function MentorClient() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-primary text-text-on-primary">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(212,168,67,0.16),transparent_55%)]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <Link
-            href="/get-involved"
-            className="inline-flex items-center gap-1.5 text-sm text-text-on-primary/70 transition-colors hover:text-accent-bright"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All ways to get involved
-          </Link>
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="mt-6 max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
-              <GraduationCap className="h-3.5 w-3.5" />
-              Mentor pathway
+      <PageHero
+        eyebrow="Mentor pathway"
+        eyebrowIcon={GraduationCap}
+        title="Be the person someone needed"
+        backLink={{ href: "/get-involved", label: "All ways to get involved" }}
+        description="Mentors connect children and young people with guidance, role models and real-world experience. A consistent, encouraging adult can change the direction of a young life - and it starts with showing up."
+        meta={
+          <>
+            <span className="inline-flex items-center gap-2">
+              <Clock className="h-4 w-4 text-accent-text" /> Regular, flexible cadence
             </span>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] sm:text-5xl">
-              Be the person someone needed
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-              Mentors connect children and young people with guidance, role models
-              and real-world experience. A consistent, encouraging adult can change
-              the direction of a young life - and it starts with showing up.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-on-primary/70">
-              <span className="inline-flex items-center gap-2">
-                <Clock className="h-4 w-4 text-accent-text" /> Regular, flexible cadence
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-accent-text" /> Safeguarding-checked
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-accent-text" /> Trained &amp; supported
-              </span>
-            </div>
-            <Link
-              href="#apply"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
-            >
-              Become a mentor
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+            <span className="inline-flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-accent-text" /> Safeguarding-checked
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <GraduationCap className="h-4 w-4 text-accent-text" /> Trained &amp; supported
+            </span>
+          </>
+        }
+        image="/images/about/ftf-tamale-3.jpg"
+        imageAlt="A mentor guiding a young person during a community session."
+        actions={
+          <Link
+            href="#apply"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
+          >
+            Become a mentor
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        }
+      />
 
       {/* ===== TRACKS ===== */}
       <SectionWrapper background="warm">

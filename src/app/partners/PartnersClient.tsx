@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { img } from "@/lib/imageUrl";
 import { cardClasses, cardPadding } from "@/lib/ui/cardClasses";
+import PageHero from "@/components/ui/PageHero";
 import {
   ArrowRight,
   Handshake,
@@ -97,58 +97,32 @@ export default function PartnersClient({ initialPartners = [], deckDocs = [] }: 
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative flex min-h-[52vh] items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/page-heroes/partners-hero.png")}
-            alt=""
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/85" />
-        </div>
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-28 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
-              <Handshake className="h-3.5 w-3.5" />
-              Partnerships
-            </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.08] text-text-on-primary sm:text-5xl md:text-6xl">
-              Looking for a credible local implementation partner?
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-              For The Future Organization is youth-led and community-rooted, with
-              a decade of delivery across Ghana and Nigeria. We help
-              institutions, foundations and companies turn intent into measurable
-              impact - safely, transparently and locally.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
-              >
-                <Mail className="h-4 w-4" />
-                Discuss a partnership
-              </Link>
-              <Link
-                href="#deck"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
-              >
-                <FileDown className="h-4 w-4" />
-                Corporate deck
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Partnerships"
+        eyebrowIcon={Handshake}
+        title="Looking for a credible local implementation partner?"
+        description="For The Future Organization is youth-led and community-rooted, with a decade of delivery across Ghana and Nigeria. We help institutions, foundations and companies turn intent into measurable impact - safely, transparently and locally."
+        image="/images/page-heroes/partners-hero.png"
+        imageAlt="For The Future team working with community partners across Ghana and Nigeria."
+        actions={
+          <>
+            <Link
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
+            >
+              <Mail className="h-4 w-4" />
+              Discuss a partnership
+            </Link>
+            <Link
+              href="#deck"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-7 py-3.5 text-sm font-semibold text-text-primary transition-all hover:border-accent hover:text-accent-text"
+            >
+              <FileDown className="h-4 w-4" />
+              Corporate deck
+            </Link>
+          </>
+        }
+      />
 
       {/* ===== CREDIBILITY ===== */}
       <SectionWrapper background="cream">

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowLeft,
   ArrowRight,
   Sparkles,
   Users,
@@ -14,6 +13,7 @@ import {
   Check,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
+import PageHero from "@/components/ui/PageHero";
 import VolunteerApplicationForm from "@/components/get-involved/VolunteerApplicationForm";
 
 const pillarsOfFellowship = [
@@ -60,44 +60,24 @@ export default function FellowshipClient() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-primary text-text-on-primary">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(212,168,67,0.16),transparent_55%)]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+      <PageHero
+        eyebrow="Young Changemakers"
+        eyebrowIcon={Sparkles}
+        title="The FTF Fellowship"
+        backLink={{ href: "/get-involved", label: "All ways to get involved" }}
+        description="A structured pathway for young leaders - including graduates of our own programmes - to lead community projects, build real skills and give back by mentoring the next cohort."
+        image="/images/about/ftf-about-3.png"
+        imageAlt="Young FTF fellows collaborating on a community project."
+        actions={
           <Link
-            href="/get-involved"
-            className="inline-flex items-center gap-1.5 text-sm text-text-on-primary/70 transition-colors hover:text-accent-bright"
+            href="#apply"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
           >
-            <ArrowLeft className="h-4 w-4" />
-            All ways to get involved
+            Express your interest
+            <ArrowRight className="h-4 w-4" />
           </Link>
-          <motion.div
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="mt-6 max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
-              <Sparkles className="h-3.5 w-3.5" />
-              Young Changemakers
-            </span>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] sm:text-5xl">
-              The FTF Fellowship
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-              A structured pathway for young leaders - including graduates of our
-              own programmes - to lead community projects, build real skills and
-              give back by mentoring the next cohort.
-            </p>
-            <Link
-              href="#apply"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-cta px-7 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-accent/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
-            >
-              Express your interest
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ===== WHAT THE FELLOWSHIP OFFERS ===== */}
       <SectionWrapper background="warm">

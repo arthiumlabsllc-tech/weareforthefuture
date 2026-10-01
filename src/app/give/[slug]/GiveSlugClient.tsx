@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ShieldCheck, CalendarClock, Sparkles } from "lucide-react";
-import { img } from "@/lib/imageUrl";
+import { ArrowRight, ShieldCheck, CalendarClock, Sparkles } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
+import PageHero from "@/components/ui/PageHero";
 import GivingPanel from "@/components/give/GivingPanel";
 import { siteConfig } from "@/data/site";
 import type { GivingTarget } from "@/lib/give";
@@ -34,48 +32,15 @@ export default function GiveSlugClient({ target }: { target: GivingTarget }) {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-primary text-text-on-primary">
-        {target.image && (
-          <Image
-            src={img(target.image)}
-            alt=""
-            fill
-            className="object-cover opacity-20"
-            priority
-            unoptimized
-          />
-        )}
-        <div className="absolute inset-0 bg-primary/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(212,168,67,0.16),transparent_55%)]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <Link
-            href="/give"
-            className="inline-flex items-center gap-1.5 text-sm text-text-on-primary/70 transition-colors hover:text-accent-bright"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All giving routes
-          </Link>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="mt-6 max-w-3xl"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-text">
-              <Sparkles className="h-3.5 w-3.5" />
-              {KIND_LABEL[target.kind]}
-            </span>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] sm:text-5xl">
-              {target.name}
-            </h1>
-            {target.description && (
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-primary/75">
-                {target.description}
-              </p>
-            )}
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        backLink={{ href: "/give", label: "All giving routes" }}
+        eyebrow={KIND_LABEL[target.kind]}
+        eyebrowIcon={Sparkles}
+        title={target.name}
+        description={target.description}
+        image={target.image || "/images/page-heroes/donate-hero.png"}
+        imageAlt={target.name}
+      />
 
       {/* ===== PANEL + CONTEXT ===== */}
       <SectionWrapper background="warm">

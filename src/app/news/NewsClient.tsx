@@ -17,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { img } from "@/lib/imageUrl";
+import PageHero from "@/components/ui/PageHero";
 import { cardClasses } from "@/lib/ui/cardClasses";
 import { pillars } from "@/data/pillars";
 
@@ -140,40 +140,13 @@ export default function NewsClient({ initialCategories = [], initialPosts = [] }
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[45vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/page-heroes/news-hero.jpg")}
-            alt="News & Stories"
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-primary/70" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
-              News & Stories
-            </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
-              Stories of Impact, News of Change
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
-              Programme updates, impact stories, partnerships, events and insights
-              from across Ghana and Nigeria - filtered the way you read.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="News & Stories"
+        title="Stories of Impact, News of Change"
+        description="Programme updates, impact stories, partnerships, events and insights from across Ghana and Nigeria - filtered the way you read."
+        image="/images/page-heroes/news-hero.jpg"
+        imageAlt="News & Stories"
+      />
 
       {/* ===== FILTER BAR ===== */}
       <SectionWrapper background="cream" className="!py-10">

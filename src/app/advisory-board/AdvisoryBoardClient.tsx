@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Compass, Users } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { img } from "@/lib/imageUrl";
+import PageHero from "@/components/ui/PageHero";
 
 interface AdvisoryMember {
   name: string;
@@ -33,40 +33,14 @@ export default function AdvisoryBoardClient({ initialMembers = [] }: { initialMe
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/page-heroes/board-hero.png")}
-            alt="Advisory Board"
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-text uppercase tracking-wider mb-6">
-              <Compass className="h-3.5 w-3.5" />
-              Guidance & Leadership
-            </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold text-text-on-primary sm:text-5xl lg:text-6xl">
-              Advisory Board
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-text-on-primary/70">
-              Expert guidance, leadership, and unwavering support to help drive
-              our mission forward and create lasting impact for vulnerable
-              children.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Guidance & Leadership"
+        eyebrowIcon={Compass}
+        title="Advisory Board"
+        description="Expert guidance, leadership, and unwavering support to help drive our mission forward and create lasting impact for vulnerable children."
+        image="/images/page-heroes/board-hero.png"
+        imageAlt="Advisory Board"
+      />
 
       {/* ===== STATS BAR ===== */}
       <div className="bg-bg-secondary border-y border-white/5">

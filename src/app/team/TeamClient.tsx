@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Users, MapPin, Heart, User } from "lucide-react";
 import SectionWrapper, { SectionHeader } from "@/components/ui/SectionWrapper";
-import { img } from "@/lib/imageUrl";
+import PageHero from "@/components/ui/PageHero";
 
 interface Member {
   name: string;
@@ -37,40 +37,13 @@ export default function TeamClient({ initialMembers = [] }: { initialMembers?: M
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={img("/images/page-heroes/team-hero.png")}
-            alt="Our Team"
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-primary/75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-primary/70" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.3em] text-accent-text mb-4">
-              Our People
-            </span>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] text-text-on-primary sm:text-5xl md:text-6xl">
-              The Passionate People Behind the Mission
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-text-on-primary/70 leading-relaxed">
-              Meet the dedicated team of young changemakers driving FTF&apos;s
-              mission across Ghana, Nigeria, and the United States.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Our People"
+        title="The Passionate People Behind the Mission"
+        description="Meet the dedicated team of young changemakers driving FTF's mission across Ghana, Nigeria, and the United States."
+        image="/images/page-heroes/team-hero.png"
+        imageAlt="Our Team"
+      />
 
       {/* ===== LEADERSHIP ===== */}
       <SectionWrapper background="white">
