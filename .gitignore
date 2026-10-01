@@ -85,3 +85,7 @@ extract-wcag.ps1
 !/scripts/dev/
 /scripts/dev/*.mjs
 /scripts/dev/support-a-future-browser.json
+
+# local database dumps / snapshots (never commit real production data).
+# Anchored to repo root so tracked prisma/migrations/**/*.sql are unaffected.
+/*.sql
